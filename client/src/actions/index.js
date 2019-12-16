@@ -1,4 +1,5 @@
 import axiosWithYelpAuth from "../utils/axiosWithYelpAuth";
+import axios from "axios";
 
 export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
 export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";
@@ -22,6 +23,27 @@ export const fetchBusiness = ({ name, location }) => {
       .catch(err => {
         dispatch({
           type: FETCH_BUSINESS_FAILURE,
+          payload: err
+        });
+      });
+  };
+};
+
+export const postBusiness = ({ url, id }) => {
+  const dsEndpoint = ``; // TODO: GET ENDPOINT URL
+  return dispatch => {
+    dispatch({ type: POST_BUSINESS_START });
+    axios
+      .post(dsEndpoint, { url, id })
+      .then(res => {
+        dispatch({
+          type: POST_BUSINESS_SUCCESS,
+          payload: res
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: POST_BUSINESS_FAILURE,
           payload: err
         });
       });
