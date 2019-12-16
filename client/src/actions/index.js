@@ -8,7 +8,20 @@ export const POST_BUSINESS_START = "POST_BUSINESS_START";
 export const POST_BUSINESS_SUCCESS = "POST_BUSINESS_SUCCESS";
 export const POST_BUSINESS_FAILURE = "POST_BUSINESS_FAILURE";
 
-export const fetchBusiness = ({ name, location }) => {
+export const fetchBusiness = business => {
+  const name = business.name;
+  const location;
+  if (business.location) {
+    location = `location=${business.location}`;
+  } else if (business.latitude && business.longitude) {
+      location = `latitude=${business.latitude}&longitude=${business.longitude}`;
+  } else {
+      dispatch({
+        type: FETCH_BUSINESS_FAILURE,
+        payload: "Business location required"
+      });
+  }
+  
   const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&location=${location}`;
   return dispatch => {
     dispatch({ type: FETCH_BUSINESS_START });
