@@ -9,21 +9,23 @@ export const POST_BUSINESS_SUCCESS = "POST_BUSINESS_SUCCESS";
 export const POST_BUSINESS_FAILURE = "POST_BUSINESS_FAILURE";
 
 export const fetchBusiness = business => {
-  const name = business.name;
-  const location;
-  if (business.location) {
-    location = `location=${business.location}`;
-  } else if (business.latitude && business.longitude) {
+  return dispatch => {
+    const name = business.name;
+    let location;
+    
+    if (business.location) {
+      location = `location=${business.location}`;
+    } else if (business.latitude && business.longitude) {
       location = `latitude=${business.latitude}&longitude=${business.longitude}`;
-  } else {
+    } else {
       dispatch({
         type: FETCH_BUSINESS_FAILURE,
         payload: "Business location required"
       });
-  }
-  
-  const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;
-  return dispatch => {
+    }
+    
+    const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;
+    
     dispatch({ type: FETCH_BUSINESS_START });
     axiosWithYelpAuth
       .get(yelpSearchEndpoint)
