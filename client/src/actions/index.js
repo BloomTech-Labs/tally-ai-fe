@@ -22,7 +22,7 @@ export const fetchBusiness = business => {
       });
   }
   
-  const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&location=${location}`;
+  const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;
   return dispatch => {
     dispatch({ type: FETCH_BUSINESS_START });
     axiosWithYelpAuth
