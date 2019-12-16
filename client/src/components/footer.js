@@ -20,7 +20,7 @@ export default function Footer() {
         <footer className ={classes.root}>
             <Button color="inherit">Contact Us</Button>
             <Button color="inherit">Terms Of Use</Button>
-            <Button color="inherit">Privacty Policy</Button>
+            <Button color="inherit">Privacy Policy</Button>
                 <Typography align="center">
                     {'Copyright © '}
                     Tally AI 2019
