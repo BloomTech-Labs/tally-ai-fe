@@ -13,7 +13,6 @@ const initialState = {
 };
 
 function reducer(state = initialState, action) {
-
   console.log(
     "Reducer working, current action: ",
     action.type,
@@ -22,7 +21,6 @@ function reducer(state = initialState, action) {
   );
 
   switch (action.type) {
-
     case FETCH_BUSINESS_START:
       return {
         ...state,
@@ -64,9 +62,18 @@ function reducer(state = initialState, action) {
     case POST_BUSINESS_FAILURE:
       return {
         ...state,
-        keyWords: { ...state.keyWords, isFetching: false, error: action.payload }
+        keyWords: {
+          ...state.keyWords,
+          isFetching: false,
+          error: action.payload
+        }
       };
 
+    default:
+      console.log(`\nUnknown action type:\n${action}`);
+      return {
+        ...state
+      };
   }
 }
 
