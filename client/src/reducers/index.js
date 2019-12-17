@@ -13,7 +13,6 @@ const initialState = {
 };
 
 function reducer(state = initialState, action) {
-  
   console.log(
     "Reducer working, current action: ",
     action.type,
@@ -29,13 +28,13 @@ function reducer(state = initialState, action) {
       };
 
     case FETCH_BUSINESS_SUCCESS:
-      console.log("FETCH SUCCESS! Payload:", action.payload)
+      console.log("FETCH SUCCESS! Payload:", action.payload);
       return {
         ...state,
         searchResults: {
           ...state.searchResults,
           isFetching: false,
-          data: action.payload
+          data: action.payload.data.businesses
         }
       };
 
