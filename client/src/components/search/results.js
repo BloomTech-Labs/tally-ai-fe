@@ -25,12 +25,9 @@ const Results = (props) => {
   const [active, setActive] = useState();
 
   useEffect(() => {
-    if(props.businesses.data.length > 0) {
-    //There are now search results to display from state, lets do our CSS animation and render results
-    setActive(true);
-    }
-    else {
-      //Reverse animation? Or just leave empty? Talk to Colton
+    if (props.businesses.data) {
+      //There are now search results to display from state, lets do our CSS animation and render results
+      setActive(true);
     }
   }, [props.businesses.data])
 
@@ -38,12 +35,21 @@ const Results = (props) => {
   if (props.businesses.error) {
     return (<p>Error loading search results...</p>)
   }
-  else if (props.businesses.error) {
+
+  if (props.businesses.isFetching) {
     return (<p>Loading search results...</p>)
+  }
+
+  if (!active) {//we don't want to try to render until state has been touched
+    return (<></>);
+  }
+
+  if (props.businesses.data.length == 0) {
+    return (<p>No results found</p>)
   }
   else {
     let animationClass = "";
-    if(active){
+    if (active) {
       animationClass = " expand-search-results";
     }
     console.log("Animation class", animationClass);
