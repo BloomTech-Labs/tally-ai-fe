@@ -12,3 +12,60 @@
   width: 100%;
   justify-content:space-between;
 }
+
+.search-widget {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.search-results {
+  /* flex-basis: 0%; */
+  background: white;
+  width: 0px;
+}
+
+.expand-search-results {
+  animation-name: expandResults;
+  animation-duration: 1s;
+  /* prevent the animation from resetting after done playinig */
+  animation-fill-mode: forwards;
+}
+
+@keyframes expandResults {
+  /* flex-basis is how big the results column is in this flex row, auto should take whatever is left over from the search-form */
+  from { width: 0px; }
+  to { width: 100%; }
+}
+
+@keyframes fadeIn {
+  /* flex-basis is how big the results column is in this flex row, auto should take whatever is left over from the search-form */
+  from { opacity: 0%; }
+  to { opacity: 100%; }
+}
+
+.result {
+
+  opacity: 0%;
+
+  border-color: gray;
+  border-width: 1px;
+
+  display: flex;
+  flex-direction: row;
+  height: 25%;
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  /* prevent the animation from resetting after done playinig */
+  animation-fill-mode: forwards;
+}
+
+.result img{
+
+  height: 200px;
+  width: 200px;
+
+}
+

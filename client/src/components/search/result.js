@@ -1,9 +1,23 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 
+/*Required business data for Result
+data {
+  image_url
+  name
+  rating (1-5)
+  phone
+    location {
+      address1
+      state
+      zip_code
+    }
+}
+*/
+
 const Result = ({ data, postBusiness }) => {
   return (
-    <div className="result" onClick={postBusiness(data.url, data.id)}>
+    <div className="result" /*onClick={postBusiness(data.url, data.id)}*/>
       <img src={data.image_url} />
       <div className="result-text">
         <h3>{data.name}</h3>
