@@ -43,21 +43,6 @@ const useStyles = makeStyles(theme => ({
 
 const Search = (props) => {
 
-    /*Example Business Result
-    data {
-      image_url
-      name
-      rating (1-5)
-      phone
-        location {
-          address1
-          state
-          zip_code
-        }
-    }
-    */
-
-
     let placeholderBusinesses = [
         {
             image_url: "https://yorktownsentry.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-14-at-2.41.39-PM.png",
@@ -107,6 +92,9 @@ const Search = (props) => {
 
     const classes = useStyles();
 
+    const [searchTerm, setSearchTerm] = useState();
+    const [searchLocation, setSearchLocation] = useState();
+
     return (
         <div className="search-widget" style={{ backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9)' }}>
 
@@ -129,6 +117,7 @@ const Search = (props) => {
                         type="text"
                         className={classes.textField}
                         placeholder="Business Name"
+                        onChange={(e) => {setSearchTerm(e.target.value); console.log("Setting search term value to state", e.target.value);}}
                     />
                     <TextField
                         label="City or State"
@@ -137,6 +126,7 @@ const Search = (props) => {
                         type="text"
                         className={`${classes.textField} `}
                         placeholder="City or State"
+                        onChange={(e) => {setSearchLocation(e.target.value)}}
                         //     endAdornment={<InputAdornment position="end">
                         //     <GpsFixedIcon
                         //       aria-label="locator-icon"
@@ -153,7 +143,7 @@ const Search = (props) => {
                         }}
                     >
                     </TextField>
-                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); props.searchResultsPlaceholder(placeholderBusinesses); console.log("Adding example search results to state") }}>Submit</Button>
+                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); props.fetchBusinesses({name: searchTerm, location: searchLocation}); }}>Submit</Button>
                 </form>
             </div>
             <Results />

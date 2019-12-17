@@ -1,12 +1,19 @@
 import axios from "axios";
 
-const key = process.env.YELP_KEY;
+const key = process.env.REACT_APP_YELP_KEY;
 
-const axiosWithYelpAuth = axios.create({
-  headers: {
+export const axiosWithYelpAuth = () => {
+  console.log("Yelp headers", {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${key}`
-  }
-});
-
-export default axiosWithYelpAuth;
+    'Access-Control-Allow-Origin': 'http://localhost:3000/',
+    'Authorization': `Bearer ${key}`
+  });
+  return axios.create({
+    headers: {
+      "Content-Type": "application/json",
+      'Access-Control-Allow-Origin': 'http://localhost:3000/',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Authorization': `Bearer ${key}`
+    }
+  });
+}

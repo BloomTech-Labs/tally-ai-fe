@@ -4,6 +4,20 @@ import { connect } from "react-redux";
 import Result from "./result";
 import { postBusiness } from "../../actions/index";
 
+/*Required business data for Result
+data {
+  image_url
+  name
+  rating (1-5)
+  phone
+    location {
+      address1
+      state
+      zip_code
+    }
+}
+*/
+
 const Results = (props) => {
 
   console.log("props", props);
@@ -12,7 +26,7 @@ const Results = (props) => {
 
   useEffect(() => {
     if(props.businesses.data.length > 0) {
-    //There is now search results to display in state, lets do our CSS animation and render results
+    //There are now search results to display from state, lets do our CSS animation and render results
     setActive(true);
     }
     else {

@@ -1,7 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 
-/*Example Business Result
+/*Required business data for Result
 data {
   image_url
   name

@@ -1,4 +1,4 @@
-import axiosWithYelpAuth from "../utils/axiosWithYelpAuth";
+import {axiosWithYelpAuth} from "../utils/axiosWithYelpAuth";
 import axios from "axios";
 
 export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
@@ -9,6 +9,8 @@ export const POST_BUSINESS_SUCCESS = "POST_BUSINESS_SUCCESS";
 export const POST_BUSINESS_FAILURE = "POST_BUSINESS_FAILURE";
 
 export const fetchBusinesses = (business) => dispatch => {
+
+  console.log("action business query", business);
 
   const name = business.name;
   let location;
@@ -24,10 +26,9 @@ export const fetchBusinesses = (business) => dispatch => {
     });
   }
 
-  const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;
-
+  const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;//I've tried like a million different solutions from Google to get this to work without a 403 and a CORS error, maybe someone else has ideas cause I give up
   dispatch({ type: FETCH_BUSINESS_START });
-  axiosWithYelpAuth
+  axiosWithYelpAuth()
     .get(yelpSearchEndpoint)
     .then(res => {
       dispatch({
