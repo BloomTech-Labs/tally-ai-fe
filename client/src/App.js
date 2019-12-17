@@ -13,9 +13,9 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Search />
-      <Footer />
+      <Route exact path="/Search/" component={Search}/>
       <Route exact path="/Dashboard/" component={DashboardGrid}/>
+      <Footer />
     </div>
   );
 }
