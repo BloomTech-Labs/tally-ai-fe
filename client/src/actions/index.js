@@ -26,7 +26,7 @@ export const fetchBusinesses = (business) => dispatch => {
     });
   }
 
-  const yelpSearchEndpoint = `https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;//I've tried like a million different solutions from Google to get this to work without a 403 and a CORS error, maybe someone else has ideas cause I give up
+  const yelpSearchEndpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;//I've tried like a million different solutions from Google to get this to work without a 403 and a CORS error, maybe someone else has ideas cause I give up
   dispatch({ type: FETCH_BUSINESS_START });
   axiosWithYelpAuth()
     .get(yelpSearchEndpoint)
