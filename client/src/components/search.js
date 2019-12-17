@@ -6,6 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 import { InputAdornment } from "@material-ui/core";
+import Results from "../components/search/results";
+
+import { fetchBusinesses } from "../actions/index";
+import { searchResultsPlaceholder } from "../actions/index";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -13,84 +17,151 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center'
-        
-       
+
+
     },
     textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: '100%'
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: '100%'
     },
     dense: {
-      marginTop: theme.spacing(2),
+        marginTop: theme.spacing(2),
     },
-   
+
     button: {
-    margin: theme.spacing(1),
-    marginTop: '2%',
-    marginBottom: '6%',
-    width: '15%'
+        margin: theme.spacing(1),
+        marginTop: '2%',
+        marginBottom: '6%',
+        width: '15%'
     },
     input: {
-    display: 'none',
+        display: 'none',
     },
-    
-  }));
 
-  const Search = () => {
+}));
+
+const Search = (props) => {
+
+    /*Example Business Result
+    data {
+      image_url
+      name
+      rating (1-5)
+      phone
+        location {
+          address1
+          state
+          zip_code
+        }
+    }
+    */
+
+
+    let placeholderBusinesses = [
+        {
+            image_url: "https://yorktownsentry.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-14-at-2.41.39-PM.png",
+            name: "Coffee Mart",
+            rating: 4,
+            phone: "530-320-5567",
+            location: {
+                address1: "address",
+                state: "CA",
+                zip_code: "51923"
+            }
+        },
+        {
+            image_url: "https://yorktownsentry.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-14-at-2.41.39-PM.png",
+            name: "Coffee Mart",
+            rating: 4,
+            phone: "530-320-5567",
+            location: {
+                address1: "address",
+                state: "CA",
+                zip_code: "51923"
+            }
+        },
+        {
+            image_url: "https://yorktownsentry.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-14-at-2.41.39-PM.png",
+            name: "Coffee Mart",
+            rating: 4,
+            phone: "530-320-5567",
+            location: {
+                address1: "address",
+                state: "CA",
+                zip_code: "51923"
+            }
+        },
+        {
+            image_url: "https://yorktownsentry.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-14-at-2.41.39-PM.png",
+            name: "Coffee Mart",
+            rating: 4,
+            phone: "530-320-5567",
+            location: {
+                address1: "address",
+                state: "CA",
+                zip_code: "51923"
+            }
+        }
+    ]
 
     const classes = useStyles();
 
     return (
-        
-    <div className="business-search" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9)' }}>
-        {/* <div class="mdc-text-field mdc-text-field--outlined">
-        <input type="text" id="tf-outlined" class="mdc-text-field__input"></input>
-        <div class="mdc-notched-outline"></div>
-        <div class="mdc-notched-outline__notch">
-        <label for="tf-outlined" class="mdc-floating-label">Your Name</label>
+        <div className="search-widget" style={{ backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9)' }}>
+
+            <div className="search-form" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                {/* <div class="mdc-text-field mdc-text-field--outlined">
+            <input type="text" id="tf-outlined" class="mdc-text-field__input"></input>
+            <div class="mdc-notched-outline"></div>
+            <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label">Your Name</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+            </div> */}
+                {/* <h1>Search for a business to get started</h1> */}
+                <form className={classes.container}>
+                    <h1>Search for a business to get started</h1>
+                    <TextField
+                        label="Business Name"
+                        variant="outlined"
+                        margin="normal"
+                        type="text"
+                        className={classes.textField}
+                        placeholder="Business Name"
+                    />
+                    <TextField
+                        label="City or State"
+                        variant="outlined"
+                        margin="normal"
+                        type="text"
+                        className={`${classes.textField} `}
+                        placeholder="City or State"
+                        //     endAdornment={<InputAdornment position="end">
+                        //     <GpsFixedIcon
+                        //       aria-label="locator-icon"
+                        //     //   onClick={handleClickShowPassword}
+                        //     //   onMouseDown={handleMouseDownPassword}
+                        //       edge="end"
+                        //     >
+                        //       {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
+                        //     </GpsFixedIcon>
+                        //   </InputAdornment>
+
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end"><GpsFixedIcon /></InputAdornment>,
+                        }}
+                    >
+                    </TextField>
+                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); props.searchResultsPlaceholder(placeholderBusinesses); console.log("Adding example search results to state") }}>Submit</Button>
+                </form>
+            </div>
+            <Results />
         </div>
-        <div class="mdc-notched-outline__trailing"></div>
-        </div> */}
-        {/* <h1>Search for a business to get started</h1> */}
-        <form className ={classes.container}>
-        <h1>Search for a business to get started</h1>
-            <TextField
-                label="Business Name"
-                variant="outlined"
-                margin="normal"
-                type="text"
-                className={classes.textField}
-                placeholder="Business Name"
-            />
-            <TextField
-                label="City or State"
-                variant="outlined"
-                margin="normal"
-                type="text"
-                className={`${classes.textField} `}
-                placeholder="City or State"
-            //     endAdornment={<InputAdornment position="end">
-            //     <GpsFixedIcon
-            //       aria-label="locator-icon"
-            //     //   onClick={handleClickShowPassword}
-            //     //   onMouseDown={handleMouseDownPassword}
-            //       edge="end"
-            //     >
-            //       {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
-            //     </GpsFixedIcon>
-            //   </InputAdornment>
-            
-                InputProps={{
-                endAdornment: <InputAdornment position="end"><GpsFixedIcon/></InputAdornment>,
-                }}
-            >
-            </TextField>
-            <Button className ={classes.button} variant="outlined" color="blue" type="submit">Submit</Button>
-        </form>
-    </div>
-        
+
     )
 }
 
-export default Search;
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps, { fetchBusinesses, searchResultsPlaceholder })(Search);

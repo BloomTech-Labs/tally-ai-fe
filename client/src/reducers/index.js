@@ -8,11 +8,12 @@ import {
 } from "../actions/index.js";
 
 const initialState = {
-  searchResults: { isFetching: false, error: null, data: null },
+  searchResults: { isFetching: false, error: null, data: [] },
   keyWords: { isFetching: false, error: null, data: null }
 };
 
 function reducer(state = initialState, action) {
+  
   console.log(
     "Reducer working, current action: ",
     action.type,
@@ -28,6 +29,7 @@ function reducer(state = initialState, action) {
       };
 
     case FETCH_BUSINESS_SUCCESS:
+      console.log("FETCH SUCCESS! Payload:", action.payload)
       return {
         ...state,
         searchResults: {
