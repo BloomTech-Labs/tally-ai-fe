@@ -153,7 +153,10 @@ const Search = (props) => {
                         }}
                     >
                     </TextField>
-                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); props.fetchBusinesses({ name: searchTerm, location: searchLocation }); }}>Submit</Button>
+                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); 
+                        // props.fetchBusinesses({ name: searchTerm, location: searchLocation }); 
+props.searchResultsPlaceholder(placeholderBusinesses)
+                        }}>Submit</Button>
                 </form>
             </div>
             <Results />
