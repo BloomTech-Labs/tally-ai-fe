@@ -93,7 +93,7 @@ const Search = (props) => {
     const classes = useStyles();
 
     const [searchTerm, setSearchTerm] = useState();
-    const [searchLocation, setSearchLocation] = useState();
+    const [searchLocation, setSearchLocation] = useState("");
 
     return (
         <div className="search-widget" style={{ backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9)' }}>
@@ -117,16 +117,19 @@ const Search = (props) => {
                         type="text"
                         className={classes.textField}
                         placeholder="Business Name"
-                        onChange={(e) => {setSearchTerm(e.target.value); console.log("Setting search term value to state", e.target.value);}}
+                        onChange={(e) => { setSearchTerm(e.target.value); console.log("Setting search term value to state", e.target.value); }}
                     />
                     <TextField
-                        label="City or State"
+                        label={searchLocation.longitude && searchLocation.latitude ? "Using Your Location" : "City or State"}
+                        value={searchLocation.longitude && searchLocation.latitude ? "" : searchLocation}
                         variant="outlined"
                         margin="normal"
                         type="text"
                         className={`${classes.textField} `}
-                        placeholder="City or State"
-                        onChange={(e) => {setSearchLocation(e.target.value)}}
+                        placeholder={searchLocation.logitude && searchLocation.latitude ? "Using Your Location" : "City or State"}
+                        onChange={(e) => {
+                            setSearchLocation(e.target.value);
+                        }}
                         //     endAdornment={<InputAdornment position="end">
                         //     <GpsFixedIcon
                         //       aria-label="locator-icon"
@@ -139,11 +142,18 @@ const Search = (props) => {
                         //   </InputAdornment>
 
                         InputProps={{
-                            endAdornment: <InputAdornment position="end"><GpsFixedIcon /></InputAdornment>,
+                            endAdornment: <InputAdornment position="end">
+                                <GpsFixedIcon onClick={() => {
+                                    if (navigator.geolocation) {
+                                        navigator.geolocation.getCurrentPosition((loc) => { setSearchLocation(loc.coords) });
+                                    } else {
+                                        alert("Failed to access browser geolocation");
+                                    }
+                                }} /></InputAdornment>,
                         }}
                     >
                     </TextField>
-                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); props.fetchBusinesses({name: searchTerm, location: searchLocation}); }}>Submit</Button>
+                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); props.fetchBusinesses({ name: searchTerm, location: searchLocation }); }}>Submit</Button>
                 </form>
             </div>
             <Results />

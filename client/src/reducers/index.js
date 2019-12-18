@@ -8,7 +8,7 @@ import {
 } from "../actions/index.js";
 
 const initialState = {
-  searchResults: { isFetching: false, error: null, data: [] },
+  searchResults: { isFetching: false, error: null, data: null },
   keyWords: { isFetching: false, error: null, data: null }
 };
 

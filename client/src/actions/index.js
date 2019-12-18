@@ -15,10 +15,10 @@ export const fetchBusinesses = (business) => dispatch => {
   const name = business.name;
   let location;
 
-  if (business.location) {
-    location = `location=${business.location}`;
-  } else if (business.latitude && business.longitude) {
-    location = `latitude=${business.latitude}&longitude=${business.longitude}`;
+  if (business.location.latitude && business.location.longitude) {
+    location = `latitude=${business.location.latitude}&longitude=${business.location.longitude}`;
+  } else if (business.location) {
+    location = `location=${business.searchLocation}`;
   } else {
     dispatch({
       type: FETCH_BUSINESS_FAILURE,
@@ -45,12 +45,12 @@ export const fetchBusinesses = (business) => dispatch => {
 
 };
 
-export const postBusiness = ({ url, id }) => dispatch => {
+export const postBusiness = ({ id }) => dispatch => {
   const dsEndpoint = ``; // TODO: GET ENDPOINT URL
 
   dispatch({ type: POST_BUSINESS_START });
   axios
-    .post(dsEndpoint, { url, id })
+    .post(dsEndpoint, { id })
     .then(res => {
       dispatch({
         type: POST_BUSINESS_SUCCESS,
