@@ -27,7 +27,7 @@ const Results = props => {
   const select = e => {
     console.log("Selection: ", tentativeSelection);
     e.preventDefault();
-    postBusiness(tentativeSelection);
+    props.postBusiness(tentativeSelection);
     history.push("/dashboard");
   };
 
