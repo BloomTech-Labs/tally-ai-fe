@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+
+/*
+=======
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+*/
 /*Required business data for Result
 data {
   image_url
@@ -24,7 +29,7 @@ data {
 
 const Result = ({ data, setTentativeSelection, select }) => {
   const [isSelected, setIsSelected] = useState(false);
-
+  /*
   const useStyles = makeStyles({
     card: {
       width: "80%",
@@ -39,48 +44,48 @@ const Result = ({ data, setTentativeSelection, select }) => {
     }
   });
   const classes = useStyles();
-
+*/
   return (
-    <Card className={classes.card}>
+    <div
+      onClick={() => {
+        setIsSelected(!isSelected);
+        setTentativeSelection(data.id);
+      }}
+    >
+      {/* <CardActionArea>
+        <CardContent> */}
+      <img src={data.image_url} />
+
+      {/* <h2>{data.name}</h2> */}
+      {/* </CardContent>
+      </CardActionArea> */}
       <div
-        onClick={() => {
-          setIsSelected(!isSelected);
-          setTentativeSelection(data.id);
+        className="result-text"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyItems: "space-between",
+          paddingLeft: "20%"
         }}
       >
-        {/* <CardActionArea>
-        <CardContent> */}
-        <img src={data.image_url} />
-
-        {/* <h2>{data.name}</h2> */}
-        {/* </CardContent>
-      </CardActionArea> */}
-        <div
-          className="result-text"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyItems: "space-between",
-            paddingLeft: "20%"
-          }}
-        >
-          <h2>{data.name}</h2>
-          <StarRatings
-            rating={data.rating}
-            starRatedColor="blue"
-            numberOfStars={5}
-            name="rating"
-            size="large"
-          />
-          <p>{data.phone}</p>
-          <p>{data.location.address1}</p>
-          <p>
-            {data.location.city}, {data.location.state} {data.location.zip_code}
-          </p>
-          <button onClick={() => select()}>Select</button>
-        </div>
+        <h2>{data.name}</h2>
+        <StarRatings
+          rating={data.rating}
+          starRatedColor="grey"
+          starDimension="20px"
+          starSpacing="1px"
+          numberOfStars={5}
+          name="rating"
+          size="large"
+        />
+        <p className="phoneNumber">{data.phone}</p>
+        <p>{data.location.address1}</p>
+        <p>
+          {data.location.city}, {data.location.state} {data.location.zip_code}
+        </p>
+        <button onClick={() => select()}>Select</button>
       </div>
-    </Card>
+    </div>
   );
 };
 
