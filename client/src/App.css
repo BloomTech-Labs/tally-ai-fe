@@ -33,6 +33,7 @@ star-rating{
   font-size: 10px;
 }
 
+
 .expand-search-results {
   z-index: 0;
 }
@@ -46,6 +47,14 @@ star-rating{
   align-items:center;
   width: 100%;
   justify-content:space-between;
+}
+
+.formFaded{
+  background: whitesmoke;
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0s;
 }
 
 .search-widget {
@@ -106,12 +115,12 @@ star-rating{
 
 }
 
-.selected {
-  /* background: gray; */
+/* .selected {
+  background: gray;
 
-  /* box-shadow: 1px 1px;
-  display: inline-block; */
-}
+  box-shadow: 1px 1px;
+  display: inline-block;
+} */
 
 .selected button {
   float: right;

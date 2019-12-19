@@ -49,8 +49,12 @@ const Results = (props) => {
   }
   else {
     let animationClass = "";
+    let fadeForm = document.querySelector('.search-form');
+ 
     if (active) {
       animationClass = " expand-search-results";
+      fadeForm.classList.add('formFaded');
+
     }
     console.log("Animation class", animationClass);
     return (
