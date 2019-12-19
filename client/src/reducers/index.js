@@ -50,6 +50,7 @@ function reducer(state = initialState, action) {
       };
 
     case POST_BUSINESS_START:
+      console.log("Post start.");
       return {
         ...state,
         keyWords: { ...state.keyWords, isFetching: true }
@@ -63,6 +64,7 @@ function reducer(state = initialState, action) {
       };
 
     case POST_BUSINESS_FAILURE:
+      console.log("Post failure: ", action.payload);
       return {
         ...state,
         keyWords: {

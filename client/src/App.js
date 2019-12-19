@@ -13,8 +13,8 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Route exact path="/" component={Search}/>
-      <Route exact path="/Dashboard/" component={DashboardGrid}/>
+      <Route exact path="/" component={Search} />
+      <Route exact path="/Dashboard/" component={DashboardGrid} />
       <Footer />
     </div>
   );

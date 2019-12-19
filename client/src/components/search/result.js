@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 
-
 /*
 =======
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,44 +27,54 @@ data {
 }
 */
 
-const Result = ({ data, postBusiness }) => {
-  const [tentativeSelection, setTentativeSelection] = useState();
+const Result = ({ data, setTentativeSelection, select }) => {
   const [isSelected, setIsSelected] = useState(false);
-
-
-  const select = e => {
-    e.preventDefault();
-    postBusiness(data.id);
-  }
-/*
+  /*
   const useStyles = makeStyles({
     card: {
+<<<<<<< HEAD
+      width: "80%",
+      height: "30%",
+=======
       width: '80%',
       height: '25%',
+>>>>>>> 52638292fc3b17ea53cf1637ac96d8a52bcd0135
       margin: 20,
-      padding: 20,
+      padding: 20
       // display: 'flex',
       // // alignItems: 'center',
       // // justifyItems: 'center',
       // justifyContent: 'space-between',
       // // alignContent: 'space-between'
     }
-  })
+  });
   const classes = useStyles();
 */
   return (
-    {/*<Card className={classes.card}>*/}
-    <div className={`result ${isSelected ? "selected" : "not-selected"}`} onClick={() => {setIsSelected(!isSelected)} }>
+    <div
+      onClick={() => {
+        setIsSelected(!isSelected);
+        setTentativeSelection(data.id);
+      }}
+    >
       {/* <CardActionArea>
         <CardContent> */}
       <img src={data.image_url} />
-      
-        {/* <h2>{data.name}</h2> */}
+
+      {/* <h2>{data.name}</h2> */}
       {/* </CardContent>
       </CardActionArea> */}
-      <div className="result-text" style={{display:"flex", flexDirection:"column", justifyItems:"space-between", paddingLeft: "20%"}}>
-      <h2>{data.name}</h2>
-        <StarRatings 
+      <div
+        className="result-text"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyItems: "space-between",
+          paddingLeft: "20%"
+        }}
+      >
+        <h2>{data.name}</h2>
+        <StarRatings
           rating={data.rating}
           starRatedColor="grey"
           starDimension="20px"
@@ -79,10 +88,9 @@ const Result = ({ data, postBusiness }) => {
         <p>
           {data.location.city}, {data.location.state} {data.location.zip_code}
         </p>
-        <button onClick={select}>Select</button>
+        <button onClick={e => select(e)}>Select</button>
       </div>
     </div>
-{/*</Card>*/}
   );
 };
 
