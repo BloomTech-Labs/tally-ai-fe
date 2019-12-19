@@ -89,6 +89,8 @@ star-rating{
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-delay: 1s;
+  border-bottom: 1px solid lightgrey;
+
   /* prevent the animation from resetting after done playinig */
   animation-fill-mode: forwards;
 }
@@ -108,8 +110,16 @@ star-rating{
 }
 
 .selected button {
-  background: pink;
   float: right;
+  text-transform: uppercase;
+  background: none;
+  color: blueviolet;
+  border: none;
+  font-weight: bold;
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0s;
 }
 
 .not-selected button {
