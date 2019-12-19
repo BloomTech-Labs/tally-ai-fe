@@ -27,7 +27,7 @@ data {
 }
 */
 
-const Result = ({ data, setTentativeSelection, select }) => {
+const Result = ({ data, setTentativeSelection, select, className }) => {
   const [isSelected, setIsSelected] = useState(false);
   /*
   const useStyles = makeStyles({
@@ -51,6 +51,7 @@ const Result = ({ data, setTentativeSelection, select }) => {
         setIsSelected(!isSelected);
         setTentativeSelection(data.id);
       }}
+      className={className}
     >
       {/* <CardActionArea>
         <CardContent> */}
