@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Grid } from "@material-ui/core";
@@ -18,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
   
-  function DashboardGrid() {
+  function DashboardGrid(props) {
     const classes = useStyles();
   
     function FormRow() {
@@ -37,6 +39,13 @@ const useStyles = makeStyles(theme => ({
     return (
       <div className={classes.root} >
         <Grid container spacing={1}>
+            {props.words.positive.map(word => {
+                return (
+                    <Grid item xs={4} style={{display:"flex", flexDirection:"column"}}>
+            <Paper className={classes.paper}>{word.term}</Paper>
+          </Grid>
+                )
+            })}
           <Grid container item xs={6} spacing={3}>
             <FormRow />
           </Grid>
@@ -71,61 +80,9 @@ const useStyles = makeStyles(theme => ({
       </div>
     );
   }
-// const useStyles = makeStyles(theme => ({
-    
-//     root: {
-//       flexGrow: 1,
-//     },
-//     paper: {
-//       padding: theme.spacing(2),
-//       width: "300%",
-//       textAlign: 'center',
-//       color: theme.palette.text.secondary,
-//       marginTop: "30%"
-//     },
-//   }));
 
+  const mapStateToProps = state => ({
+      words: state.keyWords.data
+    });
 
-
-// const DashboardGrid = () => {
-//     const classes = useStyles();
-//     return (
-//         <div className={classes.root}>
-//       <Grid container spacing={2} direction="column" justify="center" alignItems="center" >
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//         <Grid item xs>
-//           <Paper className={classes.paper}></Paper>
-//         </Grid>
-//       </Grid>
-//     </div>
-    
-//   );
-// }
-
-export default DashboardGrid;
+  export default connect(mapStateToProps)(DashboardGrid);
