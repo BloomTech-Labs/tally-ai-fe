@@ -2,6 +2,36 @@
   text-align: center;
 }
 
+h3{
+  color: grey;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.result-text{
+padding-left: 25px;
+text-align: left;
+}
+
+.result-text p {
+  color: grey;
+  font-size: 14px;
+  margin: 0px;
+}
+
+p.phoneNumber {
+padding-bottom: 10px;
+padding-top:10px
+}
+
+star-rating{
+  font-size: 10px;
+}
+
+.expand-search-results {
+  z-index: 0;
+}
+
 .navbar {
   color: red;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 
+
 /*Required business data for Result
 data {
   image_url
@@ -32,11 +33,13 @@ const Result = ({ data, postBusiness }) => {
         <h3>{data.name}</h3>
         <StarRatings
           rating={data.rating}
-          starRatedColor="blue"
+          starRatedColor="grey"
+          starDimension="20px"
+          starSpacing="1px"
           numberOfStars={5}
           name="rating"
         />
-        <p>{data.phone}</p>
+        <p className="phoneNumber">{data.phone}</p>
         <p>{data.location.address1}</p>
         <p>
           {data.location.city}, {data.location.state} {data.location.zip_code}
