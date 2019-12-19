@@ -49,7 +49,7 @@ export const postBusiness = id => dispatch => {
 
   dispatch({ type: POST_BUSINESS_START });
   axios
-    .post(dsEndpoint, { id })
+    .get(dsEndpoint)
     .then(res => {
       dispatch({
         type: POST_BUSINESS_SUCCESS,
