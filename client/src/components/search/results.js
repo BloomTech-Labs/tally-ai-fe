@@ -25,6 +25,7 @@ const Results = props => {
   let history = useHistory();
 
   const select = e => {
+    console.log("Selection: ", tentativeSelection);
     e.preventDefault();
     postBusiness(tentativeSelection);
     history.push("/dashboard");
@@ -59,12 +60,11 @@ const Results = props => {
     return <p>No results found</p>;
   } else {
     let animationClass = "";
-    let fadeForm = document.querySelector('.search-form');
- 
+    let fadeForm = document.querySelector(".search-form");
+
     if (active) {
       animationClass = " expand-search-results";
-      fadeForm.classList.add('formFaded');
-
+      fadeForm.classList.add("formFaded");
     }
     console.log("Animation class", animationClass);
     return (

@@ -83,7 +83,7 @@ const Result = ({ data, setTentativeSelection, select }) => {
         <p>
           {data.location.city}, {data.location.state} {data.location.zip_code}
         </p>
-        <button onClick={() => select()}>Select</button>
+        <button onClick={e => select(e)}>Select</button>
       </div>
     </div>
   );

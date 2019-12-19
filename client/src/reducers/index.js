@@ -50,18 +50,21 @@ function reducer(state = initialState, action) {
       };
 
     case POST_BUSINESS_START:
+      console.log("Post start.");
       return {
         ...state,
         keyWords: { ...state.keyWords, isFetching: true }
       };
 
     case POST_BUSINESS_SUCCESS:
+      console.log("Post success. Action payload: ", action.payload);
       return {
         ...state,
         keyWords: { ...state.keyWords, isFetching: false, data: action.payload }
       };
 
     case POST_BUSINESS_FAILURE:
+      console.log("Post failure: ", action.payload);
       return {
         ...state,
         keyWords: {

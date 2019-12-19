@@ -44,8 +44,8 @@ export const fetchBusinesses = business => dispatch => {
     });
 };
 
-export const postBusiness = ({ id }) => dispatch => {
-  const dsEndpoint = ``; // TODO: GET ENDPOINT URL
+export const postBusiness = id => dispatch => {
+  const dsEndpoint = `http://tallyai.xyz/yelp/${id}`; // TODO: GET ENDPOINT URL
 
   dispatch({ type: POST_BUSINESS_START });
   axios
