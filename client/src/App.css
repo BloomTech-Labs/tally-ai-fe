@@ -11,6 +11,7 @@ h3{
 .result-text{
 padding-left: 25px;
 text-align: left;
+width: 50%;
 }
 
 .result-text p {
@@ -100,9 +101,15 @@ star-rating{
 }
 
 .selected {
-  background: gray;
-  box-shadow: 1px 1px;
-  display: inline-block;
+  /* background: gray; */
+
+  /* box-shadow: 1px 1px;
+  display: inline-block; */
+}
+
+.selected button {
+  background: pink;
+  float: right;
 }
 
 .not-selected button {
