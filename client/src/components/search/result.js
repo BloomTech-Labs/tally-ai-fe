@@ -41,7 +41,7 @@ const Result = ({ data, postBusiness }) => {
   const useStyles = makeStyles({
     card: {
       width: '80%',
-      height: '30%',
+      height: '25%',
       margin: 20,
       padding: 20,
       // display: 'flex',
