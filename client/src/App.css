@@ -2,6 +2,42 @@
   text-align: center;
 }
 
+form{
+  padding-right: 20px;
+}
+
+h3{
+  color: grey;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.result-text{
+padding-left: 25px;
+text-align: left;
+width: 50%;
+}
+
+.result-text p {
+  color: grey;
+  font-size: 14px;
+  margin: 0px;
+}
+
+p.phoneNumber {
+padding-bottom: 10px;
+padding-top:10px
+}
+
+star-rating{
+  font-size: 10px;
+}
+
+
+.expand-search-results {
+  z-index: 0;
+}
+
 .navbar {
   color: red;
 }
@@ -11,6 +47,14 @@
   align-items:center;
   width: 100%;
   justify-content:space-between;
+}
+
+.formFaded{
+  background: whitesmoke;
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0s;
 }
 
 .search-widget {
@@ -58,6 +102,8 @@
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-delay: 1s;
+  border-bottom: 1px solid lightgrey;
+
   /* prevent the animation from resetting after done playinig */
   animation-fill-mode: forwards;
 }
@@ -69,10 +115,24 @@
 
 }
 
-.selected {
+/* .selected {
   background: gray;
+
   box-shadow: 1px 1px;
   display: inline-block;
+} */
+
+.selected button {
+  float: right;
+  text-transform: uppercase;
+  background: none;
+  color: blueviolet;
+  border: none;
+  font-weight: bold;
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0s;
 }
 
 .not-selected button {

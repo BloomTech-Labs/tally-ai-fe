@@ -50,7 +50,21 @@ const Search = (props) => {
             rating: 4,
             phone: "530-320-5567",
             location: {
+                address1: "742 EverGreen Terrance ",
+                city:"Springfield",
+                state: "WA",
+                zip_code: "40069"
+            }
+        },
+        {
+            image_url: "https://yorktownsentry.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-14-at-2.41.39-PM.png",
+            name: "Coffee Mart",
+            rating: 4,
+            phone: "530-320-5567",
+            location: {
                 address1: "address",
+                city:"LA",
+
                 state: "CA",
                 zip_code: "51923"
             }
@@ -61,9 +75,10 @@ const Search = (props) => {
             rating: 4,
             phone: "530-320-5567",
             location: {
-                address1: "address",
-                state: "CA",
-                zip_code: "51923"
+                address1: "742 EverGreen Terrance ",
+                city:"Springfield",
+                state: "WA",
+                zip_code: "40069"
             }
         },
         {
@@ -73,17 +88,7 @@ const Search = (props) => {
             phone: "530-320-5567",
             location: {
                 address1: "address",
-                state: "CA",
-                zip_code: "51923"
-            }
-        },
-        {
-            image_url: "https://yorktownsentry.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-14-at-2.41.39-PM.png",
-            name: "Coffee Mart",
-            rating: 4,
-            phone: "530-320-5567",
-            location: {
-                address1: "address",
+                city:"LA",
                 state: "CA",
                 zip_code: "51923"
             }
@@ -153,7 +158,10 @@ const Search = (props) => {
                         }}
                     >
                     </TextField>
-                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); props.fetchBusinesses({ name: searchTerm, location: searchLocation }); }}>Submit</Button>
+                    <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault();                  
+                        props.fetchBusinesses({ name: searchTerm, location: searchLocation }); 
+// props.searchResultsPlaceholder(placeholderBusinesses)
+                        }}>Submit</Button>
                 </form>
             </div>
             <Results />
