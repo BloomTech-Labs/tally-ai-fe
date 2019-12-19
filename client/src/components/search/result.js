@@ -2,6 +2,18 @@ import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 
 
+/*
+=======
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+*/
 /*Required business data for Result
 data {
   image_url
@@ -25,19 +37,42 @@ const Result = ({ data, postBusiness }) => {
     e.preventDefault();
     postBusiness(data.id);
   }
-
+/*
+  const useStyles = makeStyles({
+    card: {
+      width: '80%',
+      height: '30%',
+      margin: 20,
+      padding: 20,
+      // display: 'flex',
+      // // alignItems: 'center',
+      // // justifyItems: 'center',
+      // justifyContent: 'space-between',
+      // // alignContent: 'space-between'
+    }
+  })
+  const classes = useStyles();
+*/
   return (
+    {/*<Card className={classes.card}>*/}
     <div className={`result ${isSelected ? "selected" : "not-selected"}`} onClick={() => {setIsSelected(!isSelected)} }>
+      {/* <CardActionArea>
+        <CardContent> */}
       <img src={data.image_url} />
-      <div className="result-text">
-        <h3>{data.name}</h3>
-        <StarRatings
+      
+        {/* <h2>{data.name}</h2> */}
+      {/* </CardContent>
+      </CardActionArea> */}
+      <div className="result-text" style={{display:"flex", flexDirection:"column", justifyItems:"space-between", paddingLeft: "20%"}}>
+      <h2>{data.name}</h2>
+        <StarRatings 
           rating={data.rating}
           starRatedColor="grey"
           starDimension="20px"
           starSpacing="1px"
           numberOfStars={5}
           name="rating"
+          size="large"
         />
         <p className="phoneNumber">{data.phone}</p>
         <p>{data.location.address1}</p>
@@ -47,6 +82,7 @@ const Result = ({ data, postBusiness }) => {
         <button onClick={select}>Select</button>
       </div>
     </div>
+{/*</Card>*/}
   );
 };
 

@@ -44,7 +44,7 @@ const Results = (props) => {
     return (<></>);
   }
 
-  if (props.businesses.data.length == 0) {
+  if (props.businesses.data.length === 0) {
     return (<p>No results found</p>)
   }
   else {
