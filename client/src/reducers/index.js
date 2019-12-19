@@ -9,7 +9,11 @@ import {
 
 const initialState = {
   searchResults: { isFetching: false, error: null, data: null },
-  keyWords: { isFetching: false, error: null, data: {positive:[{term: "apple"}, {term: "banana"}] }}
+  keyWords: {
+    isFetching: false,
+    error: null,
+    data: { positive: [{ term: "apple" }, { term: "banana" }] }
+  }
 };
 
 function reducer(state = initialState, action) {
@@ -57,10 +61,14 @@ function reducer(state = initialState, action) {
       };
 
     case POST_BUSINESS_SUCCESS:
-      console.log("data incoming", action.payload)
-    return {
+      console.log("data incoming", action.payload);
+      return {
         ...state,
-        keyWords: { ...state.keyWords, isFetching: false, data: action.payload }
+        keyWords: {
+          ...state.keyWords,
+          isFetching: false,
+          data: action.payload.data
+        }
       };
 
     case POST_BUSINESS_FAILURE:

@@ -32,13 +32,8 @@ const Result = ({ data, setTentativeSelection, select }) => {
   /*
   const useStyles = makeStyles({
     card: {
-<<<<<<< HEAD
       width: "80%",
       height: "30%",
-=======
-      width: '80%',
-      height: '25%',
->>>>>>> 52638292fc3b17ea53cf1637ac96d8a52bcd0135
       margin: 20,
       padding: 20
       // display: 'flex',

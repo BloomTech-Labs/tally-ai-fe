@@ -46,7 +46,7 @@ export const fetchBusinesses = business => dispatch => {
 
 export const postBusiness = id => dispatch => {
   const dsEndpoint = `http://tallyai.xyz/yelp/${id}`; // TODO: GET ENDPOINT URL
-
+  console.log("Running postBusiness.");
   dispatch({ type: POST_BUSINESS_START });
   axios
     .get(dsEndpoint)
