@@ -6,7 +6,7 @@ form{
   padding-right: 20px;
 }
 
-h3{
+h2{
   color: grey;
   text-align: left;
   margin-bottom: 5px;
@@ -129,7 +129,7 @@ star-rating{
   color: blueviolet;
   border: none;
   font-weight: bold;
-
+/* width:400px; */
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-delay: 0s;

@@ -38,8 +38,8 @@ function reducer(state = initialState, action) {
         searchResults: {
           ...state.searchResults,
           isFetching: false,
-          // data: action.payload
-          data: action.payload.data.businesses
+          data: action.payload
+          // data: action.payload.data.businesses
         }
       };
 
