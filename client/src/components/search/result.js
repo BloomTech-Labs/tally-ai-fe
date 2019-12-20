@@ -66,7 +66,8 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
           display: "flex",
           flexDirection: "column",
           justifyItems: "space-between",
-          paddingLeft: "20%"
+          paddingLeft: "20%",
+          cursor: 'pointer'
         }}
       >
         <h2>{data.name}</h2>
