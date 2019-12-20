@@ -180,8 +180,8 @@ const Search = (props) => {
                     >
                     </TextField>
                     <Button className={classes.button} variant="outlined" color="blue" type="submit" onClick={(e) => { e.preventDefault(); 
-props.searchResultsPlaceholder(placeholderBusinesses);
-                        // props.fetchBusinesses({ name: searchTerm, location: searchLocation }); 
+// props.searchResultsPlaceholder(placeholderBusinesses);
+                        props.fetchBusinesses({ name: searchTerm, location: searchLocation }); 
                         }}>Submit</Button>
                 </form>
             </div>
