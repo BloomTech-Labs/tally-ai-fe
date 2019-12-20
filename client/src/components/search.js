@@ -175,7 +175,7 @@ const Search = (props) => {
                                     } else {
                                         alert("Failed to access browser geolocation");
                                     }
-                                }} /></InputAdornment>,
+                                }} style={{cursor: 'pointer'}} /></InputAdornment>,
                         }}
                     >
                     </TextField>
