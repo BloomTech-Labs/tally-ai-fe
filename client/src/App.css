@@ -106,6 +106,7 @@ star-rating{
 
   /* prevent the animation from resetting after done playinig */
   animation-fill-mode: forwards;
+  
 }
 
 .result img{
@@ -137,4 +138,76 @@ star-rating{
 
 .not-selected button {
   display: none;
+}
+
+.widgetContainer {
+  width: 30vw;
+  height: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 1vw;
+}
+
+.widgetList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.exampleWidget1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(219, 202, 250);
+  width: 90%;
+  height: 90%;
+}
+
+.exampleWidget2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(250, 240, 147);
+  width: 90%;
+  height: 90%;
+}
+
+.exampleWidget3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(142, 228, 142);
+  width: 90%;
+  height: 90%;
+}
+
+.exampleWidget4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(236, 139, 139);
+  width: 90%;
+  height: 90%;
+}
+
+.exampleWidget5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(136, 205, 214);
+  width: 90%;
+  height: 90%;
+}
+
+.exampleWidget6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(105, 105, 105);
+  width: 90%;
+  height: 90%;
 }
