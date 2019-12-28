@@ -68,7 +68,7 @@ const Results = props => {
     }
     console.log("Animation class", animationClass);
     return (
-      <div className={"search-results" + animationClass}>
+      <div className={"search-results" + animationClass} style={{overflow:'scroll'}}>
         {props.businesses.data.map(result => (
           <Result
             data={result}
