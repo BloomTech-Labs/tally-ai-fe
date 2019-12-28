@@ -55,7 +55,7 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
     >
       {/* <CardActionArea>
         <CardContent> */}
-      <img src={data.image_url} />
+      <img style={{alignSelf:"center"}} src={data.image_url} />
 
       {/* <h2>{data.name}</h2> */}
       {/* </CardContent>
