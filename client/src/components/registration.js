@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// action goes here
+import { fetchAddNewUser } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -54,7 +54,7 @@ function Registration(props) {
     const submitHandler = event => {
         event.preventDefault();
         console.log(userCredentials);
-        props.addUser(userCredentials)  //action goes here
+        props.fetchAddNewUser(userCredentials)
     }
 
     const changeHandler = event => {
@@ -177,6 +177,6 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { }  //action goes here
+    { fetchAddNewUser }  
 )(Registration)
 
