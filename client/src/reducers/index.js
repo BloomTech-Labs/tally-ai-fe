@@ -4,7 +4,8 @@ import {
   FETCH_BUSINESS_FAILURE,
   POST_BUSINESS_START,
   POST_BUSINESS_SUCCESS,
-  POST_BUSINESS_FAILURE
+  POST_BUSINESS_FAILURE,
+  FETCH_ADDNEWUSER_SUCCESS
 } from "../actions/index.js";
 
 const initialState = {
@@ -81,6 +82,13 @@ function reducer(state = initialState, action) {
           error: action.payload
         }
       };
+    
+    case FETCH_ADDNEWUSER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: "",
+      }
 
     default:
       console.log(`\nUnknown action type:\n${action.type}`);

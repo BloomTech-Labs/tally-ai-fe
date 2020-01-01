@@ -8,6 +8,7 @@ export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
 export const POST_BUSINESS_START = "POST_BUSINESS_START";
 export const POST_BUSINESS_SUCCESS = "POST_BUSINESS_SUCCESS";
 export const POST_BUSINESS_FAILURE = "POST_BUSINESS_FAILURE";
+export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS"
 
 export const fetchBusinesses = business => dispatch => {
   console.log("action business query", business);
