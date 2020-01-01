@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 import { InputAdornment } from "@material-ui/core";
@@ -167,15 +168,19 @@ const Search = (props) => {
                         //     </GpsFixedIcon>
                         //   </InputAdornment>
 
+                        // <Tooltip title="Use your current location" arrow>
                         InputProps={{
                             endAdornment: <InputAdornment position="end">
+                                <Tooltip title="Use your current location" arrow>
                                 <GpsFixedIcon onClick={() => {
                                     if (navigator.geolocation) {
                                         navigator.geolocation.getCurrentPosition((loc) => { setSearchLocation(loc.coords) });
                                     } else {
                                         alert("Failed to access browser geolocation");
                                     }
-                                }} style={{cursor: 'pointer'}} /></InputAdornment>,
+                                }} style={{cursor: 'pointer'}} />
+                                </Tooltip>
+                                </InputAdornment>,
                         }}
                     >
                     </TextField>
