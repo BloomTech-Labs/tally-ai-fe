@@ -1,4 +1,5 @@
 import { axiosWithYelpAuth } from "../utils/axiosWithYelpAuth";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 
 export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
@@ -7,6 +8,7 @@ export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
 export const POST_BUSINESS_START = "POST_BUSINESS_START";
 export const POST_BUSINESS_SUCCESS = "POST_BUSINESS_SUCCESS";
 export const POST_BUSINESS_FAILURE = "POST_BUSINESS_FAILURE";
+export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS"
 
 export const fetchBusinesses = business => dispatch => {
   console.log("action business query", business);
@@ -72,3 +74,11 @@ export const searchResultsPlaceholder = results => dispatch => {
     payload: results
   });
 };
+
+// Used at Registration
+export const fetchAddNewUser = (newUser) => dispatch => {
+  axiosWithAuth()
+  .post(``, newUser) //endpoint goes here
+  .then(res => dispatch({ type: FETCH_ADDNEWUSER_SUCCESS }) & console.log(res.data, "fetchAddNewUser"))
+  .catch(err => dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response}))
+}
