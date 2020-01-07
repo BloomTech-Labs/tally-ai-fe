@@ -13,7 +13,7 @@ const initialState = {
   keyWords: {
     isFetching: false,
     error: null,
-    data: { positive: [{ term: "apple" }, { term: "banana" }] }
+    data: { positive: [{ term: "apple" }, { term: "banana" }], negative: [{ term: "orange" }, { term: "kiwi" }] }
   }
 };
 
