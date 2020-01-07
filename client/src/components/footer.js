@@ -7,7 +7,7 @@ const useStyles = makeStyles ({
 
 root:{
     bottom: '0',
-    background: 'lightblue',
+    background: '#2C98F0',
     color: 'black',
     height: '80px'
 },
@@ -23,7 +23,7 @@ export default function Footer() {
             <Button color="inherit">Privacy Policy</Button>
                 <Typography align="center">
                     {'Copyright © '}
-                    Tally AI 2019
+                    Tally AI 2020
                 </Typography>
         </footer>
     );

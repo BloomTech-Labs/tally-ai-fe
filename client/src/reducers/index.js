@@ -5,8 +5,14 @@ import {
   POST_BUSINESS_START,
   POST_BUSINESS_SUCCESS,
   POST_BUSINESS_FAILURE,
-  FETCH_ADDNEWUSER_SUCCESS
+  FETCH_ADDNEWUSER_SUCCESS,
+  FETCH_WORDS_OVER_TIME_START,
+  FETCH_WORDS_OVER_TIME_SUCCESS,
+  FETCH_WORDS_OVER_TIME_FAILURE
 } from "../actions/index.js";
+
+import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
+import dummyReviewsOverTime from "../dummyData/dummyReviewsOverTime";
 
 const initialState = {
   searchResults: { isFetching: false, error: null, data: null },
@@ -14,6 +20,16 @@ const initialState = {
     isFetching: false,
     error: null,
     data: { positive: [{ term: "apple" }, { term: "banana" }], negative: [{ term: "orange" }, { term: "kiwi" }] }
+  },
+  wordsOverTime: {
+    isFetching: false,
+    error: null,
+    data: { words: dummyWordsOverTime }
+  },
+  reviewFrequency: {
+    isFetching: false,
+    error: null,
+    data: dummyReviewsOverTime
   }
 };
 
@@ -88,6 +104,37 @@ function reducer(state = initialState, action) {
         ...state,
         isFetching: false,
         error: "",
+      };
+
+    case FETCH_WORDS_OVER_TIME_START:
+      return {
+        ...state,
+        wordsOverTime: {
+          ...state.wordsOverTime,
+          isFetching: true
+        }
+      };
+
+    case FETCH_WORDS_OVER_TIME_SUCCESS:
+      return {
+        ...state,
+        wordsOverTime: {
+          ...state.wordsOverTime,
+          isFetching: false,
+          data: {
+            words: action.payload.words
+          } 
+        }
+      };
+
+    case FETCH_WORDS_OVER_TIME_FAILURE:
+      return {
+        ...state,
+        wordsOverTime: {
+          ...state.wordsOverTime,
+          isFetching: false,
+          error: action.payload
+        }
       }
 
     default:

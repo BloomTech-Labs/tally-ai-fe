@@ -185,11 +185,11 @@ star-rating{
   height: 90%;
 }
 
-.exampleWidget4 {
+.review-frequency {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(236, 139, 139);
+  background: white;
   width: 90%;
   height: 90%;
 }
@@ -210,4 +210,14 @@ star-rating{
   background: rgb(105, 105, 105);
   width: 90%;
   height: 90%;
+}
+
+.radarChart {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* padding: 10px;
+  width: 800px;
+  height: 800px; */
+  /* background-color: #fff; */
 }
