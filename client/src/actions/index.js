@@ -5,10 +5,20 @@ import axios from "axios";
 export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
 export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";
 export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
+
 export const POST_BUSINESS_START = "POST_BUSINESS_START";
 export const POST_BUSINESS_SUCCESS = "POST_BUSINESS_SUCCESS";
 export const POST_BUSINESS_FAILURE = "POST_BUSINESS_FAILURE";
-export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS"
+
+export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS";
+
+export const FETCH_WORDS_OVER_TIME_START = "FETCH_WORDS_OVER_TIME_START";
+export const FETCH_WORDS_OVER_TIME_SUCCESS = "FETCH_WORDS_OVER_TIME_SUCCESS";
+export const FETCH_WORDS_OVER_TIME_FAILURE = "FETCH_WORDS_OVER_TIME_FAILURE";
+
+export const FETCH_REVIEWS_OVER_TIME_START = "FETCH_REVIEWS_OVERTIME_START";
+export const FETCH_REVIEWS_OVER_TIME_SUCCESS = "FETCH_REVIEWS_OVERTIME_SUCCESS";
+export const FETCH_REVIEWS_OVER_TIME_FAILURE = "FETCH_REVIEWS_OVERTIME_FAILURE";
 
 export const fetchBusinesses = business => dispatch => {
   console.log("action business query", business);
@@ -81,4 +91,30 @@ export const fetchAddNewUser = (newUser) => dispatch => {
   .post(``, newUser) //endpoint goes here
   .then(res => dispatch({ type: FETCH_ADDNEWUSER_SUCCESS }) & console.log(res.data, "fetchAddNewUser"))
   .catch(err => dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response}))
+}
+
+
+export const fetchWordsOverTime = () => dispatch => { // TODO: FIND OUT WHAT WE NEED TO GIVE DS TO GET THE DATA
+  //dispatch({ type: FETCH_WORDS_OVER_TIME_START });
+  console.log("\nFetching words over time...\n");
+  // axiosWithAuth()
+  // .get() // TODO: FIND OUT THE URL FROM DS
+  // .then(res => {
+  //   dispatch({ type:FETCH_WORDS_OVER_TIME_SUCCESS, payload: res.data });
+  // })
+  // .catch(err => {
+  //   dispatch({ type:FETCH_WORDS_OVER_TIME_FAILURE, payload: err });
+  // })
+}
+
+export const fetchReviewsOverTime = () => dispatch => {
+  console.log("\nFetching reviews over time...\n");
+  // axiosWithAuth()
+  // .get() // TODO: FIND OUT THE URL FROM DS
+  // .then(res => {
+  //   dispatch({ type:FETCH_REVIEWS_OVER_TIME_SUCCESS, payload: res.data });
+  // })
+  // .catch(err => {
+  //   dispatch({ type:FETCH_REVIEWS_OVER_TIME_FAILURE, payload: err });
+  // })
 }

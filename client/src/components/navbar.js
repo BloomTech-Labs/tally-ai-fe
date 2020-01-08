@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles({
 
   root: {
-    background: 'lightblue'
+    background: '#2C98F0'
   },
   NavItems: {
     marginLeft:'auto',
