@@ -57,7 +57,7 @@ export const fetchBusinesses = business => dispatch => {
 };
 
 export const postBusiness = id => dispatch => {
-  const dsEndpoint = `http://tally-deploy.us-east-1.elasticbeanstalk.com/yelp/${id}`; // TODO: GET ENDPOINT URL
+  const dsEndpoint = `https://cors-anywhere.herokuapp.com/http://tally-deploy.us-east-1.elasticbeanstalk.com/yelp/${id}`; // TODO: GET ENDPOINT URL
   console.log("Running postBusiness.");
   dispatch({ type: POST_BUSINESS_START });
   axios
