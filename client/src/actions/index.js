@@ -16,6 +16,9 @@ export const FETCH_WORDS_OVER_TIME_START = "FETCH_WORDS_OVER_TIME_START";
 export const FETCH_WORDS_OVER_TIME_SUCCESS = "FETCH_WORDS_OVER_TIME_SUCCESS";
 export const FETCH_WORDS_OVER_TIME_FAILURE = "FETCH_WORDS_OVER_TIME_FAILURE";
 
+export const FETCH_REVIEWS_OVER_TIME_START = "FETCH_REVIEWS_OVERTIME_START";
+export const FETCH_REVIEWS_OVER_TIME_SUCCESS = "FETCH_REVIEWS_OVERTIME_SUCCESS";
+export const FETCH_REVIEWS_OVER_TIME_FAILURE = "FETCH_REVIEWS_OVERTIME_FAILURE";
 
 export const fetchBusinesses = business => dispatch => {
   console.log("action business query", business);
@@ -101,5 +104,17 @@ export const fetchWordsOverTime = () => dispatch => { // TODO: FIND OUT WHAT WE 
   // })
   // .catch(err => {
   //   dispatch({ type:FETCH_WORDS_OVER_TIME_FAILURE, payload: err });
+  // })
+}
+
+export const fetchReviewsOverTime = () => dispatch => {
+  console.log("\nFetching reviews over time...\n");
+  // axiosWithAuth()
+  // .get() // TODO: FIND OUT THE URL FROM DS
+  // .then(res => {
+  //   dispatch({ type:FETCH_REVIEWS_OVER_TIME_SUCCESS, payload: res.data });
+  // })
+  // .catch(err => {
+  //   dispatch({ type:FETCH_REVIEWS_OVER_TIME_FAILURE, payload: err });
   // })
 }
