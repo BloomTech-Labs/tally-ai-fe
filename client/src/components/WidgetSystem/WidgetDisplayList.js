@@ -50,6 +50,27 @@ const WidgetDisplayList = () => {
 
     }
 
+    function DropWidget(event) {
+
+        //FIXME: If the user drops the widget outside of the WidgetList, this method is never called, and projections are left/dragged widgets are never added back
+
+        let draggedWidget = localStorage.getItem("dragged");//So we can add the widget (that was deleted while dragging) back, where the user dropped it
+
+        //mouse position vector
+        let mousePosition = { x: event.pageX, y: event.pageY }
+
+        let closestWidget = getClosestWidgetToMouse(mousePosition);
+
+        let closestIndex = activeWidgets.indexOf(closestWidget.id);
+
+        let activeWidgetsClone = activeWidgets.map((item) => item);
+        //Remove projections and widgets that are of the same type as draggedWidget as well so you can't have duplicate widgets on your dashboard
+        activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
+        //Add back draggedWidget in its new spot
+        activeWidgetsClone.splice(closestIndex, 0, draggedWidget)
+        setActiveWidgets(activeWidgetsClone);
+    }
+
     return (
         <div>
             <hr />
@@ -68,7 +89,7 @@ const WidgetDisplayList = () => {
 
                 let closestIndex = activeWidgets.indexOf(closestWidget.id);
 
-                //If the widgets array doesn't already contain a projection widget in projectedLocation, add one and remove any out of position ones. 
+                //If the widgets array doesn't already contain a projection widget in closestIndex, add one and remove any out of position ones. 
                 //Otherwise, even though the mouse location changed, the projection is still correct and there is no need to re-render
                 if (!(activeWidgets[closestIndex] === "projection")) {
 
@@ -84,26 +105,10 @@ const WidgetDisplayList = () => {
                 }
 
             }
-            } onDrop={(event) => {
-
-                //FIXME: If the user drops the widget outside of the WidgetList, this method is never called, and projections are left/dragged widgets are never added back
-
-                let draggedWidget = localStorage.getItem("dragged");//So we can add the widget (that was deleted while dragging) back, where the user dropped it
-
-                //mouse position vector
-                let mousePosition = { x: event.pageX, y: event.pageY }
-
-                let closestWidget = getClosestWidgetToMouse(mousePosition);
-
-                let closestIndex = activeWidgets.indexOf(closestWidget.id);
-
-                let activeWidgetsClone = activeWidgets.map((item) => item);
-                //Remove projections and widgets that are of the same type as draggedWidget as well so you can't have duplicate widgets on your dashboard
-                activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
-                //Add back draggedWidget in its new spot
-                activeWidgetsClone.splice(closestIndex, 0, draggedWidget)
-                setActiveWidgets(activeWidgetsClone);
-            }
+            } onDragLeave={
+                (e) => DropWidget(e)
+            } onDrop= {
+                (e) => DropWidget(e)
             }>
 
                 {/* Render Active Widgets */}
