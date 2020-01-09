@@ -224,3 +224,35 @@ star-rating {
   height: 800px; */
   /* background-color: #fff; */
 }
+
+.home-icons {
+  padding: 75px;
+  display: flex;
+  justify-content:center;
+  justify-content:space-around;
+}
+
+.lock-icon {
+  flex-wrap: wrap;
+  width:20%;
+}
+
+.chart-icon {
+  flex-wrap: wrap;
+  width:20%;
+}
+
+.hear-icon {
+  flex-wrap:wrap;
+  width:20%;
+}
+
+.flag-icon {
+  flex-wrap:wrap;
+  width:20%;
+}
+
+.arrow-icon {
+  flex-wrap:wrap;
+  width:20%;
+}
