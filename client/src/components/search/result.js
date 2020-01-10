@@ -47,16 +47,31 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
 */
   return (
     <div
-      onClick={() => {
+      onClick={e => {
         setIsSelected(!isSelected);
-        setTentativeSelection(data.id);
+        setTentativeSelection({
+          businessId: data.id,
+          businessName: data.name,
+          businessImg: data.image_url,
+          reviewCount: data.review_count,
+          averageRating: data.rating,
+          changeInRating: "" //Yelp API doesn't offer this, unless DS can get this somehow, lets just exclude it
+        });
       }}
       className={className}
     >
       {/* <CardActionArea>
         <CardContent> */}
 
-      <img style={{alignSelf:"center", height:"100%", width:"33%", objectFit:"cover"}} src={data.image_url} />
+      <img
+        style={{
+          alignSelf: "center",
+          height: "100%",
+          width: "33%",
+          objectFit: "cover"
+        }}
+        src={data.image_url}
+      />
 
       {/* <h2>{data.name}</h2> */}
       {/* </CardContent>
@@ -68,7 +83,7 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
           flexDirection: "column",
           justifyItems: "space-between",
           paddingLeft: "20%",
-          cursor: 'pointer'
+          cursor: "pointer"
         }}
       >
         <h2>{data.name}</h2>
@@ -86,7 +101,14 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
         <p>
           {data.location.city}, {data.location.state} {data.location.zip_code}
         </p>
-        <button onClick={e => select(e)}>Select</button>
+        <button
+          onClick={e => {
+            console.log("On click! setting selected business data as: ", data);
+            select(e);
+          }}
+        >
+          Select
+        </button>
       </div>
     </div>
   );

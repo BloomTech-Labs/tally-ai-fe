@@ -2,9 +2,10 @@ import {
   FETCH_BUSINESS_START,
   FETCH_BUSINESS_SUCCESS,
   FETCH_BUSINESS_FAILURE,
-  POST_BUSINESS_START,
-  POST_BUSINESS_SUCCESS,
-  POST_BUSINESS_FAILURE,
+  ADD_BUSINESS,
+  FETCH_TOP_AND_BOTTOM_START,
+  FETCH_TOP_AND_BOTTOM_SUCCESS,
+  FETCH_TOP_AND_BOTTOM_FAILURE,
   FETCH_ADDNEWUSER_SUCCESS,
   FETCH_WORDS_OVER_TIME_START,
   FETCH_WORDS_OVER_TIME_SUCCESS,
@@ -18,25 +19,41 @@ import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
 import dummyReviewsOverTime from "../dummyData/dummyReviewsOverTime";
 
 const initialState = {
-  searchResults: { 
+  searchResults: {
     isFetching: false,
     error: null,
     data: null
   },
-  keyWords: {
-    isFetching: false,
-    error: null,
-    data: { positive: [{ term: "apple" }, { term: "banana" }], negative: [{ term: "orange" }, { term: "kiwi" }] }
+  businessInfo: {
+    // for DS API calls
+    businessId: null,
+    // for side bar
+    businessName: null,
+    businessImg: null,
+    // for top-of-page info cards
+    reviewCount: 0,
+    averageRating: 0,
+    changeInRating: ""
   },
-  wordsOverTime: {
-    isFetching: false,
-    error: null,
-    data: { words: dummyWordsOverTime }
-  },
-  reviewsOverTime: {
-    isFetching: false,
-    error: null,
-    data: dummyReviewsOverTime
+  widgetData: {
+    keyWords: {
+      isFetching: false,
+      error: null,
+      data: {
+        positive: [{ term: "apple" }, { term: "banana" }],
+        negative: [{ term: "orange" }, { term: "kiwi" }]
+      }
+    },
+    wordsOverTime: {
+      isFetching: false,
+      error: null,
+      data: { words: null }
+    },
+    reviewsOverTime: {
+      isFetching: false,
+      error: null,
+      data: dummyReviewsOverTime
+    }
   }
 };
 
@@ -52,7 +69,7 @@ function reducer(state = initialState, action) {
     case FETCH_BUSINESS_START:
       return {
         ...state,
-        searchResults: { 
+        searchResults: {
           ...state.searchResults,
           isFetching: true,
           error: null
@@ -82,73 +99,101 @@ function reducer(state = initialState, action) {
         }
       };
 
-    case POST_BUSINESS_START:
-      console.log("Post start.");
+    case ADD_BUSINESS:
       return {
         ...state,
-        keyWords: { ...state.keyWords, isFetching: true }
+        businessInfo: { ...action.payload }
       };
 
-    case POST_BUSINESS_SUCCESS:
-      console.log("data incoming", action.payload);
+    case FETCH_TOP_AND_BOTTOM_START:
+      console.log("Fetch top and bottom words start..");
       return {
         ...state,
-        keyWords: {
-          ...state.keyWords,
-          isFetching: false,
-          data: action.payload.data,
-          error: null
+        widgetData: {
+          ...state.widgetData,
+          keyWords: { ...state.widgetData.keyWords, isFetching: true }
         }
       };
 
-    case POST_BUSINESS_FAILURE:
-      console.log("Post failure: ", action.payload);
+    case FETCH_TOP_AND_BOTTOM_SUCCESS:
+      console.log(
+        "Successfully fetched top and bottom ten words:\n",
+        action.payload
+      );
       return {
         ...state,
-        keyWords: {
-          ...state.keyWords,
-          isFetching: false,
-          error: action.payload
+        widgetData: {
+          ...state.widgetData,
+          keyWords: {
+            isFetching: false,
+            data: action.payload.data,
+            error: null
+          }
         }
       };
-    
+
+    case FETCH_TOP_AND_BOTTOM_FAILURE:
+      console.log("Fetch top and bottom failure:\n", action.payload);
+      return {
+        ...state,
+        widgetData: {
+          ...state.widgetData,
+          keyWords: {
+            ...state.widgetData.keyWords,
+            isFetching: false,
+            error: action.payload
+          }
+        }
+      };
+
     case FETCH_ADDNEWUSER_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        error: "",
+        error: ""
       };
 
     case FETCH_WORDS_OVER_TIME_START:
       return {
         ...state,
-        wordsOverTime: {
-          ...state.wordsOverTime,
-          isFetching: true,
-          error: null
+        widgetData: {
+          ...state.widgetData,
+          wordsOverTime: {
+            ...state.widgetData.wordsOverTime,
+            isFetching: true,
+            error: null
+          }
         }
       };
 
     case FETCH_WORDS_OVER_TIME_SUCCESS:
       return {
         ...state,
-        wordsOverTime: {
-          ...state.wordsOverTime,
-          isFetching: false,
-          data: {
-            words: action.payload.words
-          },
-          error: null
+        widgetData: {
+          ...state.widgetData,
+
+          wordsOverTime: {
+            ...state.widgetData.wordsOverTime,
+            isFetching: false,
+            data: {
+              words: action.payload
+            },
+            error: null
+          }
         }
       };
 
     case FETCH_WORDS_OVER_TIME_FAILURE:
       return {
         ...state,
-        wordsOverTime: {
-          ...state.wordsOverTime,
-          isFetching: false,
-          error: action.payload
+        widgetData: {
+          ...state.widgetData,
+
+          wordsOverTime: {
+            ...state.widgetData.wordsOverTime,
+            isFetching: false,
+            error: action.payload
+          }
         }
       };
 
@@ -168,7 +213,7 @@ function reducer(state = initialState, action) {
         reviewsOverTime: {
           ...state.reviewsOverTime,
           isFetching: false,
-          data:  action.payload
+          data: action.payload
         },
         error: null
       };
@@ -181,7 +226,7 @@ function reducer(state = initialState, action) {
           isFetching: false,
           error: action.payload
         }
-      }
+      };
 
     default:
       console.log(`\nUnknown action type:\n${action.type}`);

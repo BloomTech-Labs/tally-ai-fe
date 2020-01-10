@@ -6,9 +6,11 @@ export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
 export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";
 export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
 
-export const POST_BUSINESS_START = "POST_BUSINESS_START";
-export const POST_BUSINESS_SUCCESS = "POST_BUSINESS_SUCCESS";
-export const POST_BUSINESS_FAILURE = "POST_BUSINESS_FAILURE";
+export const ADD_BUSINESS = "ADD_BUSINESS";
+
+export const FETCH_TOP_AND_BOTTOM_START = "FETCH_TOP_AND_BOTTOM_START";
+export const FETCH_TOP_AND_BOTTOM_SUCCESS = "FETCH_TOP_AND_BOTTOM_SUCCESS";
+export const FETCH_TOP_AND_BOTTOM_FAILURE = "FETCH_TOP_AND_BOTTOM_FAILURE";
 
 export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS";
 
@@ -56,24 +58,29 @@ export const fetchBusinesses = business => dispatch => {
     });
 };
 
-export const postBusiness = id => dispatch => {
-  const dsEndpoint = `https://cors-anywhere.herokuapp.com/http://tally-deploy.us-east-1.elasticbeanstalk.com/yelp/${id}`; // TODO: GET ENDPOINT URL
-  console.log("Running postBusiness.");
-  dispatch({ type: POST_BUSINESS_START });
+export const fetchTopAndBottom = id => dispatch => {
+  const dsEndpoint = `https://cors-anywhere.herokuapp.com/http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`;
+  console.log("Running fetchTopAndBottom.");
+  dispatch({ type: FETCH_TOP_AND_BOTTOM_START });
   axios
     .get(dsEndpoint)
     .then(res => {
       dispatch({
-        type: POST_BUSINESS_SUCCESS,
+        type: FETCH_TOP_AND_BOTTOM_SUCCESS,
         payload: res
       });
     })
     .catch(err => {
       dispatch({
-        type: POST_BUSINESS_FAILURE,
+        type: FETCH_TOP_AND_BOTTOM_FAILURE,
         payload: err
       });
     });
+};
+
+export const addBusiness = businessInfo => dispatch => {
+  console.log("\nAdding business to the store...\n");
+  dispatch({ type: ADD_BUSINESS, payload: businessInfo });
 };
 
 export const searchResultsPlaceholder = results => dispatch => {
@@ -99,21 +106,23 @@ export const fetchAddNewUser = newUser => dispatch => {
     );
 };
 
-export const fetchWordsOverTime = () => dispatch => {
-  // TODO: FIND OUT WHAT WE NEED TO GIVE DS TO GET THE DATA
-  //dispatch({ type: FETCH_WORDS_OVER_TIME_START });
+export const fetchWordsOverTime = id => dispatch => {
+  dispatch({ type: FETCH_WORDS_OVER_TIME_START });
   console.log("\nFetching words over time...\n");
-  // axiosWithAuth()
-  // .get() // TODO: FIND OUT THE URL FROM DS
-  // .then(res => {
-  //   dispatch({ type:FETCH_WORDS_OVER_TIME_SUCCESS, payload: res.data });
-  // })
-  // .catch(err => {
-  //   dispatch({ type:FETCH_WORDS_OVER_TIME_FAILURE, payload: err });
-  // })
+  const dsEndpoint = `https://cors-anywhere.herokuapp.com/http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=1`;
+  console.log(`Fetch Words Over Time endpoint:\n${dsEndpoint}`);
+  axios
+    .get(dsEndpoint)
+    .then(res => {
+      console.log("WORDS OVER TIME ACTION FETCH SUCCESS, PAYLOAD: ", res.data);
+      dispatch({ type: FETCH_WORDS_OVER_TIME_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FETCH_WORDS_OVER_TIME_FAILURE, payload: err });
+    });
 };
 
-export const fetchReviewsOverTime = () => dispatch => {
+export const fetchReviewsOverTime = id => dispatch => {
   console.log("\nFetching reviews over time...\n");
   // axiosWithAuth()
   // .get() // TODO: FIND OUT THE URL FROM DS
@@ -124,3 +133,9 @@ export const fetchReviewsOverTime = () => dispatch => {
   //   dispatch({ type:FETCH_REVIEWS_OVER_TIME_FAILURE, payload: err });
   // })
 };
+
+// export const fetchAllWidgetData = id => {
+//   console.log("ID in fetchAllWidgetData:\n", id);
+//   fetchWordsOverTime(id);
+//   fetchTopAndBottom(id);
+// };
