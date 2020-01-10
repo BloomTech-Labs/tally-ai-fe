@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper";
 
 import WidgetDisplayList from "../components/WidgetSystem/WidgetDisplayList";
 import WidgetAdditionList from "../components/WidgetSystem/WidgetAdditionList";
+import Sidebar from "../components/WidgetSystem/Sidebar";
 
 import { fetchWordsOverTime, fetchTopAndBottom } from "../actions/";
 
@@ -36,9 +37,14 @@ function DashboardGrid(props) {
   }, []);
 
   return (
-    <div>
-      <WidgetDisplayList />
-      <WidgetAdditionList />
+    <div className="dashboardgrid">
+      <div>
+        <Sidebar />
+      </div> 
+      <div>
+            <WidgetDisplayList />
+            <WidgetAdditionList />
+      </div>
     </div>
   );
   function FormRow() {
