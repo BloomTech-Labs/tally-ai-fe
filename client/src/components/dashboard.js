@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper";
 
 import WidgetDisplayList from "../components/WidgetSystem/WidgetDisplayList";
 import WidgetAdditionList from "../components/WidgetSystem/WidgetAdditionList";
+import Sidebar from "../components/WidgetSystem/Sidebar";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,9 +27,14 @@ const useStyles = makeStyles(theme => ({
 function DashboardGrid(props) {
   const classes = useStyles();
   return (
-    <div>
-          <WidgetDisplayList />
-          <WidgetAdditionList />
+    <div className="dashboardgrid">
+      <div>
+        <Sidebar />
+      </div> 
+      <div>
+            <WidgetDisplayList />
+            <WidgetAdditionList />
+      </div>
     </div>
         );
   function FormRow() {
