@@ -57,7 +57,7 @@ export const fetchBusinesses = business => dispatch => {
 };
 
 export const postBusiness = id => dispatch => {
-  const dsEndpoint = `http://tallyai.xyz/yelp/${id}`; // TODO: GET ENDPOINT URL
+  const dsEndpoint = `https://cors-anywhere.herokuapp.com/http://tally-deploy.us-east-1.elasticbeanstalk.com/yelp/${id}`; // TODO: GET ENDPOINT URL
   console.log("Running postBusiness.");
   dispatch({ type: POST_BUSINESS_START });
   axios
@@ -86,15 +86,21 @@ export const searchResultsPlaceholder = results => dispatch => {
 };
 
 // Used at Registration
-export const fetchAddNewUser = (newUser) => dispatch => {
+export const fetchAddNewUser = newUser => dispatch => {
   axiosWithAuth()
-  .post(``, newUser) //endpoint goes here
-  .then(res => dispatch({ type: FETCH_ADDNEWUSER_SUCCESS }) & console.log(res.data, "fetchAddNewUser"))
-  .catch(err => dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response}))
-}
+    .post(``, newUser) //endpoint goes here
+    .then(
+      res =>
+        dispatch({ type: FETCH_ADDNEWUSER_SUCCESS }) &
+        console.log(res.data, "fetchAddNewUser")
+    )
+    .catch(err =>
+      dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response })
+    );
+};
 
-
-export const fetchWordsOverTime = () => dispatch => { // TODO: FIND OUT WHAT WE NEED TO GIVE DS TO GET THE DATA
+export const fetchWordsOverTime = () => dispatch => {
+  // TODO: FIND OUT WHAT WE NEED TO GIVE DS TO GET THE DATA
   //dispatch({ type: FETCH_WORDS_OVER_TIME_START });
   console.log("\nFetching words over time...\n");
   // axiosWithAuth()
@@ -105,7 +111,7 @@ export const fetchWordsOverTime = () => dispatch => { // TODO: FIND OUT WHAT WE 
   // .catch(err => {
   //   dispatch({ type:FETCH_WORDS_OVER_TIME_FAILURE, payload: err });
   // })
-}
+};
 
 export const fetchReviewsOverTime = () => dispatch => {
   console.log("\nFetching reviews over time...\n");
@@ -117,4 +123,4 @@ export const fetchReviewsOverTime = () => dispatch => {
   // .catch(err => {
   //   dispatch({ type:FETCH_REVIEWS_OVER_TIME_FAILURE, payload: err });
   // })
-}
+};

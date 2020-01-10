@@ -8,6 +8,11 @@ import Button from '@material-ui/core/Button';
 import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
+import Finder from "./Finder.png"
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import HomeIcons from './homeIcons';
 
 import { fetchBusinesses } from "../actions/index";
 import { searchResultsPlaceholder } from "../actions/index";
@@ -123,7 +128,9 @@ const Search = (props) => {
     }, [searchLocation])
 
     return (
-        <div className="search-widget" style={{ backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9)' }}>
+        <div>
+        <div className="search-widget" style={{ backgroundSize: 'cover', backgroundColor: '#BBDEFB', borderBottomLeftRadius: '25%', borderBottomRightRadius: '25%', marginRight: '5%', marginLeft: '5%'}}>
+            <img src={Finder} alt="Guy with Magnifier"/>
 
             <div className="search-form" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 {/* <div class="mdc-text-field mdc-text-field--outlined">
@@ -190,9 +197,12 @@ const Search = (props) => {
                         }}>Submit</Button>
                 </form>
             </div>
-            <Results />
+            
         </div>
-
+        <div>
+            <HomeIcons/>
+        </div>
+        </div>
     )
 }
 
