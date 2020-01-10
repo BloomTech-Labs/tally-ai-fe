@@ -99,6 +99,39 @@ import {
 //   },
 // ]
 
+// ***** FORMAT OF DATA FROM API *****
+// const data = [
+//   {
+//     "date": "2018-11-30",
+//     "data": [
+//       {
+//         "phrase": "room service",
+//         "rank": 0.07187422941187253
+//       },
+//       {
+//         "phrase": "room",
+//         "rank": 0.06953759794899689
+//       }
+//     ]
+//   }
+// ]
+
+// function unpackData(oldData, newData) {
+//   if (oldData.length === 0) {
+//     return newData;
+//   } else {
+//     const nextPoint = oldData.pop();
+//     return unpackData(oldData, newData.concat(...nextPoint));
+//   }
+// }
+
+// function formatData(data) {
+//   return data.map(dataPoint => ({
+//     name: dataPoint.date,
+//     ...dataPoint.data
+//   }))
+// }
+
 //how phrases rank
 const PhraseRank = props => {
   const [formattedData, setFormattedData] = useState();
@@ -108,7 +141,8 @@ const PhraseRank = props => {
   // }, []);
 
   useEffect(() => {
-    if (props.data != null && !props.isFetching && !props.error) {
+    console.log("useEfffect working");
+    if (props.data) {
       //format data
       let tempFormattedData = [];
       props.data.forEach(date => {
@@ -119,6 +153,7 @@ const PhraseRank = props => {
         });
         tempFormattedData.push(tempObject);
       });
+      console.log("Result", tempFormattedData);
       setFormattedData(tempFormattedData);
     }
   }, [props.data]);

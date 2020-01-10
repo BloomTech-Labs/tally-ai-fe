@@ -143,10 +143,8 @@ function reducer(state = initialState, action) {
             isFetching: false,
             error: action.payload
           }
-      }
-    };
-
-
+        }
+      };
 
     case FETCH_ADDNEWUSER_SUCCESS:
       return {
@@ -178,7 +176,7 @@ function reducer(state = initialState, action) {
             ...state.widgetData.wordsOverTime,
             isFetching: false,
             data: {
-              words: action.payload.words
+              words: action.payload
             },
             error: null
           }
