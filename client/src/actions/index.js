@@ -176,11 +176,12 @@ export const fetchAllData = id => async dispatch => {
   try {
     dispatch({ type: FETCH_TOP_AND_BOTTOM_START });
     dispatch({ type: FETCH_RATING_OVER_TIME_START });
-    const { viztype0, viztype3 } = await axios.get(
-      `http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`
+    const data = await axios.get(
+      `https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`
     );
-    dispatch({ type: FETCH_TOP_AND_BOTTOM_SUCCESS, payload: viztype0 });
-    dispatch({ type: FETCH_RATING_OVER_TIME_SUCCESS, payload: viztype3 });
+    console.log("\nData from viztype=0:\n", data);
+    dispatch({ type: FETCH_TOP_AND_BOTTOM_SUCCESS, payload: data["viztype0"] });
+    dispatch({ type: FETCH_RATING_OVER_TIME_SUCCESS, payload: data["viztype1"] });
   } catch (error) {
     console.error(
       `\nError getting data for topBottomWords and ratingOverTime\n${error}\n`
@@ -192,7 +193,7 @@ export const fetchAllData = id => async dispatch => {
   try {
     dispatch({ type: FETCH_WORDS_OVER_TIME_START });
     const phraseRank = await axios.get(
-      `http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=1`
+      `https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=1`
     );
     dispatch({ type: FETCH_WORDS_OVER_TIME_SUCCESS, payload: phraseRank });
   } catch (error) {
@@ -203,7 +204,7 @@ export const fetchAllData = id => async dispatch => {
   try {
     dispatch({ type: FETCH_REVIEWS_OVER_TIME_START });
     const reviewsOverTime = await axios.get(
-      `http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=2`
+      `https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=2`
     );
     dispatch({
       type: FETCH_REVIEWS_OVER_TIME_SUCCESS,

@@ -62,7 +62,7 @@ const initialState = {
     wordsOverTime: {
       isFetching: false,
       error: null,
-      data: { words: null }
+      data: null
     },
     // ReviewFrequency
     reviewsOverTime: {
@@ -197,9 +197,7 @@ function reducer(state = initialState, action) {
           wordsOverTime: {
             ...state.widgetData.wordsOverTime,
             isFetching: false,
-            data: {
-              words: action.payload
-            },
+            data: action.payload.data,
             error: null
           }
         }
@@ -234,7 +232,7 @@ function reducer(state = initialState, action) {
         reviewsOverTime: {
           ...state.reviewsOverTime,
           isFetching: false,
-          data: action.payload
+          data: action.payload.data
         },
         error: null
       };
@@ -270,7 +268,7 @@ function reducer(state = initialState, action) {
           ratingOverTime: {
             ...state.widgetData.ratingOverTime,
             isFetching: false,
-            data: action.payload,
+            data: action.payload.data,
             error: null
           }
         }

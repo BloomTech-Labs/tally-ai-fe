@@ -197,11 +197,11 @@ star-rating {
   height: 90%;
 }
 
-.exampleWidget5 {
+.rating-over-time {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(136, 205, 214);
+  background: white;
   width: 90%;
   height: 90%;
 }
@@ -224,7 +224,6 @@ star-rating {
   height: 800px; */
   /* background-color: #fff; */
 }
-
 
 .dashboardgrid {
   display: flex;
@@ -269,8 +268,8 @@ star-rating {
 
 .top-card {
   /* border: 1px solid black; */
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   margin-right: 10%;
   margin-left: 10%;
   height: 60vh;
@@ -290,8 +289,8 @@ star-rating {
 
 .bottom-card {
   /* border: 1px solid black; */
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   margin-right: 10%;
   margin-left: 10%;
   height: 60vh;
@@ -317,5 +316,3 @@ star-rating {
   margin-right: 20%;
   justify-content: space-evenly;
 }
-
-
