@@ -82,7 +82,7 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
           display: "flex",
           flexDirection: "column",
           justifyItems: "space-between",
-          paddingLeft: "20%",
+          paddingLeft: "5%",
           cursor: "pointer"
         }}
       >

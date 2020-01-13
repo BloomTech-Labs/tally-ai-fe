@@ -74,9 +74,11 @@ export default function ClippedDrawer() {
           </CardContent>
         </CardActionArea>
         <CardActions>
+          <div>
         <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
           Date Range
         </Button>
+        </div>
         <div className="InputFields">
           <Menu
             id="simple-menu"
@@ -91,7 +93,9 @@ export default function ClippedDrawer() {
           </Menu>
           <form className={classes.root} noValidate autoComplete="off">
             <TextField id="standard-basic" label="Filter by Word" />
+            <input />
           </form>
+          
         </div> 
         </CardActions>
       </Card>       

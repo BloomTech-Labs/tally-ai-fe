@@ -10,7 +10,7 @@ import WidgetDisplayList from "../components/WidgetSystem/WidgetDisplayList";
 import WidgetAdditionList from "../components/WidgetSystem/WidgetAdditionList";
 import Sidebar from "../components/WidgetSystem/Sidebar";
 
-import { fetchWordsOverTime, fetchTopAndBottom } from "../actions/";
+import { fetchWordsOverTime, fetchTopAndBottom, fetchAllData } from "../actions/";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,8 +32,9 @@ function DashboardGrid(props) {
   // Fetch data for widgets
   useEffect(() => {
     console.log("Fetching all widget data with ID ", props.id);
-    props.fetchTopAndBottom(props.id);
-    props.fetchWordsOverTime(props.id);
+    props.fetchAllData(props.id);
+    // props.fetchTopAndBottom(props.id);
+    // props.fetchWordsOverTime(props.id);
   }, []);
 
   return (
@@ -131,5 +132,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchWordsOverTime,
-  fetchTopAndBottom
+  fetchTopAndBottom,
+  fetchAllData
 })(DashboardGrid);
