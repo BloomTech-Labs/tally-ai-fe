@@ -2,7 +2,6 @@ import { axiosWithYelpAuth } from "../utils/axiosWithYelpAuth";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 
-
 /*
   ------------ 
   ACTION TYPES 
@@ -22,6 +21,11 @@ export const FETCH_TOP_AND_BOTTOM_START = "FETCH_TOP_AND_BOTTOM_START";
 export const FETCH_TOP_AND_BOTTOM_SUCCESS = "FETCH_TOP_AND_BOTTOM_SUCCESS";
 export const FETCH_TOP_AND_BOTTOM_FAILURE = "FETCH_TOP_AND_BOTTOM_FAILURE";
 
+// ReviewFrequency
+export const FETCH_RATING_OVER_TIME_START = "FETCH_RATING_OVER_TIME_START";
+export const FETCH_RATING_OVER_TIME_SUCCESS = "FETCH_RATING_OVER_TIME_SUCCESS";
+export const FETCH_RATING_OVER_TIME_FAILURE = "FETCH_RATING_OVER_TIME_FAILURE";
+
 // Registration
 export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS";
 
@@ -31,9 +35,11 @@ export const FETCH_WORDS_OVER_TIME_SUCCESS = "FETCH_WORDS_OVER_TIME_SUCCESS";
 export const FETCH_WORDS_OVER_TIME_FAILURE = "FETCH_WORDS_OVER_TIME_FAILURE";
 
 // ReviewFrequency
-export const FETCH_REVIEWS_OVER_TIME_START = "FETCH_REVIEWS_OVERTIME_START";
-export const FETCH_REVIEWS_OVER_TIME_SUCCESS = "FETCH_REVIEWS_OVERTIME_SUCCESS";
-export const FETCH_REVIEWS_OVER_TIME_FAILURE = "FETCH_REVIEWS_OVERTIME_FAILURE";
+export const FETCH_REVIEWS_OVER_TIME_START = "FETCH_REVIEWS_OVER_TIME_START";
+export const FETCH_REVIEWS_OVER_TIME_SUCCESS =
+  "FETCH_REVIEWS_OVER_TIME_SUCCESS";
+export const FETCH_REVIEWS_OVER_TIME_FAILURE =
+  "FETCH_REVIEWS_OVER_TIME_FAILURE";
 
 /*
   -------
@@ -61,7 +67,7 @@ export const fetchBusinesses = business => dispatch => {
 
   // Dynamically generate endpoint using provided location and name
   const yelpSearchEndpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${name}&${location}`; //I've tried like a million different solutions from Google to get this to work without a 403 and a CORS error, maybe someone else has ideas cause I give up
-  
+
   dispatch({ type: FETCH_BUSINESS_START });
   console.log("Yelp API URL: ", yelpSearchEndpoint);
   axiosWithYelpAuth()
@@ -165,3 +171,46 @@ export const fetchReviewsOverTime = id => dispatch => {
 //   fetchWordsOverTime(id);
 //   fetchTopAndBottom(id);
 // };
+
+export const fetchAllData = id => async dispatch => {
+  try {
+    dispatch({ type: FETCH_TOP_AND_BOTTOM_START });
+    dispatch({ type: FETCH_RATING_OVER_TIME_START });
+    const { viztype0, viztype3 } = await axios.get(
+      `http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`
+    );
+    dispatch({ type: FETCH_TOP_AND_BOTTOM_SUCCESS, payload: viztype0 });
+    dispatch({ type: FETCH_RATING_OVER_TIME_SUCCESS, payload: viztype3 });
+  } catch (error) {
+    console.error(
+      `\nError getting data for topBottomWords and ratingOverTime\n${error}\n`
+    );
+    dispatch({ type: FETCH_TOP_AND_BOTTOM_FAILURE, payload: error });
+    dispatch({ type: FETCH_RATING_OVER_TIME_FAILURE, payload: error });
+  }
+
+  try {
+    dispatch({ type: FETCH_WORDS_OVER_TIME_START });
+    const phraseRank = await axios.get(
+      `http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=1`
+    );
+    dispatch({ type: FETCH_WORDS_OVER_TIME_SUCCESS, payload: phraseRank });
+  } catch (error) {
+    console.error(`\nError getting data for phraseRank\n${error}\n`);
+    dispatch({ type: FETCH_WORDS_OVER_TIME_FAILURE, payload: error });
+  }
+
+  try {
+    dispatch({ type: FETCH_REVIEWS_OVER_TIME_START });
+    const reviewsOverTime = await axios.get(
+      `http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=2`
+    );
+    dispatch({
+      type: FETCH_REVIEWS_OVER_TIME_SUCCESS,
+      payload: reviewsOverTime
+    });
+  } catch (error) {
+    console.error(`\nError getting data for reviewsOverTime\n${error}\n`);
+    dispatch({ type: FETCH_REVIEWS_OVER_TIME_FAILURE, payload: error });
+  }
+};

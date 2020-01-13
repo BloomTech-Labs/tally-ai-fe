@@ -18,7 +18,11 @@ import {
   // Data for ReviewFrequency
   FETCH_REVIEWS_OVER_TIME_START,
   FETCH_REVIEWS_OVER_TIME_SUCCESS,
-  FETCH_REVIEWS_OVER_TIME_FAILURE
+  FETCH_REVIEWS_OVER_TIME_FAILURE,
+  // Data for RatingOverTime
+  FETCH_RATING_OVER_TIME_START,
+  FETCH_RATING_OVER_TIME_SUCCESS,
+  FETCH_RATING_OVER_TIME_FAILURE
 } from "../actions/index.js";
 
 import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
@@ -65,6 +69,12 @@ const initialState = {
       isFetching: false,
       error: null,
       data: dummyReviewsOverTime
+    },
+    // RatingOverTime
+    ratingOverTime: {
+      isFetching: false,
+      error: null,
+      data: null
     }
   }
 };
@@ -235,6 +245,47 @@ function reducer(state = initialState, action) {
           ...state.reviewsOverTime,
           isFetching: false,
           error: action.payload
+        }
+      };
+
+    // RatingOverTime
+    case FETCH_RATING_OVER_TIME_START:
+      return {
+        ...state,
+        widgetData: {
+          ...state.widgetData,
+          ratingOverTime: {
+            ...state.widgetData.ratingOverTime,
+            isFetching: true,
+            error: null
+          }
+        }
+      };
+    case FETCH_RATING_OVER_TIME_SUCCESS:
+      return {
+        ...state,
+        widgetData: {
+          ...state.widgetData,
+
+          ratingOverTime: {
+            ...state.widgetData.ratingOverTime,
+            isFetching: false,
+            data: action.payload,
+            error: null
+          }
+        }
+      };
+    case FETCH_RATING_OVER_TIME_FAILURE:
+      return {
+        ...state,
+        widgetData: {
+          ...state.widgetData,
+
+          ratingOverTime: {
+            ...state.widgetData.ratingOverTime,
+            isFetching: false,
+            error: action.payload
+          }
         }
       };
 

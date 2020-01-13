@@ -249,7 +249,7 @@ const PhraseRank = props => {
       })
     });
     //we should have a comprehensive list of all line names now
-    return allPhrases.filter((name) => name != "name");//exlude the "name" variable cause it's the date, not the data
+    return allPhrases.filter((name) => name !== "name");//exlude the "name" variable cause it's the date, not the data
   }
 
   if (props.isFetching) {
