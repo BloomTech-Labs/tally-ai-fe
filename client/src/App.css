@@ -261,3 +261,61 @@ star-rating {
   flex-wrap: wrap;
   width: 20%;
 }
+
+.head-title {
+  margin-top: 80px;
+  font-size: 55px;
+}
+
+.top-card {
+  /* border: 1px solid black; */
+  display:flex;
+  align-items:center;
+  margin-right: 10%;
+  margin-left: 10%;
+  height: 60vh;
+}
+
+.rightpara {
+  /* border: 1px solid black; */
+  font-size: 22px;
+  /* font-weight: bold; */
+  width: 50%;
+  margin-right: 10%;
+}
+
+.RadarIMG {
+  width: 50%;
+}
+
+.bottom-card {
+  /* border: 1px solid black; */
+  display:flex;
+  align-items:center;
+  margin-right: 10%;
+  margin-left: 10%;
+  height: 60vh;
+}
+
+.leftpara {
+  /* border: 1px solid black; */
+  font-size: 22px;
+  /* font-weight: bold; */
+  width: 50%;
+  margin-left: 10%;
+}
+
+.LineIMG {
+  width: 55%;
+}
+
+.bottom-info {
+  padding-bottom: 35px;
+  display: flex;
+  margin-top: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+  justify-content: space-evenly;
+}
+
+

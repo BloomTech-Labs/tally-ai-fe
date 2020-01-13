@@ -13,6 +13,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HomeIcons from "./homeIcons";
+import HomeInfo from "./HomeInfoText";
 
 import { fetchBusinesses } from "../actions/index";
 import { searchResultsPlaceholder } from "../actions/index";
@@ -199,6 +200,7 @@ const Search = props => {
       </div>
       <div>
         <HomeIcons />
+        <HomeInfo />
       </div>
     </div>
   );
