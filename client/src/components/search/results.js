@@ -20,10 +20,23 @@ data {
 */
 
 const Results = props => {
+  /* 
+    tentativeSelection is made by clicking on the result component.
+    Once tentativeSelection is made, the select button appears.
+    The tentativeSelection contains business information from Yelp,
+    including the businessId used for requests to DS API.
+  */
   const [tentativeSelection, setTentativeSelection] = useState("");
 
   let history = useHistory();
 
+  /*
+    select is used as the onClick for the select button.
+    Calling the select function does the following:
+    - adds the business information from tentativeSelection 
+      to the store under state.businessInfo
+    - routes the user to the dashboard
+  */
   const select = e => {
     console.log("Selection: ", tentativeSelection);
     e.preventDefault();
@@ -33,6 +46,13 @@ const Results = props => {
 
   console.log("props", props);
 
+  /*
+    active, props.businesses.error, and props.businesses.isFetching
+    are used to conditionally render the results section.
+    
+    active is true if the request to Yelp was successful and the
+    search results are in
+  */
   const [active, setActive] = useState();
 
   useEffect(() => {
@@ -70,7 +90,7 @@ const Results = props => {
     return (
       <div
         className={"search-results" + animationClass}
-        style={{ overflow: "scroll" }}
+        style={{ overflow: "scroll", marginTop: "4%" }}
       >
         {props.businesses.data.map(result => (
           <Result

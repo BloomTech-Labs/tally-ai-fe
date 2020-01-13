@@ -1,15 +1,21 @@
 import {
+  // Yelp Business Search
   FETCH_BUSINESS_START,
   FETCH_BUSINESS_SUCCESS,
   FETCH_BUSINESS_FAILURE,
+  // Select business from results
   ADD_BUSINESS,
+  // Data for TopBottomWords
   FETCH_TOP_AND_BOTTOM_START,
   FETCH_TOP_AND_BOTTOM_SUCCESS,
   FETCH_TOP_AND_BOTTOM_FAILURE,
+  // Registration
   FETCH_ADDNEWUSER_SUCCESS,
+  // Data for PhraseRank
   FETCH_WORDS_OVER_TIME_START,
   FETCH_WORDS_OVER_TIME_SUCCESS,
   FETCH_WORDS_OVER_TIME_FAILURE,
+  // Data for ReviewFrequency
   FETCH_REVIEWS_OVER_TIME_START,
   FETCH_REVIEWS_OVER_TIME_SUCCESS,
   FETCH_REVIEWS_OVER_TIME_FAILURE
@@ -24,6 +30,7 @@ const initialState = {
     error: null,
     data: null
   },
+  // Business information from the Yelp API
   businessInfo: {
     // for DS API calls
     businessId: null,
@@ -35,7 +42,10 @@ const initialState = {
     averageRating: 0,
     changeInRating: ""
   },
+
+  // Data for populating the visuals
   widgetData: {
+    // TopBottomWords
     keyWords: {
       isFetching: false,
       error: null,
@@ -44,11 +54,13 @@ const initialState = {
         negative: [{ term: "orange" }, { term: "kiwi" }]
       }
     },
+    // PhraseRank
     wordsOverTime: {
       isFetching: false,
       error: null,
       data: { words: null }
     },
+    // ReviewFrequency
     reviewsOverTime: {
       isFetching: false,
       error: null,
@@ -66,6 +78,7 @@ function reducer(state = initialState, action) {
   );
 
   switch (action.type) {
+    // Yelp Business Search
     case FETCH_BUSINESS_START:
       return {
         ...state,
@@ -75,7 +88,6 @@ function reducer(state = initialState, action) {
           error: null
         }
       };
-
     case FETCH_BUSINESS_SUCCESS:
       console.log("FETCH SUCCESS! Payload:", action.payload);
       return {
@@ -88,7 +100,6 @@ function reducer(state = initialState, action) {
           error: null
         }
       };
-
     case FETCH_BUSINESS_FAILURE:
       return {
         ...state,
@@ -99,12 +110,14 @@ function reducer(state = initialState, action) {
         }
       };
 
+    // Select business
     case ADD_BUSINESS:
       return {
         ...state,
         businessInfo: { ...action.payload }
       };
 
+    // TopBottomWords
     case FETCH_TOP_AND_BOTTOM_START:
       console.log("Fetch top and bottom words start..");
       return {
@@ -114,7 +127,6 @@ function reducer(state = initialState, action) {
           keyWords: { ...state.widgetData.keyWords, isFetching: true }
         }
       };
-
     case FETCH_TOP_AND_BOTTOM_SUCCESS:
       console.log(
         "Successfully fetched top and bottom ten words:\n",
@@ -131,7 +143,6 @@ function reducer(state = initialState, action) {
           }
         }
       };
-
     case FETCH_TOP_AND_BOTTOM_FAILURE:
       console.log("Fetch top and bottom failure:\n", action.payload);
       return {
@@ -146,6 +157,7 @@ function reducer(state = initialState, action) {
         }
       };
 
+    // Registration
     case FETCH_ADDNEWUSER_SUCCESS:
       return {
         ...state,
@@ -153,6 +165,7 @@ function reducer(state = initialState, action) {
         error: ""
       };
 
+    // PhraseRank
     case FETCH_WORDS_OVER_TIME_START:
       return {
         ...state,
@@ -165,7 +178,6 @@ function reducer(state = initialState, action) {
           }
         }
       };
-
     case FETCH_WORDS_OVER_TIME_SUCCESS:
       return {
         ...state,
@@ -182,7 +194,6 @@ function reducer(state = initialState, action) {
           }
         }
       };
-
     case FETCH_WORDS_OVER_TIME_FAILURE:
       return {
         ...state,
@@ -197,6 +208,7 @@ function reducer(state = initialState, action) {
         }
       };
 
+    // ReviewFrequency
     case FETCH_REVIEWS_OVER_TIME_START:
       return {
         ...state,
@@ -206,7 +218,6 @@ function reducer(state = initialState, action) {
           error: null
         }
       };
-
     case FETCH_REVIEWS_OVER_TIME_SUCCESS:
       return {
         ...state,
@@ -217,7 +228,6 @@ function reducer(state = initialState, action) {
         },
         error: null
       };
-
     case FETCH_REVIEWS_OVER_TIME_FAILURE:
       return {
         ...state,
@@ -228,6 +238,7 @@ function reducer(state = initialState, action) {
         }
       };
 
+    // Unknown action type (default)
     default:
       console.log(`\nUnknown action type:\n${action.type}`);
       return {

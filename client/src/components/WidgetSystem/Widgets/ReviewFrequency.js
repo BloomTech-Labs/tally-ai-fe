@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
     LineChart,
     CartesianGrid,
@@ -11,7 +12,7 @@ import {
 
 import data from "../../../dummyData/dummyReviewsOverTime";
 
-const ReviewsOverTime = () => {
+const ReviewsOverTime = props => {
 
     return (
         <div className="exampleWidget4">
@@ -19,7 +20,7 @@ const ReviewsOverTime = () => {
             <LineChart
                 width={500}
                 height={300}
-                data={data}
+                data={props.data}
                 margin={{
                 top: 5, right: 30, left: 20, bottom: 5,
                 }}
@@ -36,4 +37,10 @@ const ReviewsOverTime = () => {
     );
 }
 
-export default ReviewsOverTime;
+const mapStateToProps = state => ({
+    data: state.widgetData.reviewsOverTime.data,
+    isFetching: state.widgetData.reviewsOverTime.isFetching,
+    error: state.widgetData.reviewsOverTime.error
+})
+
+export default connect(mapStateToProps)(ReviewsOverTime);
