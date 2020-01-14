@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// action import goes here
+import { fetchLoginUser } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -111,5 +111,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {} //action goes here
+    { fetchLoginUser }
 )(Login)
