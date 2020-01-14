@@ -39,6 +39,7 @@ const NavBar = () => {
           </Typography>
           <div className ={classes.NavItems}>
           <Link to ="/" style={{ textDecoration: 'none' }} ><Button className = {classes.NavButton} >Home</Button></Link>
+          <Link to ="/Login" style={{ textDecoration: 'none' }} ><Button className = {classes.NavButton} >Login</Button></Link>
           <Link to ="/Register" style={{ textDecoration: 'none' }} ><Button classname = {classes.NavButton} >Register</Button></Link>
           </div>
         </Toolbar>

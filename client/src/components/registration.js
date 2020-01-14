@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
         marginTop: '2%',
-        marginBottom: '6%',
+        marginBottom: '9%',
         width: '15%'
     },
     input: {
