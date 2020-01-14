@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import Result from "./result";
-import { postBusiness } from "../../actions/index";
+import { addBusiness } from "../../actions/index";
 
 /*Required business data for Result
 data {
@@ -20,19 +20,39 @@ data {
 */
 
 const Results = props => {
-  const [tentativeSelection, setTentativeSelection] = useState();
+  /* 
+    tentativeSelection is made by clicking on the result component.
+    Once tentativeSelection is made, the select button appears.
+    The tentativeSelection contains business information from Yelp,
+    including the businessId used for requests to DS API.
+  */
+  const [tentativeSelection, setTentativeSelection] = useState("");
 
   let history = useHistory();
 
+  /*
+    select is used as the onClick for the select button.
+    Calling the select function does the following:
+    - adds the business information from tentativeSelection 
+      to the store under state.businessInfo
+    - routes the user to the dashboard
+  */
   const select = e => {
     console.log("Selection: ", tentativeSelection);
     e.preventDefault();
-    props.postBusiness(tentativeSelection);
+    props.addBusiness(tentativeSelection);
     history.push("/dashboard");
   };
 
   console.log("props", props);
 
+  /*
+    active, props.businesses.error, and props.businesses.isFetching
+    are used to conditionally render the results section.
+    
+    active is true if the request to Yelp was successful and the
+    search results are in
+  */
   const [active, setActive] = useState();
 
   useEffect(() => {
@@ -68,7 +88,10 @@ const Results = props => {
     }
     console.log("Animation class", animationClass);
     return (
-      <div className={"search-results" + animationClass} style={{overflow:'scroll'}}>
+      <div
+        className={"search-results" + animationClass}
+        style={{ overflow: "scroll", marginTop: "4%" }}
+      >
         {props.businesses.data.map(result => (
           <Result
             data={result}
@@ -76,7 +99,9 @@ const Results = props => {
             key={result.id}
             setTentativeSelection={setTentativeSelection}
             className={`result ${
-              result.id === tentativeSelection ? "selected" : "not-selected"
+              result.id === tentativeSelection.businessId
+                ? "selected"
+                : "not-selected"
             }`}
           />
         ))}
@@ -89,4 +114,4 @@ const mapStateToProps = state => ({
   businesses: state.searchResults
 });
 
-export default connect(mapStateToProps, { postBusiness })(Results);
+export default connect(mapStateToProps, { addBusiness })(Results);
