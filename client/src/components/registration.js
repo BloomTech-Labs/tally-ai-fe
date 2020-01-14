@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
         marginTop: '2%',
-        marginBottom: '6%',
+        marginBottom: '9%',
         width: '15%'
     },
     input: {
@@ -62,7 +62,7 @@ function Registration(props) {
     }
 
     return (
-        <div>
+        <div style={{marginTop:'5%'}}>
             <h1>Register</h1>
             <form className ={classes.container} onSubmit={submitHandler}>
             
@@ -139,7 +139,7 @@ function Registration(props) {
                 margin="normal"
                 />
             <TextField
-                type="number"
+                type="text"
                 name="zip"
                 className={classes.textField}
                 value={userCredentials.zip}

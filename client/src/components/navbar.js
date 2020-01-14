@@ -14,9 +14,9 @@ const useStyles = makeStyles({
 
   root: {
     background: '#2C98F0',
-    width: '100%',
-    position: 'fixed',
-    zIndex: '1',
+    // width: '100%',
+    // position: 'fixed',
+    // zIndex: '1',
   },
   NavItems: {
     marginLeft:'auto',
@@ -39,6 +39,8 @@ const NavBar = () => {
           </Typography>
           <div className ={classes.NavItems}>
           <Link to ="/" style={{ textDecoration: 'none' }} ><Button className = {classes.NavButton} >Home</Button></Link>
+          <Link to ="/Login" style={{ textDecoration: 'none' }} ><Button className = {classes.NavButton} >Login</Button></Link>
+          <Link to ="/Register" style={{ textDecoration: 'none' }} ><Button classname = {classes.NavButton} >Register</Button></Link>
           </div>
         </Toolbar>
       </AppBar>

@@ -11,6 +11,9 @@ import {
   FETCH_TOP_AND_BOTTOM_FAILURE,
   // Registration
   FETCH_ADDNEWUSER_SUCCESS,
+  // Login
+  FETCH_LOGIN_SUCCESS,
+  FETCH_LOGIN_FAILURE,
   // Data for PhraseRank
   FETCH_WORDS_OVER_TIME_START,
   FETCH_WORDS_OVER_TIME_SUCCESS,
@@ -187,6 +190,21 @@ function reducer(state = initialState, action) {
         isFetching: false,
         error: ""
       };
+    
+    // Login
+    case FETCH_LOGIN_SUCCESS:
+      return{
+        ...state,
+        isFetching: false,
+        error: "",
+        loggedUser: action.payload
+      }
+    case FETCH_LOGIN_FAILURE:
+      return{
+        ...state,
+        isFetching: false,
+        error: action.payload
+      }
 
     // PhraseRank
     case FETCH_WORDS_OVER_TIME_START:

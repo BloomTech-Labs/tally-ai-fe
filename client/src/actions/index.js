@@ -29,6 +29,11 @@ export const FETCH_RATING_OVER_TIME_FAILURE = "FETCH_RATING_OVER_TIME_FAILURE";
 // Registration
 export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS";
 
+// Login
+export const FETCH_LOGIN_START = "FETCH_LOGIN_START";
+export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
+export const FETCH_LOGIN_FAILURE = "FETCH_LOGIN_FAILURE";
+
 // PhraseRank
 export const FETCH_WORDS_OVER_TIME_START = "FETCH_WORDS_OVER_TIME_START";
 export const FETCH_WORDS_OVER_TIME_SUCCESS = "FETCH_WORDS_OVER_TIME_SUCCESS";
@@ -140,6 +145,15 @@ export const fetchAddNewUser = newUser => dispatch => {
       dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response })
     );
 };
+
+// Used at Login
+export const fetchLoginUser = (login) => dispatch => {
+  dispatch({ type: FETCH_LOGIN_START });
+  axiosWithAuth()
+  .post("", login) //endpoint goes here
+  .then(res => dispatch({ type: FETCH_LOGIN_SUCCESS, payload: res.data.userId }) & localStorage.setItem("token", res.data.token) & console.log(res.data.userId, "Data returned from fetchLoginSuccess action and set to state"))
+  .catch(err => dispatch({ type: FETCH_LOGIN_FAILURE, payload: err.response }))
+}
 
 // PhraseRank
 export const fetchWordsOverTime = id => dispatch => {
