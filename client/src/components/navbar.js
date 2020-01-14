@@ -14,9 +14,9 @@ const useStyles = makeStyles({
 
   root: {
     background: '#2C98F0',
-    width: '100%',
-    position: 'fixed',
-    zIndex: '1',
+    // width: '100%',
+    // position: 'fixed',
+    // zIndex: '1',
   },
   NavItems: {
     marginLeft:'auto',

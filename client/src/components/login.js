@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
-    constainer: {
+    container: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     },
     input: {
         display: 'none',
+    },
+    bottomText: {
+
     },
 }));
 
@@ -59,7 +62,7 @@ const Login = props => {
     }, [props.loggedUser]);
 
     return (
-        <div>
+        <div style={{marginTop:'5%'}}>
             <form className ={classes.container} onSubmit={handleSubmit}>
                 <h1>Log In</h1>
                 <TextField
@@ -81,12 +84,13 @@ const Login = props => {
                     className={classes.textField}
                     value={login.password}
                     onChange={handleChange}
-                    requiredmargin="normal"
+                    required
+                    margin="normal"
                     variant="outlined"
                     placeholder="Password"
                 />
                 <Button className={classes.button} variant="outlined" color="black" type="submit">Login</Button>
-                <div>
+                <div className ={classes.bottomText}>
                     <p>
                         Don't have an account?  <Link to='/Register/'>Register Now!</Link>
                     </p>

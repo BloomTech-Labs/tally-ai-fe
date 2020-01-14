@@ -62,7 +62,7 @@ function Registration(props) {
     }
 
     return (
-        <div>
+        <div style={{marginTop:'5%'}}>
             <h1>Register</h1>
             <form className ={classes.container} onSubmit={submitHandler}>
             
