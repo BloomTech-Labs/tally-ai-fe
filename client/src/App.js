@@ -8,6 +8,7 @@ import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import Search from "./components/search";
 import DashboardGrid from "./components/dashboard";
+import registration from "./components/registration";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <NavBar />
       <Route exact path="/" component={Search} />
       <Route exact path="/Dashboard/" component={DashboardGrid} />
+      <Route exact path="/Register/" component={registration} />
       <Footer />
     </div>
   );
