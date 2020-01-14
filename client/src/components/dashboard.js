@@ -35,7 +35,7 @@ function DashboardGrid(props) {
     props.fetchAllData(props.id);
     // props.fetchTopAndBottom(props.id);
     // props.fetchWordsOverTime(props.id);
-  }, []);
+  }, [props.id]);
 
   return (
     <div className="dashboardgrid">
@@ -44,7 +44,6 @@ function DashboardGrid(props) {
       </div> 
       <div>
             <WidgetDisplayList />
-            <WidgetAdditionList />
       </div>
     </div>
   );
@@ -125,8 +124,8 @@ function DashboardGrid(props) {
   }
 }
 const mapStateToProps = state => ({
-  words: state.widgetData.keyWords.data,
-  isFetching: state.widgetData.keyWords.isFetching,
+  // words: state.widgetData.keyWords.data,
+  // isFetching: state.widgetData.keyWords.isFetching,
   id: state.businessInfo.businessId
 });
 

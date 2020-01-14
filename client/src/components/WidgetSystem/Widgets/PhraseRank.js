@@ -264,6 +264,8 @@ const PhraseRank = props => {
 
   //a widget that maps the rank of a phrase over time
   return (
+    <div>
+    <h3>Word Sentiment Over Time</h3>
     <LineChart
       width={500}
       height={300}
@@ -293,6 +295,7 @@ const PhraseRank = props => {
       <Line type="monotone" dataKey="coffee" stroke="#BDCFB5" />
       <Line type="monotone" dataKey="specials" stroke="#482728" /> */}
     </LineChart>
+    </div>
   );
 };
 // wordsOverTime: {

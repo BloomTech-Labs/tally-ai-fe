@@ -25,32 +25,44 @@ const exampleData = {
 };
 
 const RatingOverTime = props => {
+  console.log("Data in RatingOverTime: ", props.data);
+
+  if (props.isFetching || !props.data) {
+    return <div>Loading...</div>;
+  }
+  if (props.error) {
+    return <div>Error!</div>;
+  }
+
   return (
-    <div className="rating-over-time">
-      <ComposedChart
-        width={500}
-        height={300}
-        data={exampleData.star_data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5
-        }}
-      >
-        <XAxis dataKey="date" />
-        <YAxis />
-        <CartesianGrid />
-        <Tooltip />
-        <Legend />
-        {/* {exampleData.star_data.map(point => (<Bar dataKey={point.weekly_avg_rating} barSize={20} fill="#413ea0" />))} */}
-        <Bar dataKey="weekly_avg_rating" barSize={20} fill="#413ea0" />
-        <Line
-          type="monotone"
-          dataKey="cumulative_avg_rating"
-          stroke="#ff7300"
-        />
-      </ComposedChart>
+    <div>
+      <h3>Weekly Average Rating vs. Cumulative Average</h3>
+      <div className="rating-over-time">
+        <ComposedChart
+          width={500}
+          height={300}
+          data={props.data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5
+          }}
+        >
+          <XAxis dataKey="date" />
+          <YAxis />
+          <CartesianGrid />
+          <Tooltip />
+          <Legend />
+          {/* {exampleData.star_data.map(point => (<Bar dataKey={point.weekly_avg_rating} barSize={20} fill="#413ea0" />))} */}
+          <Bar dataKey="weekly_avg_rating" barSize={20} fill="#413ea0" />
+          <Line
+            type="monotone"
+            dataKey="cumulative_avg_rating"
+            stroke="#ff7300"
+          />
+        </ComposedChart>
+      </div>
     </div>
   );
 };
@@ -58,7 +70,7 @@ const RatingOverTime = props => {
 const mapStateToProps = state => ({
   data: state.widgetData.ratingOverTime.data,
   isFetching: state.widgetData.ratingOverTime.isFetching,
-  error: state.widgetData.ratingOverTime.data
+  error: state.widgetData.ratingOverTime.error
 });
 
 export default connect(mapStateToProps)(RatingOverTime);

@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 
 import WidgetContainer from "./WidgetContainer";
+import { setActiveWidgets } from "../../actions/index";
+import { connect } from "react-redux";
 
 import { widgets } from "./WidgetRegistry";
 
-const WidgetDisplayList = () => {
-
-    let defaultWidgets = [widgets[0].name, widgets[1].name];//Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
-
-    //TODO: Change to Redux state
-    const [activeWidgets, setActiveWidgets] = useState(defaultWidgets);//Array order really matters here, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
+const WidgetDisplayList = (props) => {
 
     function getElementCenter(element) {
 
@@ -32,7 +29,7 @@ const WidgetDisplayList = () => {
         let closestDistanceFromMouse = 9999999;//gotta be a big screen for this loop to not find a new closest distance
 
         //Loop through all the widgets on the screen and find the closest widget to the mouse position
-        activeWidgets.forEach(element => {
+        props.activeWidgets.forEach(element => {
 
             let widget = document.getElementById(element);
 
@@ -61,14 +58,14 @@ const WidgetDisplayList = () => {
 
         let closestWidget = getClosestWidgetToMouse(mousePosition);
 
-        let closestIndex = activeWidgets.indexOf(closestWidget.id);
+        let closestIndex = props.activeWidgets.indexOf(closestWidget.id);
 
-        let activeWidgetsClone = activeWidgets.map((item) => item);
+        let activeWidgetsClone = props.activeWidgets.map((item) => item);
         //Remove projections and widgets that are of the same type as draggedWidget as well so you can't have duplicate widgets on your dashboard
         activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
         //Add back draggedWidget in its new spot
         activeWidgetsClone.splice(closestIndex, 0, draggedWidget)
-        setActiveWidgets(activeWidgetsClone);
+        props.setActiveWidgets(activeWidgetsClone);
     }
 
     return (
@@ -87,20 +84,20 @@ const WidgetDisplayList = () => {
 
                 let closestWidget = getClosestWidgetToMouse(mousePosition);
 
-                let closestIndex = activeWidgets.indexOf(closestWidget.id);
+                let closestIndex = props.activeWidgets.indexOf(closestWidget.id);
 
                 //If the widgets array doesn't already contain a projection widget in closestIndex, add one and remove any out of position ones. 
                 //Otherwise, even though the mouse location changed, the projection is still correct and there is no need to re-render
-                if (!(activeWidgets[closestIndex] === "projection")) {
+                if (!(props.activeWidgets[closestIndex] === "projection")) {
 
-                    let activeWidgetsClone = activeWidgets.map((item) => item);
+                    let activeWidgetsClone = props.activeWidgets.map((item) => item);
 
                     //remove out-of-position projections
                     activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
                     //Add new projection in correct position
                     activeWidgetsClone.splice(closestIndex, 0, "projection")
 
-                    setActiveWidgets(activeWidgetsClone);
+                    props.setActiveWidgets(activeWidgetsClone);
 
                 }
 
@@ -113,7 +110,7 @@ const WidgetDisplayList = () => {
 
                 {/* Render Active Widgets */}
                 {
-                    activeWidgets.map((widgetName) => {
+                    props.activeWidgets.map((widgetName) => {
                         return (
                             <WidgetContainer widgetName={widgetName} />//WidgetContainer will render the correct widget based on widgetName
                         )
@@ -125,4 +122,8 @@ const WidgetDisplayList = () => {
     );
 }
 
-export default WidgetDisplayList;
+const mapStateToProps = state => ({
+    activeWidgets: state.activeWidgets
+  });
+  
+  export default connect(mapStateToProps, { setActiveWidgets })(WidgetDisplayList);

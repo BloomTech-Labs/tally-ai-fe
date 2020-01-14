@@ -40,6 +40,7 @@ export const FETCH_REVIEWS_OVER_TIME_SUCCESS =
   "FETCH_REVIEWS_OVER_TIME_SUCCESS";
 export const FETCH_REVIEWS_OVER_TIME_FAILURE =
   "FETCH_REVIEWS_OVER_TIME_FAILURE";
+export const SET_ACTIVE_WIDGETS = "SET_ACTIVE_WIDGETS";
 
 /*
   -------
@@ -85,6 +86,10 @@ export const fetchBusinesses = business => dispatch => {
       });
     });
 };
+
+export const setActiveWidgets = (widgetArray) => dispatch => {
+  dispatch({ type: SET_ACTIVE_WIDGETS, payload: widgetArray });
+}
 
 // TopBottomWords
 export const fetchTopAndBottom = id => dispatch => {
@@ -173,15 +178,26 @@ export const fetchReviewsOverTime = id => dispatch => {
 // };
 
 export const fetchAllData = id => async dispatch => {
+
+  if(!id){
+    console.error("WARNING: ID IS UNDEFINED");
+  }
+
   try {
     dispatch({ type: FETCH_TOP_AND_BOTTOM_START });
     dispatch({ type: FETCH_RATING_OVER_TIME_START });
+    console.log("Attempting to get data from ", `https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`);
     const data = await axios.get(
       `https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`
     );
     console.log("\nData from viztype=0:\n", data);
-    dispatch({ type: FETCH_TOP_AND_BOTTOM_SUCCESS, payload: data["viztype0"] });
-    dispatch({ type: FETCH_RATING_OVER_TIME_SUCCESS, payload: data["viztype1"] });
+    
+    const {viztype0, viztype3} = data.data;
+    console.log("viztype0: ", viztype0);
+    console.log("viztype3: ", viztype3);    
+
+    dispatch({ type: FETCH_TOP_AND_BOTTOM_SUCCESS, payload: viztype0 });
+    dispatch({ type: FETCH_RATING_OVER_TIME_SUCCESS, payload: viztype3 });
   } catch (error) {
     console.error(
       `\nError getting data for topBottomWords and ratingOverTime\n${error}\n`
@@ -206,6 +222,7 @@ export const fetchAllData = id => async dispatch => {
     const reviewsOverTime = await axios.get(
       `https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=2`
     );
+    console.log("Data in action for reviewsOverTime: ", reviewsOverTime);
     dispatch({
       type: FETCH_REVIEWS_OVER_TIME_SUCCESS,
       payload: reviewsOverTime
