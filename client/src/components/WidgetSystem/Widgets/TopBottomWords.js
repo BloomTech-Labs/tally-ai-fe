@@ -35,11 +35,16 @@ const TopBottomWords = props => {
   // );
   console.log("props.words in dashboard: ", props.words);
 
-  if (props.isFetching) {
+  if(props.error){
+    console.log("Error with props:", props);
+    return <p>Error!</p>
+  }
+  if (props.isFetching || !props.words) {
     return <h3>Loading analytics...</h3>;
   } else {
     return (
       <div style={{ margin: "5%" }} className={classes.root}>
+        <h3>Top and Bottom Words</h3>
         <Grid container spacing={1}>
           {props.words.positive.map(word => {
             return (
@@ -105,7 +110,8 @@ const TopBottomWords = props => {
 
 const mapStateToProps = state => ({
   words: state.widgetData.keyWords.data,
-  isFetching: state.widgetData.keyWords.isFetching
+  isFetching: state.widgetData.keyWords.isFetching,
+  error: state.widgetData.keyWords.error
 });
 
 export default connect(mapStateToProps)(TopBottomWords);

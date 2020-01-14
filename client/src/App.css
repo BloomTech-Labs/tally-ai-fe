@@ -144,8 +144,8 @@ star-rating {
 }
 
 .widgetContainer {
-  width: 37vw;
-  height: 35vw;
+  width: 35vmax;
+  height: 35vmax;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,4 +315,17 @@ star-rating {
   margin-left: 20%;
   margin-right: 20%;
   justify-content: space-evenly;
+}
+
+.overlayImg:before {
+    position: absolute;
+    width: 37vmin;
+    height: 37vmin;
+  transition: .5s ease;
+  opacity:.5;
+}
+
+.widgetThumbnail {
+  width: 37vmin;
+  height: 37vmin;
 }

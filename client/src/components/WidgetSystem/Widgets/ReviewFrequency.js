@@ -28,12 +28,23 @@ const exampleData = [
 ];
 
 const ReviewsOverTime = props => {
+
+  console.log(`\nData in ReviewsOverTime\n${props.data}\n`);
+
+  if (props.isFetching || props.data === null) {
+    return <div>Loading...</div>;
+  }
+  if (props.error) {
+    return <div>Error!</div>;
+  }
+
   return (
     <div className="exampleWidget4">
+      <h3>Review Frequency Over Time</h3>
       <LineChart
         width={500}
         height={300}
-        data={exampleData}
+        data={props.data}
         margin={{
           top: 5,
           right: 30,

@@ -22,11 +22,15 @@ import {
   // Data for RatingOverTime
   FETCH_RATING_OVER_TIME_START,
   FETCH_RATING_OVER_TIME_SUCCESS,
-  FETCH_RATING_OVER_TIME_FAILURE
+  FETCH_RATING_OVER_TIME_FAILURE,
+
+  SET_ACTIVE_WIDGETS
 } from "../actions/index.js";
 
 import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
 import dummyReviewsOverTime from "../dummyData/dummyReviewsOverTime";
+
+import { widgets } from "../components/WidgetSystem/WidgetRegistry"
 
 const initialState = {
   searchResults: {
@@ -46,6 +50,10 @@ const initialState = {
     averageRating: 0,
     changeInRating: ""
   },
+  
+    //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
+    //Array order really matters with activeWidgets, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
+  activeWidgets: [widgets[0].name, widgets[1].name],
 
   // Data for populating the visuals
   widgetData: {
@@ -68,7 +76,7 @@ const initialState = {
     reviewsOverTime: {
       isFetching: false,
       error: null,
-      data: dummyReviewsOverTime
+      data: null
     },
     // RatingOverTime
     ratingOverTime: {
@@ -126,6 +134,11 @@ function reducer(state = initialState, action) {
         ...state,
         businessInfo: { ...action.payload }
       };
+    case SET_ACTIVE_WIDGETS:
+      return {
+        ...state,
+        activeWidgets: action.payload
+      };
 
     // TopBottomWords
     case FETCH_TOP_AND_BOTTOM_START:
@@ -134,7 +147,7 @@ function reducer(state = initialState, action) {
         ...state,
         widgetData: {
           ...state.widgetData,
-          keyWords: { ...state.widgetData.keyWords, isFetching: true }
+          keyWords: { ...state.widgetData.keyWords, isFetching: true, error: null }
         }
       };
     case FETCH_TOP_AND_BOTTOM_SUCCESS:
@@ -148,7 +161,7 @@ function reducer(state = initialState, action) {
           ...state.widgetData,
           keyWords: {
             isFetching: false,
-            data: action.payload.data,
+            data: action.payload,
             error: null
           }
         }
@@ -220,29 +233,39 @@ function reducer(state = initialState, action) {
     case FETCH_REVIEWS_OVER_TIME_START:
       return {
         ...state,
-        reviewsOverTime: {
-          ...state.reviewsOverTime,
-          isFetching: true,
-          error: null
+        widgetData: {
+          ...state.widgetData,
+          reviewsOverTime: {
+            ...state.widgetData.reviewsOverTime,
+            isFetching: true,
+           
+            error: null
+          },
         }
       };
     case FETCH_REVIEWS_OVER_TIME_SUCCESS:
       return {
         ...state,
-        reviewsOverTime: {
-          ...state.reviewsOverTime,
-          isFetching: false,
-          data: action.payload.data
-        },
-        error: null
+        widgetData: {
+          ...state.widgetData,
+          reviewsOverTime: {
+            ...state.widgetData.reviewsOverTime,
+            isFetching: false,
+            data: action.payload.data
+          },
+        }
       };
     case FETCH_REVIEWS_OVER_TIME_FAILURE:
       return {
         ...state,
-        reviewsOverTime: {
-          ...state.reviewsOverTime,
-          isFetching: false,
-          error: action.payload
+        widgetData: {
+          ...state.widgetData,
+          reviewsOverTime: {
+            ...state.widgetData.reviewsOverTime,
+            isFetching: true,
+            data: null,
+            error: action.payload
+          },
         }
       };
 
@@ -268,7 +291,7 @@ function reducer(state = initialState, action) {
           ratingOverTime: {
             ...state.widgetData.ratingOverTime,
             isFetching: false,
-            data: action.payload.data,
+            data: action.payload.star_data,
             error: null
           }
         }
@@ -286,6 +309,7 @@ function reducer(state = initialState, action) {
           }
         }
       };
+
 
     // Unknown action type (default)
     default:
