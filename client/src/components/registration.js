@@ -139,7 +139,7 @@ function Registration(props) {
                 margin="normal"
                 />
             <TextField
-                type="number"
+                type="text"
                 name="zip"
                 className={classes.textField}
                 value={userCredentials.zip}
