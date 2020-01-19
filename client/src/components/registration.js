@@ -38,11 +38,7 @@ function Registration(props) {
         first_name: "",
         last_name: "",
         email: "",
-        password: "",
-        company: "",
-        city: "",
-        state: "",
-        zip: "",
+        password: ""
     });
 
         useEffect(() => {
@@ -102,7 +98,8 @@ function Registration(props) {
                 variant="outlined"
                 margin="normal"
                 />
-            <TextField
+
+            {/* <TextField
                 label="Company"
                 type="text"
                 name="company"
@@ -148,7 +145,7 @@ function Registration(props) {
                 required
                 variant="outlined"
                 margin="normal"
-                />
+                /> */}
             <TextField
                 type="password"
                 name="password"

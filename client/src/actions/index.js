@@ -34,6 +34,11 @@ export const FETCH_LOGIN_START = "FETCH_LOGIN_START";
 export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
 export const FETCH_LOGIN_FAILURE = "FETCH_LOGIN_FAILURE";
 
+// Edit Account
+export const FETCH_EDITACCOUNT_START = "FETCH_EDITACCOUNT_START";
+export const FETCH_EDITACCOUNT_SUCCESS = "FETCH_EDITACCOUNT_SUCCESS";
+export const FETCH_EDITACCOUNT_FAILURE = "FETCH_EDITACCOUNT_FAILURE";
+
 // PhraseRank
 export const FETCH_WORDS_OVER_TIME_START = "FETCH_WORDS_OVER_TIME_START";
 export const FETCH_WORDS_OVER_TIME_SUCCESS = "FETCH_WORDS_OVER_TIME_SUCCESS";
@@ -153,7 +158,16 @@ export const fetchLoginUser = (login) => dispatch => {
   .post("", login) //endpoint goes here
   .then(res => dispatch({ type: FETCH_LOGIN_SUCCESS, payload: res.data.userId }) & localStorage.setItem("token", res.data.token) & console.log(res.data.userId, "Data returned from fetchLoginSuccess action and set to state"))
   .catch(err => dispatch({ type: FETCH_LOGIN_FAILURE, payload: err.response }))
-}
+};
+
+// Used at Edit Account
+export const fetchEditAccount = (id, newInfo) => dispatch => {
+  dispatch({ type: FETCH_EDITACCOUNT_START });
+  axiosWithAuth()
+  .put("", newInfo) //endpoint goes here
+  .then(res => dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: newInfo }) & console.log(res.data, "fetchEditAccount"))
+  .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
+};
 
 // PhraseRank
 export const fetchWordsOverTime = id => dispatch => {
