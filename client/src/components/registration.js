@@ -72,7 +72,7 @@ function Registration(props) {
                 placeholder="First Name"
                 required
                 variant="outlined"
-                margine="normal"
+                margin="normal"
                 />
             <TextField
                 label="Last Name"
