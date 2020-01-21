@@ -329,3 +329,15 @@ star-rating {
   width: 37vmin;
   height: 37vmin;
 }
+
+.businessStats {
+  padding-top: 75px;
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#tallyTitle {
+  text-decoration: none;
+  color: white;
+}

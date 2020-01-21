@@ -27,7 +27,10 @@ import {
   FETCH_RATING_OVER_TIME_SUCCESS,
   FETCH_RATING_OVER_TIME_FAILURE,
 
-  SET_ACTIVE_WIDGETS
+  SET_ACTIVE_WIDGETS,
+  SET_FAVORITES_START,
+  SET_FAVORITES_SUCCESS,
+  SET_FAVORITES_FAILURE
 } from "../actions/index.js";
 
 import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
@@ -36,6 +39,16 @@ import dummyReviewsOverTime from "../dummyData/dummyReviewsOverTime";
 import { widgets } from "../components/WidgetSystem/WidgetRegistry"
 
 const initialState = {
+  loggedInUser: {
+    userID: null
+  },
+  //past favorites should be added to state when they log in. when the user favorites/unfavorites, send to backend and update state with list of favorites returned from backend.
+  favorites: {
+    isSetting: false,
+    error: null,
+    favorites: []//array of businesses
+  },
+
   searchResults: {
     isFetching: false,
     error: null,
@@ -53,9 +66,9 @@ const initialState = {
     averageRating: 0,
     changeInRating: ""
   },
-  
-    //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
-    //Array order really matters with activeWidgets, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
+
+  //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
+  //Array order really matters with activeWidgets, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
   activeWidgets: [widgets[0].name, widgets[1].name],
 
   // Data for populating the visuals
@@ -142,7 +155,34 @@ function reducer(state = initialState, action) {
         ...state,
         activeWidgets: action.payload
       };
-
+    case SET_FAVORITES_START:
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          isSetting: true,
+          error: null
+        }
+      };
+    case SET_FAVORITES_SUCCESS:
+      console.log("REDUCER SETTING FAVS", action.payload);
+      return {
+        ...state,
+        favorites: {
+          favorites: action.payload,
+          isSetting: false,
+          error: null
+        }
+      };
+    case SET_FAVORITES_FAILURE:
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          isSetting: false,
+          error: action.payload
+        }
+      };
     // TopBottomWords
     case FETCH_TOP_AND_BOTTOM_START:
       console.log("Fetch top and bottom words start..");
@@ -190,17 +230,17 @@ function reducer(state = initialState, action) {
         isFetching: false,
         error: ""
       };
-    
+
     // Login
     case FETCH_LOGIN_SUCCESS:
-      return{
+      return {
         ...state,
         isFetching: false,
         error: "",
         loggedUser: action.payload
       }
     case FETCH_LOGIN_FAILURE:
-      return{
+      return {
         ...state,
         isFetching: false,
         error: action.payload
@@ -256,7 +296,7 @@ function reducer(state = initialState, action) {
           reviewsOverTime: {
             ...state.widgetData.reviewsOverTime,
             isFetching: true,
-           
+
             error: null
           },
         }

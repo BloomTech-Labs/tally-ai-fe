@@ -37,13 +37,27 @@ function DashboardGrid(props) {
     // props.fetchWordsOverTime(props.id);
   }, [props.id]);
 
+  if(!props.businessInfo.reviewCount || !props.businessInfo.averageRating){
+    return(<div></div>);
+  }
+
   return (
     <div className="dashboardgrid">
       <div>
         <Sidebar />
-      </div> 
+      </div>
       <div>
-            <WidgetDisplayList />
+        <div className="businessStats">
+          <div>
+            Reviews<br/>
+            {props.businessInfo.reviewCount}
+          </div>
+          <div>
+            Overall Rating<br/>
+            {props.businessInfo.averageRating}
+          </div>
+        </div>
+        <WidgetDisplayList />
       </div>
     </div>
   );
@@ -126,7 +140,8 @@ function DashboardGrid(props) {
 const mapStateToProps = state => ({
   // words: state.widgetData.keyWords.data,
   // isFetching: state.widgetData.keyWords.isFetching,
-  id: state.businessInfo.businessId
+  id: state.businessInfo.businessId,
+  businessInfo: state.businessInfo
 });
 
 export default connect(mapStateToProps, {

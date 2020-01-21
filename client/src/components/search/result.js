@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
+import ToggleFavoriteButton from "../ToggleFavoriteButton";
 
 /*
 =======
@@ -109,6 +110,7 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
         >
           Select
         </button>
+        <ToggleFavoriteButton business={data} />
       </div>
     </div>
   );
