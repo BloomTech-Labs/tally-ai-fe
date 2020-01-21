@@ -35,7 +35,7 @@ const NavBar = () => {
       <AppBar className={classes.root}>
         <Toolbar>
           <Typography variant= "h4">
-            Tally AI
+          <Link to ="/" id="tallyTitle">Tally AI</Link>
           </Typography>
           <div className ={classes.NavItems}>
           <Link to ="/" style={{ textDecoration: 'none' }} ><Button className = {classes.NavButton} >Home</Button></Link>

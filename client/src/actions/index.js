@@ -46,6 +46,9 @@ export const FETCH_REVIEWS_OVER_TIME_SUCCESS =
 export const FETCH_REVIEWS_OVER_TIME_FAILURE =
   "FETCH_REVIEWS_OVER_TIME_FAILURE";
 export const SET_ACTIVE_WIDGETS = "SET_ACTIVE_WIDGETS";
+export const SET_FAVORITES_START = "SET_FAVORITES_START";
+export const SET_FAVORITES_FAILURE = "SET_FAVORITES_FAILURE";
+export const SET_FAVORITES_SUCCESS = "SET_FAVORITES_SUCCESS";
 
 /*
   -------
@@ -190,6 +193,19 @@ export const fetchReviewsOverTime = id => dispatch => {
 //   fetchWordsOverTime(id);
 //   fetchTopAndBottom(id);
 // };
+
+export const setFavorites = (favorites, userID) => dispatch => {
+
+//TODO: Add eddpoint to set a user's favorites, have endpoint return the new list of favorites on success
+console.log("ACTION SETTING FAVS", favorites);
+  dispatch({ type: SET_FAVORITES_START });
+  //hit endpoint POST userID and favorites
+  //then
+  dispatch({ type: SET_FAVORITES_SUCCESS, payload: favorites });//payload: res.data
+  //catch
+  //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
+
+}
 
 export const fetchAllData = id => async dispatch => {
 
