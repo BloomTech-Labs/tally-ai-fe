@@ -55,9 +55,9 @@ export default function EditAccount(props){
         setCredentials({ ...userCredentials, [event.target.name]: event.target.value })
     }
 
-    useEffect(() => {
-        setCredentials(props.loggedUserInfo)
-    }, []);
+    // useEffect(() => {
+    //     setCredentials(props.loggedUserInfo)
+    // }, []);
 
     return (
         <div>
