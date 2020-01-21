@@ -10,6 +10,7 @@ import Search from "./components/search";
 import DashboardGrid from "./components/dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
+import Settings from "./components/settings/settings"
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/Dashboard/" component={DashboardGrid} />
       <Route path="/Register/" component={registration} />
       <Route path="/Login/" component={Login} />
+      <Route path="/Settings/" component={Settings} />
       <Footer />
     </div>
   );
