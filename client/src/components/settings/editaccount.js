@@ -60,7 +60,7 @@ export default function EditAccount(props){
     // }, []);
 
     return (
-        <div>
+        <div style={{backgroundColor: "white"}}>
             <h1>Edit Account</h1>
             <form className ={classes.container} onSubmit= {submitHandler}>
             <TextField 

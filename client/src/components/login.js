@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchLoginUser } from "../actions/index";
+import { loginUser } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -48,18 +48,18 @@ const Login = props => {
     }
 
     const handleSubmit = e => {
+        if(!props.isFetching) {
         e.preventDefault();
         console.log(login, "login that was passed")
-        props.fetchLoginUser(login)
-        props.history.push('/dashboard')  // change to account when made
-        console.log(props, "props after handleSubmit")
+        props.loginUser(login)
+        }
     }
 
     useEffect(() => {
-        if(props.loggedUser > 0){
-            props.history.push('/dashboard')  //change to account when made
+        if(props.loggedInUser){
+            props.history.push('/')  //change to account when made
         }
-    }, [props.loggedUser]);
+    }, [props.loggedInUser]);
 
     return (
         <div style={{marginTop:'5%'}}>
@@ -103,13 +103,13 @@ const Login = props => {
 
 const mapStateToProps = state => {
     return {
-        loggedUser: state.loggedUser,
-        isFetching: state.isFetching,
-        error: state.error
+        loggedInUser: state.loggedInUser.userID,
+        isFetching: state.loggedInUser.isFetching,
+        error: state.loggedInUser.error
     };
 };
 
 export default connect(
     mapStateToProps,
-    { fetchLoginUser }
+    { loginUser }
 )(Login)

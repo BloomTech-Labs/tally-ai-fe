@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchAddNewUser } from "../actions/index";
+import { registerUser } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -42,15 +42,17 @@ function Registration(props) {
     });
 
         useEffect(() => {
-            if(props.loggedUser > 0){
-                props.history.push('/home')
+            if(props.loggedInUser){//we're logged in, lets redirect to /home
+                props.history.push('/')
             }
-        }, []);
+        }, [props.loggedInUser]);
 
     const submitHandler = event => {
+        if(!props.isFetching){//don't let them submit again if the backend is already processing their registration request
         event.preventDefault();
         console.log(userCredentials);
-        props.fetchAddNewUser(userCredentials)
+        props.registerUser(userCredentials);
+        }
     }
 
     const changeHandler = event => {
@@ -166,14 +168,14 @@ function Registration(props) {
 
 const mapStateToProps = state => {
     return {
-        isFetching: state.isFetching,
-        error: state.error,
-        loggedUser: state.loggedUser
+        isFetching: state.loggedInUser.isFetching,
+        error: state.loggedInUser.error,
+        loggedInUser: state.loggedInUser.userID
     };
 };
 
 export default connect(
     mapStateToProps,
-    { fetchAddNewUser }  
+    { registerUser }  
 )(Registration)
 

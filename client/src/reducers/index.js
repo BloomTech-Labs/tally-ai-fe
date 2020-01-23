@@ -10,10 +10,17 @@ import {
   FETCH_TOP_AND_BOTTOM_SUCCESS,
   FETCH_TOP_AND_BOTTOM_FAILURE,
   // Registration
-  FETCH_ADDNEWUSER_SUCCESS,
+  REGISTER_START,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
   // Login
-  FETCH_LOGIN_SUCCESS,
-  FETCH_LOGIN_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  // Edit Account
+  FETCH_EDITACCOUNT_START,
+  FETCH_EDITACCOUNT_SUCCESS,
+  FETCH_EDITACCOUNT_FAILURE,
   // Data for PhraseRank
   FETCH_WORDS_OVER_TIME_START,
   FETCH_WORDS_OVER_TIME_SUCCESS,
@@ -28,9 +35,18 @@ import {
   FETCH_RATING_OVER_TIME_FAILURE,
 
   SET_ACTIVE_WIDGETS,
+
   SET_FAVORITES_START,
   SET_FAVORITES_SUCCESS,
-  SET_FAVORITES_FAILURE
+  SET_FAVORITES_FAILURE,
+
+  ADD_FAVORITE_START,
+  ADD_FAVORITE_SUCCESS,
+  ADD_FAVORITE_FAILURE,
+
+  REMOVE_FAVORITE_START,
+  REMOVE_FAVORITE_SUCCESS,
+  REMOVE_FAVORITE_FAILURE
 } from "../actions/index.js";
 
 import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
@@ -46,7 +62,38 @@ const initialState = {
   favorites: {
     isSetting: false,
     error: null,
-    favorites: []//array of businesses
+    favorites: [{
+      // for DS API calls
+      businessId: "19878f9d6s77237-asd",
+      // for side bar
+      businessName: "Example Business",
+      businessImg: "https://assets.entrepreneur.com/franchise/282553-cover-image-1564755271.jpeg?width=800",
+      // for top-of-page info cards
+      reviewCount: 0,
+      averageRating: 0,
+      changeInRating: ""
+    },
+    {
+      // for DS API calls
+      businessId: "19878f9d6s77237-asd",
+      // for side bar
+      businessName: "VERAMEAT",
+      businessImg: "https://www.shopkeep.com/wp-content/uploads/2016/07/retail-store_retail-business-plan-e1468443541681.jpg",
+      // for top-of-page info cards
+      reviewCount: 0,
+      averageRating: 0,
+      changeInRating: ""
+    }, {
+      // for DS API calls
+      businessId: "19878f9d6s77237-asd",
+      // for side bar
+      businessName: "Bicycles",
+      businessImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshfmpFtjour-4iJgDPY7uZ0Ki3Kua13zPonqqdiSAu27YFsW48Q&s",
+      // for top-of-page info cards
+      reviewCount: 0,
+      averageRating: 0,
+      changeInRating: ""
+    }]//array of businesses
   },
 
   searchResults: {
@@ -183,6 +230,65 @@ function reducer(state = initialState, action) {
           error: action.payload
         }
       };
+
+    case ADD_FAVORITE_START:
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          isSetting: true,
+          error: null
+        }
+      };
+    case ADD_FAVORITE_SUCCESS:
+      console.log("REDUCER SETTING FAVS", action.payload);
+      return {
+        ...state,
+        favorites: {
+          favorites: action.payload,
+          isSetting: false,
+          error: null
+        }
+      };
+    case ADD_FAVORITE_FAILURE:
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          isSetting: false,
+          error: action.payload
+        }
+      };
+
+    case REMOVE_FAVORITE_START:
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          isSetting: true,
+          error: null
+        }
+      };
+    case REMOVE_FAVORITE_SUCCESS:
+      console.log("REDUCER SETTING FAVS", action.payload);
+      return {
+        ...state,
+        favorites: {
+          favorites: action.payload,
+          isSetting: false,
+          error: null
+        }
+      };
+    case REMOVE_FAVORITE_FAILURE:
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          isSetting: false,
+          error: action.payload
+        }
+      };
+
     // TopBottomWords
     case FETCH_TOP_AND_BOTTOM_START:
       console.log("Fetch top and bottom words start..");
@@ -224,22 +330,81 @@ function reducer(state = initialState, action) {
       };
 
     // Registration
-    case FETCH_ADDNEWUSER_SUCCESS:
+    case REGISTER_START:
       return {
         ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          userID: null,
+        isFetching: true,
+        error: null
+        }
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          userID: action.payload,
         isFetching: false,
-        error: ""
+        error: null
+        }
+      };
+    case REGISTER_FAILURE:
+      return {
+        ...state,
+        userID: null,
+        isFetching: false,
+        error: action.payload
       };
 
     // Login
-    case FETCH_LOGIN_SUCCESS:
+    case LOGIN_START:
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          userID: null,
+        isFetching: true,
+        error: null
+        }
+      }
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          userID: action.payload,
+        isFetching: false,
+        error: null
+        }
+      }
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          userID: null,
+        isFetching: false,
+        error: action.payload
+        }
+      }
+
+    // Edit Account
+    case FETCH_EDITACCOUNT_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: ""
+      }
+    case FETCH_EDITACCOUNT_SUCCESS:
       return {
         ...state,
         isFetching: false,
         error: "",
-        loggedUser: action.payload
+        loggedUserInfo: action.payload
       }
-    case FETCH_LOGIN_FAILURE:
+    case FETCH_EDITACCOUNT_FAILURE:
       return {
         ...state,
         isFetching: false,

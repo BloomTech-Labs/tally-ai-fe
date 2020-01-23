@@ -27,12 +27,14 @@ export const FETCH_RATING_OVER_TIME_SUCCESS = "FETCH_RATING_OVER_TIME_SUCCESS";
 export const FETCH_RATING_OVER_TIME_FAILURE = "FETCH_RATING_OVER_TIME_FAILURE";
 
 // Registration
-export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAILURE = "REGISTER_FAILURE";
+export const REGISTER_START = "REGISTER_START";
 
 // Login
-export const FETCH_LOGIN_START = "FETCH_LOGIN_START";
-export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
-export const FETCH_LOGIN_FAILURE = "FETCH_LOGIN_FAILURE";
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 // Edit Account
 export const FETCH_EDITACCOUNT_START = "FETCH_EDITACCOUNT_START";
@@ -54,6 +56,14 @@ export const SET_ACTIVE_WIDGETS = "SET_ACTIVE_WIDGETS";
 export const SET_FAVORITES_START = "SET_FAVORITES_START";
 export const SET_FAVORITES_FAILURE = "SET_FAVORITES_FAILURE";
 export const SET_FAVORITES_SUCCESS = "SET_FAVORITES_SUCCESS";
+
+export const ADD_FAVORITE_START = "ADD_FAVORITE_START";
+export const ADD_FAVORITE_FAILURE = "ADD_FAVORITE_FAILURE";
+export const ADD_FAVORITE_SUCCESS = "ADD_FAVORITE_SUCCESS";
+
+export const REMOVE_FAVORITE_START = "REMOVE_FAVORITE_START";
+export const REMOVE_FAVORITE_FAILURE = "REMOVE_FAVORITE_FAILURE";
+export const REMOVE_FAVORITE_SUCCESS = "REMOVE_FAVORITE_SUCCESS";
 
 /*
   -------
@@ -141,13 +151,17 @@ export const searchResultsPlaceholder = results => dispatch => {
 };
 
 // Used at Registration
-export const fetchAddNewUser = newUser => dispatch => {
-  axiosWithAuth()
-    .post(``, newUser) //endpoint goes here
+export const registerUser = newUser => dispatch => {
+  console.log("User info: ", newUser);
+  dispatch({ type: REGISTER_START })
+  axios
+    .post(`https://tally-ai.herokuapp.com/api/auth/register`, newUser) //swap local host with https://tally-ai.herokuapp.com/api/auth/register
     .then(
-      res =>
-        dispatch({ type: FETCH_ADDNEWUSER_SUCCESS }) &
-        console.log(res.data, "fetchAddNewUser")
+      res => {
+        localStorage.setItem("token", res.data.token);
+        dispatch({ type: REGISTER_SUCCESS, payload: res.data.userN.id });
+        console.log(res.data, "fetchAddNewUser");
+      }
     )
     .catch(err =>
       dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response })
@@ -155,12 +169,12 @@ export const fetchAddNewUser = newUser => dispatch => {
 };
 
 // Used at Login
-export const fetchLoginUser = (login) => dispatch => {
-  dispatch({ type: FETCH_LOGIN_START });
+export const loginUser = (login) => dispatch => {
+  dispatch({ type: LOGIN_START });
   axiosWithAuth()
-  .post("", login) //endpoint goes here
-  .then(res => dispatch({ type: FETCH_LOGIN_SUCCESS, payload: res.data.userId }) & localStorage.setItem("token", res.data.token) & console.log(res.data.userId, "Data returned from fetchLoginSuccess action and set to state"))
-  .catch(err => dispatch({ type: FETCH_LOGIN_FAILURE, payload: err.response }))
+  .post("https://tally-ai.herokuapp.com/api/auth/login", login) //swap local host with https://tally-ai.herokuapp.com/api/auth/login
+  .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data.id }) & localStorage.setItem("token", res.data.token) & console.log(res, "Data returned from fetchLoginSuccess action and set to state"))
+  .catch(err => dispatch({ type: LOGIN_FAILURE, payload: err.response }))
 };
 
 // Used at Edit Account
@@ -220,6 +234,33 @@ console.log("ACTION SETTING FAVS", favorites);
   //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
 
 }
+
+
+export const addFavorite = (favorite, userID) => dispatch => {
+
+  console.log("ACTION ADDING FAV", favorite);
+    dispatch({ type: ADD_FAVORITE_START });
+    //hit endpoint POST userID and favorites
+    //then
+    //dispatch({ type: ADD_FAVORITE_SUCCESS, payload: res.favorites });//payload: res.data
+    //catch
+    //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
+  
+  }
+
+  
+export const removeFavorite = (favorite, userID) => dispatch => {
+
+  // //TODO: Add eddpoint to set a user's favorites, have endpoint return the new list of favorites on success
+  // console.log("ACTION SETTING FAVS", favorites);
+  //   dispatch({ type: SET_FAVORITES_START });
+  //   //hit endpoint POST userID and favorites
+  //   //then
+  //   dispatch({ type: SET_FAVORITES_SUCCESS, payload: favorites });//payload: res.data
+  //   //catch
+  //   //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
+  
+  }
 
 export const fetchAllData = id => async dispatch => {
 

@@ -40,12 +40,12 @@ const ToggleFavoriteButton = (props) => {
 
     function toggle(e) {
         if (!props.isSettingFavorites && props.business) {//make sure we're not trying to toggle again before the last toggle has even reached the backend and come back again (would happen when the user clicks repeatedly)
-        console.log("BUTTON SETTING FAVS", props.favorites.concat([props.business]));   
-        if(!favorited){ 
-        props.setFavorites(props.favorites.concat([{...props.business, businessId: props.business.id}]), 0);//duplicate and add new favorite, and set state
-        }else{
-            props.setFavorites(props.favorites.filter((fav) => { return !(fav.businessId === props.business.id) }), 0);//duplicate and remove favorite, and set state
-        }
+            console.log("BUTTON SETTING FAVS", props.favorites.concat([props.business]));
+            if (!favorited) {
+                props.setFavorites(props.favorites.concat([{ ...props.business, businessId: props.business.businessId }]), 0);//duplicate and add new favorite, and set state
+            } else {
+                props.setFavorites(props.favorites.filter((fav) => { return !(fav.businessId === props.business.businessId) }), 0);//duplicate and remove favorite, and set state
+            }
         }
     }
 
