@@ -7,9 +7,9 @@ const useStyles = makeStyles ({
 
 root:{
     bottom: '0',
-    background: '#2C98F0',
+    background: '#BBDEFB',
     color: 'black',
-    height: '80px',
+    height: '100px',
     zIndex: '1'
 },
 
@@ -19,13 +19,15 @@ export default function Footer() {
 
     return(
         <footer className ={classes.root}>
-            <Button color="inherit">Contact Us</Button>
-            <Button color="inherit">Terms Of Use</Button>
-            <Button color="inherit">Privacy Policy</Button>
-                <Typography align="center">
+            <Typography align="center">
                     {'Copyright © '}
                     Tally AI 2020
                 </Typography>
+            <Button className="FooterButton" color="inherit">About</Button>
+            <Button className="FooterButton" color="inherit">Team</Button>
+            <Button className="FooterButton" color="inherit">FAQ</Button>
+            <Button className="FooterButton" color="inherit">Terms Of Service</Button>
+            <Button className="FooterButton" color="inherit">Privacy Policy</Button>           
         </footer>
     );
 }

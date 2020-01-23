@@ -1,36 +1,43 @@
 import React from 'react';
-import LineGraph from './LineGraph.svg'
-import RadarGraph from './RadarGraph.svg'
+import toptablet from "./images/toptablet.png"
+import bottomtablet from "./images/bottomtablet.png"
+import TopOrangePolygon from "./images/TopOrangePolygon.png"
+import YellowTopReactangle from "./images/YellowTopReactangle.png"
+import BlueTopRectangle from "./images/BlueTopRectangle.png"
+import BottomBlueRectangle from "./images/BottomBlueRectangle.png"
+import BottomPolygon2 from "./images/BottomPolygon2.png"
+import BottomRectangle from "./images/BottomRectangle.png"
 
 const HomeInfo = () => {
     return (
         <div className="home-info">
 
-            <div className="head-title">
-                <p>Intelligent visualizations to understand data at a glance</p>
-            </div>
-
             <div className="top-card">
-                <div className="RadarIMG">
-                    <img src={RadarGraph} alt='Radar Graph Displaying Data' />
+                <div className="leftpara">
+                    <h1>Build the business your customers want</h1>
+                    <p>Filler Text Filler TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller Text</p>
                 </div>
-                <div className="rightpara">
-                    <p>Take your evaluations to the next level by understanding how customers rank your competitors, find what you are doing better and build on it, or discover those things that you could do better and uncover growth opportunities.</p>
-                </div>
+                <div className="TopTabletIMG">
+                    <img className="HomePicture" src={TopOrangePolygon} alt='Orange Polygon' />
+                    <img className="HomePicture2" src={YellowTopReactangle} alt='Yellow Reactangle' />
+                    <img className="HomePicture3" src={BlueTopRectangle} alt='Blue Rectangle' />
+                    <img className="HomePicture4" src={toptablet} alt='Radar Graph Displaying Data' />
+                </div>   
             </div>
 
             <div className="bottom-card"> 
-                <div className="leftpara">  
-                    <p>Quickly find trends in word ranks to track improvements or identify reasons of decline. Take your service to the next by identifying your progress and acting on it</p>
+                <div className="BottomTabletIMG">
+                    <img className="HomePicture5" src={BottomBlueRectangle} alt='Blue Rectangle' />
+                    <img className="HomePicture6" src={BottomPolygon2} alt='Blue Polygon' />
+                    <img className="HomePicture7" src={BottomRectangle} alt='Yellow Rectangle' />
+                    <img className="HomePicture8" src={bottomtablet} alt='Line Graph Displaying Data' />
                 </div>
-                <div className="LineIMG">
-                    <img src={LineGraph} alt='Line Graph Displaying Data' />
+                <div className="rightpara">  
+                    <h1>Keep Track of your competitors</h1>
+                    <p>Filler Text Filler TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller TextFiller Text</p>
                 </div>
             </div> 
 
-            <div className="bottom-info">
-                <h1>Use these and many other visualizations to quickly identify problems and informed decisions</h1>
-            </div>
         </div>
     )
 }
