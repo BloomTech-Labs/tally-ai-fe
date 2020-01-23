@@ -60,7 +60,9 @@ star-rating {
   display: flex;
   flex-direction: row;
   height: 100vh;
+  background: linear-gradient(347.71deg, #E3F2FD 11.16%, #BBDEFB 82.03%);
 }
+
 
 .search-results {
   /* flex-basis: 0%; */
@@ -229,36 +231,43 @@ star-rating {
   display: flex;
 }
 
+.AIBusiness {
+  display: flex;
+  justify-content: center;
+}
+
+.AITitle {
+  color: black;
+  font-size: 30px;
+  margin-top: -70px;
+  margin-bottom: 30px;
+}
+
+.CustomerBusiness {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.CustomerTitle {
+  font-size: 60px;
+  margin-bottom: 120px;
+  width: 65%;
+}
+
 .home-icons {
-  padding: 75px;
+  height: 100vh;
   display: flex;
   justify-content: center;
   justify-content: space-around;
+  background-color: #BBDEFB;
+  align-items: center;
 }
 
-.lock-icon {
-  flex-wrap: wrap;
-  width: 20%;
-}
-
-.chart-icon {
-  flex-wrap: wrap;
-  width: 20%;
-}
-
-.hear-icon {
-  flex-wrap: wrap;
-  width: 20%;
-}
-
-.flag-icon {
-  flex-wrap: wrap;
-  width: 20%;
-}
-
-.arrow-icon {
-  flex-wrap: wrap;
-  width: 20%;
+.mid-section {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
 }
 
 .head-title {
@@ -266,8 +275,137 @@ star-rating {
   font-size: 55px;
 }
 
+.flag-icon {
+  /* border: 1px solid black; */
+  width: 33%;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.chart-icon {
+  width: 33%;
+  margin-left: 44px;
+  margin-right: 25px;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.arrow-icon {
+  width: 33%;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.h2 {
+  font-size: 24px;
+}
+
+.p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .top-card {
   /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 60vh;
+  margin-top: 125px;
+  width: 100%;
+}
+
+.leftpara {
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 30px;
+  width: 50%;
+  margin-left: 10%;
+}
+
+.TopTabletIMG {
+  display: flex;
+  /* justify-content: flex-end; */
+  position: relative;
+  width: 50%;
+}
+
+.HomePicture {
+  position: absolute;
+  top: -300px;
+  left: 310px;
+}
+
+.HomePicture2 {
+  position: absolute;
+  top: -375px;
+  left: 385px;
+}
+
+.HomePicture3 {
+  position: absolute;
+  top: -150px;
+  left: 165px;
+}
+
+.HomePicture4 {
+  position: absolute;
+  top: -220px;
+  left: 240px;
+}
+
+.BottomTabletIMG {
+  width: 55%;
+  display: flex;
+  /* justify-content: flex-end; */
+  width: 50%;
+  position: relative;
+}
+
+.HomePicture5 {
+  position: absolute;
+  top: -160px;
+  left: 110px;
+}
+
+.HomePicture6 {
+  position: absolute;
+  top: -350px;
+  left: 100px;
+}
+
+.HomePicture7 {
+  position: absolute;
+  top: -300px;
+  left: -75px;
+}
+
+.HomePicture8 {
+  position: absolute;
+  top: -210px; 
+  left: 0px; 
+}
+
+.bottom-card {
+  /* border: 1px solid black; */
+  margin-top: 200px;
   display: flex;
   align-items: center;
   margin-right: 10%;
@@ -276,37 +414,18 @@ star-rating {
 }
 
 .rightpara {
-  /* border: 1px solid black; */
-  font-size: 22px;
-  /* font-weight: bold; */
-  width: 50%;
-  margin-right: 10%;
-}
-
-.RadarIMG {
-  width: 50%;
-}
-
-.bottom-card {
-  /* border: 1px solid black; */
   display: flex;
-  align-items: center;
-  margin-right: 10%;
-  margin-left: 10%;
-  height: 60vh;
-}
-
-.leftpara {
-  /* border: 1px solid black; */
-  font-size: 22px;
-  /* font-weight: bold; */
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
   width: 50%;
   margin-left: 10%;
 }
 
-.LineIMG {
-  width: 55%;
-}
+
 
 .bottom-info {
   padding-bottom: 35px;
@@ -340,4 +459,144 @@ star-rating {
 #tallyTitle {
   text-decoration: none;
   color: white;
+}
+
+.YelpBusinessH1 {
+  font-size: 16px;
+}
+
+.YelpBusinessH2 {
+  color: #0D47A1;
+}
+
+.HomeFeaturesTitle {
+  margin-top: 225px;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+}
+
+.FeaturesTables {
+  display: flex;
+  justify-content: space-evenly;
+  height: 35vh;
+  padding-top: 35px;
+}
+
+.FeatuesTable1 {
+  box-shadow: 0px 55px 0px 0px #0f7dd7;
+  padding: 15px;
+  width: 15%;
+  border-radius: 18px;
+  background: #2C98F0;
+  opacity: 0.8;
+  transition: transform .2s;
+}
+
+.FeatuesTable1:hover {
+  transform: scale(1.2); 
+}
+
+.FeatuesTable2 {
+  box-shadow: 0px 55px 0px 0px #9ed1fa;
+  padding: 15px;
+  width: 15%;
+  border-radius: 18px;
+  background: #BBDEFB;
+  opacity: 0.8;
+  transition: transform .2s;
+}
+
+.FeatuesTable2:hover {
+  transform: scale(1.2); 
+}
+
+.FeatuesTable3 {
+  box-shadow: 0px 55px 0px 0px #c8981e;
+  padding: 15px;
+  width: 15%;
+  border-radius: 18px;
+  background: #DFAB26;
+  opacity: 0.8;
+  transition: transform .2s;
+}
+
+.FeatuesTable3:hover {
+  transform: scale(1.2); 
+}
+
+.FeatuesTable4 {
+  box-shadow: 0px 55px 0px 0px #c46ea2;
+  padding: 15px;
+  width: 15%;
+  border-radius: 18px;
+  background: #D496BB;
+  opacity: 0.8;
+  transition: transform .2s;
+}
+
+.FeatuesTable4:hover {
+  transform: scale(1.2); 
+}
+
+.FeaturesHeaders {
+  color: black;
+  text-align: center;
+}
+
+.FeaturesButton {
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:18px;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:19px;
+	font-weight:bold;
+	font-style:italic;
+	padding:30px 60px;
+  text-decoration:none;
+  margin-top: 80px;
+}
+.FeaturesButton:hover {
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color:#ffab23;
+}
+.FeaturesButton:active {
+	position:relative;
+	top:1px;
+}
+
+.BottomSection {
+  margin-top: 250px;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(347.71deg, #E3F2FD 11.16%, #BBDEFB 82.03%);
+}
+
+.BottomTitle {
+  width: 40%;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 61px;
+  text-align: center;
+  margin-top: 150px;
+}
+
+.FooterButton {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.backgroundcolor {
+  background: linear-gradient(347.71deg, #E3F2FD 11.16%, #BBDEFB 82.03%);
 }

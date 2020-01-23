@@ -14,6 +14,8 @@ import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HomeIcons from "./homeIcons";
 import HomeInfo from "./HomeInfoText";
+import HomeFeatures from "./HomeFeatures";
+import HomeBottomSection from "./HomeBottomSection";
 
 import { fetchBusinesses } from "../actions/index";
 import { searchResultsPlaceholder } from "../actions/index";
@@ -75,17 +77,13 @@ const Search = props => {
 
   return (
     <div>
+      <div className="backgroundcolor">
       {/* <img src={Finder} alt="Guy with Magnifier" /> */}
       <div
         className="search-widget"
         style={{
           backgroundSize: "cover",
-          backgroundColor: "#BBDEFB",
-          borderBottomLeftRadius: "25%",
-          borderBottomRightRadius: "25%",
           backgroundImage: `url(${Finder})`,
-          marginRight: "5%",
-          marginLeft: "5%",
         }}
       >
         {/* <h1>See what customers are saying about your business!</h1> */}
@@ -96,8 +94,10 @@ const Search = props => {
             height: "100vh",
             width: "100%",
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
+            justifyContent: "flex-start",
+            alignItems: "center",
+            color: "#0D47A1",
+            marginLeft: "10%",
           }}
         >
           {/* <div class="mdc-text-field mdc-text-field--outlined">
@@ -110,7 +110,10 @@ const Search = props => {
             </div> */}
           {/* <h1>Search for a business to get started</h1> */}
           <form className={classes.container}>
-            <h1>Search for a business to get started</h1>
+            <div className="YelpBusinessH1">
+            <h1>See what customers are saying about your business!</h1>
+            </div>
+            <h2 className="YelpBusinessH2">Search for a Yelp Business to get started!</h2>
             <TextField
               label="Business Name"
               variant="outlined"
@@ -198,10 +201,14 @@ const Search = props => {
         </div>
         <Results />
       </div>
+      </div>{/*  closes div containing backgroundcolor */}
       <div>
         <HomeIcons />
         <HomeInfo />
+        <HomeFeatures />
+        <HomeBottomSection />
       </div>
+      
     </div>
   );
 };
