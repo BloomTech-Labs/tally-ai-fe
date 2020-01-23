@@ -36,6 +36,9 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
+// Logout
+export const LOGOUT_USER = "LOGOUT_USER";
+
 // Edit Account
 export const FETCH_EDITACCOUNT_START = "FETCH_EDITACCOUNT_START";
 export const FETCH_EDITACCOUNT_SUCCESS = "FETCH_EDITACCOUNT_SUCCESS";
@@ -205,6 +208,11 @@ export const fetchEditAccount = (id, newInfo) => dispatch => {
   .then(res => dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: newInfo }) & console.log(res.data, "fetchEditAccount"))
   .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
 };
+
+// Used at Logout
+export const logoutUser = () => ({
+  type: 'LOGOUT_USER'
+});
 
 // PhraseRank
 export const fetchWordsOverTime = id => dispatch => {

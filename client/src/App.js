@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { axiosWithAuth } from "./utils/axiosWithAuth"
 // Components
 import NavBar from "./components/navbar";
-import PersistentDrawerLeft from "./components/navbar";
 import Footer from "./components/footer";
 import Search from "./components/search";
 import DashboardGrid from "./components/dashboard";
@@ -32,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <PersistentDrawerLeft />
+      <NavBar />
       <Route exact path="/" component={Search} />
       <Route path="/Dashboard/" component={DashboardGrid} />
       <Route path="/Register/" component={registration} />
