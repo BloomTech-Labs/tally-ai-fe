@@ -56,44 +56,53 @@ import { widgets } from "../components/WidgetSystem/WidgetRegistry"
 
 const initialState = {
   loggedInUser: {
-    userID: null
+    data: {
+      firstName: null,
+      lastName: null
+    },
+    shouldUpdate: true,
+    isFetching: false,
+    error: null
   },
   //past favorites should be added to state when they log in. when the user favorites/unfavorites, send to backend and update state with list of favorites returned from backend.
   favorites: {
     isSetting: false,
     error: null,
-    favorites: [{
-      // for DS API calls
-      businessId: "19878f9d6s77237-asd",
-      // for side bar
-      businessName: "Example Business",
-      businessImg: "https://assets.entrepreneur.com/franchise/282553-cover-image-1564755271.jpeg?width=800",
-      // for top-of-page info cards
-      reviewCount: 0,
-      averageRating: 0,
-      changeInRating: ""
-    },
-    {
-      // for DS API calls
-      businessId: "19878f9d6s77237-asd",
-      // for side bar
-      businessName: "VERAMEAT",
-      businessImg: "https://www.shopkeep.com/wp-content/uploads/2016/07/retail-store_retail-business-plan-e1468443541681.jpg",
-      // for top-of-page info cards
-      reviewCount: 0,
-      averageRating: 0,
-      changeInRating: ""
-    }, {
-      // for DS API calls
-      businessId: "19878f9d6s77237-asd",
-      // for side bar
-      businessName: "Bicycles",
-      businessImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshfmpFtjour-4iJgDPY7uZ0Ki3Kua13zPonqqdiSAu27YFsW48Q&s",
-      // for top-of-page info cards
-      reviewCount: 0,
-      averageRating: 0,
-      changeInRating: ""
-    }]//array of businesses
+    favorites: [
+      {
+        // for DS API calls
+        businessId: "19878f9d6s77237-asd",
+        // for side bar
+        businessName: "Example Business",
+        businessImg: "https://assets.entrepreneur.com/franchise/282553-cover-image-1564755271.jpeg?width=800",
+        // for top-of-page info cards
+        reviewCount: 0,
+        averageRating: 0,
+        changeInRating: ""
+      },
+      {
+        // for DS API calls
+        businessId: "19878f9d6s77237-asd",
+        // for side bar
+        businessName: "VERAMEAT",
+        businessImg: "https://www.shopkeep.com/wp-content/uploads/2016/07/retail-store_retail-business-plan-e1468443541681.jpg",
+        // for top-of-page info cards
+        reviewCount: 0,
+        averageRating: 0,
+        changeInRating: ""
+      },
+      {
+        // for DS API calls
+        businessId: "19878f9d6s77237-asd",
+        // for side bar
+        businessName: "Bicycles",
+        businessImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshfmpFtjour-4iJgDPY7uZ0Ki3Kua13zPonqqdiSAu27YFsW48Q&s",
+        // for top-of-page info cards
+        reviewCount: 0,
+        averageRating: 0,
+        changeInRating: ""
+      }
+    ]//array of businesses
   },
 
   searchResults: {
@@ -104,14 +113,17 @@ const initialState = {
   // Business information from the Yelp API
   businessInfo: {
     // for DS API calls
-    businessId: null,
-    // for side bar
-    businessName: null,
-    businessImg: null,
-    // for top-of-page info cards
-    reviewCount: 0,
-    averageRating: 0,
-    changeInRating: ""
+    businesses:
+      [{
+        businessId: null,
+        // for side bar
+        businessName: null,
+        businessImg: null,
+        // for top-of-page info cards
+        reviewCount: 0,
+        averageRating: 0,
+        changeInRating: ""
+      }]
   },
 
   //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
@@ -336,8 +348,8 @@ function reducer(state = initialState, action) {
         loggedInUser: {
           ...state.loggedInUser,
           userID: null,
-        isFetching: true,
-        error: null
+          isFetching: true,
+          error: null
         }
       };
     case REGISTER_SUCCESS:
@@ -345,9 +357,9 @@ function reducer(state = initialState, action) {
         ...state,
         loggedInUser: {
           ...state.loggedInUser,
-          userID: action.payload,
-        isFetching: false,
-        error: null
+          isFetching: false,
+          error: null,
+          shouldUpdate: true
         }
       };
     case REGISTER_FAILURE:
@@ -365,8 +377,8 @@ function reducer(state = initialState, action) {
         loggedInUser: {
           ...state.loggedInUser,
           userID: null,
-        isFetching: true,
-        error: null
+          isFetching: true,
+          error: null
         }
       }
     case LOGIN_SUCCESS:
@@ -375,8 +387,9 @@ function reducer(state = initialState, action) {
         loggedInUser: {
           ...state.loggedInUser,
           userID: action.payload,
-        isFetching: false,
-        error: null
+          isFetching: false,
+          error: null,
+          shouldUpdate: true
         }
       }
     case LOGIN_FAILURE:
@@ -385,8 +398,8 @@ function reducer(state = initialState, action) {
         loggedInUser: {
           ...state.loggedInUser,
           userID: null,
-        isFetching: false,
-        error: action.payload
+          isFetching: false,
+          error: action.payload
         }
       }
 
