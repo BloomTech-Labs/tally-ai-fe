@@ -65,6 +65,8 @@ export const REMOVE_FAVORITE_START = "REMOVE_FAVORITE_START";
 export const REMOVE_FAVORITE_FAILURE = "REMOVE_FAVORITE_FAILURE";
 export const REMOVE_FAVORITE_SUCCESS = "REMOVE_FAVORITE_SUCCESS";
 
+export const SET_USER_INFO = "SET_USER_INFO";
+
 /*
   -------
   ACTIONS
@@ -159,6 +161,7 @@ export const registerUser = newUser => dispatch => {
     .then(
       res => {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userID", res.data.userN.id);
         dispatch({ type: REGISTER_SUCCESS, payload: res.data.userN.id });
         console.log(res.data, "fetchAddNewUser");
       }
@@ -168,12 +171,29 @@ export const registerUser = newUser => dispatch => {
     );
 };
 
+//set when a user logs in
+export const setUserInfo = (userInfo) => dispatch => {
+// userInfo: {  
+//   favorites
+//   loggedInUser
+//   businessInfo
+//   activeWidgets
+// }
+  dispatch({type: SET_USER_INFO, payload: userInfo})
+
+}
+
 // Used at Login
 export const loginUser = (login) => dispatch => {
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
   .post("https://tally-ai.herokuapp.com/api/auth/login", login) //swap local host with https://tally-ai.herokuapp.com/api/auth/login
-  .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data.id }) & localStorage.setItem("token", res.data.token) & console.log(res, "Data returned from fetchLoginSuccess action and set to state"))
+  .then(res => {
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("userID", res.data.id);
+    dispatch({ type: LOGIN_SUCCESS, payload: res.data.id });
+    console.log(res, "Data returned from fetchLoginSuccess action and set to state");
+  })
   .catch(err => dispatch({ type: LOGIN_FAILURE, payload: err.response }))
 };
 

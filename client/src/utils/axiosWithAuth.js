@@ -4,7 +4,7 @@ export const axiosWithAuth = () => {
     const token = localStorage.getItem('token');
 
     if(token === "undefined") {
-        alert("ERROR. Making requests that require auth while not logged in.");
+        alert("WARNING. Making requests that might require auth while not logged in.");
     }
 
     return axios.create({
