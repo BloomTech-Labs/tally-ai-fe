@@ -17,6 +17,8 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  // Logout
+  LOGOUT_USER,
   // Edit Account
   FETCH_EDITACCOUNT_START,
   FETCH_EDITACCOUNT_SUCCESS,
@@ -389,7 +391,12 @@ function reducer(state = initialState, action) {
         error: action.payload
         }
       }
-
+    // Logout
+    case LOGOUT_USER:
+      return {
+        ...state, loggedInUser: {} 
+      }
+      
     // Edit Account
     case FETCH_EDITACCOUNT_START:
       return {

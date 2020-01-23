@@ -52,6 +52,8 @@
 // export default NavBar;
 
 import React, { useEffect, useState } from "react";
+import { logoutUser } from '../actions/index';
+import { Register } from './registration';
 
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -144,7 +146,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PersistentDrawerLeft() {
+function NavBar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -156,6 +158,11 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleClick = event => {
+    event.preventDefault()
+    localStorage.removeItem("token")
+  }
 
   return (
     <div className={classes.root}>
@@ -179,7 +186,9 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h4" noWrap>
             Tally AI
           </Typography>
-          <Avatar className={classes.orange} style={{display: 'flex', marginLeft:'auto'}}>T</Avatar>
+          <Avatar className={classes.orange} style={{display: 'flex', marginLeft:'auto'}}>
+            {userCredentials.first_name.charAt(0)+" "+userCredentials.last_name.charAt(0)}
+          </Avatar>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -246,7 +255,7 @@ export default function PersistentDrawerLeft() {
             </ListItemIcon>
             <ListItemText primary="About Us" />
           </ListItem>
-          <ListItem button component={Link} to="/">
+          <ListItem button onClick={handleClick} component={Link} to="/">
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
@@ -256,3 +265,9 @@ export default function PersistentDrawerLeft() {
       </Drawer>
     </div>
 )}
+
+const mapDispatchToProps = dispatch => ({
+  logoutUser: () => dispatch(logoutUser())
+})
+
+export default connect(mapDispatchToProps)(NavBar);
