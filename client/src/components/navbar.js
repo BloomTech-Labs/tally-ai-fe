@@ -52,7 +52,7 @@
 // export default NavBar;
 
 import React, { useEffect, useState } from "react";
-import { logoutUser } from '../actions/index';
+import { shouldUpdateLoggedInUser } from '../actions/index';
 import { Register } from './registration';
 
 import { connect } from "react-redux";
@@ -146,7 +146,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function NavBar() {
+function NavBar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -161,7 +161,9 @@ function NavBar() {
 
   const handleClick = event => {
     event.preventDefault()
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
+    localStorage.removeItem("userID");
+    props.shouldUpdateLoggedInUser(true);
   }
 
   return (
@@ -186,9 +188,19 @@ function NavBar() {
           <Typography variant="h4" noWrap>
             Tally AI
           </Typography>
-          <Avatar className={classes.orange} style={{display: 'flex', marginLeft:'auto'}}>
-            {userCredentials.first_name.charAt(0)+" "+userCredentials.last_name.charAt(0)}
-          </Avatar>
+          {
+            localStorage.getItem("token") && localStorage.getItem("userID") ? (
+                <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
+                  {props.loggedInUser.firstName.charAt(0) + " " + props.loggedInUser.lastName.charAt(0)}
+                </Avatar>
+              )
+              :
+              (
+                <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
+                  ?
+                </Avatar>
+              )
+          }
         </Toolbar>
       </AppBar>
       <Drawer
@@ -248,7 +260,7 @@ function NavBar() {
             </ListItemIcon>
             <ListItemText primary="My Tally" />
           </ListItem>
-        <Divider />
+          <Divider />
           <ListItem button component={Link} to="/">
             <ListItemIcon>
               <InfoIcon />
@@ -264,10 +276,18 @@ function NavBar() {
         </List>
       </Drawer>
     </div>
-)}
+  )
+}
 
-const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
-})
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.loggedInUser.data,
+    isFetching: state.loggedInUser.isFetching,
+    error: state.loggedInUser.error
+  };
+};
 
-export default connect(mapDispatchToProps)(NavBar);
+export default connect(
+  mapStateToProps,
+  { shouldUpdateLoggedInUser }
+)(NavBar)

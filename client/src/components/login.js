@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from "../actions/index";
+import { shouldUpdateLoggedInUser } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -51,7 +53,19 @@ const Login = props => {
         if(!props.isFetching) {
         e.preventDefault();
         console.log(login, "login that was passed")
-        props.loginUser(login)
+      
+        axios
+        .post("https://tally-ai.herokuapp.com/api/auth/login", login) //swap local host with https://tally-ai.herokuapp.com/api/auth/login
+        .then(res => {
+            console.log("Logged in successfully", res);
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("userID", res.data.id);
+            props.shouldUpdateLoggedInUser(true);
+        })
+        .catch(err => {
+            console.log("Error logging in", err);
+        })
+
         }
     }
 
@@ -111,5 +125,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { loginUser }
+    { shouldUpdateLoggedInUser }
 )(Login)

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from "../actions/index";
+import { shouldUpdateLoggedInUser } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+import axios from "axios"
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -34,24 +36,38 @@ const useStyles = makeStyles(theme => ({
 
 function Registration(props) {
     const classes = useStyles();
-    const [userCredentials, setCredentials] = useState ({
+    const [userCredentials, setCredentials] = useState({
         first_name: "",
         last_name: "",
         email: "",
         password: ""
     });
 
-        useEffect(() => {
-            if(props.loggedInUser){//we're logged in, lets redirect to /home
-                props.history.push('/')
-            }
-        }, [props.loggedInUser]);
+    useEffect(() => {
+        if (props.loggedInUser) {//we're logged in, lets redirect to /home
+            props.history.push('/')
+        }
+    }, [props.loggedInUser]);
 
     const submitHandler = event => {
-        if(!props.isFetching){//don't let them submit again if the backend is already processing their registration request
-        event.preventDefault();
-        console.log(userCredentials);
-        props.registerUser(userCredentials);
+        if (!props.isFetching) {//don't let them submit again if the backend is already processing their registration request
+            event.preventDefault();
+            console.log(userCredentials);
+
+            axios
+                .post(`https://tally-ai.herokuapp.com/api/auth/register`, userCredentials)
+                .then(
+                    res => {
+                        console.log("Registered successfully", res);
+                        localStorage.setItem("token", res.data.token);
+                        localStorage.setItem("userID", res.data.userN.id);
+                        props.shouldUpdateLoggedInUser(true);
+                    }
+                )
+                .catch(err => {
+                    console.log("Error registering", err);
+                }
+                );
         }
     }
 
@@ -60,48 +76,48 @@ function Registration(props) {
     }
 
     return (
-        <div style={{marginTop:'5%'}}>
+        <div style={{ marginTop: '5%' }}>
             <h1>Register</h1>
-            <form className ={classes.container} onSubmit={submitHandler}>
-            
-            <TextField
-                label="First Name"
-                type="text"
-                name="first_name"
-                className={classes.textField}
-                value={userCredentials.first_name}
-                onChange={changeHandler}
-                placeholder="First Name"
-                required
-                variant="outlined"
-                margin="normal"
+            <form className={classes.container} onSubmit={submitHandler}>
+
+                <TextField
+                    label="First Name"
+                    type="text"
+                    name="first_name"
+                    className={classes.textField}
+                    value={userCredentials.first_name}
+                    onChange={changeHandler}
+                    placeholder="First Name"
+                    required
+                    variant="outlined"
+                    margin="normal"
                 />
-            <TextField
-                label="Last Name"
-                type="text"
-                name="last_name"
-                className={classes.textField}
-                value={userCredentials.last_name}
-                onChange={changeHandler}
-                placeholder="Last Name"
-                required
-                variant="outlined"
-                margin="normal"
+                <TextField
+                    label="Last Name"
+                    type="text"
+                    name="last_name"
+                    className={classes.textField}
+                    value={userCredentials.last_name}
+                    onChange={changeHandler}
+                    placeholder="Last Name"
+                    required
+                    variant="outlined"
+                    margin="normal"
                 />
-            <TextField
-                label="Email"
-                type="email"
-                name="email"
-                className={classes.textField}
-                value={userCredentials.email}
-                onChange={changeHandler}
-                placeholder="Email"
-                required
-                variant="outlined"
-                margin="normal"
+                <TextField
+                    label="Email"
+                    type="email"
+                    name="email"
+                    className={classes.textField}
+                    value={userCredentials.email}
+                    onChange={changeHandler}
+                    placeholder="Email"
+                    required
+                    variant="outlined"
+                    margin="normal"
                 />
 
-            {/* <TextField
+                {/* <TextField
                 label="Company"
                 type="text"
                 name="company"
@@ -148,16 +164,16 @@ function Registration(props) {
                 variant="outlined"
                 margin="normal"
                 /> */}
-            <TextField
-                type="password"
-                name="password"
-                className={classes.textField}
-                value={userCredentials.password}
-                onChange={changeHandler}
-                placeholder="Password"
-                required
-                variant="outlined"
-                margin="normal"
+                <TextField
+                    type="password"
+                    name="password"
+                    className={classes.textField}
+                    value={userCredentials.password}
+                    onChange={changeHandler}
+                    placeholder="Password"
+                    required
+                    variant="outlined"
+                    margin="normal"
                 />
 
                 <Button className={classes.button} variant="outlined" color="black" type="submit">Register</Button>
@@ -176,6 +192,6 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { registerUser }  
+    { shouldUpdateLoggedInUser }
 )(Registration)
 
