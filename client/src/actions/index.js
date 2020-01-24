@@ -27,17 +27,19 @@ export const FETCH_RATING_OVER_TIME_SUCCESS = "FETCH_RATING_OVER_TIME_SUCCESS";
 export const FETCH_RATING_OVER_TIME_FAILURE = "FETCH_RATING_OVER_TIME_FAILURE";
 
 // Registration
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAILURE = "REGISTER_FAILURE";
-export const REGISTER_START = "REGISTER_START";
+// export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+// export const REGISTER_FAILURE = "REGISTER_FAILURE";
+// export const REGISTER_START = "REGISTER_START";
 
-// Login
-export const LOGIN_START = "LOGIN_START";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILURE = "LOGIN_FAILURE";
+// // Login
+// export const LOGIN_START = "LOGIN_START";
+// export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+// export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 // Logout
-export const LOGOUT_USER = "LOGOUT_USER";
+// export const LOGOUT_USER = "LOGOUT_USER";
+
+export const UPDATE_LOGGED_IN_USER = "UPDATE_LOGGED_IN_USER";
 
 // Edit Account
 export const FETCH_EDITACCOUNT_START = "FETCH_EDITACCOUNT_START";
@@ -155,24 +157,30 @@ export const searchResultsPlaceholder = results => dispatch => {
   });
 };
 
-// Used at Registration
-export const registerUser = newUser => dispatch => {
-  console.log("User info: ", newUser);
-  dispatch({ type: REGISTER_START })
-  axios
-    .post(`https://tally-ai.herokuapp.com/api/auth/register`, newUser) //swap local host with https://tally-ai.herokuapp.com/api/auth/register
-    .then(
-      res => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userID", res.data.userN.id);
-        dispatch({ type: REGISTER_SUCCESS, payload: res.data.userN.id });
-        console.log(res.data, "fetchAddNewUser");
-      }
-    )
-    .catch(err =>
-      dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response })
-    );
-};
+// // Used at Registration
+// export const registerUser = newUser => dispatch => {
+//   console.log("User info: ", newUser);
+//   dispatch({ type: REGISTER_START })
+//   axios
+//     .post(`https://tally-ai.herokuapp.com/api/auth/register`, newUser) //swap local host with https://tally-ai.herokuapp.com/api/auth/register
+//     .then(
+//       res => {
+//         localStorage.setItem("token", res.data.token);
+//         localStorage.setItem("userID", res.data.userN.id);
+//         dispatch({ type: REGISTER_SUCCESS, payload: res.data.userN.id });
+//         console.log(res.data, "fetchAddNewUser");
+//       }
+//     )
+//     .catch(err =>
+//       dispatch({ type: FETCH_BUSINESS_FAILURE, payload: err.response })
+//     );
+// };
+
+// Used at Logout
+// export const logoutUser = () => ({
+//   type: 'LOGOUT_USER'
+// });
+
 
 //set when a user logs in
 export const setUserInfo = (userInfo) => dispatch => {
@@ -187,17 +195,10 @@ export const setUserInfo = (userInfo) => dispatch => {
 }
 
 // Used at Login
-export const loginUser = (login) => dispatch => {
-  dispatch({ type: LOGIN_START });
-  axiosWithAuth()
-  .post("https://tally-ai.herokuapp.com/api/auth/login", login) //swap local host with https://tally-ai.herokuapp.com/api/auth/login
-  .then(res => {
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("userID", res.data.id);
-    dispatch({ type: LOGIN_SUCCESS, payload: res.data.id });
-    console.log(res, "Data returned from fetchLoginSuccess action and set to state");
-  })
-  .catch(err => dispatch({ type: LOGIN_FAILURE, payload: err.response }))
+export const shouldUpdateLoggedInUser = (shouldUpdate) => dispatch => {
+
+  dispatch({ type: UPDATE_LOGGED_IN_USER, payload: shouldUpdate });
+
 };
 
 // Used at Edit Account
@@ -208,11 +209,6 @@ export const fetchEditAccount = (id, newInfo) => dispatch => {
   .then(res => dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: newInfo }) & console.log(res.data, "fetchEditAccount"))
   .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
 };
-
-// Used at Logout
-export const logoutUser = () => ({
-  type: 'LOGOUT_USER'
-});
 
 // PhraseRank
 export const fetchWordsOverTime = id => dispatch => {
@@ -266,13 +262,26 @@ console.log("ACTION SETTING FAVS", favorites);
 
 export const addFavorite = (favorite, userID) => dispatch => {
 
-  console.log("ACTION ADDING FAV", favorite);
-    dispatch({ type: ADD_FAVORITE_START });
-    //hit endpoint POST userID and favorites
-    //then
-    //dispatch({ type: ADD_FAVORITE_SUCCESS, payload: res.favorites });//payload: res.data
-    //catch
-    //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
+//   {
+//     "email": string (optional),
+//     "password": string (8 or more characters, optional),
+//     "first_name": string (optional),
+//     "last_name": string (optional),
+//     "preferences": {
+//         "widgets": array (optional)
+//     }
+// }
+  // console.log("ACTION ADDING FAV", favorite);
+  //   dispatch({ type: ADD_FAVORITE_START });
+  //   //hit endpoint POST userID and favorites
+  //   //then
+  //   axiosWithAuth()
+  //   .put("users/" + userID, ) //endpoint goes here
+  //   .then(res => dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: newInfo }) & console.log(res.data, "fetchEditAccount"))
+  //   .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
+  //   dispatch({ type: ADD_FAVORITE_SUCCESS, payload: res.favorites });//payload: res.data
+  //   //catch
+  //   //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
   
   }
 

@@ -9,16 +9,19 @@ import {
   FETCH_TOP_AND_BOTTOM_START,
   FETCH_TOP_AND_BOTTOM_SUCCESS,
   FETCH_TOP_AND_BOTTOM_FAILURE,
+
+  UPDATE_LOGGED_IN_USER,
+  SET_USER_INFO,
   // Registration
-  REGISTER_START,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
-  // Login
-  LOGIN_START,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  // Logout
-  LOGOUT_USER,
+  // REGISTER_START,
+  // REGISTER_SUCCESS,
+  // REGISTER_FAILURE,
+  // // Login
+  // LOGIN_START,
+  // LOGIN_SUCCESS,
+  // LOGIN_FAILURE,
+  // // Logout
+  // LOGOUT_USER,
   // Edit Account
   FETCH_EDITACCOUNT_START,
   FETCH_EDITACCOUNT_SUCCESS,
@@ -343,73 +346,129 @@ function reducer(state = initialState, action) {
         }
       };
 
-    // Registration
-    case REGISTER_START:
-      return {
-        ...state,
-        loggedInUser: {
-          ...state.loggedInUser,
-          userID: null,
-          isFetching: true,
-          error: null
-        }
-      };
-    case REGISTER_SUCCESS:
-      return {
-        ...state,
-        loggedInUser: {
-          ...state.loggedInUser,
-          isFetching: false,
-          error: null,
-          shouldUpdate: true
-        }
-      };
-    case REGISTER_FAILURE:
-      return {
-        ...state,
-        userID: null,
-        isFetching: false,
-        error: action.payload
-      };
+    // // Registration
+    // case REGISTER_START:
+    //   return {
+    //     ...state,
+    //     loggedInUser: {
+    //       ...state.loggedInUser,
+    //       userID: null,
+    //       isFetching: true,
+    //       error: null
+    //     }
+    //   };
+    // case REGISTER_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loggedInUser: {
+    //       ...state.loggedInUser,
+    //       isFetching: false,
+    //       error: null,
+    //       shouldUpdate: true
+    //     }
+    //   };
+    // case REGISTER_FAILURE:
+    //   return {
+    //     ...state,
+    //     userID: null,
+    //     isFetching: false,
+    //     error: action.payload
+    //   };
 
-    // Login
-    case LOGIN_START:
+    // // Login
+    // case LOGIN_START:
+    //   return {
+    //     ...state,
+    //     loggedInUser: {
+    //       ...state.loggedInUser,
+    //       userID: null,
+    //       isFetching: true,
+    //       error: null
+    //     }
+    //   }
+    // case LOGIN_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loggedInUser: {
+    //       ...state.loggedInUser,
+    //       userID: action.payload,
+    //       isFetching: false,
+    //       error: null,
+    //       shouldUpdate: true
+    //     }
+    //   }
+    // case LOGIN_FAILURE:
+    //   return {
+    //     ...state,
+    //     loggedInUser: {
+    //       ...state.loggedInUser,
+    //       userID: null,
+    //       isFetching: false,
+    //       error: action.payload
+    //     }
+    //   }
+    // // Logout
+    // case LOGOUT_USER:
+    //   return {
+    //     ...state, loggedInUser: {} 
+    //   }
+
+    case SET_USER_INFO:
+      // action.payload: {  
+      //   favorites
+      //   loggedInUser
+      //   businessInfo
+      //   activeWidgets
+      // }
+
+      // //only set state if not null
+      // let tempFavorites = state.favorites.favorites;
+      // if(action.payload.favorites){
+      //   tempFavorites = action.payload.favorites;
+      // }
+
+      // let tempLoggedInUser = state.loggedInUser.data
+      // if(action.payload.loggedInUser){
+      //   tempLoggedInUser = action.payload.loggedInUser;
+      // }
+
+      // let tempBusinessInfo = state.businessInfo.businesses;
+      // if(action.payload.businessInfo){
+      //   tempBusinessInfo = action.payload.businessInfo;
+      // }
+
+      
+      // let tempActiveWidgets = state.activeWidgets;
+      // if(action.payload.activeWidgets){
+      //   tempActiveWidgets = action.payload.activeWidgets;
+      // }
+
       return {
         ...state,
+        favorites: {
+          ...state.favorites,
+          favorites: action.payload.favorites
+        },
         loggedInUser: {
           ...state.loggedInUser,
-          userID: null,
-          isFetching: true,
-          error: null
-        }
-      }
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        loggedInUser: {
-          ...state.loggedInUser,
-          userID: action.payload,
-          isFetching: false,
-          error: null,
-          shouldUpdate: true
-        }
-      }
-    case LOGIN_FAILURE:
-      return {
-        ...state,
-        loggedInUser: {
-          ...state.loggedInUser,
-          userID: null,
-          isFetching: false,
-          error: action.payload
-        }
-      }
-    // Logout
-    case LOGOUT_USER:
-      return {
-        ...state, loggedInUser: {} 
+          data: action.payload.loggedInUser
+        },
+        businessInfo: {
+          ...state.businessInfo,
+          businesses: action.payload.businessInfo
+        },
+        activeWidgets: action.payload.activeWidgets
       }
       
+    case UPDATE_LOGGED_IN_USER:
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          shouldUpdate: action.payload
+        }
+      }
+
     // Edit Account
     case FETCH_EDITACCOUNT_START:
       return {
