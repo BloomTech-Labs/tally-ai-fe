@@ -159,6 +159,7 @@ function NavBar(props) {
     setOpen(false);
   };
 
+
   const handleClick = event => {
     event.preventDefault()
     localStorage.removeItem("token");
@@ -236,32 +237,32 @@ function NavBar(props) {
           ))}
         </List> */}
         <List>
-          <ListItem button component={Link} to="/">
+          <ListItem button onClick={handleDrawerClose} component={Link} to="/">
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button component={Link} to="/Login">
+          <ListItem button onClick={handleDrawerClose} component={Link} to="/Login">
             <ListItemIcon>
               <LockOpenIcon />
             </ListItemIcon>
             <ListItemText primary="Log In" />
           </ListItem>
-          <ListItem button component={Link} to="/Register">
+          <ListItem button onClick={handleDrawerClose} component={Link} to="/Register">
             <ListItemIcon>
               <CreateIcon />
             </ListItemIcon>
             <ListItemText primary="Register" />
           </ListItem>
-          <ListItem button component={Link} to="/Settings">
+          <ListItem button onClick={handleDrawerClose} component={Link} to="/Settings">
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary="My Tally" />
           </ListItem>
           <Divider />
-          <ListItem button component={Link} to="/">
+          <ListItem button onClick={handleDrawerClose} component={Link} to="/">
             <ListItemIcon>
               <InfoIcon />
             </ListItemIcon>
