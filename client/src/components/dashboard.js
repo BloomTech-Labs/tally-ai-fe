@@ -140,8 +140,8 @@ function DashboardGrid(props) {
 const mapStateToProps = state => ({
   // words: state.widgetData.keyWords.data,
   // isFetching: state.widgetData.keyWords.isFetching,
-  id: state.businessInfo.businessId,
-  businessInfo: state.businessInfo
+  id: state.currentlySelectedBusiness.businessId,
+  businessInfo: state.currentlySelectedBusiness
 });
 
 export default connect(mapStateToProps, {

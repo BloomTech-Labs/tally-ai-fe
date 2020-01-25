@@ -28,10 +28,10 @@ function App(props) {
     } else {
       //do we need to delete anything from state when they log out?
       let userInfo = {
-        favorites: [],
+        competitors: [],
         loggedInUser: { firstName: null, lastName: null },
-        businessInfo: null,
-        activeWidgets: null//TODO: endpoint should return widgets
+        businesses: [],
+        activeWidgets: []//TODO: endpoint should return widgets
       }
       props.setUserInfo(userInfo);
     }

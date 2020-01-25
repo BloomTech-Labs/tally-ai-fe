@@ -300,10 +300,10 @@ export const setUserInfo = (userID) => dispatch => {
       //so map data from res.data into that format
 
       let userInfo = {
-        favorites: res.data.favorites,
+        competitors: res.data.favorites,
         loggedInUser: { firstName: res.data.first_name, lastName: res.data.last_name },
-        businessInfo: res.data.businesses,
-        activeWidgets: null//TODO: endpoint should return widgets
+        businesses: res.data.businesses,
+        activeWidgets: []//TODO: endpoint should return widgets
       }
 
       console.log("Got user data, ", res);//{user_id: 13, first_name: "Test", last_name: "Test", businesses: Array(0), favorites: Array(0)}
