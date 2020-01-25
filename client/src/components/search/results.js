@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import Result from "./result";
-import { addBusiness } from "../../actions/index";
+import { selectBusiness } from "../../actions/index";
 
 /*Required business data for Result
 data {
@@ -38,10 +38,7 @@ const Results = props => {
     - routes the user to the dashboard
   */
   const select = e => {
-    console.log("Selection: ", tentativeSelection);
-    e.preventDefault();
-    props.addBusiness(tentativeSelection);
-    history.push("/dashboard");
+    props.select(tentativeSelection);
   };
 
   console.log("props", props);
@@ -114,4 +111,4 @@ const mapStateToProps = state => ({
   businesses: state.searchResults
 });
 
-export default connect(mapStateToProps, { addBusiness })(Results);
+export default connect(mapStateToProps, { addBusiness: selectBusiness })(Results);

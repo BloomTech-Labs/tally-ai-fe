@@ -1,5 +1,5 @@
-import { axiosWithYelpAuth } from "../utils/axiosWithYelpAuth";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { axiosWithYelpAuth } from "../auth/axiosWithYelpAuth";
+import { axiosWithAuth } from "../auth/axiosWithAuth";
 import axios from "axios";
 
 /*
@@ -13,8 +13,30 @@ export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
 export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";
 export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
 
+
 // Select business and add info to the store
-export const ADD_BUSINESS = "ADD_BUSINESS";
+export const SELECT_BUSINESS = "SELECT_BUSINESS";
+
+//adding businesses to user's owned businesses list
+export const ADD_BUSINESS_START = "ADD_BUSINESS_START";
+export const ADD_BUSINESS_SUCCESS = "ADD_BUSINESS_SUCCESS";
+export const ADD_BUSINESS_FAILURE = "ADD_BUSINESS_FAILURE";
+
+//removing businesses from user's owned businesses list
+export const REMOVE_BUSINESS_START = "REMOVE_BUSINESS_START";
+export const REMOVE_BUSINESS_SUCCESS = "REMOVE_BUSINESS_SUCCESS";
+export const REMOVE_BUSINESS_FAILURE = "REMOVE_BUSINESS_FAILURE";
+
+//adding competitors to user's competitor list
+export const ADD_COMPETITOR_START = "ADD_COMPETITOR_START";
+export const ADD_COMPETITOR_SUCCESS = "ADD_COMPETITOR_SUCCESS";
+export const ADD_COMPETITOR_FAILURE = "ADD_COMPETITOR_FAILURE";
+
+//removing competitors from user's competitor list
+export const REMOVE_COMPETITOR_START = "REMOVE_COMPETITOR_START";
+export const REMOVE_COMPETITOR_SUCCESS = "REMOVE_COMPETITOR_SUCCESS";
+export const REMOVE_COMPETITOR_FAILURE = "REMOVE_COMPETITOR_FAILURE";
+
 
 // TopBottomWords
 export const FETCH_TOP_AND_BOTTOM_START = "FETCH_TOP_AND_BOTTOM_START";
@@ -70,7 +92,8 @@ export const REMOVE_FAVORITE_START = "REMOVE_FAVORITE_START";
 export const REMOVE_FAVORITE_FAILURE = "REMOVE_FAVORITE_FAILURE";
 export const REMOVE_FAVORITE_SUCCESS = "REMOVE_FAVORITE_SUCCESS";
 
-export const SET_USER_INFO = "SET_USER_INFO";
+export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
+export const GET_USER_DATA_START = "GET_USER_DATA_START";
 
 /*
   -------
@@ -97,7 +120,7 @@ export const fetchBusinesses = business => dispatch => {
   }
 
   // Dynamically generate endpoint using provided location and name
-  const yelpSearchEndpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${name}&${location}`; //I've tried like a million different solutions from Google to get this to work without a 403 and a CORS error, maybe someone else has ideas cause I give up
+  const yelpSearchEndpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${name}&${location}`;//I've tried like a million different solutions from Google to get this to work without a 403 and a CORS error, maybe someone else has ideas cause I give up
 
   dispatch({ type: FETCH_BUSINESS_START });
   console.log("Yelp API URL: ", yelpSearchEndpoint);
@@ -143,9 +166,82 @@ export const fetchTopAndBottom = id => dispatch => {
 };
 
 // Select business and add info to the store at state.businessInfo
-export const addBusiness = businessInfo => dispatch => {
-  console.log("\nAdding business to the store...\n");
-  dispatch({ type: ADD_BUSINESS, payload: businessInfo });
+export const selectBusiness = businessInfo => dispatch => {
+  console.log("\nAdding business selection to the store...\n");
+  dispatch({ type: SELECT_BUSINESS, payload: businessInfo });
+};
+
+
+// Select business and add info to the store at state.businessInfo
+export const addBusiness = (businessInfo, userID) => dispatch => {
+// businessInfo must be in this format
+//   {
+//     "name": string,
+//     "city": string,
+//     "state": string,
+//     "yelp": {
+//         "id": string,
+//         "yelp_id": string,
+//         "url": string,
+//         "image_url": string
+//     }
+// }
+
+// let backendFormat =
+//   {
+//     name: string,
+//     city: string,
+//     state: string,
+//     yelp: {
+//         id: string,
+//         yelp_id: string,
+//         url: string,
+//         image_url: string
+//     }
+// }
+
+//   console.log("\nAdding business to the store...\n");
+//   dispatch({ type: ADD_BUSINESS_START });
+//   //endpoint
+//   axiosWithAuth()
+//   .post(`/users/${userID}/business`, backendFormat)
+//   .then(res => {
+//     dispatch({
+//       type: ADD_BUSINESS_SUCCESS,
+//       payload: res.data//new array after modification
+//     });
+//   })
+//   .catch(err => {
+//     dispatch({
+//       type: ADD_BUSINESS_FAILURE,
+//       payload: err
+//     });
+//   });
+  //POST /users/:id/business
+};
+
+
+// Select business and add info to the store at state.businessInfo
+export const removeBusiness = (businessID, userID) => dispatch => {
+  console.log("\removing business from the store...\n");
+  //dispatch({ type: REMOVE_BUSINESS_START, payload: businessInfo });
+  //DELETE /users/:id/business/:business_id
+};
+
+
+// Select business and add info to the store at state.businessInfo
+export const addCompetitor = (businessInfo, userID) => dispatch => {
+  console.log("\nAdding competitor to the store...\n");
+  //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
+  //POST /users/:id/favorite
+};
+
+
+// Select business and add info to the store at state.businessInfo
+export const removeCompetitor = (businessID, userID) => dispatch => {
+  console.log("\Removing competitor from the store...\n");
+  //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
+  //DELETE /users/:id/favorite/:business_id
 };
 
 export const searchResultsPlaceholder = results => dispatch => {
@@ -183,14 +279,39 @@ export const searchResultsPlaceholder = results => dispatch => {
 
 
 //set when a user logs in
-export const setUserInfo = (userInfo) => dispatch => {
-// userInfo: {  
-//   favorites
-//   loggedInUser
-//   businessInfo
-//   activeWidgets
-// }
-  dispatch({type: SET_USER_INFO, payload: userInfo})
+export const setUserInfo = (userID) => dispatch => {
+  // userInfo: {  
+  //   favorites
+  //   loggedInUser
+  //   businessInfo
+  //   activeWidgets
+  // }
+  dispatch({ type: GET_USER_DATA_START })
+  axiosWithAuth()
+    .get("users/" + userID)
+    .then(res => {
+      //setUserInfo expects
+      // userInfo: {  
+      //   favorites
+      //   loggedInUser
+      //   businessInfo
+      //   activeWidgets
+      // }
+      //so map data from res.data into that format
+
+      let userInfo = {
+        favorites: res.data.favorites,
+        loggedInUser: { firstName: res.data.first_name, lastName: res.data.last_name },
+        businessInfo: res.data.businesses,
+        activeWidgets: null//TODO: endpoint should return widgets
+      }
+
+      console.log("Got user data, ", res);//{user_id: 13, first_name: "Test", last_name: "Test", businesses: Array(0), favorites: Array(0)}
+      dispatch({ type: GET_USER_DATA_SUCCESS, payload: userInfo })
+    })
+    .catch(err => {
+      console.error("Error getting user data", err);
+    })
 
 }
 
@@ -203,11 +324,20 @@ export const shouldUpdateLoggedInUser = (shouldUpdate) => dispatch => {
 
 // Used at Edit Account
 export const fetchEditAccount = (id, newInfo) => dispatch => {
+//   newInfo: {
+//     "email": string (optional),
+//     "password": string (8 or more characters, optional),
+//     "first_name": string (optional),
+//     "last_name": string (optional),
+//     "preferences": {
+//         "widgets": array (optional)
+//     }
+// }
   dispatch({ type: FETCH_EDITACCOUNT_START });
   axiosWithAuth()
-  .put("", newInfo) //endpoint goes here
-  .then(res => dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: newInfo }) & console.log(res.data, "fetchEditAccount"))
-  .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
+    .put("/users/" + id, newInfo)
+    .then(res => dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: res.data }) & console.log(res.data, "fetchEditAccount"))
+    .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
 };
 
 // PhraseRank
@@ -248,8 +378,8 @@ export const fetchReviewsOverTime = id => dispatch => {
 
 export const setFavorites = (favorites, userID) => dispatch => {
 
-//TODO: Add eddpoint to set a user's favorites, have endpoint return the new list of favorites on success
-console.log("ACTION SETTING FAVS", favorites);
+  //TODO: Add eddpoint to set a user's favorites, have endpoint return the new list of favorites on success
+  console.log("ACTION SETTING FAVS", favorites);
   dispatch({ type: SET_FAVORITES_START });
   //hit endpoint POST userID and favorites
   //then
@@ -262,15 +392,15 @@ console.log("ACTION SETTING FAVS", favorites);
 
 export const addFavorite = (favorite, userID) => dispatch => {
 
-//   {
-//     "email": string (optional),
-//     "password": string (8 or more characters, optional),
-//     "first_name": string (optional),
-//     "last_name": string (optional),
-//     "preferences": {
-//         "widgets": array (optional)
-//     }
-// }
+  //   {
+  //     "email": string (optional),
+  //     "password": string (8 or more characters, optional),
+  //     "first_name": string (optional),
+  //     "last_name": string (optional),
+  //     "preferences": {
+  //         "widgets": array (optional)
+  //     }
+  // }
   // console.log("ACTION ADDING FAV", favorite);
   //   dispatch({ type: ADD_FAVORITE_START });
   //   //hit endpoint POST userID and favorites
@@ -282,10 +412,10 @@ export const addFavorite = (favorite, userID) => dispatch => {
   //   dispatch({ type: ADD_FAVORITE_SUCCESS, payload: res.favorites });//payload: res.data
   //   //catch
   //   //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
-  
-  }
 
-  
+}
+
+
 export const removeFavorite = (favorite, userID) => dispatch => {
 
   // //TODO: Add eddpoint to set a user's favorites, have endpoint return the new list of favorites on success
@@ -296,12 +426,12 @@ export const removeFavorite = (favorite, userID) => dispatch => {
   //   dispatch({ type: SET_FAVORITES_SUCCESS, payload: favorites });//payload: res.data
   //   //catch
   //   //dispatch({ type: SET_FAVORITES_FAILURE, payload: error });
-  
-  }
+
+}
 
 export const fetchAllData = id => async dispatch => {
 
-  if(!id){
+  if (!id) {
     console.error("WARNING: ID IS UNDEFINED");
   }
 
@@ -313,10 +443,10 @@ export const fetchAllData = id => async dispatch => {
       `https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`
     );
     console.log("\nData from viztype=0:\n", data);
-    
-    const {viztype0, viztype3} = data.data;
+
+    const { viztype0, viztype3 } = data.data;
     console.log("viztype0: ", viztype0);
-    console.log("viztype3: ", viztype3);    
+    console.log("viztype3: ", viztype3);
 
     dispatch({ type: FETCH_TOP_AND_BOTTOM_SUCCESS, payload: viztype0 });
     dispatch({ type: FETCH_RATING_OVER_TIME_SUCCESS, payload: viztype3 });

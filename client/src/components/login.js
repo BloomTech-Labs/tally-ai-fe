@@ -61,6 +61,7 @@ const Login = props => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("userID", res.data.id);
             props.shouldUpdateLoggedInUser(true);
+            props.history.push('/dashboard')
         })
         .catch(err => {
             console.log("Error logging in", err);
