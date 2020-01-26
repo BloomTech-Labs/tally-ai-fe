@@ -81,6 +81,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CreateIcon from '@material-ui/icons/Create';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
+import CompareIcon from '@material-ui/icons/Compare';
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange } from '@material-ui/core/colors';
 
@@ -260,6 +261,12 @@ function NavBar(props) {
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary="My Tally" />
+          </ListItem>
+          <ListItem button onClick={handleDrawerClose} compoent={Link} to="/">
+            <ListItemIcon>
+              <CompareIcon />
+            </ListItemIcon>
+            <ListItemText primary="Comp Set" />
           </ListItem>
           <Divider />
           <ListItem button onClick={handleDrawerClose} component={Link} to="/">
