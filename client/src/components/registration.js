@@ -176,7 +176,7 @@ function Registration(props) {
                     margin="normal"
                 />
 
-                <Button className={classes.button} variant="outlined" color="black" type="submit">Register</Button>
+                <Button className={classes.button} onClick={props.history.push('/login')} variant="outlined" color="black" type="submit">Register</Button>
             </form>
         </div>
     )

@@ -190,7 +190,7 @@ function NavBar(props) {
           <Typography variant="h4" noWrap>
             Tally AI
           </Typography>
-          {
+          {/* {
             localStorage.getItem("token") && localStorage.getItem("userID") ? (
                 <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
                   {props.loggedInUser.firstName.charAt(0) + " " + props.loggedInUser.lastName.charAt(0)}
@@ -202,7 +202,7 @@ function NavBar(props) {
                   ?
                 </Avatar>
               )
-          }
+          } */}
         </Toolbar>
       </AppBar>
       <Drawer
