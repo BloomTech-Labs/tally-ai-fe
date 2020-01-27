@@ -82,6 +82,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CreateIcon from '@material-ui/icons/Create';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
+import CompareIcon from '@material-ui/icons/Compare';
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange } from '@material-ui/core/colors';
 
@@ -203,19 +204,6 @@ function NavBar(props) {
           <Typography variant="h4" noWrap>
             Tally AI
           </Typography>
-          {
-            isLoggedIn() ? (
-              <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
-                {props.loggedInUser.firstName.charAt(0) + " " + props.loggedInUser.lastName.charAt(0)}
-              </Avatar>
-            )
-              :
-              (
-                <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
-                  ?
-                </Avatar>
-              )
-          }
         </Toolbar>
       </AppBar>
       <Drawer
@@ -232,6 +220,7 @@ function NavBar(props) {
           </IconButton>
         </div>
         <Divider />
+
         {
           isLoggedIn() ? (
             <List>
@@ -255,6 +244,13 @@ function NavBar(props) {
                 <ListItemIcon>
                   <SettingsIcon />
                 </ListItemIcon>
+              </ListItem>
+              <ListItem button onClick={handleDrawerClose} component={Link} to="/Compset">
+               <ListItemIcon>
+              <CompareIcon />
+              </ListItemIcon>
+                <ListItemText primary="Comp Set" />
+              </ListItem>
                 <ListItemText primary="Account Settings" />
               </ListItem>
               <Divider />

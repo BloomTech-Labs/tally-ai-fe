@@ -72,7 +72,7 @@ const Login = props => {
 
     useEffect(() => {
         if(props.loggedInUser){
-            props.history.push('/')  //change to account when made
+            props.history.push('/settings')  //change to account when made
         }
     }, [props.loggedInUser]);
 
