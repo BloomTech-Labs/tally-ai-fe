@@ -43,11 +43,11 @@ function Registration(props) {
         password: ""
     });
 
-    useEffect(() => {
-        if (props.loggedInUser) {//we're logged in, lets redirect to /home
-            props.history.push('/')
-        }
-    }, [props.loggedInUser]);
+    // useEffect(() => {
+    //     if (props.loggedInUser) {//we're logged in, lets redirect to /home
+    //         props.history.push('/')
+    //     }
+    // }, [props.loggedInUser]);
 
     const submitHandler = event => {
         if (!props.isFetching) {//don't let them submit again if the backend is already processing their registration request
@@ -62,6 +62,7 @@ function Registration(props) {
                         localStorage.setItem("token", res.data.token);
                         localStorage.setItem("userID", res.data.userN.id);
                         props.shouldUpdateLoggedInUser(true);
+                        props.history.push('/search/business');
                     }
                 )
                 .catch(err => {
@@ -186,7 +187,7 @@ const mapStateToProps = state => {
     return {
         isFetching: state.loggedInUser.isFetching,
         error: state.loggedInUser.error,
-        loggedInUser: state.loggedInUser.userID
+        loggedInUser: state.loggedInUser
     };
 };
 

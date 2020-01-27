@@ -115,7 +115,7 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
 //     averageRating: 0
 //   } */}
 
-        <ToggleFavoriteButton business={{ businessId: data.id, businessName: data.name, businessImg: data.image_url, reviewCount: data.review_count, averageRating: data.rating }} />
+        {/* <ToggleFavoriteButton business={{ businessId: data.id, businessName: data.name, businessImg: data.image_url, reviewCount: data.review_count, averageRating: data.rating }} /> */}
       </div>
     </div>
   );
