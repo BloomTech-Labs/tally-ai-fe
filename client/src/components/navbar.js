@@ -262,7 +262,7 @@ function NavBar(props) {
             </ListItemIcon>
             <ListItemText primary="My Tally" />
           </ListItem>
-          <ListItem button onClick={handleDrawerClose} compoent={Link} to="/">
+          <ListItem button onClick={handleDrawerClose} component={Link} to="/Compset">
             <ListItemIcon>
               <CompareIcon />
             </ListItemIcon>

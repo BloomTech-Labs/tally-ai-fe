@@ -11,7 +11,8 @@ import Search from "./components/search";
 import DashboardGrid from "./components/dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
-import Settings from "./components/settings/settings"
+import Settings from "./components/settings/settings";
+import CompSet from "./components/compSet";
 
 function App(props) {
 
@@ -66,6 +67,7 @@ function App(props) {
       <Route path="/Register/" component={registration} />
       <Route path="/Login/" component={Login} />
       <Route path="/Settings/" component={Settings} />
+      <Route path="/Compset" component={CompSet} />
       <Footer />
     </div>
   );
