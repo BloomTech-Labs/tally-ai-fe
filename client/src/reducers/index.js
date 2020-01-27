@@ -4,24 +4,40 @@ import {
   FETCH_BUSINESS_SUCCESS,
   FETCH_BUSINESS_FAILURE,
   // Select business from results
-  ADD_BUSINESS,
+  SELECT_BUSINESS,
+
+  //adding businesses to user's owned businesses list
+  ADD_BUSINESS_START,
+  ADD_BUSINESS_SUCCESS,
+  ADD_BUSINESS_FAILURE,
+
+  //removing businesses from user's owned businesses list
+  REMOVE_BUSINESS_START,
+  REMOVE_BUSINESS_SUCCESS,
+  REMOVE_BUSINESS_FAILURE,
+
+  //adding competitors to user's competitor list
+  ADD_COMPETITOR_START,
+  ADD_COMPETITOR_SUCCESS,
+  ADD_COMPETITOR_FAILURE,
+
+  //removing competitors from user's competitor list
+  REMOVE_COMPETITOR_START,
+  REMOVE_COMPETITOR_SUCCESS,
+  REMOVE_COMPETITOR_FAILURE,
+
   // Data for TopBottomWords
   FETCH_TOP_AND_BOTTOM_START,
   FETCH_TOP_AND_BOTTOM_SUCCESS,
   FETCH_TOP_AND_BOTTOM_FAILURE,
 
+  //flag user data to be updated, this will GET_USER_DATA if it needs to
   UPDATE_LOGGED_IN_USER,
-  SET_USER_INFO,
-  // Registration
-  // REGISTER_START,
-  // REGISTER_SUCCESS,
-  // REGISTER_FAILURE,
-  // // Login
-  // LOGIN_START,
-  // LOGIN_SUCCESS,
-  // LOGIN_FAILURE,
-  // // Logout
-  // LOGOUT_USER,
+
+  //get all the user's data from backend
+  GET_USER_DATA_SUCCESS,
+  GET_USER_DATA_START,
+
   // Edit Account
   FETCH_EDITACCOUNT_START,
   FETCH_EDITACCOUNT_SUCCESS,
@@ -41,17 +57,17 @@ import {
 
   SET_ACTIVE_WIDGETS,
 
-  SET_FAVORITES_START,
-  SET_FAVORITES_SUCCESS,
-  SET_FAVORITES_FAILURE,
+  // SET_FAVORITES_START,
+  // SET_FAVORITES_SUCCESS,
+  // SET_FAVORITES_FAILURE,
 
-  ADD_FAVORITE_START,
-  ADD_FAVORITE_SUCCESS,
-  ADD_FAVORITE_FAILURE,
+  // ADD_FAVORITE_START,
+  // ADD_FAVORITE_SUCCESS,
+  // ADD_FAVORITE_FAILURE,
 
-  REMOVE_FAVORITE_START,
-  REMOVE_FAVORITE_SUCCESS,
-  REMOVE_FAVORITE_FAILURE
+  // REMOVE_FAVORITE_START,
+  // REMOVE_FAVORITE_SUCCESS,
+  // REMOVE_FAVORITE_FAILURE
 } from "../actions/index.js";
 
 import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
@@ -69,13 +85,47 @@ const initialState = {
     isFetching: false,
     error: null
   },
-  //past favorites should be added to state when they log in. when the user favorites/unfavorites, send to backend and update state with list of favorites returned from backend.
-  favorites: {
+
+  searchResults: {
+    isFetching: false,
+    error: null,
+    data: null
+  },
+
+  //currently selected business, this is what the dashboard will always display
+  currentlySelectedBusiness: {
+    businessId: null,
+    // for side bar
+    businessName: null,
+    businessImg: null,
+    // for top-of-page info cards
+    reviewCount: 0,
+    averageRating: 0,
+    changeInRating: ""
+  },
+
+  // the user's businesses that they own
+  userBusinesses: {
     isSetting: false,
     error: null,
-    favorites: [
+    businesses:
+      [{
+        businessId: null,
+        // for side bar
+        businessName: null,
+        businessImg: null,
+        // for top-of-page info cards
+        reviewCount: 0,
+        averageRating: 0,
+        changeInRating: ""
+      }]
+  },
+
+  competitors: {//TODO: Change name to competitors
+    isSetting: false,
+    error: null,
+    businesses: [
       {
-        // for DS API calls
         businessId: "19878f9d6s77237-asd",
         // for side bar
         businessName: "Example Business",
@@ -109,28 +159,6 @@ const initialState = {
       }
     ]//array of businesses
   },
-
-  searchResults: {
-    isFetching: false,
-    error: null,
-    data: null
-  },
-  // Business information from the Yelp API
-  businessInfo: {
-    // for DS API calls
-    businesses:
-      [{
-        businessId: null,
-        // for side bar
-        businessName: null,
-        businessImg: null,
-        // for top-of-page info cards
-        reviewCount: 0,
-        averageRating: 0,
-        changeInRating: ""
-      }]
-  },
-
   //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
   //Array order really matters with activeWidgets, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
   activeWidgets: [widgets[0].name, widgets[1].name],
@@ -209,102 +237,220 @@ function reducer(state = initialState, action) {
       };
 
     // Select business
-    case ADD_BUSINESS:
+    case SELECT_BUSINESS:
       return {
         ...state,
-        businessInfo: { ...action.payload }
+        currentlySelectedBusiness: { ...action.payload }
       };
+
+    //adding businesses to user's owned businesses list
+    case ADD_BUSINESS_START:
+      return {
+        ...state,
+        userBusinesses: {
+          ...state.userBusinesses,
+          isSetting: true,
+          error: null
+        }
+      }
+    case ADD_BUSINESS_SUCCESS:
+      return {
+        ...state,
+        userBusinesses: {
+          businesses: action.payload,
+          isSetting: false,
+          error: null
+        }
+      }
+    case ADD_BUSINESS_FAILURE:
+      return {
+        ...state,
+        userBusinesses: {
+          ...state.userBusinesses,
+          isSetting: false,
+          error: action.payload
+        }
+      }
+
+    //removing businesses from user's owned businesses list
+    case REMOVE_BUSINESS_START:
+      return {
+        ...state,
+        userBusinesses: {
+          ...state.userBusinesses,
+          isSetting: true,
+          error: null
+        }
+      }
+
+    case REMOVE_BUSINESS_SUCCESS:
+      return {
+        ...state,
+        userBusinesses: {
+          businesses: action.payload,
+          isSetting: false,
+          error: null
+        }
+      }
+    case REMOVE_BUSINESS_FAILURE:
+      return {
+        ...state,
+        userBusinesses: {
+          ...state.userBusinesses,
+          isSetting: false,
+          error: action.payload
+        }
+      }
+
+    //adding competitors to user's competitor list
+    case ADD_COMPETITOR_START:
+      return {
+        ...state,
+        competitors: {
+          ...state.competitors,
+          isSetting: true,
+          error: null
+        }
+      }
+    case ADD_COMPETITOR_SUCCESS:
+      return {
+        ...state,
+        competitors: {
+          businesses: action.payload,
+          isSetting: false,
+          error: null
+        }
+      }
+    case ADD_COMPETITOR_FAILURE:
+      return {
+        ...state,
+        competitors: {
+          ...state.competitors,
+          isSetting: false,
+          error: action.payload
+        }
+      }
+
+    //removing competitors from user's competitor list
+    case REMOVE_COMPETITOR_START:
+      return {
+        ...state,
+        competitors: {
+          ...state.competitors,
+          isSetting: true,
+          error: null
+        }
+      }
+    case REMOVE_COMPETITOR_SUCCESS:
+      return {
+        ...state,
+        competitors: {
+          businesses: action.payload,
+          isSetting: false,
+          error: null
+        }
+      }
+    case REMOVE_COMPETITOR_FAILURE:
+      return {
+        ...state,
+        competitors: {
+          ...state.competitors,
+          isSetting: false,
+          error: action.payload
+        }
+      }
+
     case SET_ACTIVE_WIDGETS:
       return {
         ...state,
         activeWidgets: action.payload
       };
-    case SET_FAVORITES_START:
-      return {
-        ...state,
-        favorites: {
-          ...state.favorites,
-          isSetting: true,
-          error: null
-        }
-      };
-    case SET_FAVORITES_SUCCESS:
-      console.log("REDUCER SETTING FAVS", action.payload);
-      return {
-        ...state,
-        favorites: {
-          favorites: action.payload,
-          isSetting: false,
-          error: null
-        }
-      };
-    case SET_FAVORITES_FAILURE:
-      return {
-        ...state,
-        favorites: {
-          ...state.favorites,
-          isSetting: false,
-          error: action.payload
-        }
-      };
+    // case SET_FAVORITES_START:
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       ...state.competitors,
+    //       isSetting: true,
+    //       error: null
+    //     }
+    //   };
+    // case SET_FAVORITES_SUCCESS:
+    //   console.log("REDUCER SETTING FAVS", action.payload);
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       favorites: action.payload,
+    //       isSetting: false,
+    //       error: null
+    //     }
+    //   };
+    // case SET_FAVORITES_FAILURE:
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       ...state.competitors,
+    //       isSetting: false,
+    //       error: action.payload
+    //     }
+    //   };
 
-    case ADD_FAVORITE_START:
-      return {
-        ...state,
-        favorites: {
-          ...state.favorites,
-          isSetting: true,
-          error: null
-        }
-      };
-    case ADD_FAVORITE_SUCCESS:
-      console.log("REDUCER SETTING FAVS", action.payload);
-      return {
-        ...state,
-        favorites: {
-          favorites: action.payload,
-          isSetting: false,
-          error: null
-        }
-      };
-    case ADD_FAVORITE_FAILURE:
-      return {
-        ...state,
-        favorites: {
-          ...state.favorites,
-          isSetting: false,
-          error: action.payload
-        }
-      };
+    // case ADD_FAVORITE_START:
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       ...state.competitors,
+    //       isSetting: true,
+    //       error: null
+    //     }
+    //   };
+    // case ADD_FAVORITE_SUCCESS:
+    //   console.log("REDUCER SETTING FAVS", action.payload);
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       favorites: action.payload,
+    //       isSetting: false,
+    //       error: null
+    //     }
+    //   };
+    // case ADD_FAVORITE_FAILURE:
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       ...state.competitors,
+    //       isSetting: false,
+    //       error: action.payload
+    //     }
+    //   };
 
-    case REMOVE_FAVORITE_START:
-      return {
-        ...state,
-        favorites: {
-          ...state.favorites,
-          isSetting: true,
-          error: null
-        }
-      };
-    case REMOVE_FAVORITE_SUCCESS:
-      console.log("REDUCER SETTING FAVS", action.payload);
-      return {
-        ...state,
-        favorites: {
-          favorites: action.payload,
-          isSetting: false,
-          error: null
-        }
-      };
-    case REMOVE_FAVORITE_FAILURE:
-      return {
-        ...state,
-        favorites: {
-          ...state.favorites,
-          isSetting: false,
-          error: action.payload
-        }
-      };
+    // case REMOVE_FAVORITE_START:
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       ...state.competitors,
+    //       isSetting: true,
+    //       error: null
+    //     }
+    //   };
+    // case REMOVE_FAVORITE_SUCCESS:
+    //   console.log("REDUCER SETTING FAVS", action.payload);
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       favorites: action.payload,
+    //       isSetting: false,
+    //       error: null
+    //     }
+    //   };
+    // case REMOVE_FAVORITE_FAILURE:
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       ...state.competitors,
+    //       isSetting: false,
+    //       error: action.payload
+    //     }
+    //   };
 
     // TopBottomWords
     case FETCH_TOP_AND_BOTTOM_START:
@@ -413,7 +559,15 @@ function reducer(state = initialState, action) {
     //     ...state, loggedInUser: {} 
     //   }
 
-    case SET_USER_INFO:
+    case GET_USER_DATA_START:
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          isFetching: true
+        }
+      }
+    case GET_USER_DATA_SUCCESS:
       // action.payload: {  
       //   favorites
       //   loggedInUser
@@ -437,7 +591,7 @@ function reducer(state = initialState, action) {
       //   tempBusinessInfo = action.payload.businessInfo;
       // }
 
-      
+
       // let tempActiveWidgets = state.activeWidgets;
       // if(action.payload.activeWidgets){
       //   tempActiveWidgets = action.payload.activeWidgets;
@@ -446,20 +600,21 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         favorites: {
-          ...state.favorites,
+          ...state.competitors,
           favorites: action.payload.favorites
         },
         loggedInUser: {
           ...state.loggedInUser,
-          data: action.payload.loggedInUser
+          data: action.payload.loggedInUser,
+          isFetching: false
         },
         businessInfo: {
-          ...state.businessInfo,
+          ...state.userBusinesses,
           businesses: action.payload.businessInfo
         },
         activeWidgets: action.payload.activeWidgets
       }
-      
+
     case UPDATE_LOGGED_IN_USER:
       return {
         ...state,
@@ -473,15 +628,23 @@ function reducer(state = initialState, action) {
     case FETCH_EDITACCOUNT_START:
       return {
         ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
         isFetching: true,
-        error: ""
+        error: null
+        }
       }
-    case FETCH_EDITACCOUNT_SUCCESS:
+    case FETCH_EDITACCOUNT_SUCCESS://TODO: update activeWidgets with action.payload.preferences.widgets
       return {
         ...state,
+        loggedInUser: {
+        data: {
+          fisrtName: action.payload.first_name ? action.payload.first_name : state.loggedInUser.data.firstName,
+          lastName: action.payload.last_name_name ? action.payload.last_name : state.loggedInUser.data.lastName
+        },
         isFetching: false,
-        error: "",
-        loggedUserInfo: action.payload
+        error: null
+        }
       }
     case FETCH_EDITACCOUNT_FAILURE:
       return {

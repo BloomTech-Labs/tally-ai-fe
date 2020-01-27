@@ -57,6 +57,7 @@ import { Register } from './registration';
 
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { withRouter } from 'react-router-dom'
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -159,9 +160,22 @@ function NavBar(props) {
     setOpen(false);
   };
 
+  function isLoggedIn() {
+    return props.loggedInUser.firstName && props.loggedInUser.lastName && localStorage.getItem("token") && localStorage.getItem("userID");
+  }
+
+  function businessSearch () {
+    props.history.push("/search/business");
+    console.log("businessSearch");
+  }
+
+  function competitorSearch () {
+    props.history.push("/search/competitor");
+    console.log("compSearch");
+  }
 
   const handleClick = event => {
-    event.preventDefault()
+    //event.preventDefault()
     localStorage.removeItem("token");
     localStorage.removeItem("userID");
     props.shouldUpdateLoggedInUser(true);
@@ -190,11 +204,11 @@ function NavBar(props) {
             Tally AI
           </Typography>
           {
-            localStorage.getItem("token") && localStorage.getItem("userID") ? (
-                <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
-                  {props.loggedInUser.firstName.charAt(0) + " " + props.loggedInUser.lastName.charAt(0)}
-                </Avatar>
-              )
+            isLoggedIn() ? (
+              <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
+                {props.loggedInUser.firstName.charAt(0) + " " + props.loggedInUser.lastName.charAt(0)}
+              </Avatar>
+            )
               :
               (
                 <Avatar className={classes.orange} style={{ display: 'flex', marginLeft: 'auto' }}>
@@ -206,7 +220,6 @@ function NavBar(props) {
       </AppBar>
       <Drawer
         className={classes.drawer}
-        variant="persistent"
         anchor="left"
         open={open}
         classes={{
@@ -219,62 +232,71 @@ function NavBar(props) {
           </IconButton>
         </div>
         <Divider />
-        {/* <List>
-          {['Home', 'Login', 'Register', 'My Tally'].map((text, index) => (
-            <ListItem button component={Link} to="/Register">
-              <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <LockOpenIcon /> }</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Contact Us', 'Log Out'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <ContactMailIcon /> : <ExitToAppIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
-        <List>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/">
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/Login">
-            <ListItemIcon>
-              <LockOpenIcon />
-            </ListItemIcon>
-            <ListItemText primary="Log In" />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/Register">
-            <ListItemIcon>
-              <CreateIcon />
-            </ListItemIcon>
-            <ListItemText primary="Register" />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/Settings">
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="My Tally" />
-          </ListItem>
-          <Divider />
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/">
-            <ListItemIcon>
-              <InfoIcon />
-            </ListItemIcon>
-            <ListItemText primary="About Us" />
-          </ListItem>
-          <ListItem button onClick={handleClick} component={Link} to="/">
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary="Log Out" />
-          </ListItem>
-        </List>
+        {
+          isLoggedIn() ? (
+            <List>
+              <Link style={{ color: "black", textDecoration: "none"}} to={{ pathname: 'Search', searchMode: false }}>
+                <ListItem button onClick={() => { handleDrawerClose(); businessSearch(); } } component={Link}>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Add a Business" />
+                </ListItem>
+              </Link>
+              <Link style={{ color: "black", textDecoration: "none" }} to="Search">
+                <ListItem button onClick={() => { handleDrawerClose(); competitorSearch(); } } component={Link}>
+                  <ListItemIcon>
+                    <LockOpenIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Add a Competitor" />
+                </ListItem>
+              </Link>
+              <ListItem button onClick={handleDrawerClose} component={Link} to="/Settings">
+                <ListItemIcon>
+                  <SettingsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Account Settings" />
+              </ListItem>
+              <Divider />
+              <ListItem button onClick={handleClick} component={Link} to="/">
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Log Out" />
+              </ListItem>
+            </List>
+          )
+            :
+            (//not logged in
+              <List>
+                <ListItem button onClick={handleDrawerClose} component={Link} to="/">
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </ListItem>
+                <ListItem button onClick={handleDrawerClose} component={Link} to="/Login">
+                  <ListItemIcon>
+                    <LockOpenIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Log In" />
+                </ListItem>
+                <ListItem button onClick={handleDrawerClose} component={Link} to="/Register">
+                  <ListItemIcon>
+                    <CreateIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Register" />
+                </ListItem>
+                <Divider />
+                <ListItem button onClick={handleDrawerClose} component={Link} to="/">
+                  <ListItemIcon>
+                    <InfoIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="About Us" />
+                </ListItem>
+              </List>
+            )
+        }
       </Drawer>
     </div>
   )
@@ -288,7 +310,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { shouldUpdateLoggedInUser }
-)(NavBar)
+)(NavBar))

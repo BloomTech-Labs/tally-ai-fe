@@ -17,7 +17,7 @@ import HomeInfo from "./HomeInfoText";
 import HomeFeatures from "./HomeFeatures";
 import HomeBottomSection from "./HomeBottomSection";
 
-import { fetchBusinesses } from "../actions/index";
+import { fetchBusinesses, selectBusiness } from "../actions/index";
 import { searchResultsPlaceholder } from "../actions/index";
 
 import axios from "axios";
@@ -57,6 +57,14 @@ const Search = props => {
   const [searchTerm, setSearchTerm] = useState();
   const [searchLocation, setSearchLocation] = useState("");
   const [readableLocation, setReadableLocation] = useState();
+
+  function resultsSelection(selection) {
+    console.log("Selection: ", selection);
+
+    props.selectBusiness(selection);
+
+    props.history.push("/dashboard");
+}
 
   useEffect(() => {
     if (searchLocation.latitude && searchLocation.longitude) {
@@ -199,7 +207,7 @@ const Search = props => {
             </Button>
           </form>
         </div>
-        <Results />
+        <Results select={resultsSelection}/>
       </div>
       </div>{/*  closes div containing backgroundcolor */}
       <div>
@@ -217,5 +225,5 @@ const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, {
   fetchBusinesses,
-  searchResultsPlaceholder
+  selectBusiness
 })(Search);

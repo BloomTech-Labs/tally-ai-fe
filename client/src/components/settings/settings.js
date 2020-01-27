@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
 
-import { fetchEditAccount, addBusiness } from "../../actions/index"
+import { fetchEditAccount, selectBusiness } from "../../actions/index"
 
 import { connect } from 'react-redux';
 
@@ -89,7 +89,7 @@ function Settings(props) {
                         onClose={handleCloseAccount}
                         style={{ display: 'flex', justifyContent: 'center', height: "50%" }}
                     >
-                        <EditAccount loggedUser={props.loggedUser} loggedUserInfo={props.loggedUserInfo} fetchEditUserInformation={props.fetchEditUserInformation} />
+                        <EditAccount loggedUser={localStorage.getItem("userID")} loggedUserInfo={props.loggedUserInfo} fetchEditAccount={props.fetchEditAccount} />
                     </Modal>
                 </div>
                 <div className="favorites-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', border: "1px solid grey" }}>
@@ -99,7 +99,7 @@ function Settings(props) {
             <div className="favorites-section" style={{ overflow: 'scroll', width: '70%', height: '80%', display: 'flex', flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#2C98F0', border: "1px solid grey" }}>
                 {/* <div style={{ display: 'flex', justifyContent: 'center', width: '75%', marginBottom: '50%' }}><h3>Favorites</h3></div> */}
 
-                {props.favorites.map((favorite) => {
+                {props.competitors.map((favorite) => {
                     return (
                         <Card className={classes.card}>
                             <CardActionArea>
@@ -117,7 +117,7 @@ function Settings(props) {
                                     to="/dashboard">View</Link></Button>
                                 {/* </Button> */}
                                 <Button variant="contained" color="secondary" style={{ width: '100px' }} onClick={() => {
-                                    props.setFavorites(props.favorites.filter((fav) => !(fav === favorite)));
+                                    props.setFavorites(props.competitors.filter((fav) => !(fav === favorite)));
                                 }}>Remove</Button>
                             </CardActions>
                         </Card>
@@ -136,11 +136,11 @@ const mapStateToProps = state => {
         isFetching: state.loggedInUser.isFetching,
         error: state.loggedInUser.error,
         // loggedUserInfo: state.loggedUserInfo,
-        favorites: state.favorites.favorites
+        competitors: state.competitors.businesses
     };
 };
 
 export default connect(
     mapStateToProps,
-    { fetchEditAccount, addBusiness }
+    { fetchEditAccount, addBusiness: selectBusiness }
 )(Settings)
