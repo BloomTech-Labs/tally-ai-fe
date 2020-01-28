@@ -80,22 +80,13 @@ function Settings(props) {
     return (
         <div>
             <div className="settings-section" style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
-                <div className="icon-buttons" style={{ width: '15%', height: '80%', backgroundColor: '#2C98F0', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center' }}>
-                    <div onClick={handleOpenAccount} style={{ width: '100%', cursor: "pointer" }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div>
-                    <Modal
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                        open={openAccount}
-                        onClose={handleCloseAccount}
-                        style={{ display: 'flex', justifyContent: 'center', height: "50%" }}
-                    >
+                {/* <div className="icon-buttons" style={{ width: '15%', height: '80%', backgroundColor: '#2C98F0', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center' }}>
+                    <div onClick={handleOpenAccount} style={{ width: '100%', cursor: "pointer" }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div> */}
                         <EditAccount loggedUser={localStorage.getItem("userID")} loggedUserInfo={props.loggedUserInfo} fetchEditAccount={props.fetchEditAccount} />
-                    </Modal>
                 </div>
-                <div className="favorites-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', border: "1px solid grey" }}>
+                {/* <div className="favorites-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', border: "1px solid grey" }}>
                     <div style={{ display: 'flex', justifyContent: 'center', width: '75%', marginBottom: '50%' }}><h3>Favorites</h3></div>
-                </div>
-            </div>
+                </div> */}
         </div>
     )
 

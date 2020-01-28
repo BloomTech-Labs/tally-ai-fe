@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import Result from "./result";
-import { selectBusiness } from "../../actions/index";
+import { selectBusiness, resetSearchResults } from "../../actions/index";
 
 /*Required business data for Result
 data {
@@ -38,6 +38,7 @@ const Results = props => {
     - routes the user to the dashboard
   */
   const select = e => {
+    props.resetSearchResults();
     props.select(tentativeSelection);
   };
 
@@ -111,4 +112,4 @@ const mapStateToProps = state => ({
   businesses: state.searchResults
 });
 
-export default connect(mapStateToProps, { addBusiness: selectBusiness })(Results);
+export default connect(mapStateToProps, { selectBusiness, resetSearchResults })(Results);

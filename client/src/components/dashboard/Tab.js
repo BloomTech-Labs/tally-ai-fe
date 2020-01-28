@@ -12,44 +12,53 @@ const Tabs = props => {
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
-    if (props.selectedBusiness.id === props.business.id) {
-      setSelected(true);
-    } else {
-      setSelected(false);
+    if (props.selectedBusiness) {
+      if (props.selectedBusiness.businessId === props.business.businessId) {
+        setSelected(true);
+      } else {
+        setSelected(false);
+      }
     }
   }, [props.selectedBusiness]);
 
-  let className = props.competitor ? "competitorTab" : "businessTab";
+  let className = "tab";
+  className += props.competitor ? " competitorTab" : " businessTab";
   className += selected ? " selectedTab" : " unselectedTab";
 
   return businessesContains(props.business) ? (
-    <div className={className} onClick={() => selectBusiness(props.business)}>
+    <div className={className} onClick={() => { props.selectBusiness(props.business); console.log("select onclick working - actual") } }>
+      {console.log("actual tab: id ", props.business.businessId, " name: ", props.business.name)}
+      <p>
       {props.business.name}
-      {selected ? <p> - selected</p> : <p></p>}
+      {selected ? (" - selected") : ("")}</p> 
     </div>
   ) : (
-    <div className={className} onClick={() => selectBusiness(props.business)}>
-      New Tab
-      {selected ? <p> - selected</p> : <p></p>}
-    </div>
-  );
+      <div className={className} onClick={() => { props.selectBusiness(props.business); console.log("select onclick working - fake") } }>
+        {console.log("new tab")}
+        <p>
+        New Tab
+      {selected ? (" - selected") : ("")}</p> 
+      </div>
+    );
 
   //used to check if this is an actual business or just a new tab
-  function businessesContains (business) {
-      let found = false;
-      props.businesses.forEach(element => {
-          if(element.id === business.id){
-              found = true;
-          }
-      });
-      return found;
+  function businessesContains(business) {
+    console.log("Checking if businesses contains, businesses:", props.businesses);
+    let found = false;
+    props.businesses.forEach(element => {
+      if (element.businessId === business.businessId) {
+        console.log("element.id === business.id", element.id, "===", business.id);
+        found = true;
+      }
+    });
+    return found;
   }
 
 };
 
 const mapStateToProps = state => {
   return {
-    selectedBusiness: state.selectedBusiness,
+    selectedBusiness: state.currentlySelectedBusiness,
     businesses: state.userBusinesses.businesses.concat(state.competitors.businesses)
   };
 };

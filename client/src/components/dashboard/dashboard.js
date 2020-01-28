@@ -13,6 +13,7 @@ import WidgetAdditionList from "../WidgetSystem/WidgetAdditionList";
 import Sidebar from "./Sidebar";
 
 import { fetchWordsOverTime, fetchTopAndBottom, fetchAllData } from "../../actions/index";
+import dashboardPlus from "./dashboardPlus";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,42 +47,62 @@ function DashboardGrid(props) {
       </div>
 
       <div>
+        {
         <Tabs />
+        }
+        {console.log("businesses contain ", props.businessInfo.businessId, "?")}
+        {businessesContains(props.businessInfo.businessId) ? (
+          <div>
 
-        { props.businessInfo ? (
-<div>
-  
-        <div className="businessStats">
-          <div className="reviews">
-            Total Reviews<br/>
-            {props.businessInfo.reviewCount}
+            <div className="businessStats">
+              <div className="reviews">
+                Total Reviews<br />
+                {props.businessInfo.reviewCount}
+              </div>
+              <div className="ratings">
+                Overall Rating<br />
+                {props.businessInfo.averageRating}
+              </div>
+              <div className="changeofrating">
+                Change in Rating<br />
+                11%
           </div>
-          <div className="ratings">
-            Overall Rating<br/>
-            {props.businessInfo.averageRating}
+            </div>
+            <WidgetDisplayList />
           </div>
-          <div className="changeofrating">
-            Change in Rating<br/>
-            11%
-          </div>
-        </div>
-          <WidgetDisplayList />
-</div>
         ) : (
 
-<p>SELECT A BUSINESS!</p>
-        )
-      }
+            <dashboardPlus />
+          )
+        }
       </div>
-      </div>
+    </div>
   )
+
+  //used to check if this is an actual business or just a new tab
+  function businessesContains(businessId) {
+
+    if (!businessId) {
+      return false;
+    }
+
+    let found = false;
+    props.businesses.forEach(element => {
+      if (element.businessId === businessId) {
+        found = true;
+      }
+    });
+    return found;
+  }
+
 }
 
 const mapStateToProps = state => ({
   // words: state.widgetData.keyWords.data,
   // isFetching: state.widgetData.keyWords.isFetching,
   id: state.currentlySelectedBusiness.businessId,
-  businessInfo: state.currentlySelectedBusiness
+  businessInfo: state.currentlySelectedBusiness,
+  businesses: state.userBusinesses.businesses.concat(state.competitors.businesses)
 });
 
 export default connect(mapStateToProps, {

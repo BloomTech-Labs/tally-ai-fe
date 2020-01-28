@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
 import { axiosWithAuth } from "./auth/axiosWithAuth"
-import { setUserInfo, shouldUpdateLoggedInUser } from "./actions/index";
+import { setUserInfo, getUserInfo, shouldUpdateLoggedInUser } from "./actions/index";
 import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
 import SearchPage from "./components/SearchPage"
@@ -15,10 +15,12 @@ import Search from "./components/search";
 import DashboardGrid from "./components/dashboard/dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
-import Settings from "./components/settings/settings";
+import EditAccount from "./components/settings/editaccount";
 import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
+
+import { widgets } from "./components/WidgetSystem/WidgetRegistry"
 
 
 function App(props) {
@@ -27,17 +29,26 @@ function App(props) {
     console.log("getting user data");
     if (localStorage.getItem("token") && localStorage.getItem("userID")) {//we're logged in but there's no user info in the store, lets fix that
 
-          props.setUserInfo(localStorage.getItem("userID"));
-          
+      props.getUserInfo(localStorage.getItem("userID"));
+
     } else {
-      // //do we need to delete anything from state when they log out?
-      // let userInfo = {
-      //   competitors: [],
-      //   loggedInUser: { firstName: null, lastName: null },
-      //   businesses: [],
-      //   activeWidgets: []//TODO: endpoint should return widgets
-      // }
-      // props.setUserInfo(userInfo);
+      //do we need to delete anything from state when they log out?
+      let userInfo = {
+        competitors: [],
+        loggedInUser: { firstName: null, lastName: null },
+        businesses: [],
+        activeWidgets: [widgets[0].name, widgets[1].name],
+        currentlySelectedBusiness: {
+          businessId: null,
+          businessName: null,
+          businessImg: null,
+          reviewCount: 0,
+          averageRating: 0,
+          changeInRating: ""
+        }
+      }
+
+      props.setUserInfo(userInfo);
     }
     props.shouldUpdateLoggedInUser(false);
   }, [props.loggedInUser.shouldUpdate])
@@ -52,7 +63,7 @@ function App(props) {
       <Route path="/Compset" component={CompSet} />
       <Route path="/AboutUs" component={AboutUs} />
       <Route path="/DashboardPlus/" component={DashboardPlus} />
-      <PrivateRoute path="/Settings/" component={Settings} />
+      <PrivateRoute path="/Settings/" component={EditAccount} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
       <Footer />
     </div>
@@ -63,7 +74,7 @@ const mapStateToProps = state => ({
   loggedInUser: state.loggedInUser
 });
 
-export default withRouter(connect(mapStateToProps, { setUserInfo, shouldUpdateLoggedInUser })(App));
+export default withRouter(connect(mapStateToProps, { setUserInfo, getUserInfo, shouldUpdateLoggedInUser })(App));
 
 // {
 //   "first_name": string,
