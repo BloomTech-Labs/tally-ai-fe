@@ -174,6 +174,7 @@ export const selectBusiness = businessInfo => dispatch => {
 
 // Select business and add info to the store at state.businessInfo
 export const addBusiness = (businessInfo, userID) => dispatch => {
+  console.log("business in addBusiness: ", businessInfo);
 // businessInfo must be in this format
 //   {
 //     "name": string,
@@ -187,37 +188,36 @@ export const addBusiness = (businessInfo, userID) => dispatch => {
 //     }
 // }
 
-// let backendFormat =
-//   {
-//     name: string,
-//     city: string,
-//     state: string,
-//     yelp: {
-//         id: string,
-//         yelp_id: string,
-//         url: string,
-//         image_url: string
-//     }
-// }
+let backendFormat =
+  {
+    name: businessInfo.name,
+    city: businessInfo.city,
+    state: businessInfo.state,
+    yelp: {
+        yelp_id: businessInfo.id,
+        url: businessInfo.url,
+        image_url: businessInfo.image_url
+    }
+}
 
-//   console.log("\nAdding business to the store...\n");
-//   dispatch({ type: ADD_BUSINESS_START });
-//   //endpoint
-//   axiosWithAuth()
-//   .post(`/users/${userID}/business`, backendFormat)
-//   .then(res => {
-//     dispatch({
-//       type: ADD_BUSINESS_SUCCESS,
-//       payload: res.data//new array after modification
-//     });
-//   })
-//   .catch(err => {
-//     dispatch({
-//       type: ADD_BUSINESS_FAILURE,
-//       payload: err
-//     });
-//   });
-  //POST /users/:id/business
+  console.log("\nAdding business to the store...\n");
+  dispatch({ type: ADD_BUSINESS_START });
+  //endpoint
+  axiosWithAuth()
+  .post(`/users/${userID}/business`, backendFormat)
+  .then(res => {
+    dispatch({
+      type: ADD_BUSINESS_SUCCESS,
+      payload: res.data//new array after modification
+    });
+  })
+  .catch(err => {
+    dispatch({
+      type: ADD_BUSINESS_FAILURE,
+      payload: err
+    });
+  });
+
 };
 
 
@@ -226,6 +226,23 @@ export const removeBusiness = (businessID, userID) => dispatch => {
   console.log("\removing business from the store...\n");
   //dispatch({ type: REMOVE_BUSINESS_START, payload: businessInfo });
   //DELETE /users/:id/business/:business_id
+  dispatch({ type: REMOVE_BUSINESS_START });
+  //endpoint
+  axiosWithAuth()
+  .delete(`/users/${userID}/business/${businessID}`)
+  .then(res => {
+    dispatch({
+      type: REMOVE_BUSINESS_SUCCESS,
+      payload: res.data//new array after modification
+    });
+  })
+  .catch(err => {
+    dispatch({
+      type: REMOVE_BUSINESS_FAILURE,
+      payload: err
+    });
+  });
+
 };
 
 
@@ -233,13 +250,60 @@ export const removeBusiness = (businessID, userID) => dispatch => {
 export const addCompetitor = (businessInfo, userID) => dispatch => {
   console.log("\nAdding competitor to the store...\n");
   //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
+  let backendFormat =
+  {
+    name: businessInfo.name,
+    city: businessInfo.city,
+    state: businessInfo.state,
+    yelp: {
+        yelp_id: businessInfo.id,
+        url: businessInfo.url,
+        image_url: businessInfo.image_url
+    }
+}
+
+  dispatch({ type: ADD_COMPETITOR_START });
+  //endpoint
+  axiosWithAuth()
+  .post(`/users/${userID}/favorite`, backendFormat)
+  .then(res => {
+    dispatch({
+      type: ADD_COMPETITOR_SUCCESS,
+      payload: res.data//new array after modification
+    });
+  })
+  .catch(err => {
+    dispatch({
+      type: ADD_COMPETITOR_FAILURE,
+      payload: err
+    });
+  });
   //POST /users/:id/favorite
 };
 
 
 // Select business and add info to the store at state.businessInfo
 export const removeCompetitor = (businessID, userID) => dispatch => {
+
   console.log("\Removing competitor from the store...\n");
+
+  dispatch({ type: REMOVE_COMPETITOR_START });
+  //endpoint
+  axiosWithAuth()
+  .delete(`/users/${userID}/favorite/${businessID}`)
+  .then(res => {
+    dispatch({
+      type: REMOVE_COMPETITOR_SUCCESS,
+      payload: res.data//new array after modification
+    });
+  })
+  .catch(err => {
+    dispatch({
+      type: REMOVE_COMPETITOR_FAILURE,
+      payload: err
+    });
+  });
+
   //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
   //DELETE /users/:id/favorite/:business_id
 };

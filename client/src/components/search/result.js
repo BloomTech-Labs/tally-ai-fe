@@ -56,7 +56,11 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
           businessImg: data.image_url,
           reviewCount: data.review_count,
           averageRating: data.rating,
-          changeInRating: "" //Yelp API doesn't offer this, unless DS can get this somehow, lets just exclude it
+          changeInRating: "", //Yelp API doesn't offer this, unless DS can get this somehow, lets just exclude it
+          url: data.url,
+          image_url: data.image_url,
+          city: data.location.city,
+          state: data.location.state
         });
       }}
       className={className}

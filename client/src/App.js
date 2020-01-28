@@ -12,11 +12,12 @@ import SearchPage from "./components/SearchPage"
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import Search from "./components/search";
-import DashboardGrid from "./components/dashboard";
+import DashboardGrid from "./components/dashboard/dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
 import Settings from "./components/settings/settings";
 import CompSet from "./components/compSet";
+import DashboardPlus from "./components/dashboard/dashboardPlus";
 
 function App(props) {
 
@@ -27,14 +28,14 @@ function App(props) {
           props.setUserInfo(localStorage.getItem("userID"));
           
     } else {
-      //do we need to delete anything from state when they log out?
-      let userInfo = {
-        competitors: [],
-        loggedInUser: { firstName: null, lastName: null },
-        businesses: [],
-        activeWidgets: []//TODO: endpoint should return widgets
-      }
-      props.setUserInfo(userInfo);
+      // //do we need to delete anything from state when they log out?
+      // let userInfo = {
+      //   competitors: [],
+      //   loggedInUser: { firstName: null, lastName: null },
+      //   businesses: [],
+      //   activeWidgets: []//TODO: endpoint should return widgets
+      // }
+      // props.setUserInfo(userInfo);
     }
     props.shouldUpdateLoggedInUser(false);
   }, [props.loggedInUser.shouldUpdate])
@@ -47,6 +48,7 @@ function App(props) {
       <Route path="/Register/" component={registration} />
       <Route path="/Login/" component={Login} />
       <Route path="/Compset" component={CompSet} />
+      <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={Settings} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
       <Footer />
