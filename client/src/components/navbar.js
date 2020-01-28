@@ -251,8 +251,6 @@ function NavBar(props) {
               </ListItemIcon>
                 <ListItemText primary="Comp Set" />
               </ListItem>
-                <ListItemText primary="Account Settings" />
-              </ListItem>
               <Divider />
               <ListItem button onClick={handleClick} component={Link} to="/">
                 <ListItemIcon>

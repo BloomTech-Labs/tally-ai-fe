@@ -40,7 +40,8 @@ const ReviewsOverTime = props => {
 
   return (
     <div className="exampleWidget4">
-      <h3>Review Frequency Over Time</h3>
+      <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"30px"}}>Review Frequency</h3>
+      <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>View the frequency in reviews over time to keep track if promotional efforts are working!</p>
       <LineChart
         width={500}
         height={300}

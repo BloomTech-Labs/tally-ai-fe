@@ -48,13 +48,17 @@ function DashboardGrid(props) {
       </div>
       <div>
         <div className="businessStats">
-          <div>
-            Reviews<br/>
+          <div className="reviews">
+            Total Reviews<br/>
             {props.businessInfo.reviewCount}
           </div>
-          <div>
+          <div className="ratings">
             Overall Rating<br/>
             {props.businessInfo.averageRating}
+          </div>
+          <div className="changeofrating">
+            Change in Rating<br/>
+            11%
           </div>
         </div>
         <WidgetDisplayList />

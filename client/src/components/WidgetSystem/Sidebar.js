@@ -17,6 +17,7 @@ import WidgetThumbnail from "./WidgetThumbnail";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import burger from "../images/burger.jpg";
 
 const drawerWidth = 375;
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   drawer: {
+    marginLeft: '50px',
     width: drawerWidth,
     flexShrink: 0,
     zIndex: '-1',
@@ -78,11 +80,22 @@ export default function ClippedDrawer() {
         }}
       >
         {/* <div className={classes.toolbar} /> */}
+        <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px"}}>
+          <img src={burger} alt="burger" style={{ height: "20vh", width: "12vw", borderRadius: "100%"}}/> {/* pass in business image prop here */}
+          <h1>Test Business</h1> {/* pass in business title prop here */}
+          <h2 style={{ textAlign:"center", color:"black"}}> 12345 Test Address St. Las Vegas Nevada 89149</h2> {/* pass in business address prop here */}
+          <img></img>
+        </div>
+      
         <Divider />
+        <div style={{ fontSize: "15px"}}>
+          <h1>Add to dashboard</h1>
+        </div>
+
         <Card className={classes.card}>
           <CardActionArea>
             <CardMedia className={classes.media}
-            // Insert image here
+            
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
@@ -120,7 +133,7 @@ export default function ClippedDrawer() {
         </Card>
         <div
           className="widgetSelector"
-          style={{marginTop: "4%" }}
+          style={{marginTop: "4%", borderRadius: "10px" }}
         >
           {/* Render Available Widgets */}
           {availableWidgets.map(widgetName => {

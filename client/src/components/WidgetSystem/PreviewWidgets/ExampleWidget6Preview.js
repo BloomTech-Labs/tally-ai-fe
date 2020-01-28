@@ -13,7 +13,7 @@ const ExampleWidget6Preview = () => {
 
     return (
         <div>
-            <h3>Example Widget 6</h3>
+            <h3>Negative Words</h3>
             {/* <LineChart
                 width={500}
                 height={300}

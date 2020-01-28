@@ -1,11 +1,11 @@
 import React from "react";
 
-import TopBottomWords from "./Widgets/TopBottomWords";
+import TopBottomWords from "./Widgets/PositiveWords";
 import PhraseRank from "./Widgets/PhraseRank";
 import RadarWidget from "./Widgets/RadarWidget";
 import ReviewFrequency from "./Widgets/ReviewFrequency";
 import RatingOverTime from "./Widgets/RatingOverTime";
-import ExampleWidget6 from "./Widgets/ExampleWidget6";
+import ExampleWidget6 from "./Widgets/NegativeWords";
 import PhraseRankPreview from "./PreviewWidgets/PhraseRankPreview";
 import TopBottomWordsPreview from "./PreviewWidgets/TopBottomWordsPreview";
 import RatingOverTimePreview from "./PreviewWidgets/RatingOverTimePreview";
@@ -16,11 +16,11 @@ import RadarWidgetPreview from "./PreviewWidgets/RadarWidgetPreview";
 //Update this array whenever a new widget is added
 export let widgets = [
   { name: "topbottomwords", component: <TopBottomWords />, previewComponent: <TopBottomWordsPreview/> },
+  { name: "NegativeWords", component: <ExampleWidget6 />, previewComponent: <ExampleWidget6Preview/> },
   { name: "phraserank", component: <PhraseRank />, previewComponent: <PhraseRankPreview/>  },
   { name: "radarchart", component: <RadarWidget />, previewComponent: <RadarWidgetPreview/>},
   { name: "reviewfrequency", component: <ReviewFrequency />, previewComponent: <ReviewFrequencyPreview/>  },
   { name: "ratingovertime", component: <RatingOverTime />, previewComponent: <RatingOverTimePreview/>  },
-  { name: "widget6", component: <ExampleWidget6 />, previewComponent: <ExampleWidget6Preview/> },
   {
     name: "projection",
     component: (
