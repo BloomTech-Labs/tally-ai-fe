@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from "react";
-import { shouldUpdateLoggedInUser } from '../actions/index';
+import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/index';
 import { Register } from './registration';
+import EditAccount from "./settings/editaccount"
 
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -171,7 +172,8 @@ function NavBar(props) {
 
         {
           isLoggedIn() ? (
-            <List>
+            <List> 
+
               <Link style={{ color: "black", textDecoration: "none"}} to={{ pathname: 'Search', searchMode: false }}>
                 <ListItem button onClick={() => { handleDrawerClose(); businessSearch(); } } component={Link}>
                   <ListItemIcon>
@@ -180,6 +182,7 @@ function NavBar(props) {
                   <ListItemText primary="Add a Business" />
                 </ListItem>
               </Link>
+
               <Link style={{ color: "black", textDecoration: "none" }} to="Search">
                 <ListItem button onClick={() => { handleDrawerClose(); competitorSearch(); } } component={Link}>
                   <ListItemIcon>
@@ -188,55 +191,67 @@ function NavBar(props) {
                   <ListItemText primary="Add a Competitor" />
                 </ListItem>
               </Link>
-              <ListItem button onClick={handleDrawerClose} component={Link} to="/Settings">
-                <ListItemIcon>
+
+              
+              <ListItem button onClick={handleDrawerClose} loggedUser={localStorage.getItem("userID")} loggedUserInfo={props.loggedUserInfo} fetchEditAccount={props.fetchEditAccount} component={Link} to="/Settings">
+                <ListItemIcon >
                   <SettingsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Settings" />
+                <ListItemText primary=" Account Settings" />
               </ListItem>
+
               <ListItem button onClick={handleDrawerClose} component={Link} to="/Compset">
                <ListItemIcon>
               <CompareIcon />
               </ListItemIcon>
                 <ListItemText primary="Comp Set" />
               </ListItem>
+
               <Divider />
+
               <ListItem button onClick={handleClick} component={Link} to="/">
                 <ListItemIcon>
                   <ExitToAppIcon />
                 </ListItemIcon>
                 <ListItemText primary="Log Out" />
               </ListItem>
+
             </List>
           )
             :
             (//not logged in
               <List>
+
                 <ListItem button onClick={handleDrawerClose} component={Link} to="/">
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
                   <ListItemText primary="Home" />
                 </ListItem>
+
                 <ListItem button onClick={handleDrawerClose} component={Link} to="/Login">
                   <ListItemIcon>
                     <LockOpenIcon />
                   </ListItemIcon>
                   <ListItemText primary="Log In" />
                 </ListItem>
+
                 <ListItem button onClick={handleDrawerClose} component={Link} to="/Register">
                   <ListItemIcon>
                     <CreateIcon />
                   </ListItemIcon>
                   <ListItemText primary="Register" />
                 </ListItem>
+
                 <Divider />
+
                 <ListItem button onClick={handleDrawerClose} component={Link} to="/AboutUs">
                   <ListItemIcon>
                     <InfoIcon />
                   </ListItemIcon>
                   <ListItemText primary="About Us" />
                 </ListItem>
+
               </List>
             )
         }
@@ -247,6 +262,7 @@ function NavBar(props) {
 
 const mapStateToProps = state => {
   return {
+    loggedUser: state.loggedInUser.userID,
     loggedInUser: state.loggedInUser.data,
     isFetching: state.loggedInUser.isFetching,
     error: state.loggedInUser.error
@@ -255,5 +271,5 @@ const mapStateToProps = state => {
 
 export default withRouter(connect(
   mapStateToProps,
-  { shouldUpdateLoggedInUser }
+  { fetchEditAccount, shouldUpdateLoggedInUser }
 )(NavBar))

@@ -57,6 +57,10 @@ import {
 
   SET_ACTIVE_WIDGETS,
 
+  SET_TABS_START,
+  SET_TABS_SUCCESS,
+  SET_TABS_FAILURE
+
   // SET_FAVORITES_START,
   // SET_FAVORITES_SUCCESS,
   // SET_FAVORITES_FAILURE,
@@ -110,9 +114,9 @@ const initialState = {
     error: null,
     businesses:
       [{
-        businessId: null,
+        businessId: "jndajnsdj0202020",
         // for side bar
-        businessName: null,
+        businessName: "IOwnThisBusiness",
         businessImg: null,
         // for top-of-page info cards
         reviewCount: 0,
@@ -137,7 +141,7 @@ const initialState = {
       },
       {
         // for DS API calls
-        businessId: "19878f9d6s77237-asd",
+        businessId: "19878f9d6s71235assd",
         // for side bar
         businessName: "VERAMEAT",
         businessImg: "https://www.shopkeep.com/wp-content/uploads/2016/07/retail-store_retail-business-plan-e1468443541681.jpg",
@@ -148,7 +152,7 @@ const initialState = {
       },
       {
         // for DS API calls
-        businessId: "19878f9d6s77237-asd",
+        businessId: "19878ffdgdfgb7237-asd",
         // for side bar
         businessName: "Bicycles",
         businessImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshfmpFtjour-4iJgDPY7uZ0Ki3Kua13zPonqqdiSAu27YFsW48Q&s",
@@ -162,6 +166,14 @@ const initialState = {
   //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
   //Array order really matters with activeWidgets, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
   activeWidgets: [widgets[0].name, widgets[1].name],
+
+  //array of open tabs and the IDs of the businesses they display, anything that's not an actual business ID, like "defaultTab", will just be New Tabs. 
+  //In this case we default to 1 open New Tab, this will be replaced if the user has any previously open tabs in their preferences from the database.
+  tabs: {
+    activeTabs: [ {businessId: "defaultTab", isCompetitor: false} ],//isCompetitor used to color tab depending on if you own the business or if its a competitor
+    isFetching: false,
+    error: null
+  },
 
   // Data for populating the visuals
   widgetData: {
@@ -203,7 +215,36 @@ function reducer(state = initialState, action) {
     action.payload
   );
 
+  //TODO: seperate this switch into multiple files, it's way too long
   switch (action.type) {
+    case SET_TABS_START:
+      return {
+        ...state,
+        tabs: {
+          ...state.tabs,
+          isFetching: true,
+          error: null
+        }
+      };
+    case SET_TABS_SUCCESS:
+      return {
+        ...state,
+        tabs: {
+          activeTabs: action.payload,
+          isFetching: false,
+          error: null
+        }
+      };
+    case SET_TABS_FAILURE:
+      return {
+        ...state,
+        tabs: {
+          ...state.tabs,
+          isFetching: false,
+          error: action.payload
+        }
+      };
+
     // Yelp Business Search
     case FETCH_BUSINESS_START:
       return {
@@ -222,7 +263,7 @@ function reducer(state = initialState, action) {
           ...state.searchResults,
           isFetching: false,
           // data: action.payload
-          data: action.payload.data.businesses,
+          data: action.payload,
           error: null
         }
       };
@@ -366,92 +407,6 @@ function reducer(state = initialState, action) {
         ...state,
         activeWidgets: action.payload
       };
-    // case SET_FAVORITES_START:
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       ...state.competitors,
-    //       isSetting: true,
-    //       error: null
-    //     }
-    //   };
-    // case SET_FAVORITES_SUCCESS:
-    //   console.log("REDUCER SETTING FAVS", action.payload);
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       favorites: action.payload,
-    //       isSetting: false,
-    //       error: null
-    //     }
-    //   };
-    // case SET_FAVORITES_FAILURE:
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       ...state.competitors,
-    //       isSetting: false,
-    //       error: action.payload
-    //     }
-    //   };
-
-    // case ADD_FAVORITE_START:
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       ...state.competitors,
-    //       isSetting: true,
-    //       error: null
-    //     }
-    //   };
-    // case ADD_FAVORITE_SUCCESS:
-    //   console.log("REDUCER SETTING FAVS", action.payload);
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       favorites: action.payload,
-    //       isSetting: false,
-    //       error: null
-    //     }
-    //   };
-    // case ADD_FAVORITE_FAILURE:
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       ...state.competitors,
-    //       isSetting: false,
-    //       error: action.payload
-    //     }
-    //   };
-
-    // case REMOVE_FAVORITE_START:
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       ...state.competitors,
-    //       isSetting: true,
-    //       error: null
-    //     }
-    //   };
-    // case REMOVE_FAVORITE_SUCCESS:
-    //   console.log("REDUCER SETTING FAVS", action.payload);
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       favorites: action.payload,
-    //       isSetting: false,
-    //       error: null
-    //     }
-    //   };
-    // case REMOVE_FAVORITE_FAILURE:
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       ...state.competitors,
-    //       isSetting: false,
-    //       error: action.payload
-    //     }
-    //   };
 
     // TopBottomWords
     case FETCH_TOP_AND_BOTTOM_START:
@@ -492,73 +447,6 @@ function reducer(state = initialState, action) {
           }
         }
       };
-
-    // // Registration
-    // case REGISTER_START:
-    //   return {
-    //     ...state,
-    //     loggedInUser: {
-    //       ...state.loggedInUser,
-    //       userID: null,
-    //       isFetching: true,
-    //       error: null
-    //     }
-    //   };
-    // case REGISTER_SUCCESS:
-    //   return {
-    //     ...state,
-    //     loggedInUser: {
-    //       ...state.loggedInUser,
-    //       isFetching: false,
-    //       error: null,
-    //       shouldUpdate: true
-    //     }
-    //   };
-    // case REGISTER_FAILURE:
-    //   return {
-    //     ...state,
-    //     userID: null,
-    //     isFetching: false,
-    //     error: action.payload
-    //   };
-
-    // // Login
-    // case LOGIN_START:
-    //   return {
-    //     ...state,
-    //     loggedInUser: {
-    //       ...state.loggedInUser,
-    //       userID: null,
-    //       isFetching: true,
-    //       error: null
-    //     }
-    //   }
-    // case LOGIN_SUCCESS:
-    //   return {
-    //     ...state,
-    //     loggedInUser: {
-    //       ...state.loggedInUser,
-    //       userID: action.payload,
-    //       isFetching: false,
-    //       error: null,
-    //       shouldUpdate: true
-    //     }
-    //   }
-    // case LOGIN_FAILURE:
-    //   return {
-    //     ...state,
-    //     loggedInUser: {
-    //       ...state.loggedInUser,
-    //       userID: null,
-    //       isFetching: false,
-    //       error: action.payload
-    //     }
-    //   }
-    // // Logout
-    // case LOGOUT_USER:
-    //   return {
-    //     ...state, loggedInUser: {} 
-    //   }
 
     case GET_USER_DATA_START:
       return {
@@ -631,20 +519,20 @@ function reducer(state = initialState, action) {
         ...state,
         loggedInUser: {
           ...state.loggedInUser,
-        isFetching: true,
-        error: null
+          isFetching: true,
+          error: null
         }
       }
     case FETCH_EDITACCOUNT_SUCCESS://TODO: update activeWidgets with action.payload.preferences.widgets
       return {
         ...state,
         loggedInUser: {
-        data: {
-          fisrtName: action.payload.first_name ? action.payload.first_name : state.loggedInUser.data.firstName,
-          lastName: action.payload.last_name_name ? action.payload.last_name : state.loggedInUser.data.lastName
-        },
-        isFetching: false,
-        error: null
+          data: {
+            fisrtName: action.payload.first_name ? action.payload.first_name : state.loggedInUser.data.firstName,
+            lastName: action.payload.last_name_name ? action.payload.last_name : state.loggedInUser.data.lastName
+          },
+          isFetching: false,
+          error: null
         }
       }
     case FETCH_EDITACCOUNT_FAILURE:

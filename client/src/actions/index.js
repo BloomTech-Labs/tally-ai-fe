@@ -80,6 +80,11 @@ export const FETCH_REVIEWS_OVER_TIME_SUCCESS =
 export const FETCH_REVIEWS_OVER_TIME_FAILURE =
   "FETCH_REVIEWS_OVER_TIME_FAILURE";
 export const SET_ACTIVE_WIDGETS = "SET_ACTIVE_WIDGETS";
+
+export const SET_TABS_START = "SET_TABS_START";
+export const SET_TABS_FAILURE = "SET_TABS_FAILURE";
+export const SET_TABS_SUCCESS = "SET_TABS_SUCCESS";
+
 export const SET_FAVORITES_START = "SET_FAVORITES_START";
 export const SET_FAVORITES_FAILURE = "SET_FAVORITES_FAILURE";
 export const SET_FAVORITES_SUCCESS = "SET_FAVORITES_SUCCESS";
@@ -129,7 +134,7 @@ export const fetchBusinesses = business => dispatch => {
     .then(res => {
       dispatch({
         type: FETCH_BUSINESS_SUCCESS,
-        payload: res
+        payload: res.data.businesses
       });
     })
     .catch(err => {
@@ -142,6 +147,14 @@ export const fetchBusinesses = business => dispatch => {
 
 export const setActiveWidgets = (widgetArray) => dispatch => {
   dispatch({ type: SET_ACTIVE_WIDGETS, payload: widgetArray });
+}
+
+export const setActiveTabs = (tabsArray, userID) => dispatch => {
+  dispatch({ type: SET_TABS_START });
+  axiosWithAuth()
+    .put("/users/" + userID, { preferences: { activeTabs: tabsArray } })
+    .then(res => console.log("TABS SET, RESULT: ", res) & dispatch({ type: SET_TABS_SUCCESS, payload: tabsArray }))
+    .catch(err => dispatch({ type: SET_TABS_FAILURE, payload: err }))
 }
 
 // TopBottomWords
@@ -175,48 +188,48 @@ export const selectBusiness = businessInfo => dispatch => {
 // Select business and add info to the store at state.businessInfo
 export const addBusiness = (businessInfo, userID) => dispatch => {
   console.log("business in addBusiness: ", businessInfo);
-// businessInfo must be in this format
-//   {
-//     "name": string,
-//     "city": string,
-//     "state": string,
-//     "yelp": {
-//         "id": string,
-//         "yelp_id": string,
-//         "url": string,
-//         "image_url": string
-//     }
-// }
+  // businessInfo must be in this format
+  //   {
+  //     "name": string,
+  //     "city": string,
+  //     "state": string,
+  //     "yelp": {
+  //         "id": string,
+  //         "yelp_id": string,
+  //         "url": string,
+  //         "image_url": string
+  //     }
+  // }
 
-let backendFormat =
+  let backendFormat =
   {
     name: businessInfo.name,
     city: businessInfo.city,
     state: businessInfo.state,
     yelp: {
-        yelp_id: businessInfo.id,
-        url: businessInfo.url,
-        image_url: businessInfo.image_url
+      yelp_id: businessInfo.id,
+      url: businessInfo.url,
+      image_url: businessInfo.image_url
     }
-}
+  }
 
   console.log("\nAdding business to the store...\n");
   dispatch({ type: ADD_BUSINESS_START });
   //endpoint
   axiosWithAuth()
-  .post(`/users/${userID}/business`, backendFormat)
-  .then(res => {
-    dispatch({
-      type: ADD_BUSINESS_SUCCESS,
-      payload: res.data//new array after modification
+    .post(`/users/${userID}/business`, backendFormat)
+    .then(res => {
+      dispatch({
+        type: ADD_BUSINESS_SUCCESS,
+        payload: res.data//new array after modification
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ADD_BUSINESS_FAILURE,
+        payload: err
+      });
     });
-  })
-  .catch(err => {
-    dispatch({
-      type: ADD_BUSINESS_FAILURE,
-      payload: err
-    });
-  });
 
 };
 
@@ -229,19 +242,19 @@ export const removeBusiness = (businessID, userID) => dispatch => {
   dispatch({ type: REMOVE_BUSINESS_START });
   //endpoint
   axiosWithAuth()
-  .delete(`/users/${userID}/business/${businessID}`)
-  .then(res => {
-    dispatch({
-      type: REMOVE_BUSINESS_SUCCESS,
-      payload: res.data//new array after modification
+    .delete(`/users/${userID}/business/${businessID}`)
+    .then(res => {
+      dispatch({
+        type: REMOVE_BUSINESS_SUCCESS,
+        payload: res.data//new array after modification
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_BUSINESS_FAILURE,
+        payload: err
+      });
     });
-  })
-  .catch(err => {
-    dispatch({
-      type: REMOVE_BUSINESS_FAILURE,
-      payload: err
-    });
-  });
 
 };
 
@@ -256,28 +269,28 @@ export const addCompetitor = (businessInfo, userID) => dispatch => {
     city: businessInfo.city,
     state: businessInfo.state,
     yelp: {
-        yelp_id: businessInfo.id,
-        url: businessInfo.url,
-        image_url: businessInfo.image_url
+      yelp_id: businessInfo.id,
+      url: businessInfo.url,
+      image_url: businessInfo.image_url
     }
-}
+  }
 
   dispatch({ type: ADD_COMPETITOR_START });
   //endpoint
   axiosWithAuth()
-  .post(`/users/${userID}/favorite`, backendFormat)
-  .then(res => {
-    dispatch({
-      type: ADD_COMPETITOR_SUCCESS,
-      payload: res.data//new array after modification
+    .post(`/users/${userID}/favorite`, backendFormat)
+    .then(res => {
+      dispatch({
+        type: ADD_COMPETITOR_SUCCESS,
+        payload: res.data//new array after modification
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ADD_COMPETITOR_FAILURE,
+        payload: err
+      });
     });
-  })
-  .catch(err => {
-    dispatch({
-      type: ADD_COMPETITOR_FAILURE,
-      payload: err
-    });
-  });
   //POST /users/:id/favorite
 };
 
@@ -290,19 +303,19 @@ export const removeCompetitor = (businessID, userID) => dispatch => {
   dispatch({ type: REMOVE_COMPETITOR_START });
   //endpoint
   axiosWithAuth()
-  .delete(`/users/${userID}/favorite/${businessID}`)
-  .then(res => {
-    dispatch({
-      type: REMOVE_COMPETITOR_SUCCESS,
-      payload: res.data//new array after modification
+    .delete(`/users/${userID}/favorite/${businessID}`)
+    .then(res => {
+      dispatch({
+        type: REMOVE_COMPETITOR_SUCCESS,
+        payload: res.data//new array after modification
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_COMPETITOR_FAILURE,
+        payload: err
+      });
     });
-  })
-  .catch(err => {
-    dispatch({
-      type: REMOVE_COMPETITOR_FAILURE,
-      payload: err
-    });
-  });
 
   //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
   //DELETE /users/:id/favorite/:business_id
@@ -341,9 +354,24 @@ export const searchResultsPlaceholder = results => dispatch => {
 //   type: 'LOGOUT_USER'
 // });
 
+export const resetSearchResults = () => dispatch => {
+  dispatch({ type: FETCH_BUSINESS_SUCCESS, payload: null });
+}
 
-//set when a user logs in
-export const setUserInfo = (userID) => dispatch => {
+//set user's store data
+export const setUserInfo = (userData) => dispatch => {
+  // userInfo: {  
+  //   favorites
+  //   loggedInUser
+  //   businessInfo
+  //   activeWidgets
+  // }
+  dispatch({ type: GET_USER_DATA_SUCCESS, payload: userData });
+
+}
+
+//get user data from the back end
+export const getUserInfo = (userID) => dispatch => {
   // userInfo: {  
   //   favorites
   //   loggedInUser
@@ -388,15 +416,15 @@ export const shouldUpdateLoggedInUser = (shouldUpdate) => dispatch => {
 
 // Used at Edit Account
 export const fetchEditAccount = (id, newInfo) => dispatch => {
-//   newInfo: {
-//     "email": string (optional),
-//     "password": string (8 or more characters, optional),
-//     "first_name": string (optional),
-//     "last_name": string (optional),
-//     "preferences": {
-//         "widgets": array (optional)
-//     }
-// }
+  //   newInfo: {
+  //     "email": string (optional),
+  //     "password": string (8 or more characters, optional),
+  //     "first_name": string (optional),
+  //     "last_name": string (optional),
+  //     "preferences": {
+  //         "widgets": array (optional)
+  //     }
+  // }
   dispatch({ type: FETCH_EDITACCOUNT_START });
   axiosWithAuth()
     .put("/users/" + id, newInfo)

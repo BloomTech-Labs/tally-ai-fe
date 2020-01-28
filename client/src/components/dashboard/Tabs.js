@@ -3,28 +3,30 @@ import { connect } from "react-redux";
 
 import Tab from "./Tab";
 
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { setActiveTabs } from "../../actions/index";
 
 //expects a prop called business which contains business data
 const Tabs = props => {
 
-  const [newTabs, setNewTabs] = useState(props.businesses.length + props.competitors.length === 0 ? ["defaultTab"] : []);
-
   return (
-    <div className="tabs">
-      {props.businesses.map(business => {
+    <div className="tabs" style={{ marginTop: "200px" }}>
+      {/* {props.businesses.map(business => {
         return <Tab business={business} competitor={false}/>;
       })}
       {props.competitors.map(competitor => {
         return <Tab business={competitor} competitor={true}/>;
+      })} */}
+      {props.activeTabs.map(tab => {
+        return <Tab business={tab} competitor={tab.isCompetitor} />;
       })}
-      {newTabs.map(newTab => {
-        return <Tab business={newTab} competitor={false}/>;
-      })}
-      <div className="addTab" onClick={() => setNewTabs(newTabs.concat([ { id: Date.now() } ]))}> {/* Add an empty tab with a fake business, which means its an empty tab */}
-        +
+      <div className="addTab" onClick={() => {
+        let uniqueID = Date.now() + "";
+        if (props.activeTabs.length < 20) {
+          props.setActiveTabs(props.activeTabs.concat([{ businessId: uniqueID }]), localStorage.getItem("userID"));
+          console.log("adding new tab with ID ", uniqueID);
+        }
+      }}> {/* Add an empty tab with a fake business, which means its an empty tab */}
+        <p>+</p>
       </div>
     </div>
   );
@@ -33,9 +35,10 @@ const Tabs = props => {
 
 const mapStateToProps = state => {
   return {
+    activeTabs: state.tabs.activeTabs,
     businesses: state.userBusinesses.businesses,
     competitors: state.competitors.businesses
   };
 };
 
-export default connect(mapStateToProps, {} )(Tabs);
+export default connect(mapStateToProps, { setActiveTabs })(Tabs);
