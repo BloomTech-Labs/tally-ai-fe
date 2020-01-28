@@ -39,111 +39,44 @@ function DashboardGrid(props) {
     // props.fetchWordsOverTime(props.id);
   }, [props.id]);
 
-  if(!props.businessInfo.reviewCount || !props.businessInfo.averageRating){
-    return(<div></div>);
-  }
-
   return (
     <div className="dashboardgrid">
       <div>
         <Sidebar />
       </div>
-{
+
       <div>
-        <div className="businessStats">
-          <div>
-            Reviews<br/>
-            {props.businessInfo.reviewCount}
+        <Tabs />
+
+        { props.businessInfo ? (
+<div>
+  
+          <div className="businessStats">
+            <div>
+              Reviews<br/>
+              {props.businessInfo.reviewCount}
+            </div>
+            <div>
+              Overall Rating<br/>
+              {props.businessInfo.averageRating}
+            </div>
+            <div>
+              Business ID<br/>
+              {props.id}
+            </div>
           </div>
-          <div>
-            Overall Rating<br/>
-            {props.businessInfo.averageRating}
-          </div>
-          <div>
-            Business ID<br/>
-            {props.id}
-          </div>
-        </div>
-        <WidgetDisplayList />
-      </div>}
-    </div>
-  );
-  function FormRow() {
-    //   return (
-    //     <React.Fragment>
-    //       <Grid item xs={4} style={{ display: "flex", flexDirection: "column" }}>
-    //         <Paper className={classes.paper}>item</Paper>
-    //       </Grid>
-    //       <Grid item xs={4} style={{ display: "flex", flexDirection: "column" }}>
-    //         <Paper className={classes.paper}>item</Paper>
-    //       </Grid>
-    //     </React.Fragment>
-    //   );
-    // }
-    // console.log("props.words in dashboard: ", props.words);
-    // if (props.isFetching) {
-    //   return <h3>Loading analytics...</h3>;
-    // } else {
-    //   return (
-    //     <div className={classes.root}>
-    //       <Grid container spacing={1}>
-    //         {props.words.positive.map(word => {
-    //           return (
-    //             <Grid
-    //               item
-    //               xs={6}
-    //               style={{ display: "flex", flexDirection: "column" }}
-    //             >
-    //               <Paper className={classes.paper}>{word.term}</Paper>
-    //             </Grid>
-    //           );
-    //         })}
-    //         {props.words.negative.map(word => {
-    //           return (
-    //             <Grid
-    //               item
-    //               xs={6}
-    //               style={{ display: "flex", flexDirection: "column" }}
-    //             >
-    //               <Paper className={classes.paper}>{word.term}</Paper>
-    //             </Grid>
-    //           );
-    //         })}
-    //         {/* <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid>
-    //         <Grid container item xs={6} spacing={3}>
-    //           <FormRow />
-    //         </Grid> */}
-    //       </Grid>
-    //     </div>
-    //   );
-  }
+          <WidgetDisplayList />
+</div>
+        ) : (
+
+<p>SELECT A BUSINESS!</p>
+        )
+      }
+      </div>
+      </div>
+  )
 }
+
 const mapStateToProps = state => ({
   // words: state.widgetData.keyWords.data,
   // isFetching: state.widgetData.keyWords.isFetching,

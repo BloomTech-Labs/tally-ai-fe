@@ -17,6 +17,7 @@ import registration from "./components/registration";
 import Login from "./components/login";
 import Settings from "./components/settings/settings";
 import CompSet from "./components/compSet";
+import DashboardPlus from "./components/dashboard/dashboardPlus";
 
 function App(props) {
 
@@ -47,6 +48,7 @@ function App(props) {
       <Route path="/Register/" component={registration} />
       <Route path="/Login/" component={Login} />
       <Route path="/Compset" component={CompSet} />
+      <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={Settings} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
       <Footer />

@@ -9,7 +9,7 @@ root:{
     bottom: '0',
     background: '#BBDEFB',
     color: 'black',
-    height: '100px',
+    height: '12vh',
     zIndex: '1'
 },
 
