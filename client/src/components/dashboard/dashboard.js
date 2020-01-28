@@ -48,32 +48,58 @@ function DashboardGrid(props) {
 
       <div>
         {
-        <Tabs />
-        }
-        {console.log("businesses contain ", props.businessInfo.businessId, "?")}
-        {businessesContains(props.businessInfo.businessId) ? (
-          <div>
+          localStorage.getItem("token") && localStorage.getItem("userID") ? (
+            <div>
+              <Tabs />
+              {businessesContains(props.businessInfo.businessId) ? (
+                <div>
 
-            <div className="businessStats">
-              <div className="reviews">
-                Total Reviews<br />
-                {props.businessInfo.reviewCount}
+                  <div className="businessStats">
+                    <div className="reviews">
+                      Total Reviews<br />
+                      {props.businessInfo.reviewCount}
+                    </div>
+                    <div className="ratings">
+                      Overall Rating<br />
+                      {props.businessInfo.averageRating}
+                    </div>
+                    <div className="changeofrating">
+                      Change in Rating<br />
+                      11%
               </div>
-              <div className="ratings">
-                Overall Rating<br />
-                {props.businessInfo.averageRating}
-              </div>
-              <div className="changeofrating">
-                Change in Rating<br />
-                11%
-          </div>
+                  </div>
+                  <WidgetDisplayList />
+                </div>
+              ) : (
+
+                  <dashboardPlus />
+                )
+              }
             </div>
-            <WidgetDisplayList />
-          </div>
-        ) : (
+          ) : (
+              props.businessInfo.businessId ? (//if a business is selected
+                <div>
 
-            <dashboardPlus />
-          )
+                  <div className="businessStats">
+                    <div className="reviews">
+                      Total Reviews<br />
+                      {props.businessInfo.reviewCount}
+                    </div>
+                    <div className="ratings">
+                      Overall Rating<br />
+                      {props.businessInfo.averageRating}
+                    </div>
+                    <div className="changeofrating">
+                      Change in Rating<br />
+                      11%
+                    </div>
+                  </div>
+                  <WidgetDisplayList />
+                </div>
+              ) : (
+                  props.history.push("/")
+                )
+            )
         }
       </div>
     </div>
