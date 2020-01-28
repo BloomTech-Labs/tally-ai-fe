@@ -6,11 +6,13 @@ import Button from "@material-ui/core/Button";
 import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 
-import WidgetDisplayList from "../components/WidgetSystem/WidgetDisplayList";
-import WidgetAdditionList from "../components/WidgetSystem/WidgetAdditionList";
-import Sidebar from "../components/WidgetSystem/Sidebar";
+import Tabs from "./Tabs";
 
-import { fetchWordsOverTime, fetchTopAndBottom, fetchAllData } from "../actions/";
+import WidgetDisplayList from "../WidgetSystem/WidgetDisplayList";
+import WidgetAdditionList from "../WidgetSystem/WidgetAdditionList";
+import Sidebar from "./Sidebar";
+
+import { fetchWordsOverTime, fetchTopAndBottom, fetchAllData } from "../../actions/index";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,6 +48,7 @@ function DashboardGrid(props) {
       <div>
         <Sidebar />
       </div>
+{
       <div>
         <div className="businessStats">
           <div>
@@ -56,9 +59,13 @@ function DashboardGrid(props) {
             Overall Rating<br/>
             {props.businessInfo.averageRating}
           </div>
+          <div>
+            Business ID<br/>
+            {props.id}
+          </div>
         </div>
         <WidgetDisplayList />
-      </div>
+      </div>}
     </div>
   );
   function FormRow() {

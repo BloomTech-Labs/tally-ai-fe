@@ -245,6 +245,7 @@ function reducer(state = initialState, action) {
 
     //adding businesses to user's owned businesses list
     case ADD_BUSINESS_START:
+      console.log("ADDDDDDD BUSINESSS STARTTT");
       return {
         ...state,
         userBusinesses: {
