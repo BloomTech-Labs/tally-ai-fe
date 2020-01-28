@@ -231,7 +231,7 @@ function NavBar(props) {
                   <ListItemText primary="Register" />
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={handleDrawerClose} component={Link} to="/">
+                <ListItem button onClick={handleDrawerClose} component={Link} to="/AboutUs">
                   <ListItemIcon>
                     <InfoIcon />
                   </ListItemIcon>

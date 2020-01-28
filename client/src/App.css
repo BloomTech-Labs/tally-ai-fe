@@ -647,3 +647,8 @@ star-rating {
   justify-content: center;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
+
+.MeetTheTeam {
+  height: 35vh;
+  background: linear-gradient(353.46deg, #E3F2FD 11.16%, #BBDEFB 82.03%);
+}
