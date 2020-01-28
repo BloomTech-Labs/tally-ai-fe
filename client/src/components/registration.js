@@ -50,8 +50,9 @@ function Registration(props) {
     // }, [props.loggedInUser]);
 
     const submitHandler = event => {
+        console.log("onSubmit working");
+        event.preventDefault();
         if (!props.isFetching) {//don't let them submit again if the backend is already processing their registration request
-            event.preventDefault();
             console.log(userCredentials);
 
             axios
@@ -79,7 +80,7 @@ function Registration(props) {
     return (
         <div style={{ marginTop: '5%' }}>
             <h1>Register</h1>
-            <form className={classes.container} onSubmit={submitHandler}>
+            <form className={classes.container} onSubmit={(e) => submitHandler(e)}>
 
                 <TextField
                     label="First Name"
@@ -177,7 +178,7 @@ function Registration(props) {
                     margin="normal"
                 />
 
-                <Button className={classes.button} onClick={props.history.push('/login')} variant="outlined" color="black" type="submit">Register</Button>
+                <Button className={classes.button} variant="outlined" color="black" type="submit">Register</Button>
             </form>
         </div>
     )

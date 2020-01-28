@@ -96,35 +96,6 @@ function Settings(props) {
                     <div style={{ display: 'flex', justifyContent: 'center', width: '75%', marginBottom: '50%' }}><h3>Favorites</h3></div>
                 </div>
             </div>
-            <div className="favorites-section" style={{ overflow: 'scroll', width: '70%', height: '80%', display: 'flex', flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#2C98F0', border: "1px solid grey" }}>
-                {/* <div style={{ display: 'flex', justifyContent: 'center', width: '75%', marginBottom: '50%' }}><h3>Favorites</h3></div> */}
-
-                {props.competitors.map((favorite) => {
-                    return (
-                        <Card className={classes.card}>
-                            <CardActionArea>
-
-                                <img style={{ objectFit: "cover", width: "20vw", height: "10vw" }} src={favorite.businessImg}></img>
-                                <CardContent>
-                                    <Typography><h3>{favorite.businessName}</h3></Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions style={{ justifyContent: 'center' }}>
-                                {/* <Button variant="contained" color="primary"> */}
-                                <Button variant="contained" color="secondary" style={{ width: '100px' }}><Link style={{ textDecoration: "none", color: "white" }} onClick={() => {
-                                    props.addBusiness(favorite);
-                                }}
-                                    to="/dashboard">View</Link></Button>
-                                {/* </Button> */}
-                                <Button variant="contained" color="secondary" style={{ width: '100px' }} onClick={() => {
-                                    props.setFavorites(props.competitors.filter((fav) => !(fav === favorite)));
-                                }}>Remove</Button>
-                            </CardActions>
-                        </Card>
-                    );
-                })
-                }
-            </div>
         </div>
     )
 
