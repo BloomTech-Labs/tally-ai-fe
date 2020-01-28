@@ -13,7 +13,7 @@ const TopBottomWordsPreview = () => {
 
     return (
         <div>
-            <h3>Top and Bottom Words</h3>
+            <h3>Positive Words</h3>
             {/* <LineChart
                 width={500}
                 height={300}

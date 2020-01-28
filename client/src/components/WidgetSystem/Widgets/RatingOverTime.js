@@ -36,7 +36,8 @@ const RatingOverTime = props => {
 
   return (
     <div>
-      <h3>Weekly Average Rating vs. Cumulative Average</h3>
+      <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"28px"}}>Weekly Average Rating vs. Cumulative Average</h3>
+      <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>See how your weekly rating compares to the cumulative average rating!</p>
       <div className="rating-over-time">
         <ComposedChart
           width={500}

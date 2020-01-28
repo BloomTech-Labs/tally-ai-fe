@@ -100,8 +100,8 @@ star-rating {
 .result {
   opacity: 0%;
 
-  border-color: gray;
-  border-width: 1px;
+  /* border-color: gray;
+  border-width: 1px; */
 
   display: flex;
   flex-direction: row;
@@ -110,7 +110,7 @@ star-rating {
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-delay: 1s;
-  border-bottom: 1px solid lightgrey;
+  /* border-bottom: 1px solid lightgrey; */
 
   /* prevent the animation from resetting after done playinig */
   animation-fill-mode: forwards;
@@ -147,13 +147,14 @@ star-rating {
 
 .widgetContainer {
   width: 35vmax;
-  height: 35vmax;
+  height: 30vmax;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   border-radius: 10px;
   margin: 1vw;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .widgetList {
@@ -492,6 +493,7 @@ star-rating {
   background: #2C98F0;
   opacity: 0.8;
   transition: transform .2s;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .FeatuesTable1:hover {
@@ -506,6 +508,7 @@ star-rating {
   background: #BBDEFB;
   opacity: 0.8;
   transition: transform .2s;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .FeatuesTable2:hover {
@@ -520,6 +523,7 @@ star-rating {
   background: #DFAB26;
   opacity: 0.8;
   transition: transform .2s;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .FeatuesTable3:hover {
@@ -534,6 +538,7 @@ star-rating {
   background: #D496BB;
   opacity: 0.8;
   transition: transform .2s;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .FeatuesTable4:hover {
@@ -599,4 +604,46 @@ star-rating {
 
 .backgroundcolor {
   background: linear-gradient(347.71deg, #E3F2FD 11.16%, #BBDEFB 82.03%);
+}
+
+.reviews {
+  background: #BBDEFB;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  height: 12vh;
+  width: 12vw;
+  border-radius: 10px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ratings {
+  background: #2C98F0;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  height: 12vh;
+  width: 12vw;
+  border-radius: 10px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.changeofrating {
+  background: #DFAB26;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  height: 12vh;
+  width: 12vw;
+  border-radius: 10px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }

@@ -43,23 +43,24 @@ const TopBottomWords = props => {
     return <h3>Loading analytics...</h3>;
   } else {
     return (
-      <div style={{ margin: "5%" }} className={classes.root}>
-        <h3>Top and Bottom Words</h3>
+      <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
+        <h3 style={{fontWeight:"bold", fontSize:"30px"}}>Your customers are loving...</h3>
+        <p style={{ fontSize:"18px" }}>These are the words associated with the reviews with high ratings</p>
         <Grid container spacing={1}>
           {props.words.positive.map(word => {
             return (
               <Grid
                 item
                 xs={6}
-                style={{ display: "flex", flexDirection: "column" }}
+                style={{ display: "flex", flexDirection: "column", fontSize:"20px", border:"none" }}
               >
-                <Paper style={{ color: "green" }} className={classes.paper}>
+                <Paper style={{ color: "black" }} className={classes.paper}>
                   {word.term}
                 </Paper>
               </Grid>
             );
           })}
-          {props.words.negative.map(word => {
+          {/* {props.words.negative.map(word => {
             return (
               <Grid
                 item
@@ -71,7 +72,7 @@ const TopBottomWords = props => {
                 </Paper>
               </Grid>
             );
-          })}
+          })} */}
           {/* <Grid container item xs={6} spacing={3}>
               <FormRow />
             </Grid>
