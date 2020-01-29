@@ -13,6 +13,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
@@ -45,6 +46,7 @@ const useStyles = makeStyles(theme => ({
     margin: 20,
     padding: 20,
     borderRadius: 20,
+    position: "relative"
 
   },
   // root: {
@@ -119,6 +121,9 @@ function DashboardPlus(props) {
           props.businesses.map(business => {
             return (
               <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw" }}>
+                <Tooltip title="Delete" arrow>
+                <DeleteForeverOutlinedIcon style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}} />
+                </Tooltip>
                 <img style={{ objectFit: "cover" }}
                   src={business.bussinessImg} />
                 <h3>{business.businessName}</h3>
@@ -164,6 +169,10 @@ function DashboardPlus(props) {
           props.competitors.map(competitor => {
             return (
               <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw" }}>
+                <Tooltip title="Delete" arrow>
+                <DeleteForeverOutlinedIcon style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}}>
+                </DeleteForeverOutlinedIcon>
+                </Tooltip>
                 <img style={{ objectFit: "cover" }}
                   src={competitor.bussinessImg} />
                 <h3>{competitor.businessName}</h3>
