@@ -123,11 +123,11 @@ function DashboardPlus(props) {
             return (
               <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#EBF5FE" }}>
                 <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}} />
+                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh"}} />
                 </Tooltip>
-                <img style={{ objectFit: "cover" }}
-                  src={business.businessImg} />
                 <h3>{business.businessName}</h3>
+                <img style={{ objectFit: "cover", width: "100%", height: "80%", borderRadius: "10%" }}
+                  src={business.businessImg} />
               </Card>
             )
           })
@@ -170,12 +170,12 @@ function DashboardPlus(props) {
             return (
               <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#F5E6BE" }}>
                 <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}}>
+                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh"}}>
                 </DeleteForeverOutlinedIcon>
                 </Tooltip>
-                <img style={{ objectFit: "cover", width: "100%", borderRadius: "10%" }}
-                  src={competitor.businessImg} />
                 <h3>{competitor.businessName}</h3>
+                <img style={{ objectFit: "cover", width: "100%", height: "80%", borderRadius: "10%" }}
+                  src={competitor.businessImg} />
               </Card>
             )
           })
