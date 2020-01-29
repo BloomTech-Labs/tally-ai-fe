@@ -21,7 +21,7 @@ import burger from "../images/burger.jpg";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { fetchBusinesses } from "../../actions/index.js";
+import { fetchBusinesses, selectBusiness } from "../../actions/index.js";
 
 const drawerWidth = 375;
 
@@ -83,16 +83,15 @@ function ClippedDrawer(props) {
           paper: classes.drawerPaper,
         }}
       >
-        {/* <div className={classes.toolbar} /> */}
-        {props.businesses.map(business => {
-          return (
-            <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px"}}>
-              <img src={business.bussinessImg} style={{ height: "20vh", width: "12vw", borderRadius: "100%"}}/> 
-              <h1>{business.businessName}</h1> {/* pass in business title prop here */}
-            </div>
-          )
-        })
-        }
+        
+        
+          <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px"}}>
+          <img src={props.selectedBusiness.businessImg} style={{ height: "20vh", width: "12vw", borderRadius: "100%"}}/> 
+          <h1>{props.selectedBusiness.businessName}</h1> {/* pass in business title prop here */} 
+          
+        </div>
+        
+        
         
       
         <Divider />
@@ -156,9 +155,11 @@ function ClippedDrawer(props) {
 }
 
 const mapStateToProps = state => ({
-  businesses: state.userBusinesses.businesses
+  businesses: state.userBusinesses.businesses,
+  selectedBusiness: state.currentlySelectedBusiness
 });
 
 export default withRouter(connect(mapStateToProps, {
-  fetchBusinesses
+  fetchBusinesses,
+  selectBusiness
 })(ClippedDrawer));
