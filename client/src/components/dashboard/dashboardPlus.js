@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
@@ -120,18 +121,17 @@ function DashboardPlus(props) {
         {
           props.businesses.map(business => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw" }}>
+              <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#EBF5FE" }}>
                 <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}} />
+                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}} />
                 </Tooltip>
                 <img style={{ objectFit: "cover" }}
-                  src={business.bussinessImg} />
+                  src={business.businessImg} />
                 <h3>{business.businessName}</h3>
               </Card>
             )
           })
         }
-
         {/* </div> */}
       </div>
       <div className="competitors-results"
@@ -168,13 +168,13 @@ function DashboardPlus(props) {
         {
           props.competitors.map(competitor => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw" }}>
+              <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#F5E6BE" }}>
                 <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}}>
+                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh", fontSize:"40"}}>
                 </DeleteForeverOutlinedIcon>
                 </Tooltip>
-                <img style={{ objectFit: "cover" }}
-                  src={competitor.bussinessImg} />
+                <img style={{ objectFit: "cover", width: "100%", borderRadius: "10%" }}
+                  src={competitor.businessImg} />
                 <h3>{competitor.businessName}</h3>
               </Card>
             )
