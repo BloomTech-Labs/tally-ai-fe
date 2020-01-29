@@ -103,8 +103,8 @@ const SearchPage = props => {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
     }
-    props.setActiveTabs(props.activeTabs.concat([selection]), localStorage.getItem("userID"));
-    props.selectBusiness(selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
+    // props.setActiveTabs(props.activeTabs.concat([selection]), localStorage.getItem("userID"));
+    // props.selectBusiness(selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
 
