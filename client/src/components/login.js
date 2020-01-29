@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        width: '15%'
+        width: '60%'
     },
     dense: {
         marginTop: theme.spacing(2),
@@ -77,40 +77,47 @@ const Login = props => {
     }, [props.loggedInUser]);
 
     return (
-        <div style={{marginTop:'5%'}}>
+        <div style={{border: "1px solid #E3F2FD", background: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)"}}>
             <form className ={classes.container} onSubmit={handleSubmit}>
-                <h1>Log In</h1>
-                <TextField
-                    name="email"
-                    label="Email"
-                    type="email"
-                    className={classes.textField}
-                    value={login.username}
-                    onChange={handleChange}
-                    required
-                    margin="normal"
-                    variant="outlined"
-                    placeholder="Email"
-                />
-                <TextField
-                    name="password"
-                    label="Password"
-                    type="password"
-                    className={classes.textField}
-                    value={login.password}
-                    onChange={handleChange}
-                    required
-                    margin="normal"
-                    variant="outlined"
-                    placeholder="Password"
-                />
-                <Button className={classes.button} variant="outlined" color="black" type="submit">Login</Button>
-                <div className ={classes.bottomText}>
-                    <p>
-                        Don't have an account?  <Link to='/Register/'>Register Now!</Link>
-                    </p>
-                </div>
-                
+                <div style={{height: "60vh", width: "30%", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", borderRadius: "47px", backgroundColor: "White"}}>
+                    <div style={{ paddingTop: "20px", fontSize: "22px"}}>
+                        <h1>Log In</h1>
+                    </div>
+                    <div style={{width: "100%"}}>
+                        <TextField
+                            name="email"
+                            label="Email"
+                            type="email"
+                            className={classes.textField}
+                            value={login.username}
+                            onChange={handleChange}
+                            required
+                            margin="normal"
+                            variant="outlined"
+                            placeholder="Email"
+                        />
+                    </div>
+                    <div style={{width: "100%"}}>
+                        <TextField
+                            name="password"
+                            label="Password"
+                            type="password"
+                            className={classes.textField}
+                            value={login.password}
+                            onChange={handleChange}
+                            required
+                            margin="normal"
+                            variant="outlined"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <Button style={{marginTop: "30px", background: "#2C98F0", color: "white", width: "40%"}} className={classes.button} variant="outlined" color="black" type="submit">Login</Button>
+                    <div className ={classes.bottomText}>
+                        <p>
+                            Need to create an account?  <Link to='/Register/'>Register Now!</Link>
+                        </p>
+                    </div>
+               </div> 
             </form>
         </div>
     )

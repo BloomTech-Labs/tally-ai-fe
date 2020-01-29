@@ -78,8 +78,8 @@ function Settings(props) {
     // }, [props.loggedUser]);
 
     return (
-        <div>
-            <div className="settings-section" style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+        <div >
+            <div style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around', }}>
                 {/* <div className="icon-buttons" style={{ width: '15%', height: '80%', backgroundColor: '#2C98F0', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center' }}>
                     <div onClick={handleOpenAccount} style={{ width: '100%', cursor: "pointer" }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div> */}
                         <EditAccount loggedUser={localStorage.getItem("userID")} loggedUserInfo={props.loggedUserInfo} fetchEditAccount={props.fetchEditAccount} />

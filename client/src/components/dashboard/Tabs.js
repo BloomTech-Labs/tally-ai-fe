@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Tab from "./Tab";
 
-import { setActiveTabs } from "../../actions/index";
+import { setActiveTabs, selectBusiness } from "../../actions/index";
 
 //expects a prop called business which contains business data
 const Tabs = props => {
@@ -20,11 +20,12 @@ const Tabs = props => {
         return <Tab business={tab} competitor={tab.isCompetitor} />;
       })}
       <div className="addTab" onClick={() => {
-        let uniqueID = Date.now() + "";
-        if (props.activeTabs.length < 20) {
-          props.setActiveTabs(props.activeTabs.concat([{ businessId: uniqueID }]), localStorage.getItem("userID"));
-          console.log("adding new tab with ID ", uniqueID);
-        }
+          let uniqueID = Date.now() + "";
+          if (props.activeTabs.length < 20) {
+            props.setActiveTabs(props.activeTabs.concat([{ businessId: uniqueID }]), localStorage.getItem("userID"));
+            props.selectBusiness({ businessId: uniqueID });
+            console.log("adding new tab with ID ", uniqueID);
+          }
       }}> {/* Add an empty tab with a fake business, which means its an empty tab */}
         <p>+</p>
       </div>
@@ -41,4 +42,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { setActiveTabs })(Tabs);
+export default connect(mapStateToProps, { setActiveTabs, selectBusiness })(Tabs);

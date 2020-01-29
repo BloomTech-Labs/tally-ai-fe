@@ -265,21 +265,22 @@ export const addCompetitor = (businessInfo, userID) => dispatch => {
   //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
   let backendFormat =
   {
-    name: businessInfo.name,
+    name: businessInfo.businessName,
     city: businessInfo.city,
     state: businessInfo.state,
     yelp: {
-      yelp_id: businessInfo.id,
+      yelp_id: businessInfo.businessId,
       url: businessInfo.url,
       image_url: businessInfo.image_url
     }
   }
-
+  console.log("Add competitor start, data:", backendFormat);
   dispatch({ type: ADD_COMPETITOR_START });
   //endpoint
   axiosWithAuth()
     .post(`/users/${userID}/favorite`, backendFormat)
     .then(res => {
+      console.log("Add competitor success, result:", res);
       dispatch({
         type: ADD_COMPETITOR_SUCCESS,
         payload: res.data//new array after modification

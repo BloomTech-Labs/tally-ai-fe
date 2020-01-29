@@ -27,12 +27,11 @@ const WidgetDisplayList = (props) => {
 
         //the closest distance we've encountered so far between the mouse and a widget on the screen
         let closestDistanceFromMouse = 9999999;//gotta be a big screen for this loop to not find a new closest distance
-
         //Loop through all the widgets on the screen and find the closest widget to the mouse position
         props.activeWidgets.forEach(element => {
-
+            
             let widget = document.getElementById(element);
-
+            
             //Lets get the distance from the mouse to this widget
             let distanceFromMouseToWidget = distance(mousePosition, getElementCenter(widget));
 
@@ -54,7 +53,7 @@ const WidgetDisplayList = (props) => {
         let draggedWidget = localStorage.getItem("dragged");//So we can add the widget (that was deleted while dragging) back, where the user dropped it
 
         //mouse position vector
-        let mousePosition = { x: event.pageX, y: event.pageY }
+        let mousePosition = { x: event.screenX, y: event.screenY }
 
         let closestWidget = getClosestWidgetToMouse(mousePosition);
 
