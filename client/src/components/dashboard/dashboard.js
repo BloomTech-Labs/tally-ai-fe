@@ -13,7 +13,7 @@ import WidgetAdditionList from "../WidgetSystem/WidgetAdditionList";
 import Sidebar from "./Sidebar";
 
 import { fetchWordsOverTime, fetchTopAndBottom, fetchAllData } from "../../actions/index";
-import dashboardPlus from "./dashboardPlus";
+import DashboardPlus from "./dashboardPlus";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,7 +35,8 @@ function DashboardGrid(props) {
   // Fetch data for widgets
   useEffect(() => {
     console.log("Fetching all widget data with ID ", props.id);
-    props.fetchAllData(props.id);
+    //props.fetchAllData(props.id);
+    
     // props.fetchTopAndBottom(props.id);
     // props.fetchWordsOverTime(props.id);
   }, [props.id]);
@@ -72,7 +73,8 @@ function DashboardGrid(props) {
                 </div>
               ) : (
 
-                  <dashboardPlus />
+                  <DashboardPlus />
+
                 )
               }
             </div>
@@ -97,7 +99,7 @@ function DashboardGrid(props) {
                   <WidgetDisplayList />
                 </div>
               ) : (
-                  props.history.push("/")
+                  props.history.push("/")//FIXME: while deployed, instead of re-routing to just tally-ai.com/ it goes to tally-ai.com/index.html. This causes errors.
                 )
             )
         }

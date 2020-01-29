@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
+        backgroundColor: 'purple',
        
     },
     textField: {
@@ -42,7 +43,8 @@ export default function EditAccount(props){
         first_name: "",
         last_name: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     });
     console.log(props)
     const submitHandler = event => {
@@ -55,14 +57,26 @@ export default function EditAccount(props){
         setCredentials({ ...userCredentials, [event.target.name]: event.target.value })
     }
 
+    const handleConfirmPassword = (event) => {
+        if (event.target.value !== this.state.password) {
+        //   message.error('error');
+          this.setState({confirmPassword: event.target.value})
+        }
+    }
+
     // useEffect(() => {
     //     setCredentials(props.loggedUserInfo)
     // }, []);
 
     return (
-        <div style={{backgroundColor: "white"}}>
-            <h1>Edit Account</h1>
-            <form className ={classes.container} onSubmit= {submitHandler}>
+        <div>
+            <div style={{backgroundColor: "blue", textAlign:"center", height: "100vh"}}>
+            <div style={{paddingTop:"50px"}}>
+            <form className ={classes.container} onSubmit= {submitHandler} style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%"}}>
+                <div style={{}}>
+                    <h1>Account</h1>
+                    <h3>Change your basic account settings</h3>
+                </div>
             <TextField 
                 label ="First Name"
                 variant ="outlined"
@@ -107,8 +121,21 @@ export default function EditAccount(props){
                 onChange={changeHandler}
                 placeholder="Password"
                 />
+            <TextField 
+                label ="Confirm Password"
+                variant ="outlined"
+                margin="normal"
+                type="password"
+                name="password"
+                className={classes.textField}
+                value={userCredentials.password}
+                onChange={changeHandler}
+                placeholder="Confirm Password"
+                /> 
                 <Button className ={classes.button} variant="outlined" color="black" type ="submit">Edit</Button>
-            </form>
+                </form>  
+            </div>
+            </div>
         </div>
     )
 }

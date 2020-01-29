@@ -193,7 +193,7 @@ function NavBar(props) {
               </Link>
 
               
-              <ListItem button onClick={handleDrawerClose} loggedUser={localStorage.getItem("userID")} loggedUserInfo={props.loggedUserInfo} fetchEditAccount={props.fetchEditAccount} component={Link} to="/Settings">
+              <ListItem to="/Settings">
                 <ListItemIcon >
                   <SettingsIcon />
                 </ListItemIcon>

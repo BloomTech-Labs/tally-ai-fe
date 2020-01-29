@@ -50,7 +50,7 @@ function Registration(props) {
     // }, [props.loggedInUser]);
 
     const submitHandler = event => {
-        console.log("onSubmit working");
+        console.log("onSubmit working", props.isFetching);
         event.preventDefault();
         if (!props.isFetching) {//don't let them submit again if the backend is already processing their registration request
             console.log(userCredentials);

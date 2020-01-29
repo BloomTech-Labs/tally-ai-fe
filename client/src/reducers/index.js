@@ -98,7 +98,7 @@ const initialState = {
 
   //currently selected business, this is what the dashboard will always display
   currentlySelectedBusiness: {
-    businessId: null,
+    businessId: "defaultTab",//default tab selected by default
     // for side bar
     businessName: null,
     businessImg: null,
@@ -170,7 +170,7 @@ const initialState = {
   //array of open tabs and the IDs of the businesses they display, anything that's not an actual business ID, like "defaultTab", will just be New Tabs. 
   //In this case we default to 1 open New Tab, this will be replaced if the user has any previously open tabs in their preferences from the database.
   tabs: {
-    activeTabs: [ {businessId: "defaultTab", isCompetitor: false} ],//isCompetitor used to color tab depending on if you own the business or if its a competitor
+    activeTabs: [ {businessId: "defaultTab"} ],//isCompetitor used to color tab depending on if you own the business or if its a competitor
     isFetching: false,
     error: null
   },
