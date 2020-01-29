@@ -203,17 +203,27 @@ export const addBusiness = (businessInfo, userID) => dispatch => {
 
   let backendFormat =
   {
-    name: businessInfo.name,
+    name: businessInfo.businessName,
     city: businessInfo.city,
     state: businessInfo.state,
     yelp: {
-      yelp_id: businessInfo.id,
+      yelp_id: businessInfo.businessId,
       url: businessInfo.url,
       image_url: businessInfo.image_url
     }
   }
 
-  console.log("\nAdding business to the store...\n");
+  console.log("\nAdding business to the store...\n", backendFormat, businessInfo);
+//   businessId: "aC1dn3qBFxgk-OYC3hFMgQ"
+// businessName: "In The Bowl"
+// businessImg: "https://s3-media1.fl.yelpcdn.com/bphoto/NpaN9bQ0YsJfI6fEVL5_Qg/o.jpg"
+// reviewCount: 709
+// averageRating: 4
+// changeInRating: ""
+// url: "https://www.yelp.com/biz/in-the-bowl-seattle-2?adjust_creative=qO78hV4p7yy-o3z8K5osow&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=qO78hV4p7yy-o3z8K5osow"
+// image_url: "https://s3-media1.fl.yelpcdn.com/bphoto/NpaN9bQ0YsJfI6fEVL5_Qg/o.jpg"
+// city: "Seattle"
+// state: "WA"
   dispatch({ type: ADD_BUSINESS_START });
   //endpoint
   axiosWithAuth()
