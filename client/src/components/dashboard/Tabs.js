@@ -17,7 +17,7 @@ const Tabs = props => {
         return <Tab business={competitor} competitor={true}/>;
       })} */}
       {props.activeTabs.map(tab => {
-        return <Tab business={tab} competitor={tab.isCompetitor} />;
+        return <Tab business={tab} />;
       })}
       <div className="addTab" onClick={() => {
           let uniqueID = Date.now() + "";

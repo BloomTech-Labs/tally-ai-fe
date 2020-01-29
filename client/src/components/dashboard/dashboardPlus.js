@@ -119,7 +119,7 @@ function DashboardPlus(props) {
         </Tooltip>
 
         {
-          props.businesses.map(business => {
+          props.businesses.slice(0, 10).map(business => {
             return (
               <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#EBF5FE" }}>
                 <Tooltip title="Delete" arrow>
@@ -166,7 +166,7 @@ function DashboardPlus(props) {
 
 
         {
-          props.competitors.map(competitor => {
+          props.competitors.slice(0, 10).map(competitor => {
             return (
               <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#F5E6BE" }}>
                 <Tooltip title="Delete" arrow>

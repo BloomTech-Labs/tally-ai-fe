@@ -35,7 +35,10 @@ function DashboardGrid(props) {
   // Fetch data for widgets
   useEffect(() => {
     console.log("Fetching all widget data with ID ", props.id);
+
+    if(businessesContains(props.businessInfo.businessId)){
     props.fetchAllData(props.id);
+    }
     
     // props.fetchTopAndBottom(props.id);
     // props.fetchWordsOverTime(props.id);
