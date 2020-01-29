@@ -18,6 +18,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import burger from "../images/burger.jpg";
+import { withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
+
+import { fetchBusinesses } from "../../actions/index.js";
 
 const drawerWidth = 375;
 
@@ -49,7 +53,7 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-export default function ClippedDrawer() {
+function ClippedDrawer(props) {
   const classes = useStyles();
 
   let widgetList = [];
@@ -80,12 +84,16 @@ export default function ClippedDrawer() {
         }}
       >
         {/* <div className={classes.toolbar} /> */}
-        <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px"}}>
-          <img src={burger} alt="burger" style={{ height: "20vh", width: "12vw", borderRadius: "100%"}}/> {/* pass in business image prop here */}
-          <h1>Test Business</h1> {/* pass in business title prop here */}
-          <h2 style={{ textAlign:"center", color:"black"}}> 12345 Test Address St. Las Vegas Nevada 89149</h2> {/* pass in business address prop here */}
-          <img></img>
-        </div>
+        {props.businesses.map(business => {
+          return (
+            <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px"}}>
+              <img src={business.bussinessImg} style={{ height: "20vh", width: "12vw", borderRadius: "100%"}}/> 
+              <h1>{business.businessName}</h1> {/* pass in business title prop here */}
+            </div>
+          )
+        })
+        }
+        
       
         <Divider />
         <div style={{ fontSize: "15px"}}>
@@ -146,3 +154,11 @@ export default function ClippedDrawer() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  businesses: state.userBusinesses.businesses
+});
+
+export default withRouter(connect(mapStateToProps, {
+  fetchBusinesses
+})(ClippedDrawer));
