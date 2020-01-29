@@ -30,7 +30,8 @@ import {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness
+  selectBusiness,
+  setActiveTabs
 } from "../actions/index";
 
 import axios from "axios";
@@ -102,8 +103,9 @@ const SearchPage = props => {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
     }
+    props.setActiveTabs(props.activeTabs.concat([selection]), localStorage.getItem("userID"));
     props.selectBusiness(selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
-    // props.history.push("/dashboard");
+    props.history.push("/dashboard");
   }
 
   useEffect(() => {
@@ -398,7 +400,8 @@ const SearchPage = props => {
 
 const mapStateToProps = state => ({
   competitors: state.competitors.businesses,
-  businesses: state.userBusinesses.businesses
+  businesses: state.userBusinesses.businesses,
+  activeTabs: state.tabs.activeTabs
 });
 
 export default connect(mapStateToProps, {
@@ -407,5 +410,6 @@ export default connect(mapStateToProps, {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness
+  selectBusiness,
+  setActiveTabs
 })(SearchPage);

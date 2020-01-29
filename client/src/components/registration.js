@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        width: '20%'
+        width: '40%'
     },
     dense: {
         marginTop: theme.spacing(2),
@@ -78,108 +78,95 @@ function Registration(props) {
     }
 
     return (
-        <div style={{ marginTop: '5%' }}>
-            <h1>Register</h1>
+        <div style={{marginTop: "64px", background: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)" }}>
             <form className={classes.container} onSubmit={(e) => submitHandler(e)}>
-
-                <TextField
-                    label="First Name"
-                    type="text"
-                    name="first_name"
-                    className={classes.textField}
-                    value={userCredentials.first_name}
-                    onChange={changeHandler}
-                    placeholder="First Name"
-                    required
-                    variant="outlined"
-                    margin="normal"
-                />
-                <TextField
-                    label="Last Name"
-                    type="text"
-                    name="last_name"
-                    className={classes.textField}
-                    value={userCredentials.last_name}
-                    onChange={changeHandler}
-                    placeholder="Last Name"
-                    required
-                    variant="outlined"
-                    margin="normal"
-                />
-                <TextField
-                    label="Email"
-                    type="email"
-                    name="email"
-                    className={classes.textField}
-                    value={userCredentials.email}
-                    onChange={changeHandler}
-                    placeholder="Email"
-                    required
-                    variant="outlined"
-                    margin="normal"
-                />
-
-                {/* <TextField
-                label="Company"
-                type="text"
-                name="company"
-                className={classes.textField}
-                value={userCredentials.company}
-                onChange={changeHandler}
-                placeholder="Company"
-                required
-                variant="outlined"
-                margin="normal"
-                />
-            <TextField
-                label="City"
-                type="text"
-                name="city"
-                className={classes.textField}
-                value={userCredentials.city}
-                onChange={changeHandler}
-                placeholder="City"
-                required
-                variant="outlined"
-                margin="normal"
-                />
-            <TextField
-                label="State"
-                type="text"
-                name="state"
-                className={classes.textField}
-                value={userCredentials.state}
-                onChange={changeHandler}
-                placeholder="State"
-                required
-                variant="outlined"
-                margin="normal"
-                />
-            <TextField
-                type="text"
-                name="zip"
-                className={classes.textField}
-                value={userCredentials.zip}
-                onChange={changeHandler}
-                placeholder="Zip"
-                required
-                variant="outlined"
-                margin="normal"
-                /> */}
-                <TextField
-                    type="password"
-                    name="password"
-                    className={classes.textField}
-                    value={userCredentials.password}
-                    onChange={changeHandler}
-                    placeholder="Password"
-                    required
-                    variant="outlined"
-                    margin="normal"
-                />
-
-                <Button className={classes.button} variant="outlined" color="black" type="submit">Register</Button>
-            </form>
+                <div style={{ width: "80%", marginLeft: "10%", marginRight: "10%", borderRadius: "47px", marginTop: "50px", marginBottom: "50px", height: "70vh", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", background: "white" }}>
+                <div style={{width: "91%", marginLeft: "9%", textAlign: "left", fontSize: "24px", paddingTop: "25px"}}> 
+                    <h1>Sign up for an account!</h1>
+                </div>
+                <div style={{width: "100%"}}>
+                    <TextField
+                        label="First Name"
+                        type="text"
+                        name="first_name"
+                        className={classes.textField}
+                        value={userCredentials.first_name}
+                        onChange={changeHandler}
+                        placeholder="First Name"
+                        required
+                        variant="outlined"
+                        margin="normal"
+                    />
+                    <TextField
+                        label="Last Name"
+                        type="text"
+                        name="last_name"
+                        className={classes.textField}
+                        value={userCredentials.last_name}
+                        onChange={changeHandler}
+                        placeholder="Last Name"
+                        required
+                        variant="outlined"
+                        margin="normal"
+                    />
+                </div>
+                <div style={{width: "100%", paddingTop: "25px", paddingBottom: "25px"}}>
+                    <TextField
+                        label="Email"
+                        type="email"
+                        name="email"
+                        className={classes.textField}
+                        value={userCredentials.email}
+                        onChange={changeHandler}
+                        placeholder="Email"
+                        required
+                        variant="outlined"
+                        margin="normal"
+                    />
+                    <TextField
+                        label="Confirm Email"
+                        type="email"
+                        name="email"
+                        className={classes.textField}
+                        value={userCredentials.email}
+                        onChange={changeHandler}
+                        placeholder="Email"
+                        required
+                        variant="outlined"
+                        margin="normal"
+                    />
+                </div>
+                <div style={{width: "100%", paddingBottom: "25px"}}>
+                    <TextField
+                        type="password"
+                        name="password"
+                        className={classes.textField}
+                        value={userCredentials.password}
+                        onChange={changeHandler}
+                        placeholder="Password"
+                        required
+                        variant="outlined"
+                        margin="normal"
+                        
+                    />
+                    <TextField
+                        type="password"
+                        name="password"
+                        className={classes.textField}
+                        value={userCredentials.password}
+                        onChange={changeHandler}
+                        placeholder="Confirm Password"
+                        required
+                        variant="outlined"
+                        margin="normal"
+                        
+                    />
+                </div>
+                <div style={{width: "100%"}}>
+                    <Button style={{background: "#2C98F0", color: "white", width: "40%"}} className={classes.button} variant="outlined" color="black" type="submit">Register</Button>
+                </div>
+            </div>
+            </form>   
         </div>
     )
 }

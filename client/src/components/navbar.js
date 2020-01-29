@@ -193,7 +193,7 @@ function NavBar(props) {
               </Link>
 
               
-              <ListItem to="/Settings">
+              <ListItem onClick={handleDrawerClose} component={Link} to="/Settings">
                 <ListItemIcon >
                   <SettingsIcon />
                 </ListItemIcon>

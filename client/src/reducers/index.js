@@ -299,7 +299,19 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         userBusinesses: {
-          businesses: action.payload,
+          businesses: action.payload.event.message === "Already favorited." ? state.userBusinesses.businesses & console.log("Already favorited") : action.payload.businesses.map((business) => {
+            return {
+              businessId: business.yelp_id,//default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            }
+
+          }),
           isSetting: false,
           error: null
         }
@@ -329,7 +341,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         userBusinesses: {
-          businesses: action.payload,
+          businesses: action.payload.event.businesses,
           isSetting: false,
           error: null
         }
@@ -358,7 +370,17 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         competitors: {
-          businesses: action.payload,
+          businesses: action.payload.event.message === "Already favorited." ? state.competitors.businesses & console.log("Already favorited") : action.payload.favorites.map((business) => {
+            return {
+              businessId: business.yelp_id,//default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            }}),
           isSetting: false,
           error: null
         }
@@ -387,7 +409,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         competitors: {
-          businesses: action.payload,
+          businesses: action.payload.event.favorites,
           isSetting: false,
           error: null
         }

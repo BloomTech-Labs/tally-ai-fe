@@ -20,12 +20,12 @@ const Tabs = props => {
         return <Tab business={tab} competitor={tab.isCompetitor} />;
       })}
       <div className="addTab" onClick={() => {
-        let uniqueID = Date.now() + "";
-        if (props.activeTabs.length < 20) {
-          props.setActiveTabs(props.activeTabs.concat([{ businessId: uniqueID }]), localStorage.getItem("userID"));
-          props.selectBusiness({businessId: uniqueID});
-          console.log("adding new tab with ID ", uniqueID);
-        }
+          let uniqueID = Date.now() + "";
+          if (props.activeTabs.length < 20) {
+            props.setActiveTabs(props.activeTabs.concat([{ businessId: uniqueID }]), localStorage.getItem("userID"));
+            props.selectBusiness({ businessId: uniqueID });
+            console.log("adding new tab with ID ", uniqueID);
+          }
       }}> {/* Add an empty tab with a fake business, which means its an empty tab */}
         <p>+</p>
       </div>

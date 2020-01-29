@@ -26,13 +26,21 @@ const Tabs = props => {
         setSelected(false);
       }
     }
-  }, [props.selectedBusiness, props.activeTabs]);
+  }, [props.selectedBusiness, props.activeTabs, props.businesses]);
 
   let className = "tab";
-  className += props.competitor ? " competitorTab" : " businessTab";
+  // className += props.competitor ? " competitorTab" : " businessTab";
+  if (props.competitors.filter(item => props.business.businessId === item.businessId).length >= 1) {
+    className += " competitorTab";
+  }else if (props.businesses.filter(item => props.business.businessId === item.businessId).length >= 1) {
+    className += " businessTab";
+  }else{
+    className += " newTab";
+  }
   className += selected ? " selectedTab" : " unselectedTab";
 
-  function deleteTab() {
+  function deleteTab(event) {
+    event.stopPropagation();
     let newActiveTabs = props.activeTabs.filter((tab) => {
       console.log("tab.businessId === props.business.businessId " + tab.businessId + " === " + props.business.businessId);
       return !(tab.businessId === props.business.businessId);
@@ -57,35 +65,38 @@ const Tabs = props => {
   }
 
   return (
-    <div className={className}>
-      <div className="deleteTab" onClick={() => deleteTab()}>X</div>
+    <div className={className} onClick={() => { props.selectBusiness(props.business); }}>
+      <div className="deleteTab" onClick={(e) => deleteTab(e)}>X</div>
       {businessesContains(props.business) ? (
-        <div onClick={() => { props.selectBusiness(props.business); }}>
+        <div>
 
           <p>
             {getBusinessFromID(props.business.businessId).businessName}
-            {selected ? (" - selected") : ("")}
+            {/* {selected ? (" - selected") : ("")} */}
           </p>
 
         </div>
       ) : (
-          <div onClick={() => { props.selectBusiness(props.business); }}>
+          <div>
 
             <p>
               New Business
-        {selected ? (" - selected") : ("")}
+        {/* {selected ? (" - selected") : ("")} */}
             </p>
 
           </div>
         )
       }
+      <div className="tabSpace"></div>{/* For styling, don't delete*/}
     </div>
   )
 
   //used to check if this is an actual business or just a new tab
   function businessesContains(business) {
     let found = false;
+    // console.log("Checking ", props.businesses, " for ", business);
     props.businesses.forEach(element => {
+      // console.log("element.businessId === business.businessId", element.businessId, "===", business.businessId)
       if (element.businessId === business.businessId) {
         found = true;
       }
@@ -99,7 +110,9 @@ const mapStateToProps = state => {
   return {
     selectedBusiness: state.currentlySelectedBusiness,
     businesses: state.userBusinesses.businesses.concat(state.competitors.businesses),
-    activeTabs: state.tabs.activeTabs
+    activeTabs: state.tabs.activeTabs,
+    userBusinesses: state.userBusinesses.businesses,
+    competitors: state.competitors.businesses
   };
 };
 
