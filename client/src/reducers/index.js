@@ -99,7 +99,7 @@ const initialState = {
 
   //currently selected business, this is what the dashboard will always display
   currentlySelectedBusiness: {
-    businessId: "defaultTab", //default tab selected by default
+    businessId: null, //default tab selected by default
     // for side bar
     businessName: null,
     businessImg: null,

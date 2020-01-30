@@ -9,7 +9,7 @@ import { setActiveTabs, selectBusiness } from "../../actions/index";
 const Tabs = props => {
 
   return (
-    <div className="tabs" style={{ marginTop: "200px" }}>
+    <div className="tabs" style={{ marginTop: "10px" }}>
       {/* {props.businesses.map(business => {
         return <Tab business={business} competitor={false}/>;
       })}

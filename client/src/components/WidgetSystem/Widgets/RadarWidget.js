@@ -6,11 +6,11 @@ const RadarWidget = (props) => {
 
 
     if(props.isFetching || props.error || !props.data) {
-        return (<div></div>);
+        return (<div>Not enough data...</div>);
     }
 
     const data = props.data.map((item) => {
-        return { subject: item.subject, data1: item.data1, data2: 0 }
+        return { subject: item.subject, data1: item.data1, data2: item.data2, fullMark: item.maxValue }
     })
     //  [
     //     { subject: 'Food', A: 45, B: 70, fullMark: 150 },

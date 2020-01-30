@@ -149,7 +149,7 @@ const SearchPage = props => {
               justifyContent: "flex-start",
               alignItems: "center",
               color: "#0D47A1",
-              marginLeft: "10%"
+              
             }}
           >
             {/* <div class="mdc-text-field mdc-text-field--outlined">

@@ -84,7 +84,7 @@ function DashboardGrid(props) {
           ) : (
               props.businessInfo.businessId ? (//if a business is selected
                 <div>
-
+{console.log("Not Redirecting cause business selected while on dashboard. Business selected:", props.businessInfo.businessId )}
                   <div className="businessStats">
                     <div className="reviews">
                       Total Reviews<br />
@@ -102,6 +102,7 @@ function DashboardGrid(props) {
                   <WidgetDisplayList />
                 </div>
               ) : (
+                console.log("Redirecting cause no business selected while on dashboard. Business selected:", props.businessInfo.businessId ) &
                   props.history.push("/")//FIXME: while deployed, instead of re-routing to just tally-ai.com/ it goes to tally-ai.com/index.html. This causes errors.
                 )
             )

@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   drawer: {
-    marginLeft: '50px',
+    marginLeft: '100px',
     width: drawerWidth,
     flexShrink: 0,
     zIndex: '-1',
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    marginTop: '70px',
+    marginTop: '75px',
     marginBottom: '80px'
   },
   content: {

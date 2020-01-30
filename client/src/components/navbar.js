@@ -398,7 +398,7 @@ function NavBar(props) {
             Tally AI
           </Typography> */}
           <div style={{display: 'flex', width: '25%', color: '#0D47A1'}}>
-                <h1>tally</h1>
+                <Link style={{color: '#0D47A1', textDecoration: "none"}} to="/dashboard"><h1>tally</h1></Link>
           </div>
           {
           isLoggedIn() ? (
@@ -478,24 +478,24 @@ function NavBar(props) {
           (//not logged in
             <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end'}}>
 
-              <div style={{width: '75%', height: '6vh'}}>
+              <div style={{width: '100%', height: '6vh'}}>
 
                 <List>
                   <div style={{display: 'flex', justifyContent: 'flex-end'}}>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/">
                       <ListItemText primary="Home" />
                     </ListItem>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/AboutUs">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/AboutUs">
                       <ListItemText primary="About Us" />
                     </ListItem>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/Login">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/Login">
                       <ListItemText primary="Log In" />
                     </ListItem>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center', background: '#DFAB26', borderRadius: '40px'}} button onClick={handleClose} component={Link} to="/Register">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center', background: '#DFAB26', borderRadius: '40px'}} button onClick={handleClose} component={Link} to="/Register">
                       <ListItemText primary="Register" />
                     </ListItem>
                   </div>
