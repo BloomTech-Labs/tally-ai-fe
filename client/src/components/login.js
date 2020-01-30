@@ -55,7 +55,7 @@ const Login = props => {
             console.log(login, "login that was passed")
 
             axios
-                .post("http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login", login) //swap local host with https://tally-ai.herokuapp.com/api/auth/login
+                .post("https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login", login) //swap local host with https://tally-ai.herokuapp.com/api/auth/login
                 .then(res => {
                     console.log("Logged in successfully", res);
                     localStorage.setItem("token", res.data.token);

@@ -56,7 +56,7 @@ function Registration(props) {
             console.log(userCredentials);
 
             axios
-                .post(`http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, userCredentials)
+                .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, userCredentials)
                 .then(
                     res => {
                         console.log("Registered successfully", res);
