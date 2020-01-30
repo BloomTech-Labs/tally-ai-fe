@@ -100,6 +100,10 @@ export const REMOVE_FAVORITE_SUCCESS = "REMOVE_FAVORITE_SUCCESS";
 export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_START = "GET_USER_DATA_START";
 
+export const FETCH_RADAR_START = "FETCH_RADAR_START";
+export const FETCH_RADAR_SUCCESS = "FETCH_RADAR_SUCCESS";
+export const FETCH_RADAR_FAILURE = "FETCH_RADAR_FAILURE";
+
 /*
   -------
   ACTIONS
@@ -203,17 +207,27 @@ export const addBusiness = (businessInfo, userID) => dispatch => {
 
   let backendFormat =
   {
-    name: businessInfo.name,
+    name: businessInfo.businessName,
     city: businessInfo.city,
     state: businessInfo.state,
     yelp: {
-      yelp_id: businessInfo.id,
+      yelp_id: businessInfo.businessId,
       url: businessInfo.url,
       image_url: businessInfo.image_url
     }
   }
 
-  console.log("\nAdding business to the store...\n");
+  console.log("\nAdding business to the store...\n", backendFormat, businessInfo);
+//   businessId: "aC1dn3qBFxgk-OYC3hFMgQ"
+// businessName: "In The Bowl"
+// businessImg: "https://s3-media1.fl.yelpcdn.com/bphoto/NpaN9bQ0YsJfI6fEVL5_Qg/o.jpg"
+// reviewCount: 709
+// averageRating: 4
+// changeInRating: ""
+// url: "https://www.yelp.com/biz/in-the-bowl-seattle-2?adjust_creative=qO78hV4p7yy-o3z8K5osow&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=qO78hV4p7yy-o3z8K5osow"
+// image_url: "https://s3-media1.fl.yelpcdn.com/bphoto/NpaN9bQ0YsJfI6fEVL5_Qg/o.jpg"
+// city: "Seattle"
+// state: "WA"
   dispatch({ type: ADD_BUSINESS_START });
   //endpoint
   axiosWithAuth()
@@ -265,21 +279,22 @@ export const addCompetitor = (businessInfo, userID) => dispatch => {
   //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
   let backendFormat =
   {
-    name: businessInfo.name,
+    name: businessInfo.businessName,
     city: businessInfo.city,
     state: businessInfo.state,
     yelp: {
-      yelp_id: businessInfo.id,
+      yelp_id: businessInfo.businessId,
       url: businessInfo.url,
       image_url: businessInfo.image_url
     }
   }
-
+  console.log("Add competitor start, data:", backendFormat);
   dispatch({ type: ADD_COMPETITOR_START });
   //endpoint
   axiosWithAuth()
     .post(`/users/${userID}/favorite`, backendFormat)
     .then(res => {
+      console.log("Add competitor success, result:", res);
       dispatch({
         type: ADD_COMPETITOR_SUCCESS,
         payload: res.data//new array after modification
@@ -575,4 +590,15 @@ export const fetchAllData = id => async dispatch => {
     console.error(`\nError getting data for reviewsOverTime\n${error}\n`);
     dispatch({ type: FETCH_REVIEWS_OVER_TIME_FAILURE, payload: error });
   }
+
+  dispatch({ type: FETCH_RADAR_START });
+  axiosWithAuth()
+  .get(`https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=4`)
+  .then((res) => {
+    dispatch({ type: FETCH_RADAR_SUCCESS, payload: res.data});
+  })
+  .catch((err) => {
+    dispatch({ type: FETCH_RADAR_FAILURE, payload: err});
+  })
+
 };

@@ -54,12 +54,10 @@ import {
   FETCH_RATING_OVER_TIME_START,
   FETCH_RATING_OVER_TIME_SUCCESS,
   FETCH_RATING_OVER_TIME_FAILURE,
-
   SET_ACTIVE_WIDGETS,
-
   SET_TABS_START,
   SET_TABS_SUCCESS,
-  SET_TABS_FAILURE
+  SET_TABS_FAILURE,
 
   // SET_FAVORITES_START,
   // SET_FAVORITES_SUCCESS,
@@ -72,12 +70,15 @@ import {
   // REMOVE_FAVORITE_START,
   // REMOVE_FAVORITE_SUCCESS,
   // REMOVE_FAVORITE_FAILURE
+  FETCH_RADAR_START,
+  FETCH_RADAR_SUCCESS,
+  FETCH_RADAR_FAILURE
 } from "../actions/index.js";
 
 import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
 import dummyReviewsOverTime from "../dummyData/dummyReviewsOverTime";
 
-import { widgets } from "../components/WidgetSystem/WidgetRegistry"
+import { widgets } from "../components/WidgetSystem/WidgetRegistry";
 
 const initialState = {
   loggedInUser: {
@@ -98,7 +99,7 @@ const initialState = {
 
   //currently selected business, this is what the dashboard will always display
   currentlySelectedBusiness: {
-    businessId: null,
+    businessId: "defaultTab", //default tab selected by default
     // for side bar
     businessName: null,
     businessImg: null,
@@ -112,65 +113,67 @@ const initialState = {
   userBusinesses: {
     isSetting: false,
     error: null,
-    businesses:
-      [{
-        businessId: "jndajnsdj0202020",
-        // for side bar
-        businessName: "IOwnThisBusiness",
-        businessImg: null,
-        // for top-of-page info cards
-        reviewCount: 0,
-        averageRating: 0,
-        changeInRating: ""
-      }]
+    businesses: [
+      // [{
+      //   businessId: "jndajnsdj0202020",
+      //   // for side bar
+      //   businessName: "IOwnThisBusiness",
+      //   businessImg: null,
+      //   // for top-of-page info cards
+      //   reviewCount: 0,
+      //   averageRating: 0,
+      //   changeInRating: ""
+      // }]
+    ]
   },
 
-  competitors: {//TODO: Change name to competitors
+  competitors: {
+    //TODO: Change name to competitors
     isSetting: false,
     error: null,
     businesses: [
-      {
-        businessId: "19878f9d6s77237-asd",
-        // for side bar
-        businessName: "Example Business",
-        businessImg: "https://assets.entrepreneur.com/franchise/282553-cover-image-1564755271.jpeg?width=800",
-        // for top-of-page info cards
-        reviewCount: 0,
-        averageRating: 0,
-        changeInRating: ""
-      },
-      {
-        // for DS API calls
-        businessId: "19878f9d6s71235assd",
-        // for side bar
-        businessName: "VERAMEAT",
-        businessImg: "https://www.shopkeep.com/wp-content/uploads/2016/07/retail-store_retail-business-plan-e1468443541681.jpg",
-        // for top-of-page info cards
-        reviewCount: 0,
-        averageRating: 0,
-        changeInRating: ""
-      },
-      {
-        // for DS API calls
-        businessId: "19878ffdgdfgb7237-asd",
-        // for side bar
-        businessName: "Bicycles",
-        businessImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshfmpFtjour-4iJgDPY7uZ0Ki3Kua13zPonqqdiSAu27YFsW48Q&s",
-        // for top-of-page info cards
-        reviewCount: 0,
-        averageRating: 0,
-        changeInRating: ""
-      }
-    ]//array of businesses
+      // {
+      //   businessId: "19878f9d6s77237-asd",
+      //   // for side bar
+      //   businessName: "Example Business",
+      //   businessImg: "https://assets.entrepreneur.com/franchise/282553-cover-image-1564755271.jpeg?width=800",
+      //   // for top-of-page info cards
+      //   reviewCount: 0,
+      //   averageRating: 0,
+      //   changeInRating: ""
+      // },
+      // {
+      //   // for DS API calls
+      //   businessId: "19878f9d6s71235assd",
+      //   // for side bar
+      //   businessName: "VERAMEAT",
+      //   businessImg: "https://www.shopkeep.com/wp-content/uploads/2016/07/retail-store_retail-business-plan-e1468443541681.jpg",
+      //   // for top-of-page info cards
+      //   reviewCount: 0,
+      //   averageRating: 0,
+      //   changeInRating: ""
+      // },
+      // {
+      //   // for DS API calls
+      //   businessId: "19878ffdgdfgb7237-asd",
+      //   // for side bar
+      //   businessName: "Bicycles",
+      //   businessImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshfmpFtjour-4iJgDPY7uZ0Ki3Kua13zPonqqdiSAu27YFsW48Q&s",
+      //   // for top-of-page info cards
+      //   reviewCount: 0,
+      //   averageRating: 0,
+      //   changeInRating: ""
+      // }
+    ] //array of businesses
   },
   //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
   //Array order really matters with activeWidgets, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
   activeWidgets: [widgets[0].name, widgets[1].name],
 
-  //array of open tabs and the IDs of the businesses they display, anything that's not an actual business ID, like "defaultTab", will just be New Tabs. 
+  //array of open tabs and the IDs of the businesses they display, anything that's not an actual business ID, like "defaultTab", will just be New Tabs.
   //In this case we default to 1 open New Tab, this will be replaced if the user has any previously open tabs in their preferences from the database.
   tabs: {
-    activeTabs: [ {businessId: "defaultTab", isCompetitor: false} ],//isCompetitor used to color tab depending on if you own the business or if its a competitor
+    activeTabs: [{ businessId: "defaultTab" }], //isCompetitor used to color tab depending on if you own the business or if its a competitor
     isFetching: false,
     error: null
   },
@@ -203,6 +206,12 @@ const initialState = {
       isFetching: false,
       error: null,
       data: null
+    },
+
+    radarWidget: {
+      isFetching: false,
+      error: null,
+      data: null
     }
   }
 };
@@ -217,6 +226,39 @@ function reducer(state = initialState, action) {
 
   //TODO: seperate this switch into multiple files, it's way too long
   switch (action.type) {
+    case FETCH_RADAR_START:
+      return {
+        ...state,
+        widgetData: {
+          radarWidget: {
+            ...state.radarWidget,
+            isFetching: true,
+            error: null
+          }
+        }
+      };
+    case FETCH_RADAR_SUCCESS:
+      return {
+        ...state,
+        widgetData: {
+          radarWidget: {
+            isFetching: false,
+            error: null,
+            data: action.payload
+          }
+        }
+      };
+    case FETCH_RADAR_FAILURE:
+      return {
+        ...state,
+        widgetData: {
+          radarWidget: {
+            ...state.radarWidget,
+            isFetching: false,
+            error: action.payload
+          }
+        }
+      };
     case SET_TABS_START:
       return {
         ...state,
@@ -294,16 +336,32 @@ function reducer(state = initialState, action) {
           isSetting: true,
           error: null
         }
-      }
+      };
     case ADD_BUSINESS_SUCCESS:
       return {
         ...state,
         userBusinesses: {
-          businesses: action.payload,
+          businesses:
+            action.payload.event.message === "Already favorited."
+              ? state.userBusinesses.businesses &
+                console.log("Already favorited")
+              : action.payload.businesses.map(business => {
+                  return {
+                    id: business.id,
+                    businessId: business.yelp_id, //default tab selected by default
+                    // for side bar
+                    businessName: business.name,
+                    businessImg: business.image_url,
+                    // for top-of-page info cards
+                    reviewCount: 0,
+                    averageRating: 0,
+                    changeInRating: ""
+                  };
+                }),
           isSetting: false,
           error: null
         }
-      }
+      };
     case ADD_BUSINESS_FAILURE:
       return {
         ...state,
@@ -312,7 +370,7 @@ function reducer(state = initialState, action) {
           isSetting: false,
           error: action.payload
         }
-      }
+      };
 
     //removing businesses from user's owned businesses list
     case REMOVE_BUSINESS_START:
@@ -323,17 +381,29 @@ function reducer(state = initialState, action) {
           isSetting: true,
           error: null
         }
-      }
+      };
 
     case REMOVE_BUSINESS_SUCCESS:
       return {
         ...state,
         userBusinesses: {
-          businesses: action.payload,
+          businesses: action.payload.businesses.map(business => {
+            return {
+              id: business.id,
+              businessId: business.yelp_id, //default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            };
+          }),
           isSetting: false,
           error: null
         }
-      }
+      };
     case REMOVE_BUSINESS_FAILURE:
       return {
         ...state,
@@ -342,7 +412,7 @@ function reducer(state = initialState, action) {
           isSetting: false,
           error: action.payload
         }
-      }
+      };
 
     //adding competitors to user's competitor list
     case ADD_COMPETITOR_START:
@@ -353,16 +423,31 @@ function reducer(state = initialState, action) {
           isSetting: true,
           error: null
         }
-      }
+      };
     case ADD_COMPETITOR_SUCCESS:
       return {
         ...state,
         competitors: {
-          businesses: action.payload,
+          businesses:
+            action.payload.event.message === "Already favorited."
+              ? state.competitors.businesses & console.log("Already favorited")
+              : action.payload.favorites.map(business => {
+                  return {
+                    id: business.id,
+                    businessId: business.yelp_id, //default tab selected by default
+                    // for side bar
+                    businessName: business.name,
+                    businessImg: business.image_url,
+                    // for top-of-page info cards
+                    reviewCount: 0,
+                    averageRating: 0,
+                    changeInRating: ""
+                  };
+                }),
           isSetting: false,
           error: null
         }
-      }
+      };
     case ADD_COMPETITOR_FAILURE:
       return {
         ...state,
@@ -371,7 +456,7 @@ function reducer(state = initialState, action) {
           isSetting: false,
           error: action.payload
         }
-      }
+      };
 
     //removing competitors from user's competitor list
     case REMOVE_COMPETITOR_START:
@@ -382,16 +467,28 @@ function reducer(state = initialState, action) {
           isSetting: true,
           error: null
         }
-      }
+      };
     case REMOVE_COMPETITOR_SUCCESS:
       return {
         ...state,
         competitors: {
-          businesses: action.payload,
+          businesses: action.payload.favorites.map(business => {
+            return {
+              id: business.id,
+              businessId: business.yelp_id, //default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            };
+          }),
           isSetting: false,
           error: null
         }
-      }
+      };
     case REMOVE_COMPETITOR_FAILURE:
       return {
         ...state,
@@ -400,7 +497,7 @@ function reducer(state = initialState, action) {
           isSetting: false,
           error: action.payload
         }
-      }
+      };
 
     case SET_ACTIVE_WIDGETS:
       return {
@@ -415,7 +512,11 @@ function reducer(state = initialState, action) {
         ...state,
         widgetData: {
           ...state.widgetData,
-          keyWords: { ...state.widgetData.keyWords, isFetching: true, error: null }
+          keyWords: {
+            ...state.widgetData.keyWords,
+            isFetching: true,
+            error: null
+          }
         }
       };
     case FETCH_TOP_AND_BOTTOM_SUCCESS:
@@ -455,9 +556,9 @@ function reducer(state = initialState, action) {
           ...state.loggedInUser,
           isFetching: true
         }
-      }
+      };
     case GET_USER_DATA_SUCCESS:
-      // action.payload: {  
+      // action.payload: {
       //   favorites
       //   loggedInUser
       //   businessInfo
@@ -480,7 +581,6 @@ function reducer(state = initialState, action) {
       //   tempBusinessInfo = action.payload.businessInfo;
       // }
 
-
       // let tempActiveWidgets = state.activeWidgets;
       // if(action.payload.activeWidgets){
       //   tempActiveWidgets = action.payload.activeWidgets;
@@ -502,7 +602,7 @@ function reducer(state = initialState, action) {
           businesses: action.payload.businessInfo
         },
         activeWidgets: action.payload.activeWidgets
-      }
+      };
 
     case UPDATE_LOGGED_IN_USER:
       return {
@@ -511,7 +611,7 @@ function reducer(state = initialState, action) {
           ...state.loggedInUser,
           shouldUpdate: action.payload
         }
-      }
+      };
 
     // Edit Account
     case FETCH_EDITACCOUNT_START:
@@ -522,25 +622,29 @@ function reducer(state = initialState, action) {
           isFetching: true,
           error: null
         }
-      }
-    case FETCH_EDITACCOUNT_SUCCESS://TODO: update activeWidgets with action.payload.preferences.widgets
+      };
+    case FETCH_EDITACCOUNT_SUCCESS: //TODO: update activeWidgets with action.payload.preferences.widgets
       return {
         ...state,
         loggedInUser: {
           data: {
-            fisrtName: action.payload.first_name ? action.payload.first_name : state.loggedInUser.data.firstName,
-            lastName: action.payload.last_name_name ? action.payload.last_name : state.loggedInUser.data.lastName
+            fisrtName: action.payload.first_name
+              ? action.payload.first_name
+              : state.loggedInUser.data.firstName,
+            lastName: action.payload.last_name_name
+              ? action.payload.last_name
+              : state.loggedInUser.data.lastName
           },
           isFetching: false,
           error: null
         }
-      }
+      };
     case FETCH_EDITACCOUNT_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.payload
-      }
+      };
 
     // PhraseRank
     case FETCH_WORDS_OVER_TIME_START:
@@ -594,7 +698,7 @@ function reducer(state = initialState, action) {
             isFetching: true,
 
             error: null
-          },
+          }
         }
       };
     case FETCH_REVIEWS_OVER_TIME_SUCCESS:
@@ -606,7 +710,7 @@ function reducer(state = initialState, action) {
             ...state.widgetData.reviewsOverTime,
             isFetching: false,
             data: action.payload.data
-          },
+          }
         }
       };
     case FETCH_REVIEWS_OVER_TIME_FAILURE:
@@ -619,7 +723,7 @@ function reducer(state = initialState, action) {
             isFetching: true,
             data: null,
             error: action.payload
-          },
+          }
         }
       };
 
@@ -663,7 +767,6 @@ function reducer(state = initialState, action) {
           }
         }
       };
-
 
     // Unknown action type (default)
     default:

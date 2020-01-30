@@ -62,7 +62,7 @@ const AboutUs = () => {
                 </div>
             </div>
 
-            <div className="Leads" style={{display: "flex", flexDirection: "row", marginLeft:"10%", marginRight:"10%", justifyContent: "center", marginTop:"100px" }}>
+            <div className="Leads" style={{display: "flex", flexDirection: "row", marginLeft:"10%", marginRight:"10%", justifyContent: "center", marginTop:"100px", paddingBottom: "80px" }}>
                 <div className="Colton" style={{width: "20%"}}>
                     <img src={Colton} alt="Photo of UX Designer" style={{borderRadius:"100%"}} />
                     <h1>Colton Mortenson</h1>
