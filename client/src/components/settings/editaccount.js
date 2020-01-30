@@ -62,12 +62,12 @@ function EditAccount(props){
         setCredentials({ ...userCredentials, [event.target.name]: event.target.value })
     }
 
-    const handleConfirmPassword = (event) => {
-        if (event.target.value !== this.state.password) {
-        //   message.error('error');
-          this.setState({confirmPassword: event.target.value})
-        }
-    }
+    // const handleConfirmPassword = (event) => {
+    //     if (event.target.value !== state.password) {
+    //     //   message.error('error');
+    //       this.setState({confirmPassword: event.target.value})
+    //     }
+    // }
 
     // useEffect(() => {
     //     setCredentials(props.loggedUserInfo)
@@ -132,9 +132,9 @@ function EditAccount(props){
                 variant ="outlined"
                 margin="normal"
                 type="password"
-                name="password"
+                name="confirm_password"
                 className={classes.textField}
-                value={userCredentials.password}
+                value={userCredentials.confirmPassword}
                 onChange={changeHandler}
                 placeholder="Confirm Password"
                 /> 

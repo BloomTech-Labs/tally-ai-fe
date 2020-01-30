@@ -100,6 +100,10 @@ export const REMOVE_FAVORITE_SUCCESS = "REMOVE_FAVORITE_SUCCESS";
 export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_START = "GET_USER_DATA_START";
 
+export const FETCH_RADAR_START = "FETCH_RADAR_START";
+export const FETCH_RADAR_SUCCESS = "FETCH_RADAR_SUCCESS";
+export const FETCH_RADAR_FAILURE = "FETCH_RADAR_FAILURE";
+
 /*
   -------
   ACTIONS
@@ -586,4 +590,15 @@ export const fetchAllData = id => async dispatch => {
     console.error(`\nError getting data for reviewsOverTime\n${error}\n`);
     dispatch({ type: FETCH_REVIEWS_OVER_TIME_FAILURE, payload: error });
   }
+
+  dispatch({ type: FETCH_RADAR_START });
+  axiosWithAuth()
+  .get(`https://cors-anywhere.herokuapp.com/http://django-tally-dev.n9ntucwqks.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=4`)
+  .then((res) => {
+    dispatch({ type: FETCH_RADAR_SUCCESS, payload: res.data});
+  })
+  .catch((err) => {
+    dispatch({ type: FETCH_RADAR_FAILURE, payload: err});
+  })
+
 };
