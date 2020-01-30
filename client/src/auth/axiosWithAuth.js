@@ -8,7 +8,7 @@ export const axiosWithAuth = () => {
     }
 
     return axios.create({
-        baseURL: "http://tallyai.us-east-1.elasticbeanstalk.com/api/",
+        baseURL: "https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `${token}`,

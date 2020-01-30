@@ -73,7 +73,7 @@ function Registration(props) {
             delete formattedUserCredentials.confirmedPassword;
 
             axios
-                .post(`http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, formattedUserCredentials)
+                .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, formattedUserCredentials)
                 .then(
                     res => {
                         console.log("Registered successfully", res);

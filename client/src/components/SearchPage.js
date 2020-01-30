@@ -102,11 +102,15 @@ const SearchPage = props => {
     } else {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
-    }
-    props.setActiveTabs(props.activeTabs.concat([selection]).filter((item) => !(item.businessId === props.selectedBusiness.businessId)), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
+    }//.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
+    props.setActiveTabs(props.activeTabs, props.activeTabs.concat([selection]), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
     props.selectBusiness(selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
+
+  useEffect(() => {
+    console.log("Added business resulting in new state: competitors ", props.competitors, "businesses", props.businesses);
+  }, [props.competitors, props.businesses])
 
   useEffect(() => {
     if (searchLocation.latitude && searchLocation.longitude) {

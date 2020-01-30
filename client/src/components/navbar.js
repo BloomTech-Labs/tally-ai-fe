@@ -331,7 +331,8 @@ import SendIcon from '@material-ui/icons/Send';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#BBDEFB'
+    backgroundColor: '#BBDEFB',
+    position: 'fixed'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -392,7 +393,7 @@ function NavBar(props) {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup> */}
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar style={{height: "8vh", backgroundColor: "#BBDEFB", color: 'black', boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)"}}>
           {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI

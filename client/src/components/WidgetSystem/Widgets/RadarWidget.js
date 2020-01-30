@@ -25,8 +25,8 @@ const RadarWidget = (props) => {
     console.log("RADAR DATA",props.data);
     return (
         <div className="radarChart">
-        <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"30px"}}>Review Frequency</h3>
-        <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>View the frequency in reviews over time to keep track if promotional efforts are working!</p>
+        <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"30px"}}>Radar Data</h3>
+        <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>A cool Radar Chart</p>
         <RadarChart cx={250} cy={200} outerRadius={110} width={500} height={375} data={data} style={{marginLeft: "100px", marginTop: "-75px"}}>
             <PolarGrid />
             <PolarAngleAxis dataKey="subject" />
