@@ -662,7 +662,7 @@ className += selected ? " selectedTab" : " unselectedTab"; */
   justify-content: stretch;
   align-items: stretch;
   height: 50px;
-  width: 70vw;
+  width: 100%;
 }
 
 .tab {
@@ -735,10 +735,8 @@ background: #F5E6BE;
 
 .addTab {
   text-align: center;
-  font-size: 90%;
   border: 1px solid #C6C6C6;
   background: #ECEDEE;
-  width: 50px !important;
   padding-left: 20px;
   padding-right: 20px;
   font-size: 25px;

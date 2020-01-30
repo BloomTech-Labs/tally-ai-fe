@@ -38,6 +38,7 @@ function App(props) {
         loggedInUser: { firstName: null, lastName: null },
         businesses: [],
         activeWidgets: [widgets[0].name, widgets[1].name],
+        activeTabs: ["defaultTab"],
         currentlySelectedBusiness: {
           businessId: null,
           businessName: null,
@@ -71,7 +72,8 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-  loggedInUser: state.loggedInUser
+  loggedInUser: state.loggedInUser,
+  activeTabs: state.activeTabs
 });
 
 export default withRouter(connect(mapStateToProps, { setUserInfo, getUserInfo, shouldUpdateLoggedInUser })(App));

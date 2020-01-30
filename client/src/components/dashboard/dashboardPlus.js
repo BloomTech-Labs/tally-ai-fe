@@ -117,7 +117,7 @@ function DashboardPlus(props) {
             </Fab>
           </Card>
         </Tooltip>
-
+        {console.log("Displaying business images of businesses: ", props.businesses)}
         {
           props.businesses.slice(0, 10).map(business => {
             return (

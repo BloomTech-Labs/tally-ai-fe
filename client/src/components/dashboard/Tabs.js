@@ -9,7 +9,7 @@ import { setActiveTabs, selectBusiness } from "../../actions/index";
 const Tabs = props => {
 
   return (
-    <div className="tabs" style={{ marginTop: "200px" }}>
+    <div className="tabs">
       {/* {props.businesses.map(business => {
         return <Tab business={business} competitor={false}/>;
       })}
@@ -22,7 +22,7 @@ const Tabs = props => {
       <div className="addTab" onClick={() => {
           let uniqueID = Date.now() + "";
           if (props.activeTabs.length < 20) {
-            props.setActiveTabs(props.activeTabs.concat([{ businessId: uniqueID }]), localStorage.getItem("userID"));
+            props.setActiveTabs(props.activeTabs, props.activeTabs.concat([{ businessId: uniqueID }]), localStorage.getItem("userID"));
             props.selectBusiness({ businessId: uniqueID });
             console.log("adding new tab with ID ", uniqueID);
           }

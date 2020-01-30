@@ -40,7 +40,9 @@ function Registration(props) {
         first_name: "",
         last_name: "",
         email: "",
-        password: ""
+        confirmedEmail: "",
+        password: "",
+        confirmedPassword: ""
     });
 
     // useEffect(() => {
@@ -52,11 +54,26 @@ function Registration(props) {
     const submitHandler = event => {
         console.log("onSubmit working", props.isFetching);
         event.preventDefault();
+
+        if(!(userCredentials.confirmedEmail === userCredentials.email)){
+            alert("Your confirmed email does not match.");
+            return;
+        }
+
+        if(!(userCredentials.password === userCredentials.confirmedPassword)){
+            alert("Your confirmed password does not match.");
+            return;
+        }
+
         if (!props.isFetching) {//don't let them submit again if the backend is already processing their registration request
             console.log(userCredentials);
 
+            let formattedUserCredentials = userCredentials;
+            delete formattedUserCredentials.confirmedEmail;
+            delete formattedUserCredentials.confirmedPassword;
+
             axios
-                .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, userCredentials)
+                .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, formattedUserCredentials)
                 .then(
                     res => {
                         console.log("Registered successfully", res);
@@ -126,9 +143,9 @@ function Registration(props) {
                         <TextField
                             label="Confirm Email"
                             type="email"
-                            name="email"
+                            name="confirmedEmail"
                             className={classes.textField}
-                            value={userCredentials.email}
+                            value={userCredentials.confirmedEmail}
                             onChange={changeHandler}
                             placeholder="Email"
                             required
@@ -151,9 +168,9 @@ function Registration(props) {
                         />
                         <TextField
                             type="password"
-                            name="password"
+                            name="confirmedPassword"
                             className={classes.textField}
-                            value={userCredentials.password}
+                            value={userCredentials.confirmedPassword}
                             onChange={changeHandler}
                             placeholder="Confirm Password"
                             required

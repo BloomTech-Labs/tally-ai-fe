@@ -42,7 +42,7 @@ function DashboardGrid(props) {
     
     // props.fetchTopAndBottom(props.id);
     // props.fetchWordsOverTime(props.id);
-  }, [props.id]);
+  }, [props.businessInfo, props.competitors, props.userBusinesses]);
 
   return (
     <div className="dashboardgrid">
@@ -50,10 +50,10 @@ function DashboardGrid(props) {
         <Sidebar />
       </div>
 
-      <div>
+      <div style={{width: "100%", marginTop: "80px"}}>
         {
           localStorage.getItem("token") && localStorage.getItem("userID") ? (
-            <div>
+            <div style={{width: "100%"}}>
               <Tabs />
               {businessesContains(props.businessInfo.businessId) ? (
                 <div>
@@ -84,7 +84,7 @@ function DashboardGrid(props) {
           ) : (
               props.businessInfo.businessId ? (//if a business is selected
                 <div>
-
+{console.log("Not Redirecting cause business selected while on dashboard. Business selected:", props.businessInfo.businessId )}
                   <div className="businessStats">
                     <div className="reviews">
                       Total Reviews<br />
@@ -102,6 +102,7 @@ function DashboardGrid(props) {
                   <WidgetDisplayList />
                 </div>
               ) : (
+                console.log("Redirecting cause no business selected while on dashboard. Business selected:", props.businessInfo.businessId ) &
                   props.history.push("/")//FIXME: while deployed, instead of re-routing to just tally-ai.com/ it goes to tally-ai.com/index.html. This causes errors.
                 )
             )
@@ -133,7 +134,9 @@ const mapStateToProps = state => ({
   // isFetching: state.widgetData.keyWords.isFetching,
   id: state.currentlySelectedBusiness.businessId,
   businessInfo: state.currentlySelectedBusiness,
-  businesses: state.userBusinesses.businesses.concat(state.competitors.businesses)
+  businesses: state.userBusinesses.businesses.concat(state.competitors.businesses),
+  userBusinesses: state.userBusinesses.businesses,
+  competitors: state.competitors.businesses
 });
 
 export default connect(mapStateToProps, {

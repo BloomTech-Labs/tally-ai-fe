@@ -331,7 +331,8 @@ import SendIcon from '@material-ui/icons/Send';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#BBDEFB'
+    backgroundColor: '#BBDEFB',
+    position: 'fixed'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -392,13 +393,13 @@ function NavBar(props) {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup> */}
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar style={{height: "8vh", backgroundColor: "#BBDEFB", color: 'black', boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)"}}>
           {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
           </Typography> */}
           <div style={{display: 'flex', width: '25%', color: '#0D47A1'}}>
-                <h1>tally</h1>
+                <Link style={{color: '#0D47A1', textDecoration: "none"}} to="/dashboard"><h1>tally</h1></Link>
           </div>
           {
           isLoggedIn() ? (
@@ -478,24 +479,24 @@ function NavBar(props) {
           (//not logged in
             <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end'}}>
 
-              <div style={{width: '75%', height: '6vh'}}>
+              <div style={{width: '100%', height: '6vh'}}>
 
                 <List>
                   <div style={{display: 'flex', justifyContent: 'flex-end'}}>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/">
                       <ListItemText primary="Home" />
                     </ListItem>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/AboutUs">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/AboutUs">
                       <ListItemText primary="About Us" />
                     </ListItem>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/Login">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/Login">
                       <ListItemText primary="Log In" />
                     </ListItem>
 
-                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center', background: '#DFAB26', borderRadius: '40px'}} button onClick={handleClose} component={Link} to="/Register">
+                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center', background: '#DFAB26', borderRadius: '40px'}} button onClick={handleClose} component={Link} to="/Register">
                       <ListItemText primary="Register" />
                     </ListItem>
                   </div>
