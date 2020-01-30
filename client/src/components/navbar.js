@@ -331,6 +331,7 @@ import SendIcon from '@material-ui/icons/Send';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    backgroundColor: '#BBDEFB'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -367,6 +368,10 @@ function NavBar(props) {
     console.log("businessSearch");
   }
 
+  function settings () {
+    props.history.push('/settings')
+  }
+
   function competitorSearch () {
     props.history.push("/search/competitor");
     console.log("compSearch");
@@ -388,14 +393,42 @@ function NavBar(props) {
         />
       </FormGroup> */}
       <AppBar position="static">
-        <Toolbar>
-          
-          <Typography variant="h6" className={classes.title}>
+        <Toolbar style={{height: "8vh", backgroundColor: "#BBDEFB", color: 'black', boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)"}}>
+          {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
-          </Typography>
+          </Typography> */}
+          <div style={{display: 'flex', width: '25%', color: '#0D47A1'}}>
+                <h1>tally</h1>
+          </div>
           {
           isLoggedIn() ? (
+            <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end'}}>
             <List> 
+              <div style={{width: '75%', color: "#0D47A1"}}>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+              >
+                <AccountCircle />
+              </IconButton>
+              </div>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
               
               <ListItem button onClick={handleClose} component={Link} to="/Dashboard">
                <ListItemIcon>
@@ -421,13 +454,15 @@ function NavBar(props) {
                   <ListItemText primary="Add a Competitor" />
                 </ListItem>
               </Link>
-
-              <ListItem onClick={handleClose} component={Link} to="/Settings">
+              
+              <Link style={{ color: "black", textDecoration: "none" }} to="Settings">
+              <ListItem button onClick={() => { handleClose(); settings(); } } component={Link}>
                 <ListItemIcon >
                   <SettingsIcon />
                 </ListItemIcon>
                 <ListItemText primary=" Account Settings" />
               </ListItem>
+              </Link>
               <Divider />
 
               <ListItem button onClick={handleClick} component={Link} to="/">
@@ -436,43 +471,39 @@ function NavBar(props) {
                 </ListItemIcon>
                 <ListItemText primary="Log Out" />
               </ListItem>
-
+              </Menu>
             </List>
+            </div>
           ) :
           (//not logged in
-            <List>
+            <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end'}}>
 
-              <ListItem button onClick={handleClose} component={Link} to="/">
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Home" />
-              </ListItem>
+              <div style={{width: '75%', height: '6vh'}}>
 
-              <ListItem button onClick={handleClose} component={Link} to="/Login">
-                <ListItemIcon>
-                  <LockOpenIcon />
-                </ListItemIcon>
-                <ListItemText primary="Log In" />
-              </ListItem>
+                <List>
+                  <div style={{display: 'flex', justifyContent: 'flex-end'}}>
 
-              <ListItem button onClick={handleClose} component={Link} to="/Register">
-                <ListItemIcon>
-                  <CreateIcon />
-                </ListItemIcon>
-                <ListItemText primary="Register" />
-              </ListItem>
+                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/">
+                      <ListItemText primary="Home" />
+                    </ListItem>
 
-              <Divider />
+                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/AboutUs">
+                      <ListItemText primary="About Us" />
+                    </ListItem>
 
-              <ListItem button onClick={handleClose} component={Link} to="/AboutUs">
-                <ListItemIcon>
-                  <InfoIcon />
-                </ListItemIcon>
-                <ListItemText primary="About Us" />
-              </ListItem>
+                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/Login">
+                      <ListItemText primary="Log In" />
+                    </ListItem>
 
-            </List>
+                    <ListItem style={{width: '10%', fontSize: '15px', textAlign:'center', background: '#DFAB26', borderRadius: '40px'}} button onClick={handleClose} component={Link} to="/Register">
+                      <ListItemText primary="Register" />
+                    </ListItem>
+                  </div>
+                </List>
+
+              </div>
+
+            </div>
           )
       }
         </Toolbar>

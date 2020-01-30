@@ -17,7 +17,7 @@ const AboutUs = () => {
     return(
         <div>
             <div className="MeetTheTeam">
-                <h1 style={{marginTop: "60px", paddingTop: "100px", fontWeight: "800", fontSize: "80px", lineHeight: "109px", letterSpacing: "0.25px"}}>Meet The Team</h1>
+                <h1 style={{marginTop: "-60px", paddingTop: "100px", fontWeight: "800", fontSize: "80px", lineHeight: "109px", letterSpacing: "0.25px"}}>Meet The Team</h1>
             </div>
 
             <div className="WebDev" style={{display: "flex", flexDirection: "row", marginLeft:"10%", marginRight:"10%", justifyContent: "space-between", marginTop:"100px" }}>
