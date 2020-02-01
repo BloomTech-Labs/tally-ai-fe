@@ -8,9 +8,21 @@ import BottomBlueRectangle from "./images/BottomBlueRectangle.png"
 import BottomPolygon2 from "./images/BottomPolygon2.png"
 import BottomRectangle from "./images/BottomRectangle.png"
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 const HomeInfo = () => {
+    AOS.init()
     return (
-        <div className="home-info">
+        <div className="home-info"
+            data-aos="fade-down"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            data-aos-mirror="true"
+            data-aos-once="true"
+            >
 
             <div className="top-card">
                 <div className="leftpara">

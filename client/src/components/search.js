@@ -16,6 +16,7 @@ import HomeIcons from "./homeIcons";
 import HomeInfo from "./HomeInfoText";
 import HomeFeatures from "./HomeFeatures";
 import HomeBottomSection from "./HomeBottomSection";
+import Divider from "@material-ui/core/Divider";
 
 import { fetchBusinesses, selectBusiness } from "../actions/index";
 import { searchResultsPlaceholder } from "../actions/index";
@@ -212,6 +213,7 @@ const Search = props => {
       </div>{/*  closes div containing backgroundcolor */}
       <div>
         <HomeIcons />
+        <Divider />
         <HomeInfo />
         <HomeFeatures />
         <HomeBottomSection />

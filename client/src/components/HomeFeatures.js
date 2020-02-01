@@ -1,8 +1,20 @@
 import React from 'react';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 const HomeFeatures = () => {
+    AOS.init()
     return (
-        <div>
+        <div
+            data-aos="fade-down"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            data-aos-mirror="true"
+            data-aos-once="true"
+                         >
             <div className="HomeFeaturesTitle">
                 <h1>Features</h1>
             </div>
