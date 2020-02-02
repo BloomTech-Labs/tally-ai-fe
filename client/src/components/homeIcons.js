@@ -32,12 +32,12 @@ const HomeIcons = () => {
                 <div className="flag-icon">
                     <FontAwesomeIcon icon={faFlag} size="8x" style={{ color: '#DFAB26'}}/>
                     <h1>Download Reviews</h1>
-                    <p className="DataPara" style={{fontWeight:'bold'}}>Be able to download and review you data with ease!</p>
+                    <p className="DataPara" style={{fontWeight:'bold'}}>Download and review your data with ease!</p>
                 </div>
                 <div className="chart-icon">
                     <FontAwesomeIcon icon={faChartBar} size="8x" style={{ color: '#D496BB'}}/>
                     <h1>Analyze Data</h1>
-                    <p className="DataPara" style={{fontWeight:'bold'}}>Quickly and easily Analyze Data using our simply yet effective Data Charts!</p>
+                    <p className="DataPara" style={{fontWeight:'bold'}}>Quickly and easily analyze data using our simple yet effective Data Charts!</p>
                 </div>
                 <div className="arrow-icon">
                     <FontAwesomeIcon icon={faChartLine} size="8x" style={{ color: '#0D47A1'}}/>
