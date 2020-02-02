@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend
 } from "recharts";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // const data = [
 //   {
@@ -252,7 +253,7 @@ const PhraseRank = props => {
   }
 
   if (props.isFetching) {
-    return <div className="phraseRank">Loading...</div>;
+    return <div className="phraseRank"><CircularProgress>Loading...</CircularProgress></div>;
   }
   if (props.error) {
     return <div className="phraseRank">Error!</div>;

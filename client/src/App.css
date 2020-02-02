@@ -6,11 +6,6 @@ form {
   padding-right: 20px;
 }
 
-/* h2 {
-  color: grey;
-  text-align: left;
-  margin-bottom: 5px; */
-/* } */
 
 .result-text {
   padding-left: 25px;
@@ -744,8 +739,8 @@ background: #F5E6BE;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  /* padding-left: 15px;
+  padding-left: 15px;
   padding-right: 15px;
   padding-top: 15px;
-  padding-bottom: 15px; */
+  padding-bottom: 15px;
 }

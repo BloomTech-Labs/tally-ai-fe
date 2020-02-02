@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 //expects a prop called business which contains business data
-const Tabs = props => {
+const BusinessTab = props => {
 
   const [selected, setSelected] = useState(false);
 
@@ -123,4 +123,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { selectBusiness, setActiveTabs })(Tabs);
+export default connect(mapStateToProps, { selectBusiness, setActiveTabs })(BusinessTab);
