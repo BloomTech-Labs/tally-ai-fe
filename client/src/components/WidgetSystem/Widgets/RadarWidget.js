@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis } from "recharts";
+import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
 import {connect} from "react-redux";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -28,7 +28,9 @@ const RadarWidget = (props) => {
         <div className="radarChart">
         <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"30px"}}>Radar Data</h3>
         <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>A cool Radar Chart</p>
-        <RadarChart cx={250} cy={200} outerRadius={110} width={500} height={375} data={data} style={{marginLeft: "100px", marginTop: "-75px"}}>
+        <div style={{width: "90%", height: "65%"}}>
+    <ResponsiveContainer>
+        <RadarChart cx={250} cy={200} outerRadius={110} data={data} style={{marginLeft: "100px", marginTop: "-75px"}}>
             <PolarGrid />
             <PolarAngleAxis dataKey="subject" />
             <PolarRadiusAxis angle={30} domain={[0, 100]}/>
@@ -36,6 +38,8 @@ const RadarWidget = (props) => {
             <Radar name="Data 2" dataKey="data2" stroke="green" fill="green" fillOpacity={0.6}/>
             <Legend />
         </RadarChart>
+        </ResponsiveContainer>
+        </div>
         </div>
     );
 }

@@ -8,7 +8,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ResponsiveContainer
 } from "recharts";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -265,12 +266,12 @@ const PhraseRank = props => {
 
   //a widget that maps the rank of a phrase over time
   return (
-    <div>
+    <div style={{width: "100%", height: "100%"}}>
     <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"30px"}}>Word Sentiment Over Time</h3>
     <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>View the frequency in reviews over time to keep track if promotional efforts are working!</p>
+    <div style={{width: "90%", height: "65%"}}>
+    <ResponsiveContainer>
     <LineChart
-      width={500}
-      height={300}
       data={formattedData}
       margin={{
         top: 5,
@@ -297,6 +298,8 @@ const PhraseRank = props => {
       <Line type="monotone" dataKey="coffee" stroke="#BDCFB5" />
       <Line type="monotone" dataKey="specials" stroke="#482728" /> */}
     </LineChart>
+    </ResponsiveContainer>
+    </div>
     </div>
   );
 };

@@ -400,7 +400,7 @@ function NavBar(props) {
             Tally AI
           </Typography> */}
           <div style={{display: 'flex', width: '25%', color: '#0D47A1'}}>
-                <Link style={{color: '#0D47A1', textDecoration: "none", fontSize:'1.4rem'}} to="/dashboard"><h1>tally</h1></Link>
+                <Link style={{color: '#0D47A1', textDecoration: "none", fontSize:'1.4rem'}} to="/"><h1>tally</h1></Link>
           </div>
           {
           isLoggedIn() ? (
