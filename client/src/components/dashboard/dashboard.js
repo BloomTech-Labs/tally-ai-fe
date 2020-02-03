@@ -36,10 +36,10 @@ function DashboardGrid(props) {
   useEffect(() => {
     console.log("Fetching all widget data with ID ", props.id);
 
-    if(businessesContains(props.businessInfo.businessId)){
-    props.fetchAllData(props.id);
+    if (businessesContains(props.businessInfo.businessId) || !localStorage.getItem("token")) {
+      props.fetchAllData(props.id);
     }
-    
+
     // props.fetchTopAndBottom(props.id);
     // props.fetchWordsOverTime(props.id);
   }, [props.businessInfo, props.competitors, props.userBusinesses]);
@@ -50,10 +50,10 @@ function DashboardGrid(props) {
         <Sidebar />
       </div>
 
-      <div style={{width: "100%", marginTop: "80px"}}>
+      <div style={{ width: "100%", marginTop: "80px" }}>
         {
           localStorage.getItem("token") && localStorage.getItem("userID") ? (
-            <div style={{width: "100%"}}>
+            <div style={{ width: "100%" }}>
               <Tabs />
               {businessesContains(props.businessInfo.businessId) ? (
                 <div>
@@ -84,7 +84,7 @@ function DashboardGrid(props) {
           ) : (
               props.businessInfo.businessId ? (//if a business is selected
                 <div>
-{console.log("Not Redirecting cause business selected while on dashboard. Business selected:", props.businessInfo.businessId )}
+                  {console.log("Not Redirecting cause business selected while on dashboard. Business selected:", props.businessInfo.businessId)}
                   <div className="businessStats">
                     <div className="reviews">
                       Total Reviews<br />
@@ -102,7 +102,7 @@ function DashboardGrid(props) {
                   <WidgetDisplayList />
                 </div>
               ) : (
-                console.log("Redirecting cause no business selected while on dashboard. Business selected:", props.businessInfo.businessId ) &
+                  console.log("Redirecting cause no business selected while on dashboard. Business selected:", props.businessInfo.businessId) &
                   props.history.push("/")//FIXME: while deployed, instead of re-routing to just tally-ai.com/ it goes to tally-ai.com/index.html. This causes errors.
                 )
             )
@@ -113,6 +113,7 @@ function DashboardGrid(props) {
 
   //used to check if this is an actual business or just a new tab
   function businessesContains(businessId) {
+    console.log("props.businesses in businessContains: ", props.businesses);
 
     if (!businessId) {
       return false;
