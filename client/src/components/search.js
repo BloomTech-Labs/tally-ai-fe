@@ -91,7 +91,7 @@ const Search = props => {
         className="search-widget"
         style={{
           backgroundSize: "cover",
-          backgroundImage: `url(${Finder})`,
+          // backgroundImage: `url(${Finder})`,
         }}
       >
         {/* <h1>See what customers are saying about your business!</h1> */}
@@ -206,6 +206,7 @@ const Search = props => {
               Submit
             </Button>
           </form>
+          <img src={Finder} alt="Guy with magnifying glass" style={{marginLeft:'5%'}} />
         </div>
         <Results select={resultsSelection}/>
       </div>

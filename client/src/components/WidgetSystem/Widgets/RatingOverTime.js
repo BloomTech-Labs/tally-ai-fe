@@ -10,6 +10,7 @@ import {
   Legend,
   CartesianGrid
 } from "recharts";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const exampleData = {
   star_data: [
@@ -28,7 +29,7 @@ const RatingOverTime = props => {
   console.log("Data in RatingOverTime: ", props.data);
 
   if (props.isFetching || !props.data) {
-    return <div>Loading...</div>;
+    return <div><CircularProgress>Loading...</CircularProgress></div>;
   }
   if (props.error) {
     return <div>Error!</div>;

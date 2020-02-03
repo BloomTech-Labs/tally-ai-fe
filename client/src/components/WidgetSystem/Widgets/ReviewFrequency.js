@@ -9,6 +9,7 @@ import {
   Legend,
   Line
 } from "recharts";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import data from "../../../dummyData/dummyReviewsOverTime";
 
@@ -32,7 +33,7 @@ const ReviewsOverTime = props => {
   console.log(`\nData in ReviewsOverTime\n${props.data}\n`);
 
   if (props.isFetching || props.data === null) {
-    return <div>Loading...</div>;
+    return <div><CircularProgress>Loading...</CircularProgress></div>;
   }
   if (props.error) {
     return <div>Error!</div>;
