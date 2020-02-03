@@ -38,8 +38,8 @@ const RatingOverTime = props => {
 
   return (
     <div style={{width: "100%", height: "100%"}}>
-      <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"120%"}}>Weekly Average Rating vs. Cumulative Average</h3>
-      <p style={{margin: "5%", textAlign:"start", fontSize:"100%"}}>See how your weekly rating compares to the cumulative average rating!</p>
+      <h3 className="widgetTitle">Weekly Average Rating vs. Cumulative Average</h3>
+      <p className="widgetSubtitle">See how your weekly rating compares to the cumulative average rating!</p>
 
       <div style={{width: "90%", height: "60%"}}>
     <ResponsiveContainer>

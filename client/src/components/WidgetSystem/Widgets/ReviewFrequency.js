@@ -40,11 +40,11 @@ const ReviewsOverTime = props => {
   if (props.error) {
     return <div>Error!</div>;
   }
-  
+
   return (
     <div className="exampleWidget4">
-      <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"120%"}}>Review Frequency</h3>
-      <p style={{margin: "5%", textAlign:"start", fontSize:"100%"}}>View the frequency in reviews over time to keep track if promotional efforts are working!</p>
+      <h3 className="widgetTitle">Review Frequency</h3>
+      <p className="widgetSubtitle">View the frequency in reviews over time to keep track if promotional efforts are working!</p>
       <div style={{width: "90%", height: "65%"}}>
     <ResponsiveContainer>
       <LineChart

@@ -156,18 +156,7 @@ const Search = props => {
               onChange={e => {
                 setSearchLocation(e.target.value);
               }}
-              //     endAdornment={<InputAdornment position="end">
-              //     <GpsFixedIcon
-              //       aria-label="locator-icon"
-              //     //   onClick={handleClickShowPassword}
-              //     //   onMouseDown={handleMouseDownPassword}
-              //       edge="end"
-              //     >
-              //       {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
-              //     </GpsFixedIcon>
-              //   </InputAdornment>
-
-              // <Tooltip title="Use your current location" arrow>
+              
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

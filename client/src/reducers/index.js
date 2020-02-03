@@ -665,7 +665,7 @@ function reducer(state = initialState, action) {
         ...state,
         loggedInUser: {
           data: {
-            fisrtName: action.payload.first_name
+            firstName: action.payload.first_name
               ? action.payload.first_name
               : state.loggedInUser.data.firstName,
             lastName: action.payload.last_name_name

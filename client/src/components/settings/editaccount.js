@@ -57,6 +57,10 @@ function EditAccount(props){
 
     console.log(props);
 
+    const changeHandler = e => {
+
+    }
+
 
     // Submit updated account info to back end
     const submitHandler = event => {
@@ -81,12 +85,6 @@ function EditAccount(props){
             : acc
             , {});
 
-        props.fetchEditAccount(localStorage.getItem("userID"), updatedCredentials);
-    }
-
-    // Handle keystroke updates to userCredentials
-    const changeHandler = event => {
-        setCredentials({ ...userCredentials, [event.target.name]: event.target.value })
     }
 
     return (
@@ -164,6 +162,7 @@ function EditAccount(props){
 
 const mapStateToProps = state => {
     return {
+        test: state
     };
 };
 
