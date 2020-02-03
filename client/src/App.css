@@ -1,6 +1,7 @@
 .App {
   text-align: center;
 }
+ 
 
 form {
   padding-right: 20px;
@@ -274,7 +275,7 @@ star-rating {
 .flag-icon {
   /* border: 1px solid black; */
   width: 33%;
-  font-family: Avenir;
+  /* font-family: Avenir; */
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -286,7 +287,7 @@ star-rating {
   width: 33%;
   margin-left: 44px;
   margin-right: 25px;
-  font-family: Avenir;
+  /* font-family: Avenir; */
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -296,7 +297,7 @@ star-rating {
 
 .arrow-icon {
   width: 33%;
-  font-family: Avenir;
+  /* font-family: Avenir; */
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -328,7 +329,7 @@ star-rating {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: Avenir;
+  /* font-family: Avenir; */
   font-style: normal;
   font-weight: 900;
   font-size: 30px;
@@ -413,7 +414,7 @@ star-rating {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: Avenir;
+  /* font-family: Avenir; */
   font-style: normal;
   font-weight: 900;
   font-size: 28px;
@@ -467,7 +468,7 @@ star-rating {
 
 .HomeFeaturesTitle {
   margin-top: 225px;
-  font-family: Avenir;
+  /* font-family: Avenir; */
   font-style: normal;
   font-weight: 800;
   font-size: 40px;
@@ -552,7 +553,7 @@ star-rating {
 	display:inline-block;
 	cursor:pointer;
 	color:#333333;
-	font-family:Avenir;
+	/* font-family:Avenir; */
 	font-size:1.5rem;
 	font-weight:bold;
 	/* font-style:italic; */
@@ -580,7 +581,7 @@ star-rating {
 
 .BottomTitle {
   width: 40%;
-  font-family: Avenir;
+  /* font-family: Avenir; */
   font-style: normal;
   font-weight: 800;
   font-size: 60px;

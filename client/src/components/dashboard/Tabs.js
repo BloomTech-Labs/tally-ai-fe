@@ -13,6 +13,7 @@ const useStyles= makeStyles({
   root: {
     flexGrow: 1,
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'flex-start',
     // width: '100%'
   },
@@ -29,7 +30,7 @@ const BusinessTabs = props => {
   };
   
   return (
-    <div className="tabs">
+    <div className="tabs" >
       {/* {props.businesses.map(business => {
         return <Tab business={business} competitor={false}/>;
       })}

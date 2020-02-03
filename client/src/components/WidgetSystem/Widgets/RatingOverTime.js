@@ -8,7 +8,8 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  CartesianGrid
+  CartesianGrid,
+  ResponsiveContainer
 } from "recharts";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -36,13 +37,13 @@ const RatingOverTime = props => {
   }
 
   return (
-    <div>
-      <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"28px"}}>Weekly Average Rating vs. Cumulative Average</h3>
-      <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>See how your weekly rating compares to the cumulative average rating!</p>
-      <div className="rating-over-time">
+    <div style={{width: "100%", height: "100%"}}>
+      <h3 className="widgetTitle">Weekly Average Rating vs. Cumulative Average</h3>
+      <p className="widgetSubtitle">See how your weekly rating compares to the cumulative average rating!</p>
+
+      <div style={{width: "90%", height: "60%"}}>
+    <ResponsiveContainer>
         <ComposedChart
-          width={500}
-          height={300}
           data={props.data}
           margin={{
             top: 5,
@@ -64,7 +65,8 @@ const RatingOverTime = props => {
             stroke="#ff7300"
           />
         </ComposedChart>
-      </div>
+        </ResponsiveContainer>
+        </div>
     </div>
   );
 };

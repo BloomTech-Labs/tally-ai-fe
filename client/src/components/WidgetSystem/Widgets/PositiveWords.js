@@ -45,8 +45,8 @@ const TopBottomWords = props => {
   } else {
     return (
       <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
-        <h3 style={{fontWeight:"bold", fontSize:"30px"}}>Your customers are loving...</h3>
-        <p style={{ fontSize:"18px" }}>These are the words associated with the reviews with high ratings</p>
+        <h3 className="widgetTitle">Your customers are loving...</h3>
+        <p className="widgetSubtitle">These are the words associated with the reviews with high ratings</p>
         <Grid container spacing={1}>
           {props.words.positive.map(word => {
             return (
