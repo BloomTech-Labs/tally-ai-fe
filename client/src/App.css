@@ -6,11 +6,6 @@ form {
   padding-right: 20px;
 }
 
-h2 {
-  color: grey;
-  text-align: left;
-  margin-bottom: 5px;
-}
 
 .result-text {
   padding-left: 25px;
@@ -557,10 +552,10 @@ star-rating {
 	display:inline-block;
 	cursor:pointer;
 	color:#333333;
-	font-family:Arial;
-	font-size:19px;
+	font-family:Avenir;
+	font-size:1.5rem;
 	font-weight:bold;
-	font-style:italic;
+	/* font-style:italic; */
 	padding:30px 60px;
   text-decoration:none;
   margin-top: 80px;
@@ -744,8 +739,8 @@ background: #F5E6BE;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  /* padding-left: 15px;
+  padding-left: 15px;
   padding-right: 15px;
   padding-top: 15px;
-  padding-bottom: 15px; */
+  padding-bottom: 15px;
 }

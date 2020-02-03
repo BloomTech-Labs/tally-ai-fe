@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis } from "recharts";
 import {connect} from "react-redux";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const RadarWidget = (props) => {
 

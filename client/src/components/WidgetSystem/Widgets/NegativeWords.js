@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +29,7 @@ const NegativeWords = props => {
     return <p>Error!</p>
   }
   if (props.isFetching || !props.words) {
-    return <h3>Loading analytics...</h3>;
+    return <CircularProgress><h3>Loading analytics...</h3></CircularProgress>;
   } else {
     return (
       <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
