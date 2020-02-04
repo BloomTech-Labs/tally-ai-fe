@@ -12,6 +12,9 @@ import Divider from "@material-ui/core/Divider";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import Magnifier from "./images/Magnifier.png"
+import wavyLine from "./images/wavyLine.png"
+
 const HomeInfo = () => {
     AOS.init()
     return (
@@ -27,29 +30,52 @@ const HomeInfo = () => {
 
             <div className="top-card">
                 <div className="leftpara">
-                    <h1 style={{borderBottom:'1px solid grey'}}>Build the business your customers want</h1>
-                    <p>For small businesses, there are often too many reviews to sort through to get useful data out of them.  Tally AI allows business owners to save time by giving insights into specific industry trends</p>
+                    <img src={Magnifier} alt="Magnifying glass image" style={{float:'left'}}/>
+                    <div className="leftpara-text">
+                    <h1 style={{fontSize:'48px', lineHeight:'66px', fontWeight:'900', textAlign:'left'}}>Build the business your customers want</h1>
+                    <p style={{fontSize:'20px', lineHeight:'32px', fontWeight:'800', fontStyle:'normal', textAlign:'left', marginTop:'-1%'}}>Understand your online reviews and feedback to improve ineffeciences.</p>
+                    </div>
                 </div>
                 <div className="TopTabletIMG">
-                    <img className="HomePicture" src={TopOrangePolygon} alt='Orange Polygon' />
+                    {/* <img className="HomePicture" src={TopOrangePolygon} alt='Orange Polygon' />
                     <img className="HomePicture2" src={YellowTopReactangle} alt='Yellow Reactangle' />
                     <img className="HomePicture3" src={BlueTopRectangle} alt='Blue Rectangle' />
-                    <img className="HomePicture4" src={toptablet} alt='Radar Graph Displaying Data' />
+                    <img className="HomePicture4" src={toptablet} alt='Radar Graph Displaying Data' /> */}
                 </div>   
             </div>
 
-            <div className="bottom-card"> 
+            <div className="bottom-card"
+                    data-aos="fade-down"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"> 
+                <div className="rightpara">  
+                    <h1 style={{fontSize:'48px', lineHeight:'66px', fontWeight:'900', textAlign:'left'}}>Keep track of your competitors</h1>
+                    <p style={{fontSize:'20px', lineHeight:'32px', fontWeight:'800', textAlign:'left'}}>Keep a close eye on the competition by simply adding businesses to your easy-to-use dashboard and see what their customers are saying about them.</p>
+                </div>
                 <div className="BottomTabletIMG">
                     <img className="HomePicture5" src={BottomBlueRectangle} alt='Blue Rectangle' />
                     <img className="HomePicture6" src={BottomPolygon2} alt='Blue Polygon' />
                     <img className="HomePicture7" src={BottomRectangle} alt='Yellow Rectangle' />
                     <img className="HomePicture8" src={bottomtablet} alt='Line Graph Displaying Data' />
                 </div>
-                <div className="rightpara">  
-                    <h1 style={{borderBottom:'1px solid grey'}}>Keep Track of your competitors</h1>
-                    <p>Keep a close eye on the competition by simply adding businesses to your easy-to-use dashboard and see what their customers are saying about them</p>
-                </div>
+               
             </div> 
+            <div className="wavy-line"
+                    data-aos="fade-down"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true">
+                    <h1 style={{position:'absolute', marginLeft:'280px', marginTop:'200px', width:'380px', height:'167px', textAlign:'right', fontWeight:'900'}}>Be informed.  Make the right decisions.</h1>
+                    <img src={wavyLine} alt="blue wavy line" />
+                    <h1 style={{position:'absolute', marginTop:'-350px', left:'60%', width:'380px', lineHeight:'50px', fontWeight:'900', textAlign:'left'}}>Build the business your customers want</h1>
+                </div>
 
         </div>
     )

@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
-import Finder from "./Finder.png";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -134,12 +133,10 @@ const SearchPage = props => {
   return (
     <div>
       <div className="backgroundcolor">
-        {/* <img src={Finder} alt="Guy with Magnifier" /> */}
         <div
           className="search-widget"
           style={{
             backgroundSize: "cover",
-            // backgroundImage: `url(${Finder})`
           }}
         >
           {/* <h1>See what customers are saying about your business!</h1> */}

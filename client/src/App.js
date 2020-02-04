@@ -11,7 +11,7 @@ import SearchPage from "./components/SearchPage"
 // Components
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
-import Search from "./components/search";
+import Search from "./components/search.js";
 import DashboardGrid from "./components/dashboard/dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
