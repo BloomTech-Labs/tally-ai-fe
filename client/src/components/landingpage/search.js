@@ -11,11 +11,10 @@ import Results from "../components/search/results";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeIcons from "./homeIcons";
-import HomeInfo from "./HomeInfoText";
-import HomeFeatures from "./HomeFeatures";
-import HomeBottomSection from "./HomeBottomSection";
-import HomePitches from './HomePitches';
+import HomeIcons from "homeIcons";
+import HomeInfo from "HomeInfoText";
+import HomeFeatures from "HomeFeatures";
+import HomeBottomSection from ".../src/components/
 
 import { fetchBusinesses, selectBusiness } from "../actions/index";
 import { searchResultsPlaceholder } from "../actions/index";
@@ -89,8 +88,8 @@ const Search = props => {
   }, [searchLocation]);
 
   return (
-    <div className="backgroundcolor">
-      <div >
+    <div>
+      <div className="backgroundcolor">
       <div
         className="search-widget"
         style={{
@@ -204,15 +203,14 @@ const Search = props => {
         <Results select={resultsSelection}/>
       </div>
       <img src={tallySearchLogo} alt="tally search logo" style={{position:'absolute', top:'0px', right:'0px', width:'50%' }} />
-      {/*  closes div containing backgroundcolor */}
+      </div>{/*  closes div containing backgroundcolor */}
       <div>
         <HomeIcons />
         <HomeInfo />
         <HomeFeatures />
-        <HomePitches />
         <HomeBottomSection />
       </div>
-      </div>
+      
     </div>
   );
 };

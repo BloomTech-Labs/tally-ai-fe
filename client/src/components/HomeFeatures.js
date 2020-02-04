@@ -22,17 +22,17 @@ const HomeFeatures = () => {
             <div className="FeaturesTables">
                 <div className="FeatuesTable1">
                     <h2 className="FeaturesHeaders">Customizable Dashboard</h2>
-                    <p>Easily customize your dashboard with graphs that are meaningful to you.  See what customers are saying about your business and keep track of industry trends</p>
+                    <p>Easily customize your dashboard with graphs that are meaningful to you.  See what customers are saying about your business and keep track of industry trends.</p>
                 </div>
 
                 <div className="FeatuesTable2">
-                    <h2 className="FeaturesHeaders">Favorites</h2>
-                    <p>Add your businesses and competitors and keep track of them.  Once you select a business, vital information is only a click away!</p>
+                    <h2 className="FeaturesHeaders">All Your Businesses in One Piece</h2>
+                    <p>Add all the businesses you own and easily track of them using our advanced dashboard.</p>
                 </div>
 
                 <div className="FeatuesTable3">
-                    <h2 className="FeaturesHeaders">Multiple Businesses</h2>
-                    <p>Compare businesses in a specific region or across the country!</p>
+                    <h2 className="FeaturesHeaders">Track Your Competitors</h2>
+                    <p>Add all your competitors and easily track of them using our advanced dashboard.</p>
                 </div>
 
                 {/* <div className="FeatuesTable4">

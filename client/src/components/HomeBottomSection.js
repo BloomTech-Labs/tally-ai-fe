@@ -17,7 +17,7 @@ const HomeBottomSection = () => {
         >
             <div className="BottomSection">
                 <h1 className="BottomTitle">Unlock your business data with Tally AI</h1>
-                <button className="FeaturesButton">Get Started Today!</button>
+                <button className="FeaturesButton">GET STARTED</button>
             </div>
         </div>
     )
