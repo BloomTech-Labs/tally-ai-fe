@@ -18,16 +18,28 @@ root:{
 export default function Footer() {
     const classes = useStyles();
 
+    function isOnLogin() {
+
+        //this function is neccessary because match.params will always be "/" even while on /dashboard since the nav bar is always rendered to "/" (path is unexact "/")
+    
+        var url = window.location;
+        var firstParam = url.pathname.split('/')[1];
+    
+        return firstParam === "";
+    }
+
     return(
-        <footer className ={classes.root}>
+        <footer className ={classes.root}>{isOnLogin() ? <div></div> :
+            <div>
             <Typography align="center">
                     {'Copyright © '}
                     Tally AI 2020
-                </Typography>
+            </Typography>
             <Button className="FooterButton" color="inherit" onClick component={Link} to="/AboutUs">About</Button>
             <Button className="FooterButton" color="inherit" onClick component={Link} to="/AboutUs">Team</Button>
             <Button className="FooterButton" color="inherit" onClick component={Link} to="/Policy">Terms Of Service</Button>
-            <Button className="FooterButton" color="inherit" onClick component={Link} to="/Policy">Privacy Policy</Button>           
-        </footer>
+            <Button className="FooterButton" color="inherit" onClick component={Link} to="/Policy">Privacy Policy</Button>
+            </div>           
+        }</footer>
     );
 }

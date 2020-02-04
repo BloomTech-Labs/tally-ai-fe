@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import magnifier from "./images/magnifier.png"
+import magnifier from "./images/Magnifier.png"
 import wavyLine from "./images/wavyLine.png"
 
 const HomeInfo = () => {

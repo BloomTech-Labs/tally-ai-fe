@@ -781,20 +781,21 @@ className += selected ? " selectedTab" : " unselectedTab"; */
   margin-right: auto;
   display: none;
 }
-
+/* 
 .competitorTab {
 
-/* background: #F5E6BE; */
+ background: #F5E6BE; 
 
 }
 
 .businessTab {
-  /* background: #EBF5FE; */
+  background: #EBF5FE;
 }
 
 .newTab {
-  /* background: #ECEDEE; */
-}
+  background: #ECEDEE;
+} 
+*/
 
 .addTab {
   text-align: center;
