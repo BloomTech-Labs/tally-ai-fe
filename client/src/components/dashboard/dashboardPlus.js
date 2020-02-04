@@ -81,7 +81,11 @@ function DashboardPlus(props) {
       props.activeTabs.forEach((tab) => {
         if (tab.businessId === props.selectedBusiness.businessId) {//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
           console.log("Got active tab");
-          tab.businessId = business.businessId;
+          let tabIndex;
+          let newTabsArray = props.activeTabs.filter((item, index) => { console.log("FILTER INDEX", index); if(item.businessId === tab.businessId) { tabIndex = index;} return item.businessId != tab.businessId });//remove the tab we want to modify
+          newTabsArray.splice(tabIndex, 0, {...business});//add back the tab but with the new name
+          console.log("Adding tab at index", tabIndex);
+          props.setActiveTabs(props.activeTabs, newTabsArray, localStorage.getItem("userID"))
         }
       })
     }
@@ -89,7 +93,7 @@ function DashboardPlus(props) {
   }
 
   return (
-    <div style={{ border: "1px solid black" }}>
+    <div>
       <div className="business-results"
         style={{
           width: "90%",
@@ -99,11 +103,10 @@ function DashboardPlus(props) {
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
-          backgroundColor: "none",
+          backgroundColor: "white",
           marginLeft: "5%",
           marginTop: '5%',
           borderRadius: 20,
-          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
           marginBottom: '5%',
 
         }}>
@@ -143,11 +146,10 @@ function DashboardPlus(props) {
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
-          backgroundColor: "none",
+          backgroundColor: "white",
           marginLeft: "5%",
           marginTop: '5%',
           borderRadius: 20,
-          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
           marginBottom: '5%',
 
         }}>

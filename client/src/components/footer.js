@@ -2,6 +2,7 @@ import React from "react";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles ({
 
@@ -10,7 +11,7 @@ root:{
     background: '#BBDEFB',
     color: 'black',
     height: '12vh',
-    zIndex: '1'
+    zIndex: '100'
 },
 
 })
@@ -23,11 +24,10 @@ export default function Footer() {
                     {'Copyright © '}
                     Tally AI 2020
                 </Typography>
-            <Button className="FooterButton" color="inherit">About</Button>
-            <Button className="FooterButton" color="inherit">Team</Button>
-            <Button className="FooterButton" color="inherit">FAQ</Button>
-            <Button className="FooterButton" color="inherit">Terms Of Service</Button>
-            <Button className="FooterButton" color="inherit">Privacy Policy</Button>           
+            <Button className="FooterButton" color="inherit" onClick component={Link} to="/AboutUs">About</Button>
+            <Button className="FooterButton" color="inherit" onClick component={Link} to="/AboutUs">Team</Button>
+            <Button className="FooterButton" color="inherit" onClick component={Link} to="/Policy">Terms Of Service</Button>
+            <Button className="FooterButton" color="inherit" onClick component={Link} to="/Policy">Privacy Policy</Button>           
         </footer>
     );
 }

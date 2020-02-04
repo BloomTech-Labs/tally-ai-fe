@@ -36,6 +36,8 @@ function DashboardGrid(props) {
   useEffect(() => {
     console.log("Fetching all widget data with ID ", props.id);
 
+    // Only fetch data if a selected business is in the businesses or competitors array
+    // or if the user is not logged in
     if (businessesContains(props.businessInfo.businessId) || !localStorage.getItem("token")) {
       props.fetchAllData(props.id);
     }
@@ -49,8 +51,8 @@ function DashboardGrid(props) {
       <div>
         <Sidebar />
       </div>
-
-      <div style={{ width: "100%", marginTop: "80px" }}>
+      {/* // TODO: DOCUMENT WHAT'S GOING ON HERE */}
+      <div style={{ width: "100%" }}>
         {
           localStorage.getItem("token") && localStorage.getItem("userID") ? (
             <div style={{ width: "100%" }}>
@@ -60,16 +62,16 @@ function DashboardGrid(props) {
 
                   <div className="businessStats">
                     <div className="reviews">
-                      Total Reviews<br />
-                      {props.businessInfo.reviewCount}
+                      <p style={{fontWeight: "bold"}}>{props.businessInfo.reviewCount}</p><br />
+                      <p style={{fontSize: "1rem"}}>Total Reviews</p>
                     </div>
                     <div className="ratings">
-                      Overall Rating<br />
-                      {props.businessInfo.averageRating}
+                      <p style={{fontWeight: "bold"}}>{props.businessInfo.averageRating}</p><br />
+                      <p style={{fontSize: "1rem"}}>Overall Rating</p>
                     </div>
                     <div className="changeofrating">
-                      Change in Rating<br />
-                      11%
+                      <p style={{fontWeight: "bold"}}>11%</p><br />
+                      <p style={{fontSize: "1rem"}}>Change in Rating</p>
               </div>
                   </div>
                   <WidgetDisplayList />

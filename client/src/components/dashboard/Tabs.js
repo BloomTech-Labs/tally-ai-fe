@@ -37,21 +37,10 @@ const BusinessTabs = props => {
       {props.competitors.map(competitor => {
         return <Tab business={competitor} competitor={true}/>;
       })} */}
-      <Paper className={classes.root}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-          >
-        <Tab label=
       {props.activeTabs.map(tab => {
         return <BusinessTab business={tab} />;
       })}
-        />
-        </Tabs>
-      </Paper>
+      
       <div className="addTab" onClick={() => {
           let uniqueID = Date.now() + "";
           if (props.activeTabs.length < 20) {

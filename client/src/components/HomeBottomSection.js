@@ -3,6 +3,8 @@ import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import abstractlines from './images/abstractlines.png'
+
 const HomeBottomSection = () => {
     AOS.init()
     return (
@@ -15,9 +17,9 @@ const HomeBottomSection = () => {
         data-aos-mirror="true"
         data-aos-once="true"
         >
-            <div className="BottomSection">
-                <h1 className="BottomTitle">Unlock your business data with Tally AI</h1>
-                <button className="FeaturesButton">GET STARTED</button>
+            <div  className="BottomSection">
+                    <h1 className="BottomTitle">Unlock your business data with Tally AI</h1>
+                    <button className="FeaturesButton">GET STARTED</button>
             </div>
         </div>
     )

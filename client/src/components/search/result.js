@@ -100,14 +100,6 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
         <p>
           {data.location.city}, {data.location.state} {data.location.zip_code}
         </p>
-        <button
-          onClick={e => {
-            console.log("On click! setting selected business data as: ", data);
-            select(e);
-          }}
-        >
-          Select
-        </button>
         {/* // business: {
 //     // for DS API calls
 //     businessId: null,
@@ -121,6 +113,14 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
 
         {/* <ToggleFavoriteButton business={{ businessId: data.id, businessName: data.name, businessImg: data.image_url, reviewCount: data.review_count, averageRating: data.rating }} /> */}
       </div>
+      <button style={{marginTop: "auto", paddingBottom: "10%", paddingRight: "7.5%"}}
+          onClick={e => {
+            console.log("On click! setting selected business data as: ", data);
+            select(e);
+          }}
+        >
+          Select
+        </button>
     </div>
   );
 };

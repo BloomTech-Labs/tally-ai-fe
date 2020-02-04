@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: 'top',
     width: "40%"
   },
   textField: {
@@ -107,7 +107,7 @@ const Search = props => {
             width: "100%",
             display: "flex",
             justifyContent: "flex-start",
-            alignItems: "center",
+            marginTop: "20vh",
             color: "black",
             marginLeft: "10%",
           }}
@@ -203,21 +203,34 @@ const Search = props => {
         </div>
         <Results select={resultsSelection}/>
       </div>
-      <img src={tallySearchLogo} alt="tally search logo" style={{position:'absolute', top:'0px', right:'0px', width:'50%' }} />
+      
       {/*  closes div containing backgroundcolor */}
-      <div>
-        <HomeIcons />
-        <HomeInfo />
-        <HomeFeatures />
-        <HomePitches />
-        <HomeBottomSection />
-      </div>
+      {/* Made it conditionally render the content at the bottom of the landing page. Once the results come in, the marketing content disappears. */}
+      {!props.searchResults
+        ? (
+          <>
+          <img src={tallySearchLogo} alt="tally search logo" style={{position:'absolute', top:'0px', right:'0px', width:'50%' }} />
+            <div>
+              <HomeIcons />
+              <HomeInfo />
+              <HomeFeatures />
+              <HomePitches />
+              <HomeBottomSection />
+            </div>
+            </>   
+        )
+        : (
+          <div></div>
+        )
+      }
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  searchResults: state.searchResults.data
+});
 
 export default connect(mapStateToProps, {
   fetchBusinesses,
