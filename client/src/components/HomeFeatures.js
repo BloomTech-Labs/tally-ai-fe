@@ -14,7 +14,7 @@ const HomeFeatures = () => {
             data-aos-easing="ease-in-out"
             data-aos-mirror="true"
             data-aos-once="true"
-                         >
+            style={{marginTop:'-10%'}}             >
             <div className="HomeFeaturesTitle">
                 <h1>Features</h1>
             </div>

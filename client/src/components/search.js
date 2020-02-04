@@ -108,7 +108,7 @@ const Search = props => {
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
-            color: "#0D47A1",
+            color: "black",
             marginLeft: "10%",
           }}
         >

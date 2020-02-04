@@ -258,7 +258,7 @@ star-rating {
   display: flex;
   justify-content: center;
   justify-content: space-around;
-  background-color: #BBDEFB;
+  /* background-color: #BBDEFB; */
   align-items: center;
 }
 
@@ -482,7 +482,7 @@ position: absolute;
 }
 
 .YelpBusinessH2 {
-  color: #0D47A1;
+  color: black;
 }
 
 .HomeFeaturesTitle {
@@ -509,7 +509,8 @@ position: absolute;
   padding: 25px;
   padding-top: 5px;
   border-radius: 18px;
-  background: #2C98F0;
+  background: #EEEEEE;
+  border-bottom: 39px solid #2C98F0;
   opacity: 0.8;
   transition: transform .2s;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -526,7 +527,8 @@ position: absolute;
   padding: 25px;
   padding-top: 5px;
   border-radius: 18px;
-  background: #48C7FE;
+  background: #EEEEEE;
+  border-bottom: 39px solid #48C7FE;
   opacity: 0.8;
   transition: transform .2s;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -545,7 +547,8 @@ position: absolute;
   padding: 25px;
   padding-top: 5px;
   border-radius: 18px;
-  background: #6FEFCC;
+  background: #EEEEEE;
+  border-bottom: 39px solid #6FEFCC;
   opacity: 0.8;
   transition: transform .2s;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -607,7 +610,7 @@ position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(0deg, #76DEFF -10.6%, #84FFDA 100%);
+  /* background: linear-gradient(0deg, #76DEFF -10.6%, #84FFDA 100%); */
 }
 
 .BottomTitle {
@@ -630,7 +633,7 @@ position: absolute;
 }
 
 .backgroundcolor {
-  background: linear-gradient(180deg, #B5E4FE -21.37%, rgba(189, 245, 255, 0.75) 99.24%);
+  background: linear-gradient(185.52deg, #B6E6FF 1.15%, #C2FDFF 24.87%, #BEFFF8 36.92%, #FFFFFF 50.39%);
 }
 
 .reviews {

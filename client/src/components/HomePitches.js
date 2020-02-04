@@ -16,7 +16,8 @@ const HomePitches = () => {
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
             data-aos-mirror="true"
-            data-aos-once="true">
+            data-aos-once="true"
+            style={{marginTop:'-10%'}}>
                 <div style={{display: 'flex'}}>
                     <img src={ipadwithhands} alt='2 hands holding iPad searching for a business using our site' />
                     <img style={{height: '60vh', marginLeft: '150px', marginTop: '100px'}} src={lazytext} alt='Text' />

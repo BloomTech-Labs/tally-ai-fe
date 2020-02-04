@@ -47,7 +47,7 @@ import SendIcon from '@material-ui/icons/Send';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#BBDEFB',
+    // backgroundColor: '#BBDEFB',
     position: 'fixed',
     zIndex: '5'
   },
@@ -111,9 +111,10 @@ function NavBar(props) {
         />
       </FormGroup> */}
       <AppBar position="fixed">
-        <Toolbar style={{height: "8vh", backgroundColor: "#BBDEFB", color: 'black', boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)"}}>
+        <Toolbar style={{height: "8vh", color: 'black', boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)"}}>
           {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
+            backgroundColor: "#BBDEFB"
           </Typography> */}
           <div style={{display: 'flex', width: '25%', color: '#0D47A1'}}>
                 <Link style={{color: '#0D47A1', textDecoration: "none", fontSize:'1.4rem'}} to="/"><h1>tally</h1></Link>
