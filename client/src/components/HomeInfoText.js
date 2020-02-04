@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import Magnifier from "./images/Magnifier.png"
+import magnifier from "./images/magnifier.png"
 import wavyLine from "./images/wavyLine.png"
 
 const HomeInfo = () => {
@@ -30,7 +30,7 @@ const HomeInfo = () => {
 
             <div className="top-card">
                 <div className="leftpara">
-                    <img src={Magnifier} alt="Magnifying glass image" style={{float:'left'}}/>
+                    <img src={magnifier} alt="Magnifying glass image" style={{float:'left', width:'70vw'}}/>
                     <div className="leftpara-text">
                     <h1 style={{fontSize:'48px', lineHeight:'66px', fontWeight:'900', textAlign:'left'}}>Build the business your customers want</h1>
                     <p style={{fontSize:'20px', lineHeight:'32px', fontWeight:'800', fontStyle:'normal', textAlign:'left', marginTop:'-1%'}}>Understand your online reviews and feedback to improve ineffeciences.</p>

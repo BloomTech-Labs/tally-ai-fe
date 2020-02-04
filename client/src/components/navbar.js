@@ -47,7 +47,7 @@ import SendIcon from '@material-ui/icons/Send';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    // backgroundColor: '#BBDEFB',
+    //backgroundColor: '#3f51b5',
     position: 'fixed',
     zIndex: '5'
   },
@@ -81,16 +81,16 @@ function NavBar(props) {
     return props.loggedInUser.firstName && props.loggedInUser.lastName && localStorage.getItem("token") && localStorage.getItem("userID");
   }
 
-  function businessSearch () {
+  function businessSearch() {
     props.history.push("/search/business");
     console.log("businessSearch");
   }
 
-  function settings () {
+  function settings() {
     props.history.push('/settings')
   }
 
-  function competitorSearch () {
+  function competitorSearch() {
     props.history.push("/search/competitor");
     console.log("compSearch");
   }
@@ -102,131 +102,145 @@ function NavBar(props) {
     props.shouldUpdateLoggedInUser(true);
   }
 
+  function isOnHomePage() {
+
+    //this function is neccessary because match.params will always be "/" even while on /dashboard since the nav bar is always rendered to "/" (path is unexact "/")
+
+    var url = window.location;
+    var firstParam = url.pathname.split('/')[1];
+
+    return firstParam === "";
+  }
+
   return (
     <div className={classes.root}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
-      <AppBar position="fixed">
-        <Toolbar style={{height: "8vh", color: 'black', boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)"}}>
-          {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
+      {isOnHomePage() ? <div className="landing-top-section"
+      >
+
+        <a href="/AboutUs">About</a>
+        <a href="/Login">Log In</a>
+        <button className="Signup" onClick component={Link} to="/Register">Sign Up</button>
+
+
+      </div> :
+        <AppBar position="fixed" style={{backgroundColor: "#0F3088"}}>
+          <Toolbar style={{ height: "8vh", color: 'black' }}>
+            {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
             backgroundColor: "#BBDEFB"
           </Typography> */}
-          <div style={{display: 'flex', width: '25%', color: '#0D47A1'}}>
-                <Link style={{color: '#0D47A1', textDecoration: "none", fontSize:'1.4rem'}} to="/"><h1>tally</h1></Link>
-          </div>
-          {
-          isLoggedIn() ? (
-            <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end'}}>
-            <List> 
-              <div style={{width: '75%', color: "#0D47A1"}}>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-              >
-                <AccountCircle />
-              </IconButton>
-              </div>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-              
-              <ListItem button onClick={handleClose} component={Link} to="/Dashboard">
-               <ListItemIcon>
-              <DashboardIcon />
-              </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-              </ListItem>
-
-              <Link style={{ color: "black", textDecoration: "none"}} to={{ pathname: 'Search', searchMode: false }}>
-                <ListItem button onClick={() => { handleClose(); businessSearch(); } } component={Link}>
-                  <ListItemIcon>
-                    <LibraryAddIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Add a Business" />
-                </ListItem>
-              </Link>
-
-              <Link style={{ color: "black", textDecoration: "none" }} to="Search">
-                <ListItem button onClick={() => { handleClose(); competitorSearch(); } } component={Link}>
-                  <ListItemIcon>
-                    <LibraryAddIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Add a Competitor" />
-                </ListItem>
-              </Link>
-              
-              <Link style={{ color: "black", textDecoration: "none" }} to="Settings">
-              <ListItem button onClick={() => { handleClose(); settings(); } } component={Link}>
-                <ListItemIcon >
-                  <SettingsIcon />
-                </ListItemIcon>
-                <ListItemText primary=" Account Settings" />
-              </ListItem>
-              </Link>
-              <Divider />
-
-              <ListItem button onClick={handleClick} component={Link} to="/">
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                <ListItemText primary="Log Out" />
-              </ListItem>
-              </Menu>
-            </List>
+            <div style={{ display: 'flex', width: '25%', color: '#0D47A1' }}>
+              <Link style={{ color: '#0D47A1', textDecoration: "none", fontSize: '1.4rem' }} to="/"><h1 style={{color:'white'}}>tally</h1></Link>
             </div>
-          ) :
-          (//not logged in
-            <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end'}}>
+            {
+              isLoggedIn() ? (
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end' }}>
+                  <List>
+                    <div style={{ width: '75%', color: "#0D47A1" }}>
+                      <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                      >
+                        <AccountCircle />
+                      </IconButton>
+                    </div>
+                    <Menu
+                      id="menu-appbar"
+                      anchorEl={anchorEl}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={open}
+                      onClose={handleClose}
+                    >
 
-              <div style={{width: '100%', height: '6vh'}}>
+                      <ListItem button onClick={handleClose} component={Link} to="/Dashboard">
+                        <ListItemIcon>
+                          <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Dashboard" />
+                      </ListItem>
 
-                <List>
-                  <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                      <Link style={{ color: "black", textDecoration: "none" }} to={{ pathname: 'Search', searchMode: false }}>
+                        <ListItem button onClick={() => { handleClose(); businessSearch(); }} component={Link}>
+                          <ListItemIcon>
+                            <LibraryAddIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Add a Business" />
+                        </ListItem>
+                      </Link>
 
-                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/">
-                      <ListItemText primary="Home" />
-                    </ListItem>
+                      <Link style={{ color: "black", textDecoration: "none" }} to="Search">
+                        <ListItem button onClick={() => { handleClose(); competitorSearch(); }} component={Link}>
+                          <ListItemIcon>
+                            <LibraryAddIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Add a Competitor" />
+                        </ListItem>
+                      </Link>
 
-                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/AboutUs">
-                      <ListItemText primary="About Us" />
-                    </ListItem>
+                      <Link style={{ color: "black", textDecoration: "none" }} to="Settings">
+                        <ListItem button onClick={() => { handleClose(); settings(); }} component={Link}>
+                          <ListItemIcon >
+                            <SettingsIcon />
+                          </ListItemIcon>
+                          <ListItemText primary=" Account Settings" />
+                        </ListItem>
+                      </Link>
+                      <Divider />
 
-                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center'}} button onClick={handleClose} component={Link} to="/Login">
-                      <ListItemText primary="Log In" />
-                    </ListItem>
+                      <ListItem button onClick={handleClick} component={Link} to="/">
+                        
+                        <ListItemIcon>
+                          <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Log Out" />
+                      </ListItem>
+                    </Menu>
+                  </List>
+                </div>
+              ) :
+                (//not logged in
+                  <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end', alignItems: "center"}}>
 
-                    <ListItem style={{width: '15%', fontSize: '15px', textAlign:'center', background: '#DFAB26', borderRadius: '40px'}} button onClick={handleClose} component={Link} to="/Register">
-                      <ListItemText primary="Register" />
-                    </ListItem>
+                    <div style={{ width: '100%' }}>
+
+                      <List>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: "center"}}>
+
+                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/">
+                            <ListItemText primary="Home" />
+                          </ListItem>
+
+                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/AboutUs">
+                            <ListItemText primary="About Us" />
+                          </ListItem>
+
+                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/Login">
+                            <ListItemText primary="Log In" />
+                          </ListItem>
+
+                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center', background: '#DFAB26', borderRadius: '40px' }} button onClick={handleClose} component={Link} to="/Register">
+                            <ListItemText primary="Register" />
+                          </ListItem>
+                        </div>
+                      </List>
+
+                    </div>
+
                   </div>
-                </List>
-
-              </div>
-
-            </div>
-          )
-      }
-        </Toolbar>
-      </AppBar>
+                )
+            }
+          </Toolbar>
+        </AppBar>}
     </div>
   );
 }

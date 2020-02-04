@@ -3,8 +3,7 @@ import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import ipadwithhands from './images/ipadwithhands.png';
-import lazytext from './images/lazytext.png';
+import ipad from './images/ipad.png';
 
 const HomePitches = () => { 
     AOS.init()
@@ -18,9 +17,15 @@ const HomePitches = () => {
             data-aos-mirror="true"
             data-aos-once="true"
             style={{marginTop:'-10%'}}>
-                <div style={{display: 'flex'}}>
-                    <img src={ipadwithhands} alt='2 hands holding iPad searching for a business using our site' />
-                    <img style={{height: '60vh', marginLeft: '150px', marginTop: '100px'}} src={lazytext} alt='Text' />
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div style={{width: '50%', display: 'flex', justifyContent: 'flexStart', alignItems: 'flexStart'}}>
+                        <img style={{height: '120vh'}} src={ipad} alt='2 hands holding iPad searching for a business using our site' />
+                    </div>
+                    <div style={{fontSize: '38px', width: '30%', textAlign: 'left', fontWeight: 'bold', marginLeft: '10%'}}>
+                        <p>Get advanced algorithmic power behind your marketing.</p>
+                        <p style={{marginTop: '5%', marginBottom: '5%'}}>Analysis of your Yelp data.</p>
+                        <p>Easy to understand graphs and visual breakdowns.</p>
+                    </div>
                 </div>
         </div>
     )

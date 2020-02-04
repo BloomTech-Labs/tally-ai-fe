@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import Result from "./result";
 import { selectBusiness, resetSearchResults } from "../../actions/index";
 
+import dbContains from "../../dbIds";
+
 /*Required business data for Result
 data {
   image_url
@@ -78,9 +80,9 @@ const Results = props => {
     return <div></div>
   }
 
-  if (props.businesses.data.length === 0) {
-    return <p>No results found</p>;
-  } else {
+  // if (props.businesses.data.length === 0) {
+  //   return <h2>No results found</h2>;
+  // } else {
     let animationClass = "";
     let fadeForm = document.querySelector(".search-form");
 
@@ -89,27 +91,49 @@ const Results = props => {
       fadeForm.classList.add("formFaded");
     }
     console.log("Animation class", animationClass);
+
+    const results = props.businesses.data.reduce((acc, result) => 
+        // For now, only render results that already exist in the database
+        dbContains(result.id)
+          ? [...acc, ( 
+            <Result
+              data={result}
+              select={select}
+              key={result.id}
+              setTentativeSelection={setTentativeSelection}x
+              className={`result ${
+                result.id === tentativeSelection.businessId
+                  ? "selected"
+                  : "not-selected"
+              }`}
+            />
+          )]
+          : acc
+          , []
+    );
+
+    const Sorry = () => (
+      <div>
+        <h2>Sorry, your business is not currently supported, please try a cafe in Phoenix, AZ!</h2>
+      </div>
+    );
+
+    const NoResults = () => (
+      <div>
+        <h2>Sorry, no results for this business.</h2>
+      </div>
+    );
+    
+
     return (
       <div
         className={"search-results" + animationClass}
-        style={{ overflow: "scroll", marginTop: "4%" }}
+        style={{ overflow: "scroll", marginTop: "4%" }} // change margin top to 20vh if you want it to be even with the left div
       >
-        {props.businesses.data.map(result => (
-          <Result
-            data={result}
-            select={select}
-            key={result.id}
-            setTentativeSelection={setTentativeSelection}
-            className={`result ${
-              result.id === tentativeSelection.businessId
-                ? "selected"
-                : "not-selected"
-            }`}
-          />
-        ))}
+        {props.businesses.data.length ? results.length ? results : <Sorry/> : <NoResults />}
       </div>
     );
-  }
+  // }
 };
 
 const mapStateToProps = state => ({
