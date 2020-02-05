@@ -36,40 +36,42 @@ function DashboardGrid(props) {
   useEffect(() => {
     console.log("Fetching all widget data with ID ", props.id);
 
-    if(businessesContains(props.businessInfo.businessId)){
-    props.fetchAllData(props.id);
+    // Only fetch data if a selected business is in the businesses or competitors array
+    // or if the user is not logged in
+    if (businessesContains(props.businessInfo.businessId) || !localStorage.getItem("token")) {
+      props.fetchAllData(props.id);
     }
-    
+
     // props.fetchTopAndBottom(props.id);
     // props.fetchWordsOverTime(props.id);
-  }, [props.id]);
+  }, [props.businessInfo, props.competitors, props.userBusinesses]);
 
   return (
     <div className="dashboardgrid">
       <div>
         <Sidebar />
       </div>
-
-      <div>
+      {/* // TODO: DOCUMENT WHAT'S GOING ON HERE */}
+      <div style={{ width: "100%" }}>
         {
           localStorage.getItem("token") && localStorage.getItem("userID") ? (
-            <div>
+            <div style={{ width: "100%" }}>
               <Tabs />
               {businessesContains(props.businessInfo.businessId) ? (
                 <div>
 
                   <div className="businessStats">
                     <div className="reviews">
-                      Total Reviews<br />
-                      {props.businessInfo.reviewCount}
+                      <p style={{fontWeight: "bold"}}>{props.businessInfo.reviewCount}</p><br />
+                      <p style={{fontSize: "1rem"}}>Total Reviews</p>
                     </div>
                     <div className="ratings">
-                      Overall Rating<br />
-                      {props.businessInfo.averageRating}
+                      <p style={{fontWeight: "bold"}}>{props.businessInfo.averageRating}</p><br />
+                      <p style={{fontSize: "1rem"}}>Overall Rating</p>
                     </div>
                     <div className="changeofrating">
-                      Change in Rating<br />
-                      11%
+                      <p style={{fontWeight: "bold"}}>11%</p><br />
+                      <p style={{fontSize: "1rem"}}>Change in Rating</p>
               </div>
                   </div>
                   <WidgetDisplayList />
@@ -84,7 +86,7 @@ function DashboardGrid(props) {
           ) : (
               props.businessInfo.businessId ? (//if a business is selected
                 <div>
-
+                  {console.log("Not Redirecting cause business selected while on dashboard. Business selected:", props.businessInfo.businessId)}
                   <div className="businessStats">
                     <div className="reviews">
                       Total Reviews<br />
@@ -102,6 +104,7 @@ function DashboardGrid(props) {
                   <WidgetDisplayList />
                 </div>
               ) : (
+                  console.log("Redirecting cause no business selected while on dashboard. Business selected:", props.businessInfo.businessId) &
                   props.history.push("/")//FIXME: while deployed, instead of re-routing to just tally-ai.com/ it goes to tally-ai.com/index.html. This causes errors.
                 )
             )
@@ -112,6 +115,7 @@ function DashboardGrid(props) {
 
   //used to check if this is an actual business or just a new tab
   function businessesContains(businessId) {
+    console.log("props.businesses in businessContains: ", props.businesses);
 
     if (!businessId) {
       return false;
@@ -133,7 +137,9 @@ const mapStateToProps = state => ({
   // isFetching: state.widgetData.keyWords.isFetching,
   id: state.currentlySelectedBusiness.businessId,
   businessInfo: state.currentlySelectedBusiness,
-  businesses: state.userBusinesses.businesses.concat(state.competitors.businesses)
+  businesses: state.userBusinesses.businesses.concat(state.competitors.businesses),
+  userBusinesses: state.userBusinesses.businesses,
+  competitors: state.competitors.businesses
 });
 
 export default connect(mapStateToProps, {

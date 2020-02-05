@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,29 +29,32 @@ const NegativeWords = props => {
     return <p>Error!</p>
   }
   if (props.isFetching || !props.words) {
-    return <h3>Loading analytics...</h3>;
+    return <CircularProgress><h3>Loading analytics...</h3></CircularProgress>;
   } else {
     return (
-      <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
-        <h3 style={{fontWeight:"bold", fontSize:"30px"}}>You can improve on...</h3>
-        <p style={{ fontSize:"18px" }}>These are the words associated with the reviews with low ratings</p>
-        <Grid container spacing={1}>
-          {props.words.negative.map(word => {
-            return (
-              <Grid
-                item
-                xs={6}
-                style={{ display: "flex", flexDirection: "column", fontSize:"20px" }}
-              >
-                <Paper style={{ color: "black" }} className={classes.paper}>
-                  {word.term}
-                </Paper>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </div>
-    );
+      <div>
+        <h3 className="widgetTitle">You can improve on...</h3>
+        <p className="widgetSubtitle">These are the words associated with the reviews with low ratings</p>
+        <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
+  
+          <Grid container spacing={1}>
+            {props.words.negative.map(word => {
+              return (
+                <Grid
+                  item
+                  xs={6}
+                  style={{ display: "flex", flexDirection: "column", fontSize:"20px" }}
+                >
+                  <Paper style={{ color: "black" }} className={classes.paper}>
+                    {word.term}
+                  </Paper>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </div>
+        </div>
+      );
   }
 };
 

@@ -81,7 +81,11 @@ function DashboardPlus(props) {
       props.activeTabs.forEach((tab) => {
         if (tab.businessId === props.selectedBusiness.businessId) {//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
           console.log("Got active tab");
-          tab.businessId = business.businessId;
+          let tabIndex;
+          let newTabsArray = props.activeTabs.filter((item, index) => { console.log("FILTER INDEX", index); if(item.businessId === tab.businessId) { tabIndex = index;} return item.businessId != tab.businessId });//remove the tab we want to modify
+          newTabsArray.splice(tabIndex, 0, {...business});//add back the tab but with the new name
+          console.log("Adding tab at index", tabIndex);
+          props.setActiveTabs(props.activeTabs, newTabsArray, localStorage.getItem("userID"))
         }
       })
     }
@@ -89,7 +93,7 @@ function DashboardPlus(props) {
   }
 
   return (
-    <div style={{ border: "1px solid black" }}>
+    <div>
       <div className="business-results"
         style={{
           width: "90%",
@@ -99,11 +103,10 @@ function DashboardPlus(props) {
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
-          backgroundColor: "none",
+          backgroundColor: "white",
           marginLeft: "5%",
           marginTop: '5%',
           borderRadius: 20,
-          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
           marginBottom: '5%',
 
         }}>
@@ -111,19 +114,19 @@ function DashboardPlus(props) {
 
         <h2 style={{ color: "black", marginLeft: "3vh" }}>My Businesses</h2>
         <Tooltip title="Add a Business" arrow>
-          <Card className={classes.card} onClick={() => { props.history.push("/search/business") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#EBF5FE" }}>
+          <Card className={classes.card} onClick={() => { props.history.push("/search/business") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
             <Fab disabled aria-label="add" >
               <AddIcon />
             </Fab>
           </Card>
         </Tooltip>
-
+        {console.log("Displaying business images of businesses: ", props.businesses)}
         {
           props.businesses.slice(0, 10).map(business => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#EBF5FE" }}>
+              <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
                 <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh"}} />
+                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}} />
                 </Tooltip>
                 <h3>{business.businessName}</h3>
                 <img style={{ objectFit: "cover", width: "100%", height: "80%", borderRadius: "10%" }}
@@ -143,11 +146,10 @@ function DashboardPlus(props) {
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
-          backgroundColor: "none",
+          backgroundColor: "white",
           marginLeft: "5%",
           marginTop: '5%',
           borderRadius: 20,
-          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
           marginBottom: '5%',
 
         }}>
@@ -157,7 +159,7 @@ function DashboardPlus(props) {
 
         <Tooltip title="Add a Competitor" arrow>
 
-          <Card className={classes.card} onClick={() => { props.history.push("/search/competitor") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#F5E6BE" }}>
+          <Card className={classes.card} onClick={() => { props.history.push("/search/competitor") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
             <Fab disabled aria-label="add" >
               <AddIcon />
             </Fab>
@@ -168,9 +170,9 @@ function DashboardPlus(props) {
         {
           props.competitors.slice(0, 10).map(competitor => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#F5E6BE" }}>
+              <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
                 <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"2vh"}}>
+                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}}>
                 </DeleteForeverOutlinedIcon>
                 </Tooltip>
                 <h3>{competitor.businessName}</h3>

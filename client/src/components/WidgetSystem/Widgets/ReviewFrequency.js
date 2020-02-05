@@ -7,8 +7,10 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  Line
+  Line,
+  ResponsiveContainer
 } from "recharts";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import data from "../../../dummyData/dummyReviewsOverTime";
 
@@ -31,20 +33,21 @@ const ReviewsOverTime = props => {
 
   console.log(`\nData in ReviewsOverTime\n${props.data}\n`);
 
+  // Conditionally render
   if (props.isFetching || props.data === null) {
-    return <div>Loading...</div>;
+    return <div><CircularProgress>Loading...</CircularProgress></div>;
   }
   if (props.error) {
     return <div>Error!</div>;
   }
 
   return (
-    <div className="exampleWidget4">
-      <h3 style={{margin: "5%", textAlign:"start", fontWeight:"bold", fontSize:"30px"}}>Review Frequency</h3>
-      <p style={{margin: "5%", textAlign:"start", fontSize:"18px"}}>View the frequency in reviews over time to keep track if promotional efforts are working!</p>
+    <div className="exampleWidget4" style={{width: "100%", height: "100%"}}>
+      <h3 className="widgetTitle">Review Frequency</h3>
+      <p className="widgetSubtitle">View the frequency in reviews over time to keep track if promotional efforts are working!</p>
+      <div style={{width: "90%", height: "65%"}}>
+    <ResponsiveContainer>
       <LineChart
-        width={500}
-        height={300}
         data={props.data}
         margin={{
           top: 5,
@@ -65,6 +68,8 @@ const ReviewsOverTime = props => {
           activeDot={{ r: 8 }}
         />
       </LineChart>
+      </ResponsiveContainer>
+      </div>
     </div>
   );
 };

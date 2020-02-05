@@ -100,6 +100,10 @@ export const REMOVE_FAVORITE_SUCCESS = "REMOVE_FAVORITE_SUCCESS";
 export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_START = "GET_USER_DATA_START";
 
+export const UPDATE_YELP_DATA_START = "UPDATE_YELP_DATA_START";
+export const UPDATE_YELP_DATA_SUCCESS = "UPDATE_YELP_DATA_SUCCESS";
+export const UPDATE_YELP_DATA_FAILURE = "UPDATE_YELP_DATA_FAILURE";
+
 export const FETCH_RADAR_START = "FETCH_RADAR_START";
 export const FETCH_RADAR_SUCCESS = "FETCH_RADAR_SUCCESS";
 export const FETCH_RADAR_FAILURE = "FETCH_RADAR_FAILURE";
@@ -153,12 +157,13 @@ export const setActiveWidgets = (widgetArray) => dispatch => {
   dispatch({ type: SET_ACTIVE_WIDGETS, payload: widgetArray });
 }
 
-export const setActiveTabs = (tabsArray, userID) => dispatch => {
-  dispatch({ type: SET_TABS_START });
+export const setActiveTabs = (oldTabsArray, newTabsArray, userID) => dispatch => {
+  console.log("Setting tabs on back end to ", newTabsArray);
+  dispatch({ type: SET_TABS_START, payload: newTabsArray});//predict that the request will be successful and update state immediatly so the user doesn't have to wait
   axiosWithAuth()
-    .put("/users/" + userID, { preferences: { activeTabs: tabsArray } })
-    .then(res => console.log("TABS SET, RESULT: ", res) & dispatch({ type: SET_TABS_SUCCESS, payload: tabsArray }))
-    .catch(err => dispatch({ type: SET_TABS_FAILURE, payload: err }))
+    .put("/users/" + userID, { preferences: { activeTabs: newTabsArray } })
+    .then(res => console.log("TABS SET, RESULT: ", res) & dispatch({ type: SET_TABS_SUCCESS }))
+    .catch(err => dispatch({ type: SET_TABS_FAILURE, payload: oldTabsArray }))//revert to old array if an error occurs
 }
 
 // TopBottomWords
@@ -410,7 +415,8 @@ export const getUserInfo = (userID) => dispatch => {
         competitors: res.data.favorites,
         loggedInUser: { firstName: res.data.first_name, lastName: res.data.last_name },
         businesses: res.data.businesses,
-        activeWidgets: []//TODO: endpoint should return widgets
+        activeWidgets: res.data.preferences && res.data.preferences.activeWidgets ? res.data.preferences.activeWidgets : [],
+        activeTabs: res.data.preferences && res.data.preferences.activeTabs ? res.data.preferences.activeTabs : []
       }
 
       console.log("Got user data, ", res);//{user_id: 13, first_name: "Test", last_name: "Test", businesses: Array(0), favorites: Array(0)}

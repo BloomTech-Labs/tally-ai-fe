@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         marginTop: '10%',
-        marginBottom: '12.5%'
+        marginBottom: '-3%'
     },
     textField: {
         marginLeft: theme.spacing(1),
@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         marginTop: '2%',
         marginBottom: '3.2%',
-        width: '12%'
+        width: '12%',
+        backgroundColor: '#1E4DC7'
     },
     input: {
         display: 'none',
@@ -77,9 +78,9 @@ const Login = props => {
     }, [props.loggedInUser]);
 
     return (
-        <div style={{ border: "1px solid #E3F2FD", background: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)" }}>
+        <div style={{ minHeight: "99vh", border: "1px solid #E3F2FD", background: "linear-gradient(341.24deg, #B5E4FE 11.16%, #BDF5FF 82.03%)" }}>
             <form className={classes.container} onSubmit={handleSubmit}>
-                <div style={{ height: "60vh", width: "30%", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", borderRadius: "47px", backgroundColor: "White" }}>
+                <div style={{ height: "60vh", width: "30%", borderRadius: "47px", backgroundColor: "White" }}>
                     <div style={{ paddingTop: "20px", fontSize: "22px" }}>
                         <h1>Log In</h1>
                     </div>
@@ -111,10 +112,10 @@ const Login = props => {
                             placeholder="Password"
                         />
                     </div>
-                    <Button style={{ marginTop: "30px", background: "#2C98F0", color: "white", width: "40%" }} className={classes.button} variant="outlined" color="black" type="submit">Login</Button>
+                    <Button style={{ marginTop: "30px", backgroundColor: "#1E4DC7;", color: "white", width: "40%" }} className={classes.button} variant="outlined" color="black" type="submit">Login</Button>
                     <div className={classes.bottomText}>
                         <p>
-                            Need to create an account?  <Link to='/Register/'>Register Now!</Link>
+                            Need to create an account?  <Link style={{color: "blue"}} to='/Register/'>Register Now!</Link>
                         </p>
                     </div>
                 </div>

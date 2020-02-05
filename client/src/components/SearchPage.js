@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
-import Finder from "./Finder.png";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -102,11 +101,15 @@ const SearchPage = props => {
     } else {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
-    }
-    props.setActiveTabs(props.activeTabs.concat([selection]).filter((item) => !(item.businessId === props.selectedBusiness.businessId)), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
+    }//.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
+    props.setActiveTabs(props.activeTabs, props.activeTabs.concat([selection]), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
     props.selectBusiness(selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
+
+  useEffect(() => {
+    console.log("Added business resulting in new state: competitors ", props.competitors, "businesses", props.businesses);
+  }, [props.competitors, props.businesses])
 
   useEffect(() => {
     if (searchLocation.latitude && searchLocation.longitude) {
@@ -129,13 +132,11 @@ const SearchPage = props => {
 
   return (
     <div>
-      <div className="backgroundcolor">
-        {/* <img src={Finder} alt="Guy with Magnifier" /> */}
+      <div>
         <div
           className="search-widget"
           style={{
             backgroundSize: "cover",
-            // backgroundImage: `url(${Finder})`
           }}
         >
           {/* <h1>See what customers are saying about your business!</h1> */}
@@ -149,7 +150,7 @@ const SearchPage = props => {
               justifyContent: "flex-start",
               alignItems: "center",
               color: "#0D47A1",
-              marginLeft: "10%"
+              
             }}
           >
             {/* <div class="mdc-text-field mdc-text-field--outlined">
@@ -256,140 +257,6 @@ const SearchPage = props => {
             </form>
           </div>
           <Results select={resultsSelection} />
-        </div>
-        <div
-          className="favorites-section"
-          style={{
-            overflow: "scroll",
-            width: "80%",
-            height: "80%",
-            display: "flex",
-            flexWrap: "wrap",
-            flexDirection: "row",
-            justifyContent: "space-around",
-            alignItems: "center",
-            backgroundColor: "none",
-            border: "1px solid grey",
-            margin: "auto",
-            marginTop: '10%'
-
-          }}
-        >
-          {/* <div style={{ display: 'flex', justifyContent: 'center', width: '75%', marginBottom: '50%' }}><h3>Favorites</h3></div> */}
-
-          {props.match.params.searchMode === "competitor"
-            ? props.competitors.map(competitor => {
-                return (
-                    <Card className={classes.card}>
-                      <CardActionArea>
-                        <img
-                          style={{
-                            objectFit: "cover",
-                            width: "20vw",
-                            height: "10vw"
-                          }}
-                          src={competitor.businessImg}
-                        ></img>
-                        <CardContent>
-                          <Typography>
-                            <h3>{competitor.businessName}</h3>
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                      <CardActions style={{ justifyContent: "center" }}>
-                        {/* <Button variant="contained" color="primary"> */}
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          style={{ width: "100px" }}
-                        >
-                          <Link
-                            style={{
-                              textDecoration: "none",
-                              color: "white"
-                            }}
-                            onClick={() => {
-                              props.selectBusiness(competitor);
-                            }}
-                            to="/dashboard"
-                          >
-                            View
-                          </Link>
-                        </Button>
-                        {/* </Button> */}
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          style={{ width: "100px" }}
-                          onClick={() => {
-                            props.removeCompetitor(
-                              competitor.id,
-                              localStorage.getItem("userID")
-                            );
-                          }}
-                        >
-                          Remove
-                        </Button>
-                      </CardActions>
-                    </Card>
-                );
-              })
-            : props.businesses.map(business => {
-                return (
-                    <Card className={classes.card}>
-                      <CardActionArea>
-                        <img
-                          style={{
-                            objectFit: "cover",
-                            width: "20vw",
-                            height: "10vw"
-                          }}
-                          src={business.businessImg}
-                        ></img>
-                        <CardContent>
-                          <Typography>
-                            <h3>{business.businessName}</h3>
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                      <CardActions style={{ justifyContent: "center" }}>
-                        {/* <Button variant="contained" color="primary"> */}
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          style={{ width: "100px" }}
-                        >
-                          <Link
-                            style={{
-                              textDecoration: "none",
-                              color: "white"
-                            }}
-                            onClick={() => {
-                              props.selectBusiness(business);
-                            }}
-                            to="/dashboard"
-                          >
-                            View
-                          </Link>
-                        </Button>
-                        {/* </Button> */}
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          style={{ width: "100px" }}
-                          onClick={() => {
-                            props.removeBusiness(
-                              business.id,
-                              localStorage.getItem("userID")
-                            );
-                          }}
-                        >
-                          Remove
-                        </Button>
-                      </CardActions>
-                    </Card>
-                );
-              })}
         </div>
       </div>
 

@@ -69,7 +69,6 @@ const WidgetDisplayList = (props) => {
 
     return (
         <div>
-            <hr />
             {/* <h4>Widgets</h4> */}
             <div className="widgetList" onDragOver={(event) => {
 

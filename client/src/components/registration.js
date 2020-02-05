@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: '7%'
     },
     textField: {
         marginLeft: theme.spacing(1),
@@ -27,7 +28,8 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         marginTop: '2%',
         marginBottom: '9%',
-        width: '15%'
+        width: '15%',
+        color:'#1E4DC7'
     },
     input: {
         display: 'none',
@@ -40,7 +42,9 @@ function Registration(props) {
         first_name: "",
         last_name: "",
         email: "",
-        password: ""
+        confirmedEmail: "",
+        password: "",
+        confirmedPassword: ""
     });
 
     // useEffect(() => {
@@ -52,11 +56,26 @@ function Registration(props) {
     const submitHandler = event => {
         console.log("onSubmit working", props.isFetching);
         event.preventDefault();
+
+        if(!(userCredentials.confirmedEmail === userCredentials.email)){
+            alert("Your confirmed email does not match.");
+            return;
+        }
+
+        if(!(userCredentials.password === userCredentials.confirmedPassword)){
+            alert("Your confirmed password does not match.");
+            return;
+        }
+
         if (!props.isFetching) {//don't let them submit again if the backend is already processing their registration request
             console.log(userCredentials);
 
+            let formattedUserCredentials = userCredentials;
+            delete formattedUserCredentials.confirmedEmail;
+            delete formattedUserCredentials.confirmedPassword;
+
             axios
-                .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, userCredentials)
+                .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, formattedUserCredentials)
                 .then(
                     res => {
                         console.log("Registered successfully", res);
@@ -78,9 +97,9 @@ function Registration(props) {
     }
 
     return (
-        <div style={{ marginTop: "64px", background: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)" }}>
+        <div style={{background: "linear-gradient(341.24deg, #B5E4FE 11.16%, #BDF5FF 82.03%)", height:"100vh" }}>
             <form className={classes.container} onSubmit={(e) => submitHandler(e)}>
-                <div style={{ width: "80%", marginLeft: "10%", marginRight: "10%", borderRadius: "47px", marginTop: "50px", marginBottom: "50px", height: "70vh", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", background: "white" }}>
+                <div style={{ width: "80%", marginLeft: "10%", marginRight: "10%", borderRadius: "47px", marginTop: "50px", marginBottom: "50px", height: "70vh", background: "white" }}>
                     <div style={{ width: "91%", marginLeft: "9%", textAlign: "left", fontSize: "24px", paddingTop: "25px" }}>
                         <h1>Sign up for an account!</h1>
                     </div>
@@ -126,9 +145,9 @@ function Registration(props) {
                         <TextField
                             label="Confirm Email"
                             type="email"
-                            name="email"
+                            name="confirmedEmail"
                             className={classes.textField}
-                            value={userCredentials.email}
+                            value={userCredentials.confirmedEmail}
                             onChange={changeHandler}
                             placeholder="Email"
                             required
@@ -151,9 +170,9 @@ function Registration(props) {
                         />
                         <TextField
                             type="password"
-                            name="password"
+                            name="confirmedPassword"
                             className={classes.textField}
-                            value={userCredentials.password}
+                            value={userCredentials.confirmedPassword}
                             onChange={changeHandler}
                             placeholder="Confirm Password"
                             required
@@ -163,7 +182,7 @@ function Registration(props) {
                         />
                     </div>
                     <div style={{ width: "100%" }}>
-                        <Button style={{ background: "#2C98F0", color: "white", width: "40%" }} className={classes.button} variant="outlined" color="black" type="submit">Register</Button>
+                        <Button className={classes.button} variant="outlined" type="submit">Register</Button>
                     </div>
                 </div>
             </form>

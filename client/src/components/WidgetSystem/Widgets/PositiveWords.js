@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,12 +41,12 @@ const TopBottomWords = props => {
     return <p>Error!</p>
   }
   if (props.isFetching || !props.words) {
-    return <h3>Loading analytics...</h3>;
+    return <h3><CircularProgress>Loading analytics...</CircularProgress></h3>;
   } else {
     return (
       <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
-        <h3 style={{fontWeight:"bold", fontSize:"30px"}}>Your customers are loving...</h3>
-        <p style={{ fontSize:"18px" }}>These are the words associated with the reviews with high ratings</p>
+        <h3 className="widgetTitle">Your customers are loving...</h3>
+        <p className="widgetSubtitle">These are the words associated with the reviews with high ratings</p>
         <Grid container spacing={1}>
           {props.words.positive.map(word => {
             return (

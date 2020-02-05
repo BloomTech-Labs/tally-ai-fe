@@ -40,6 +40,10 @@ const useStyles = makeStyles(theme => ({
 
 
 function EditAccount(props){
+    /*
+        User can enter updates to first name, last name, email, or password.
+        If password is updated, they must confirm the password.
+    */
 
     const classes = useStyles();
 
@@ -50,28 +54,38 @@ function EditAccount(props){
         password: "",
         confirmPassword: ""
     });
-    console.log(props)
 
+    console.log(props);
+
+    const changeHandler = e => {
+
+    }
+
+
+    // Submit updated account info to back end
     const submitHandler = event => {
         event.preventDefault();
         console.log(userCredentials);
-        props.fetchEditAccount(localStorage.getItem("userID"), userCredentials)
+        
+        // Check that confirmPassword matches password.
+        // This should handle catching changes to password without
+        // the confirmation of those changes.
+        if(userCredentials.password !== userCredentials.confirmPassword){
+            alert("Your confirmed password does not match.");
+            return;
+        }
+
+        // Package the updated info to send to the back end.
+        // Notice we're only sending the data entered by the user - 
+        // ie, the data that's been changed from "" to something else
+        // - and not including the confirmPassword.
+        const updatedCredentials = Object.keys(userCredentials).reduce((acc, key) => 
+            userCredentials[key] !== "" && key !== "confirmPassword"
+            ? {...acc, [key]: userCredentials[key]}
+            : acc
+            , {});
+
     }
-
-    const changeHandler = event => {
-        setCredentials({ ...userCredentials, [event.target.name]: event.target.value })
-    }
-
-    // const handleConfirmPassword = (event) => {
-    //     if (event.target.value !== state.password) {
-    //     //   message.error('error');
-    //       this.setState({confirmPassword: event.target.value})
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     setCredentials(props.loggedUserInfo)
-    // }, []);
 
     return (
         <div >
@@ -132,7 +146,7 @@ function EditAccount(props){
                 variant ="outlined"
                 margin="normal"
                 type="password"
-                name="confirm_password"
+                name="confirmPassword"
                 className={classes.textField}
                 value={userCredentials.confirmPassword}
                 onChange={changeHandler}
@@ -148,6 +162,7 @@ function EditAccount(props){
 
 const mapStateToProps = state => {
     return {
+        test: state
     };
 };
 

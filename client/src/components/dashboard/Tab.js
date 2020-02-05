@@ -8,13 +8,14 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 //expects a prop called business which contains business data
-const Tabs = props => {
+const BusinessTab = props => {
 
   const [selected, setSelected] = useState(false);
 
   const [tabBusiness, setTabBusiness] = useState(props.business);
 
   useEffect(() => {
+    console.log("Setting tab business to ", props.business);
     setTabBusiness(props.business);
   }, [props.business])
 
@@ -33,17 +34,7 @@ const Tabs = props => {
       }
     }
 
-    //make sure this tab's business hasn't been deleted. If it has, turn tab into new window
-    let found = false;
-    props.businesses.forEach((item) => {
-      if(item.businessId === tabBusiness.businessId){
-        found = true;
-      }
-    })
-    if(!found){
-      setTabBusiness ({ businessId: Date.now() });
-    }
-  }, [props.selectedBusiness, props.activeTabs, props.businesses]);
+  }, [props.selectedBusiness, props.activeTabs, props.tabBusiness, props.businesses]);
 
   let className = "tab";
   // className += props.competitor ? " competitorTab" : " businessTab";
@@ -77,7 +68,7 @@ const Tabs = props => {
       }
     }
     console.log("newActiveTabs: ", newActiveTabs);
-    props.setActiveTabs(newActiveTabs, localStorage.getItem("userID"));
+    props.setActiveTabs(props.activeTabs, newActiveTabs, localStorage.getItem("userID"));
   }
 
   return (
@@ -110,9 +101,9 @@ const Tabs = props => {
   //used to check if this is an actual business or just a new tab
   function businessesContains(business) {
     let found = false;
-    // console.log("Checking ", tabBusinesses, " for ", business);
+    //console.log("Checking ", props.businesses, " for ", business);
     props.businesses.forEach(element => {
-      // console.log("element.businessId === business.businessId", element.businessId, "===", business.businessId)
+      //console.log("element.businessId === business.businessId", element.businessId, "===", business.businessId)
       if (element.businessId === business.businessId) {
         found = true;
       }
@@ -132,4 +123,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { selectBusiness, setActiveTabs })(Tabs);
+export default connect(mapStateToProps, { selectBusiness, setActiveTabs })(BusinessTab);

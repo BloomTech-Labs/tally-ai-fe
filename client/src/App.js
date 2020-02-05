@@ -11,7 +11,7 @@ import SearchPage from "./components/SearchPage"
 // Components
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
-import Search from "./components/search";
+import Search from "./components/search.js";
 import DashboardGrid from "./components/dashboard/dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
@@ -19,6 +19,7 @@ import EditAccount from "./components/settings/editaccount";
 import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
+import Policy from "./components/TOS/legal";
 
 import { widgets } from "./components/WidgetSystem/WidgetRegistry"
 
@@ -38,6 +39,7 @@ function App(props) {
         loggedInUser: { firstName: null, lastName: null },
         businesses: [],
         activeWidgets: [widgets[0].name, widgets[1].name],
+        activeTabs: ["defaultTab"],
         currentlySelectedBusiness: {
           businessId: null,
           businessName: null,
@@ -62,6 +64,7 @@ function App(props) {
       <Route path="/Login/" component={Login} />
       <Route path="/Compset" component={CompSet} />
       <Route path="/AboutUs" component={AboutUs} />
+      <Route path="/Policy" component={Policy} />
       <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={EditAccount} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
@@ -71,7 +74,8 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-  loggedInUser: state.loggedInUser
+  loggedInUser: state.loggedInUser,
+  activeTabs: state.activeTabs
 });
 
 export default withRouter(connect(mapStateToProps, { setUserInfo, getUserInfo, shouldUpdateLoggedInUser })(App));

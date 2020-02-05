@@ -99,7 +99,7 @@ const initialState = {
 
   //currently selected business, this is what the dashboard will always display
   currentlySelectedBusiness: {
-    businessId: "defaultTab", //default tab selected by default
+    businessId: null, //default tab selected by default
     // for side bar
     businessName: null,
     businessImg: null,
@@ -185,8 +185,8 @@ const initialState = {
       isFetching: false,
       error: null,
       data: {
-        positive: [{ term: "apple" }, { term: "banana" }],
-        negative: [{ term: "orange" }, { term: "kiwi" }]
+        positive: [],
+        negative: []
       }
     },
     // PhraseRank
@@ -230,6 +230,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         widgetData: {
+          ...state.widgetData,
           radarWidget: {
             ...state.radarWidget,
             isFetching: true,
@@ -241,6 +242,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         widgetData: {
+          ...state.widgetData,
           radarWidget: {
             isFetching: false,
             error: null,
@@ -252,6 +254,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         widgetData: {
+          ...state.widgetData,
           radarWidget: {
             ...state.radarWidget,
             isFetching: false,
@@ -263,7 +266,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         tabs: {
-          ...state.tabs,
+          activeTabs: action.payload,
           isFetching: true,
           error: null
         }
@@ -272,7 +275,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         tabs: {
-          activeTabs: action.payload,
+          ...state.tabs,
           isFetching: false,
           error: null
         }
@@ -281,9 +284,9 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         tabs: {
-          ...state.tabs,
+          activeTabs: action.payload,
           isFetching: false,
-          error: action.payload
+          error: null//idec
         }
       };
 
@@ -341,23 +344,19 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         userBusinesses: {
-          businesses:
-            action.payload.event.message === "Already favorited."
-              ? state.userBusinesses.businesses &
-                console.log("Already favorited")
-              : action.payload.businesses.map(business => {
-                  return {
-                    id: business.id,
-                    businessId: business.yelp_id, //default tab selected by default
-                    // for side bar
-                    businessName: business.name,
-                    businessImg: business.image_url,
-                    // for top-of-page info cards
-                    reviewCount: 0,
-                    averageRating: 0,
-                    changeInRating: ""
-                  };
-                }),
+          businesses: action.payload.businesses.map(business => {
+            return {
+              id: business.id,
+              businessId: business.yelp_id, //default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            };
+          }),
           isSetting: false,
           error: null
         }
@@ -428,22 +427,19 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         competitors: {
-          businesses:
-            action.payload.event.message === "Already favorited."
-              ? state.competitors.businesses & console.log("Already favorited")
-              : action.payload.favorites.map(business => {
-                  return {
-                    id: business.id,
-                    businessId: business.yelp_id, //default tab selected by default
-                    // for side bar
-                    businessName: business.name,
-                    businessImg: business.image_url,
-                    // for top-of-page info cards
-                    reviewCount: 0,
-                    averageRating: 0,
-                    changeInRating: ""
-                  };
-                }),
+          businesses: action.payload.favorites.map(business => {
+            return {
+              id: business.id,
+              businessId: business.yelp_id, //default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            };
+          }),
           isSetting: false,
           error: null
         }
@@ -586,22 +582,63 @@ function reducer(state = initialState, action) {
       //   tempActiveWidgets = action.payload.activeWidgets;
       // }
 
+      console.log("Mapping over competitors", action.payload.competitors);
       return {
         ...state,
-        favorites: {
+        competitors: {
           ...state.competitors,
-          favorites: action.payload.favorites
+          businesses: action.payload.competitors.map(business => {
+            return {
+              //id: 16
+// name: "Cartel Coffee Lab"
+// city: "Phoenix"
+// state: "AZ"
+// yelp:
+// yelp_id: "j0_DUr3vBXY-JP-b0bf93A"
+// url: "https://www.yelp.com/biz/cartel-coffee-lab-phoenix-2?adjust_creative=qO78hV4p7yy-o3z8K5osow&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=qO78hV4p7yy-o3z8K5osow"
+// image_url: 
+              id: business.id,
+              businessId: business.yelp.yelp_id, //default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.yelp.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            };
+          }),
+          isSetting: false,
+          error: null,
         },
         loggedInUser: {
           ...state.loggedInUser,
           data: action.payload.loggedInUser,
           isFetching: false
         },
-        businessInfo: {
+        userBusinesses: {
           ...state.userBusinesses,
-          businesses: action.payload.businessInfo
+          businesses: action.payload.businesses.map(business => {
+            return {
+              id: business.id,
+              businessId: business.yelp.yelp_id, //default tab selected by default
+              // for side bar
+              businessName: business.name,
+              businessImg: business.yelp.image_url,
+              // for top-of-page info cards
+              reviewCount: 0,
+              averageRating: 0,
+              changeInRating: ""
+            };
+          }),
+          isSetting: false,
+          error: null,
         },
-        activeWidgets: action.payload.activeWidgets
+        activeWidgets: action.payload.activeWidgets,
+        tabs: {
+          ...state.tabs,
+          activeTabs: action.payload.activeTabs
+        }
       };
 
     case UPDATE_LOGGED_IN_USER:
@@ -628,7 +665,7 @@ function reducer(state = initialState, action) {
         ...state,
         loggedInUser: {
           data: {
-            fisrtName: action.payload.first_name
+            firstName: action.payload.first_name
               ? action.payload.first_name
               : state.loggedInUser.data.firstName,
             lastName: action.payload.last_name_name
@@ -767,6 +804,7 @@ function reducer(state = initialState, action) {
           }
         }
       };
+      
 
     // Unknown action type (default)
     default:
