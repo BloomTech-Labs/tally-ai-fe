@@ -128,7 +128,7 @@ const Results = props => {
     return (
       <div
         className={"search-results" + animationClass}
-        style={{ overflow: "scroll", marginTop: "4%" }} // change margin top to 20vh if you want it to be even with the left div
+        style={{ overflowY: "scroll", marginTop: "8vh", height: "102vh" }} // change margin top to 20vh if you want it to be even with the left div
       >
         {props.businesses.data.length ? results.length ? results : <Sorry/> : <NoResults />}
       </div>

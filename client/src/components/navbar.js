@@ -117,8 +117,8 @@ function NavBar(props) {
       {isOnHomePage() ? <div className="landing-top-section"
       >
 
-        <Link to="/AboutUs">About</Link>
-        <Link to="/Login">Log In</Link>
+        <Link className="homeNavLink" to="/AboutUs">About</Link>
+        <Link className="homeNavLink" to="/Login">Log In</Link>
         <Link to="/register"><button className="Signup" >Sign Up</button></Link>
 
 
