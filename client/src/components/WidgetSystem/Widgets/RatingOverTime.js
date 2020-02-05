@@ -53,7 +53,7 @@ const RatingOverTime = props => {
           }}
         >
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis type="number" domain={[0, 5]}/>
           <CartesianGrid />
           <Tooltip />
           <Legend />

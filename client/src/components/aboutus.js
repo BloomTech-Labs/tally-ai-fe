@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Daniel from "./images/Daniel.png"
 import David from "./images/David.png"
 import Patrick from "./images/Patrick.png"
-import Mike from "./images/Mike.png"
+import Steve from "./images/Steve.png"
 import Wenjing from "./images/Wenjing.png"
 import Rohan from "./images/Rohan.png"
 import Lily from "./images/Lily.png"
@@ -37,9 +37,9 @@ const AboutUs = () => {
                     <h1>Patrick Stevenson</h1>
                     <h3>Web Developer</h3>
                 </div>
-                <div className="Mike" style={{width: "20%"}}>
-                    <img src={Mike} alt="Photo of developer" style={{borderRadius:"100%"}} />
-                    <h1>Mike Renner</h1>
+                <div className="Steve" style={{width: "20%"}}>
+                    <img src={Steve} alt="Photo of developer" style={{borderRadius:"100%"}} />
+                    <h1>Steve Renner</h1>
                     <h3>Web Developer</h3>
                 </div>
             </div>
