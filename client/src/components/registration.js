@@ -96,7 +96,7 @@ function Registration(props) {
     }
 
     return (
-        <div style={{background: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)" }}>
+        <div style={{background: "linear-gradient(341.24deg, #B5E4FE 11.16%, #BDF5FF 82.03%)" }}>
             <form className={classes.container} onSubmit={(e) => submitHandler(e)}>
                 <div style={{ width: "80%", marginLeft: "10%", marginRight: "10%", borderRadius: "47px", marginTop: "50px", marginBottom: "50px", height: "70vh", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", background: "white" }}>
                     <div style={{ width: "91%", marginLeft: "9%", textAlign: "left", fontSize: "24px", paddingTop: "25px" }}>
