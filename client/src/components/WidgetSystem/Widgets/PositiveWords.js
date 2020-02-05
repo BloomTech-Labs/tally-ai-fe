@@ -44,67 +44,26 @@ const TopBottomWords = props => {
     return <h3><CircularProgress>Loading analytics...</CircularProgress></h3>;
   } else {
     return (
-      <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
+      <div>
         <h3 className="widgetTitle">Your customers are loving...</h3>
         <p className="widgetSubtitle">These are the words associated with the reviews with high ratings</p>
-        <Grid container spacing={1}>
-          {props.words.positive.map(word => {
-            return (
-              <Grid
-                item
-                xs={6}
-                style={{ display: "flex", flexDirection: "column", fontSize:"20px", border:"none" }}
-              >
-                <Paper style={{ color: "black" }} className={classes.paper}>
-                  {word.term}
-                </Paper>
-              </Grid>
-            );
-          })}
-          {/* {props.words.negative.map(word => {
-            return (
-              <Grid
-                item
-                xs={6}
-                style={{ display: "flex", flexDirection: "column" }}
-              >
-                <Paper style={{ color: "red" }} className={classes.paper}>
-                  {word.term}
-                </Paper>
-              </Grid>
-            );
-          })} */}
-          {/* <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid>
-            <Grid container item xs={6} spacing={3}>
-              <FormRow />
-            </Grid> */}
-        </Grid>
+        <div style={{ margin: "5%", textAlign:"start" }} className={classes.root}>
+          <Grid container spacing={1}>
+            {props.words.positive.map(word => {
+              return (
+                <Grid
+                  item
+                  xs={6}
+                  style={{ display: "flex", flexDirection: "column", fontSize:"20px", border:"none" }}
+                >
+                  <Paper style={{ color: "black" }} className={classes.paper}>
+                    {word.term}
+                  </Paper>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </div>
       </div>
     );
   }

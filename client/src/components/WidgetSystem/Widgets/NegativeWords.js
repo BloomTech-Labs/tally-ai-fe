@@ -32,10 +32,10 @@ const NegativeWords = props => {
     return <CircularProgress><h3>Loading analytics...</h3></CircularProgress>;
   } else {
     return (
-      <div>
+      <div style={{height: "100%"}}>
         <h3 className="widgetTitle">You can improve on...</h3>
         <p className="widgetSubtitle">These are the words associated with the reviews with low ratings</p>
-        <div style={{ margin: "5%", textAlign:"start", marginTop: "-35px" }} className={classes.root}>
+        <div style={{ margin: "5%", textAlign:"start" }} className={classes.root}>
   
           <Grid container spacing={1}>
             {props.words.negative.map(word => {

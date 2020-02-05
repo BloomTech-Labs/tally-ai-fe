@@ -14,6 +14,7 @@ export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";
 export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
 
 
+
 // Select business and add info to the store
 export const SELECT_BUSINESS = "SELECT_BUSINESS";
 
@@ -192,6 +193,11 @@ export const selectBusiness = businessInfo => dispatch => {
   console.log("\nAdding business selection to the store...\n");
   dispatch({ type: SELECT_BUSINESS, payload: businessInfo });
 };
+
+// export const fetchBusinessData = id => dispatch => {
+//   console.log(`\nFetching business data for business ID ${id}\n`);
+//   // dispatch 
+// }
 
 
 // Select business and add info to the store at state.businessInfo

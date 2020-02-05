@@ -69,6 +69,22 @@ function ClippedDrawer(props) {
     setAnchorEl(event.currentTarget);
   };
 
+    //used to check if this is an actual business or just a new tab
+    function businessesContains(businessId) {
+  
+      if (!businessId) {
+        return false;
+      }
+  
+      let found = false;
+      props.allBusinesses.forEach(element => {
+        if (element.businessId === businessId) {
+          found = true;
+        }
+      });
+      return found;
+    }
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -85,18 +101,21 @@ function ClippedDrawer(props) {
         }}
       >
 
-
+{businessesContains(props.selectedBusiness.businessId) ? 
         <div style={{ position: "fixed", display: "flex", alignItems: "center", fontSize: "12px", paddingBottom: "50px", paddingLeft: "36px", paddingTop: "47px", background: "white", width: "300px"}}>
           <div><img src={props.selectedBusiness.businessImg} style={{ height: "100px", width: "100px", borderRadius: "100%", marginRight: "11px"}} /></div>
           <div style={{textAlign: "left"}}>
             <p style={{marginTop: "0", fontWeight: "600", fontSize: "23px"}}>{props.selectedBusiness.businessName}</p> {/* pass in business title prop here */}
             <p style={{ opacity: ".87", fontSize: "17px", marginTop: "-10px", marginBottom: "0"}}>
-              12345 Strawberry Rd.<br />
-              Los Angeles, CA 98765
+              {props.selectedBusiness.address ? props.selectedBusiness.address[0] +"\n" + props.selectedBusiness.address[1] : <></> }
+              {/* 12345 Strawberry Rd.<br />
+              Los Angeles, CA 98765 */}
             </p>
           </div>
         </div>
-
+        :
+        <></>
+}
 
 
 
@@ -162,7 +181,8 @@ function ClippedDrawer(props) {
 
 const mapStateToProps = state => ({
   businesses: state.userBusinesses.businesses,
-  selectedBusiness: state.currentlySelectedBusiness
+  selectedBusiness: state.currentlySelectedBusiness,
+  allBusinesses: state.userBusinesses.businesses.concat(state.competitors.businesses)
 });
 
 export default withRouter(connect(mapStateToProps, {
