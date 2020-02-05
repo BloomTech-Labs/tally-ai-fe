@@ -84,6 +84,17 @@ star-rating {
   /* flex-basis: 0%; */
   background: none;
   width: 0px;
+  
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.search-results::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.search-results {
+  -ms-overflow-style: none;
 }
 
 .expand-search-results {
@@ -100,7 +111,6 @@ star-rating {
   }
   to {
     width: 100%;
-    margin-top: 5.5%;
   }
 }
 
@@ -167,7 +177,6 @@ star-rating {
   /*width: 40vmax;
   height: 40vmax;*/
   width: 45%;
-  height: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -666,6 +675,7 @@ position: absolute;
 }
 
 .backgroundcolor {
+  min-height: 110vh;
   background: linear-gradient(185.52deg, #B6E6FF 1.15%, #C2FDFF 24.87%, #BEFFF8 36.92%, #FFFFFF 50.39%);
 }
 
@@ -847,6 +857,10 @@ className += selected ? " selectedTab" : " unselectedTab"; */
  margin-right: 40px;
 }
 
+.homeNavLink {
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.38);
+}
+
 a {
   padding-right: 40px;
   text-decoration: none;
@@ -882,7 +896,8 @@ a {
   font-style: normal;
   border: none;
   cursor: pointer;
-  box-shadow: 1px 2px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+  
 }
 
 .widgetTitle {
