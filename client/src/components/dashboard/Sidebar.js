@@ -86,16 +86,21 @@ function ClippedDrawer(props) {
       >
 
 
-        <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px" }}>
-          <img src={props.selectedBusiness.businessImg} style={{ height: "20vh", width: "12vw", borderRadius: "100%" }} />
-          <h1>{props.selectedBusiness.businessName}</h1> {/* pass in business title prop here */}
-
+        <div style={{ position: "fixed", display: "flex", alignItems: "center", fontSize: "12px", paddingBottom: "50px", paddingLeft: "36px", paddingTop: "47px", background: "white", width: "300px"}}>
+          <div><img src={props.selectedBusiness.businessImg} style={{ height: "100px", width: "100px", borderRadius: "100%", marginRight: "11px"}} /></div>
+          <div style={{textAlign: "left"}}>
+            <p style={{marginTop: "0", fontWeight: "600", fontSize: "23px"}}>{props.selectedBusiness.businessName}</p> {/* pass in business title prop here */}
+            <p style={{ opacity: ".87", fontSize: "17px", marginTop: "-10px", marginBottom: "0"}}>
+              12345 Strawberry Rd.<br />
+              Los Angeles, CA 98765
+            </p>
+          </div>
         </div>
 
 
 
 
-        <Divider />
+        <Divider style={{marginTop: "200px"}}/>
         <div style={{ fontSize: "15px" }}>
           <h1>Add to dashboard</h1>
         </div>

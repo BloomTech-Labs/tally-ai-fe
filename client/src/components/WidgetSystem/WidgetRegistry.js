@@ -18,7 +18,7 @@ export let widgets = [
   { name: "topbottomwords", component: <TopBottomWords />, previewComponent: <TopBottomWordsPreview/> },
   { name: "NegativeWords", component: <ExampleWidget6 />, previewComponent: <ExampleWidget6Preview/> },
   { name: "phraserank", component: <PhraseRank />, previewComponent: <PhraseRankPreview/>  },
-  { name: "radarchart", component: <RadarWidget />, previewComponent: <RadarWidgetPreview/>},
+  // { name: "radarchart", component: <RadarWidget />, previewComponent: <RadarWidgetPreview/>},
   { name: "reviewfrequency", component: <ReviewFrequency />, previewComponent: <ReviewFrequencyPreview/>  },
   { name: "ratingovertime", component: <RatingOverTime />, previewComponent: <RatingOverTimePreview/>  },
   {
