@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: "100%",
-    marginTop: "-1%"
+    marginTop: "1%"
   },
   dense: {
     marginTop: theme.spacing(2)

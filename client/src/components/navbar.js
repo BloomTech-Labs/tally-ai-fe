@@ -43,6 +43,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: '5'
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
@@ -123,124 +124,135 @@ function NavBar(props) {
 
 
       </div> :
-        <AppBar position="fixed" style={{backgroundColor: "#0F3088", height: "8vh"}} >
-          <Toolbar style={{ minHeight: "0", color: 'black' }}>
-            {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
+        isLoggedIn() ? (
+          <AppBar position="fixed" style={{ boxShadow: "none", backgroundColor: "#0F3088", height: "8vh" }} >
+            <Toolbar style={{ minHeight: "0", color: 'black' }}>
+              {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
             backgroundColor: "#BBDEFB"
           </Typography> */}
-            <div style={{ display: 'flex', width: '25%', color: '#0D47A1' }}>
-              <Link style={{ color: '#0D47A1', textDecoration: "none", fontSize: '2vh' }} to="/"><h1 style={{color:'white'}}>tally</h1></Link>
-            </div>
-            {
-              isLoggedIn() ? (
-                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end' }}>
-                  <List>
-                    <div style={{ width: '75%', color: "#0D47A1" }}>
-                      <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleMenu}
-                      >
-                        <AccountCircle />
-                      </IconButton>
-                    </div>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={open}
-                      onClose={handleClose}
+              <div style={{ display: 'flex', width: '25%', color: '#0D47A1' }}>
+                <Link style={{ color: '#0D47A1', textDecoration: "none", fontSize: '2vh' }} to="/"><h1 style={{ color: 'white' }}>tally</h1></Link>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end' }}>
+                <List>
+                  <div style={{ width: '75%', color: "#0D47A1" }}>
+                    {/* <IconButton
+                      aria-label="account of current user"
+                      aria-controls="menu-appbar"
+                      aria-haspopup="true"
+                      onClick={handleMenu}
                     >
+                      <AccountCircle />
+                    </IconButton> */}
+<Avatar style={{backgroundColor: "white", color: "black", cursor: "pointer"}} onClick={handleMenu}>{props.loggedInUser.firstName[0].toUpperCase()}</Avatar>
+                  </div>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                  >
 
-                      <ListItem button onClick={handleClose} component={Link} to="/Dashboard">
+                    <ListItem button onClick={handleClose} component={Link} to="/Dashboard">
+                      <ListItemIcon>
+                        <DashboardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Dashboard" />
+                    </ListItem>
+
+                    <Link style={{ color: "black", textDecoration: "none" }} to={{ pathname: 'Search', searchMode: false }}>
+                      <ListItem button onClick={() => { handleClose(); businessSearch(); }} component={Link}>
                         <ListItemIcon>
-                          <DashboardIcon />
+                          <LibraryAddIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Dashboard" />
+                        <ListItemText primary="Add a Business" />
                       </ListItem>
+                    </Link>
 
-                      <Link style={{ color: "black", textDecoration: "none" }} to={{ pathname: 'Search', searchMode: false }}>
-                        <ListItem button onClick={() => { handleClose(); businessSearch(); }} component={Link}>
-                          <ListItemIcon>
-                            <LibraryAddIcon />
-                          </ListItemIcon>
-                          <ListItemText primary="Add a Business" />
-                        </ListItem>
-                      </Link>
-
-                      <Link style={{ color: "black", textDecoration: "none" }} to="Search">
-                        <ListItem button onClick={() => { handleClose(); competitorSearch(); }} component={Link}>
-                          <ListItemIcon>
-                            <LibraryAddIcon />
-                          </ListItemIcon>
-                          <ListItemText primary="Add a Competitor" />
-                        </ListItem>
-                      </Link>
-
-                      <Link style={{ color: "black", textDecoration: "none" }} to="Settings">
-                        <ListItem button onClick={() => { handleClose(); settings(); }} component={Link}>
-                          <ListItemIcon >
-                            <SettingsIcon />
-                          </ListItemIcon>
-                          <ListItemText primary=" Account Settings" />
-                        </ListItem>
-                      </Link>
-                      <Divider />
-
-                      <ListItem button onClick={handleClick} component={Link} to="/">
-                        
+                    <Link style={{ color: "black", textDecoration: "none" }} to="Search">
+                      <ListItem button onClick={() => { handleClose(); competitorSearch(); }} component={Link}>
                         <ListItemIcon>
-                          <ExitToAppIcon />
+                          <LibraryAddIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Log Out" />
+                        <ListItemText primary="Add a Competitor" />
                       </ListItem>
-                    </Menu>
-                  </List>
+                    </Link>
+
+                    <Link style={{ color: "black", textDecoration: "none" }} to="Settings">
+                      <ListItem button onClick={() => { handleClose(); settings(); }} component={Link}>
+                        <ListItemIcon >
+                          <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary=" Account Settings" />
+                      </ListItem>
+                    </Link>
+                    <Divider />
+
+                    <ListItem button onClick={handleClick} component={Link} to="/">
+
+                      <ListItemIcon>
+                        <ExitToAppIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Log Out" />
+                    </ListItem>
+                  </Menu>
+                </List>
+              </div>
+            </Toolbar>
+          </AppBar>
+        ) :
+          (//not logged in
+            <AppBar position="fixed" style={{ boxShadow: "none", backgroundColor: "transparent", height: "8vh" }} >
+              <Toolbar style={{ minHeight: "0", color: 'black' }}>
+                {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
+            Tally AI
+            backgroundColor: "#BBDEFB"
+          </Typography> */}
+                <div style={{ display: 'flex', width: '25%', color: '#0D47A1' }}>
+                  <Link style={{ color: '#0D47A1', textDecoration: "none", fontSize: '2vh' }} to="/"><h1 style={{ color: '#0D47A1' }}>tally</h1></Link>
                 </div>
-              ) :
-                (//not logged in
-                  <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end', alignItems: "center"}}>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end', alignItems: "center" }}>
 
-                    <div style={{ width: '100%' }}>
+                  <div style={{ width: '100%' }}>
 
-                      <List>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: "center"}}>
+                    <List>
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: "center" }}>
 
-                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/">
-                            <ListItemText primary="Home" />
-                          </ListItem>
+                        {/* <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/">
+                            <ListItemText className="homeNavLink"  primary="Home" />
+                          </ListItem> */}
 
-                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/AboutUs">
-                            <ListItemText primary="About Us" />
-                          </ListItem>
+                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/AboutUs">
+                          <ListItemText className="homeNavLink" primary="About Us" />
+                        </ListItem>
 
-                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/Login">
-                            <ListItemText primary="Log In" />
-                          </ListItem>
+                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/Login">
+                          <ListItemText className="homeNavLink" primary="Log In" />
+                        </ListItem>
 
-                          <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center', background: '#DFAB26', borderRadius: '40px' }} button onClick={handleClose} component={Link} to="/Register">
-                            <ListItemText primary="Register" />
-                          </ListItem>
-                        </div>
-                      </List>
-
-                    </div>
+                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "white", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center', backgroundColor: '#1E4DC7', borderRadius: '40px' }} component={Link} to="/Register">
+                          <ListItemText style={{ background: '#67FFD2;' }} primary="Register" />
+                        </ListItem>
+                      </div>
+                    </List>
 
                   </div>
-                )
-            }
-          </Toolbar>
-        </AppBar>}
+
+                </div>
+              </Toolbar>
+            </AppBar>
+          )
+      }
     </div>
   );
 }

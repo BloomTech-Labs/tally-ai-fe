@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Daniel from "./images/Daniel.png"
 import David from "./images/David.png"
 import Patrick from "./images/Patrick.png"
-import Mike from "./images/Mike.png"
+import Steve from "./images/Steve.png"
 import Wenjing from "./images/Wenjing.png"
 import Rohan from "./images/Rohan.png"
 import Lily from "./images/Lily.png"
@@ -15,8 +15,8 @@ import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
 
 const AboutUs = () => {
     return(
-        <div style={{marginTop: "10vh"}}>
-            <div className="MeetTheTeam">
+        <div>
+            <div className="MeetTheTeam" style={{paddingTop: "10vh"}}>
                 <h1 style={{marginTop: "-60px", paddingTop: "100px", fontWeight: "800", fontSize: "80px", lineHeight: "109px", letterSpacing: "0.25px"}}>Meet The Team</h1>
             </div>
 
@@ -37,8 +37,8 @@ const AboutUs = () => {
                     <h1>Patrick Stevenson</h1>
                     <h3>Web Developer</h3>
                 </div>
-                <div className="Mike" style={{width: "20%"}}>
-                    <img src={Mike} alt="Photo of developer" style={{borderRadius:"100%"}} />
+                <div className="Steve" style={{width: "20%"}}>
+                    <img src={Steve} alt="Photo of developer" style={{borderRadius:"100%"}} />
                     <h1>Steve Renner</h1>
                     <h3>Web Developer</h3>
                 </div>

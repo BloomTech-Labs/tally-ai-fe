@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: '3%'
+        paddingTop: '7%'
     },
     textField: {
         marginLeft: theme.spacing(1),
@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         marginTop: '2%',
         marginBottom: '9%',
-        width: '15%'
+        width: '15%',
+        color:'#1E4DC7'
     },
     input: {
         display: 'none',
@@ -96,9 +97,9 @@ function Registration(props) {
     }
 
     return (
-        <div style={{background: "linear-gradient(341.24deg, #B5E4FE 11.16%, #BDF5FF 82.03%)" }}>
+        <div style={{background: "linear-gradient(341.24deg, #B5E4FE 11.16%, #BDF5FF 82.03%)", height:"100vh" }}>
             <form className={classes.container} onSubmit={(e) => submitHandler(e)}>
-                <div style={{ width: "80%", marginLeft: "10%", marginRight: "10%", borderRadius: "47px", marginTop: "50px", marginBottom: "50px", height: "70vh", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", background: "white" }}>
+                <div style={{ width: "80%", marginLeft: "10%", marginRight: "10%", borderRadius: "47px", marginTop: "50px", marginBottom: "50px", height: "70vh", background: "white" }}>
                     <div style={{ width: "91%", marginLeft: "9%", textAlign: "left", fontSize: "24px", paddingTop: "25px" }}>
                         <h1>Sign up for an account!</h1>
                     </div>
@@ -181,7 +182,7 @@ function Registration(props) {
                         />
                     </div>
                     <div style={{ width: "100%" }}>
-                        <Button style={{ background: "#2C98F0", color: "white", width: "40%" }} className={classes.button} variant="outlined" color="black" type="submit">Register</Button>
+                        <Button className={classes.button} variant="outlined" type="submit">Register</Button>
                     </div>
                 </div>
             </form>
