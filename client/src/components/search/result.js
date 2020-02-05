@@ -60,7 +60,8 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
           url: data.url,
           image_url: data.image_url,
           city: data.location.city,
-          state: data.location.state
+          state: data.location.state,
+          address: data.location.display_address // Added this for the sidebar; don't have a column in DB yet
         });
       }}
       className={className}

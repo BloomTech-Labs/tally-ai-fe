@@ -177,6 +177,7 @@ star-rating {
   /*width: 40vmax;
   height: 40vmax;*/
   width: 45%;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -905,9 +906,9 @@ a {
 font-size: 200%;
 text-align: left;
 /* line-height: 41px; */
-padding-left: 20px;
-padding-top: 30px;
-padding-bottom: 12px;
+padding-left: 40px;
+padding-top: 45px;
+padding-bottom: 25px;
 margin: 0;
 }
 
@@ -916,9 +917,10 @@ font-size: 100%;
 font-weight: 100;
 /* line-height: 41px; */
 text-align: left;
-padding-left: 20px;
+padding-left: 40px;
 opacity: .64;
 margin: 0;
+margin-top: -10px;
 }
 
 .footerTitle{

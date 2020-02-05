@@ -106,7 +106,8 @@ const initialState = {
     // for top-of-page info cards
     reviewCount: 0,
     averageRating: 0,
-    changeInRating: ""
+    changeInRating: "",
+    address: ""
   },
 
   // the user's businesses that they own
@@ -634,7 +635,7 @@ function reducer(state = initialState, action) {
           isSetting: false,
           error: null,
         },
-        activeWidgets: action.payload.activeWidgets,
+        activeWidgets: [widgets[0].name, widgets[1].name],
         tabs: {
           ...state.tabs,
           activeTabs: action.payload.activeTabs

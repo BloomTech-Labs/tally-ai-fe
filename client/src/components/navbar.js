@@ -252,7 +252,7 @@ function NavBar(props) {
               </Toolbar>
             </AppBar>
           )
-      }}
+      }
     </div>
   );
 }
