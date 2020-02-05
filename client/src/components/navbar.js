@@ -123,18 +123,18 @@ function NavBar(props) {
 
 
       </div> :
-        <AppBar position="fixed" style={{backgroundColor: "#0F3088"}}>
-          <Toolbar style={{ height: "8vh", color: 'black' }}>
+        <AppBar position="fixed" style={{backgroundColor: "#0F3088", height: "8vh"}} >
+          <Toolbar style={{ minHeight: "0", color: 'black' }}>
             {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
             backgroundColor: "#BBDEFB"
           </Typography> */}
             <div style={{ display: 'flex', width: '25%', color: '#0D47A1' }}>
-              <Link style={{ color: '#0D47A1', textDecoration: "none", fontSize: '1.4rem' }} to="/"><h1 style={{color:'white'}}>tally</h1></Link>
+              <Link style={{ color: '#0D47A1', textDecoration: "none", fontSize: '2vh' }} to="/"><h1 style={{color:'white'}}>tally</h1></Link>
             </div>
             {
               isLoggedIn() ? (
-                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end' }}>
                   <List>
                     <div style={{ width: '75%', color: "#0D47A1" }}>
                       <IconButton

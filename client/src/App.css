@@ -45,8 +45,6 @@ star-rating {
 }
 
 .formFaded {
-  background: whitesmoke;
-
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-delay: 0s;
@@ -59,10 +57,32 @@ star-rating {
   /* background: linear-gradient(347.71deg, #E3F2FD 11.16%, #BBDEFB 82.03%); */
 }
 
+.growSearch {
+  animation-name: search;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes search {
+  /* flex-basis is how big the results column is in this flex row, auto should take whatever is left over from the search-form */
+  from {
+    width: 40%;
+    background-color: none;
+  }
+  to {
+    width: 100%;
+    margin-left: 10%;
+    margin-top: 0;
+    margin-right: 10%;
+    background-color: none;
+  }
+}
+
 
 .search-results {
   /* flex-basis: 0%; */
-  background: white;
+  background: none;
   width: 0px;
 }
 
@@ -80,6 +100,7 @@ star-rating {
   }
   to {
     width: 100%;
+    margin-top: 5.5%;
   }
 }
 
@@ -143,8 +164,10 @@ star-rating {
 }
 
 .widgetContainer {
-  width: 35vmax;
-  height: 30vmax;
+  /*width: 40vmax;
+  height: 40vmax;*/
+  width: 45%;
+  height: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -635,9 +658,11 @@ position: absolute;
 .FooterButton {
   font-family: Inter;
   font-style: normal;
+  padding: 10px;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 15px;
   line-height: 29px;
+  color: black;
 }
 
 .backgroundcolor {
@@ -852,20 +877,22 @@ a {
   text-align:center;
   letter-spacing: 0.15px;
   align-items:center;
+  justify-items:center;
   line-height:27px;
   font-style: normal;
   border: none;
   cursor: pointer;
+  box-shadow: 1px 2px;
 }
 
 .widgetTitle {
   font-weight: medium;
-font-size: 40px;
-line-height: 41px;
+font-size: 2rem;
+/* line-height: 41px; */
 }
 
 .widgetSubtitle {
   font-weight: 500;
-font-size: 20px;
-line-height: 41px;
+font-size: 1.5rem;
+/* line-height: 41px; */
 }

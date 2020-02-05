@@ -121,7 +121,7 @@ const Search = props => {
             <div class="mdc-notched-outline__trailing"></div>
             </div> */}
           {/* <h1>Search for a business to get started</h1> */}
-          <form className={classes.container}>
+          <form className={(props.searchResults ? " growSearch" : classes.container)}>
             <div className="YelpBusinessH1">
             <h1>See what customers are saying about your business!</h1>
             </div>
@@ -205,7 +205,7 @@ const Search = props => {
       </div>
       
       {/*  closes div containing backgroundcolor */}
-      {/* Made it conditionally render the content at the bottom of the landing page. Once the results come in, the marketing content disappears. */}
+      {/* Made it conditionally render the content at the bottom of the landing page. Once the results come in, the marketing content disappears */}
       {!props.searchResults
         ? (
           <>
