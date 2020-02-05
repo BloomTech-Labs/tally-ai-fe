@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
@@ -39,12 +39,11 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
     zIndex: '-1',
     overflowY: 'scroll',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
   },
   drawerPaper: {
     width: drawerWidth,
-    marginTop: '80px',
-    marginBottom: '80px'
+    marginTop: '8.5vh',
   },
   content: {
     flexGrow: 0,
@@ -75,7 +74,9 @@ function ClippedDrawer(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <div style={{
+      marginBottom: '8vh'
+    }}>
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -83,26 +84,26 @@ function ClippedDrawer(props) {
           paper: classes.drawerPaper,
         }}
       >
-        
-        
-          <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px"}}>
-          <img src={props.selectedBusiness.businessImg} style={{ height: "20vh", width: "12vw", borderRadius: "100%"}}/> 
-          <h1>{props.selectedBusiness.businessName}</h1> {/* pass in business title prop here */} 
-          
+
+
+        <div style={{ fontSize: "12px", marginBottom: "50px", marginTop: "20px" }}>
+          <img src={props.selectedBusiness.businessImg} style={{ height: "20vh", width: "12vw", borderRadius: "100%" }} />
+          <h1>{props.selectedBusiness.businessName}</h1> {/* pass in business title prop here */}
+
         </div>
-        
-        
-        
-      
+
+
+
+
         <Divider />
-        <div style={{ fontSize: "15px"}}>
+        <div style={{ fontSize: "15px" }}>
           <h1>Add to dashboard</h1>
         </div>
 
         <Card className={classes.card}>
           <CardActionArea>
             <CardMedia className={classes.media}
-            
+
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
@@ -115,7 +116,7 @@ function ClippedDrawer(props) {
               <Button style={{ border: '1px solid gray' }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                 Date Range
                 <ArrowDropDownIcon />
-        </Button>
+              </Button>
             </div>
             <hr />
             <div className="InputFields">
@@ -140,7 +141,7 @@ function ClippedDrawer(props) {
         </Card>
         <div
           className="widgetSelector"
-          style={{marginTop: "4%", borderRadius: "10px" }}
+          style={{ marginTop: "4%", borderRadius: "10px" }}
         >
           {/* Render Available Widgets */}
           {availableWidgets.map(widgetName => {

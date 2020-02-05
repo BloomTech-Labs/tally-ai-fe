@@ -15,7 +15,7 @@ import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
 
 const AboutUs = () => {
     return(
-        <div>
+        <div style={{marginTop: "10vh"}}>
             <div className="MeetTheTeam">
                 <h1 style={{marginTop: "-60px", paddingTop: "100px", fontWeight: "800", fontSize: "80px", lineHeight: "109px", letterSpacing: "0.25px"}}>Meet The Team</h1>
             </div>

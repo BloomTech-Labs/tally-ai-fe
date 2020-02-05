@@ -42,7 +42,7 @@ const ReviewsOverTime = props => {
   }
 
   return (
-    <div className="exampleWidget4">
+    <div className="exampleWidget4" style={{width: "100%", height: "100%"}}>
       <h3 className="widgetTitle">Review Frequency</h3>
       <p className="widgetSubtitle">View the frequency in reviews over time to keep track if promotional efforts are working!</p>
       <div style={{width: "90%", height: "65%"}}>

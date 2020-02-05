@@ -19,6 +19,7 @@ import EditAccount from "./components/settings/editaccount";
 import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
+import Policy from "./components/TOS/legal";
 
 import { widgets } from "./components/WidgetSystem/WidgetRegistry"
 
@@ -63,6 +64,7 @@ function App(props) {
       <Route path="/Login/" component={Login} />
       <Route path="/Compset" component={CompSet} />
       <Route path="/AboutUs" component={AboutUs} />
+      <Route path="/Policy" component={Policy} />
       <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={EditAccount} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
