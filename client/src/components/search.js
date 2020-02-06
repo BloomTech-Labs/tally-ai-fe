@@ -52,6 +52,7 @@ const useStyles = makeStyles(theme => ({
     width: "15%",
     backgroundColor: "#619FFF",
     color: "white"
+
   },
   input: {
     display: "none"
@@ -68,7 +69,7 @@ const Search = props => {
   function resultsSelection(selection) {
     console.log("Selection: ", selection);
 
-    props.selectBusiness(selection);
+    props.selectBusiness(props.selectedBusiness, selection);
 
     props.history.push("/dashboard");
 }
@@ -127,7 +128,7 @@ const Search = props => {
             <div className="YelpBusinessH1" style={{textAlign:'left', fontSize:'135%', fontWeight:'900'}}>
             <h1 style={{paddingLeft:'2%'}}>See what customers are saying about your business!</h1>
             </div>
-            <h2 className="YelpBusinessH2" style={{paddingLeft: '2%'}}>Search for a Yelp Business to get started</h2>
+            <h2 className="YelpBusinessH2" style={{paddingLeft: '2%', textAlign:'left'}}>Search for a Yelp Business to get started</h2>
             <TextField
               label="Business Name"
               variant="outlined"
@@ -232,7 +233,8 @@ const Search = props => {
 };
 
 const mapStateToProps = state => ({
-  searchResults: state.searchResults.data
+  searchResults: state.searchResults.data,
+  selectedBusiness: state.currentlySelectedBusiness
 });
 
 export default connect(mapStateToProps, {

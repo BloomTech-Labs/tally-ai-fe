@@ -49,7 +49,9 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
   return (
     <div
       onClick={e => {
+        e.preventDefault();
         setIsSelected(!isSelected);
+        console.log("setting selection to ", data);
         setTentativeSelection({
           businessId: data.id,
           businessName: data.name,
@@ -63,6 +65,7 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
           state: data.location.state,
           address: data.location.display_address // Added this for the sidebar; don't have a column in DB yet
         });
+          //select(e);
       }}
       className={className}
     >
@@ -114,14 +117,14 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
 
         {/* <ToggleFavoriteButton business={{ businessId: data.id, businessName: data.name, businessImg: data.image_url, reviewCount: data.review_count, averageRating: data.rating }} /> */}
       </div>
-      <button style={{marginTop: "auto", paddingBottom: "10%", paddingRight: "7.5%"}}
+      {/* <button style={{marginTop: "auto", paddingBottom: "10%", paddingRight: "7.5%"}}
           onClick={e => {
             console.log("On click! setting selected business data as: ", data);
             select(e);
           }}
         >
           Select
-        </button>
+        </button> */}
     </div>
   );
 };

@@ -65,7 +65,7 @@ const Search = props => {
   function resultsSelection(selection) {
     console.log("Selection: ", selection);
 
-    props.selectBusiness(selection);
+    props.selectBusiness(props.selectedBusiness, selection);
 
     props.history.push("/dashboard");
 }
@@ -215,7 +215,9 @@ const Search = props => {
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  selectedBusiness: state.currentlySelectedBusiness
+});
 
 export default connect(mapStateToProps, {
   fetchBusinesses,

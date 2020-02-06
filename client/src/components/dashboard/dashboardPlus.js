@@ -76,7 +76,7 @@ function DashboardPlus(props) {
       }
     })
     if (contains) {
-      props.selectBusiness(contains);//the user is trying to add a business that they already have a tab open for, just set that tab as selected
+      props.selectBusiness(props.selectedBusiness, contains);//the user is trying to add a business that they already have a tab open for, just set that tab as selected
     } else {
       props.activeTabs.forEach((tab) => {
         if (tab.businessId === props.selectedBusiness.businessId) {//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
@@ -124,7 +124,7 @@ function DashboardPlus(props) {
         {
           props.businesses.slice(0, 10).map(business => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
+              <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(props.selectedBusiness, business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
                 <Tooltip title="Delete" arrow>
                 <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}} />
                 </Tooltip>
@@ -170,7 +170,7 @@ function DashboardPlus(props) {
         {
           props.competitors.slice(0, 10).map(competitor => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
+              <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(props.selectedBusiness, competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
                 <Tooltip title="Delete" arrow>
                 <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}}>
                 </DeleteForeverOutlinedIcon>

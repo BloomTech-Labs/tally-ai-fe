@@ -21,7 +21,7 @@ import burger from "../images/burger.jpg";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { fetchBusinesses, selectBusiness } from "../../actions/index.js";
+import { fetchBusinesses } from "../../actions/index.js";
 
 const drawerWidth = 375;
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    marginTop: '8.5vh',
+    marginTop: '8vh'
   },
   content: {
     flexGrow: 0,
@@ -95,14 +95,15 @@ function ClippedDrawer(props) {
     }}>
       <Drawer
         className={classes.drawer}
+        id="sidebarScroll"
         variant="permanent"
         classes={{
           paper: classes.drawerPaper,
         }}
       >
 
-{businessesContains(props.selectedBusiness.businessId) ? 
-        <div style={{ position: "fixed", display: "flex", alignItems: "center", fontSize: "12px", paddingBottom: "50px", paddingLeft: "36px", paddingTop: "47px", background: "white", width: "300px"}}>
+{businessesContains(props.selectedBusiness.businessId) || !(localStorage.getItem("token")) ? 
+        <div style={{ position: "fixed", display: "flex", alignItems: "center", fontSize: "12px", paddingBottom: "50px", paddingLeft: "36px", paddingTop: "47px", background: "white", width: "339px", borderBottom: "1px solid lightgray", borderRight: "1px solid lightgray"}}>
           <div><img src={props.selectedBusiness.businessImg} style={{ height: "100px", width: "100px", borderRadius: "100%", marginRight: "11px"}} /></div>
           <div style={{textAlign: "left"}}>
             <p style={{marginTop: "0", fontWeight: "600", fontSize: "23px"}}>{props.selectedBusiness.businessName}</p> {/* pass in business title prop here */}
@@ -119,12 +120,12 @@ function ClippedDrawer(props) {
 
 
 
-        <Divider style={{marginTop: "200px"}}/>
+        <Divider style={{backgroundColor: "transparent", marginTop: "200px"}}/>
         <div style={{ fontSize: "15px" }}>
           <h1>Add to dashboard</h1>
         </div>
 
-        <Card className={classes.card}>
+        {/* <Card className={classes.card}>
           <CardActionArea>
             <CardMedia className={classes.media}
 
@@ -137,7 +138,7 @@ function ClippedDrawer(props) {
           </CardActionArea>
           <CardActions>
             <div>
-              <Button style={{ border: '1px solid gray' }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+              <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                 Date Range
                 <ArrowDropDownIcon />
               </Button>
@@ -157,12 +158,12 @@ function ClippedDrawer(props) {
               </Menu>
               <form className={classes.root} noValidate autoComplete="off">
                 <TextField id="standard-basic" label="Filter by Word" variant="outlined" />
-                {/* <input /> */}
+                <input />
               </form>
 
             </div>
           </CardActions>
-        </Card>
+        </Card> */}
         <div
           className="widgetSelector"
           style={{ marginTop: "4%", borderRadius: "10px" }}
@@ -186,6 +187,5 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(connect(mapStateToProps, {
-  fetchBusinesses,
-  selectBusiness
+  fetchBusinesses
 })(ClippedDrawer));

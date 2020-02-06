@@ -28,16 +28,13 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         margin: theme.spacing(1),
-        marginTop: '2%',
-        marginBottom: '3.2%',
+        marginTop: '30px',
+        marginBottom: '30px',
         width: '12%',
         backgroundColor: '#1E4DC7'
     },
     input: {
         display: 'none',
-    },
-    bottomText: {
-
     },
 }));
 
@@ -78,9 +75,9 @@ const Login = props => {
     }, [props.loggedInUser]);
 
     return (
-        <div style={{ minHeight: "99vh", border: "1px solid #E3F2FD", background: "linear-gradient(341.24deg, #B5E4FE 11.16%, #BDF5FF 82.03%)" }}>
+        <div style={{ minHeight: "100vh", border: "1px solid #E3F2FD", background: "linear-gradient(341.24deg, #B5E4FE 11.16%, #BDF5FF 82.03%)" }}>
             <form className={classes.container} onSubmit={handleSubmit}>
-                <div style={{ height: "60vh", width: "30%", borderRadius: "47px", backgroundColor: "White" }}>
+                <div style={{ height: "60vh", width: "40%", borderRadius: "47px", backgroundColor: "White" }}>
                     <div style={{ paddingTop: "20px", fontSize: "22px" }}>
                         <h1>Log In</h1>
                     </div>
@@ -113,9 +110,9 @@ const Login = props => {
                         />
                     </div>
                     <Button style={{ marginTop: "30px", backgroundColor: "#1E4DC7;", color: "white", width: "40%" }} className={classes.button} variant="outlined" color="black" type="submit">Login</Button>
-                    <div className={classes.bottomText}>
+                    <div>
                         <p>
-                            Need to create an account?  <Link style={{color: "blue"}} to='/Register/'>Register Now!</Link>
+                            Need an account? <Link style={{padding: "0", color: "black"}} to='/Register/'>Register here</Link>
                         </p>
                     </div>
                 </div>

@@ -113,13 +113,23 @@ function NavBar(props) {
     return firstParam === "";
   }
 
+  function isOnDashboard() {
+
+    //this function is neccessary because match.params will always be "/" even while on /dashboard since the nav bar is always rendered to "/" (path is unexact "/")
+
+    var url = window.location;
+    var firstParam = url.pathname.split('/')[1];
+
+    return firstParam.toUpperCase() === "Dashboard".toUpperCase();
+  }
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{position: "fixed"}}>
       {isOnHomePage() ? <div className="landing-top-section"
       >
 
-        <Link className="homeNavLink" to="/AboutUs">About</Link>
-        <Link className="homeNavLink" to="/Login">Log In</Link>
+        <Link className="homeNavLink" to="/About">About</Link>
+        <Link className="homeNavLink" to="/Login">Sign In</Link>
         <Link to="/register"><button className="Signup" >Sign Up</button></Link>
 
 
@@ -212,7 +222,48 @@ function NavBar(props) {
           </AppBar>
         ) :
           (//not logged in
-            <AppBar position="fixed" style={{ boxShadow: "none", backgroundColor: "transparent", height: "8vh" }} >
+            isOnDashboard() ? (
+            <AppBar style={{ position: "fixed", boxShadow: "none", backgroundColor: "#0F3088", height: "8vh", width: "100%" }} >
+              <Toolbar style={{ minHeight: "0", color: 'black' }}>
+                {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
+            Tally AI
+            backgroundColor: "#BBDEFB"
+          </Typography> */}
+                <div style={{ display: 'flex', width: '25%', color: '#0D47A1' }}>
+                  <Link style={{ color: '#0D47A1', textDecoration: "none", fontSize: '2vh' }} to="/"><h1 style={{ color: 'white' }}>tally</h1></Link>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '6vh', justifyContent: 'flex-end', alignItems: "center" }}>
+
+                  <div style={{ width: '100%' }}>
+
+                    <List>
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: "center" }}>
+
+                        {/* <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/">
+                            <ListItemText className="homeNavLink"  primary="Home" />
+                          </ListItem> */}
+
+                        <ListItem style={{ color: "white", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/About">
+                          <ListItemText className="homeNavLink" primary="About" />
+                        </ListItem>
+
+                        <ListItem style={{ color: "white", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/Login">
+                          <ListItemText className="homeNavLink" primary="Sign In" />
+                        </ListItem>
+
+                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "black", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center', backgroundColor: 'white', borderRadius: '40px' }} component={Link} to="/Register">
+                          <ListItemText style={{ background: '#67FFD2;' }} primary="Sign Up" />
+                        </ListItem>
+                      </div>
+                    </List>
+
+                  </div>
+
+                </div>
+              </Toolbar>
+            </AppBar>
+            ) : (
+              <AppBar style={{ position: "fixed", boxShadow: "none", backgroundColor: "white", height: "8vh", width: "100%" }} >
               <Toolbar style={{ minHeight: "0", color: 'black' }}>
                 {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
@@ -232,16 +283,16 @@ function NavBar(props) {
                             <ListItemText className="homeNavLink"  primary="Home" />
                           </ListItem> */}
 
-                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/AboutUs">
-                          <ListItemText className="homeNavLink" primary="About Us" />
+                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/About">
+                          <ListItemText className="homeNavLink" primary="About" />
                         </ListItem>
 
                         <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/Login">
-                          <ListItemText className="homeNavLink" primary="Log In" />
+                          <ListItemText className="homeNavLink" primary="Sign In" />
                         </ListItem>
 
                         <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "white", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center', backgroundColor: '#1E4DC7', borderRadius: '40px' }} component={Link} to="/Register">
-                          <ListItemText style={{ background: '#67FFD2;' }} primary="Register" />
+                          <ListItemText style={{ background: '#67FFD2;' }} primary="Sign Up" />
                         </ListItem>
                       </div>
                     </List>
@@ -251,6 +302,7 @@ function NavBar(props) {
                 </div>
               </Toolbar>
             </AppBar>
+            )
           )
       }
     </div>
