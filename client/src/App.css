@@ -636,7 +636,7 @@ position: absolute;
 	font-family:Arial;
 	font-size:17px;
 	padding:15px 35px;
-	text-decoration:none;
+  text-decoration:none;
 }
 .FeaturesButton:hover {
 	background-color:#0D47A1;
@@ -655,14 +655,14 @@ position: absolute;
 }
 
 .BottomTitle {
-  width: 40%;
+  width: 75%;
   font-style: normal;
-  font-weight: 800;
-  font-size: 40px;
-  line-height: 61px;
+  font-weight: 900;
+  font-size: 50px;
+  line-height: 57px;
   text-align: center;
-  margin-top: 150px;
   color: black;
+  margin-top: 25%;
 }
 
 .FooterButton {
@@ -671,7 +671,7 @@ position: absolute;
   font-weight: normal;
   font-size: 24px;
   line-height: 33px;
-  color: black;
+  color: white;
 }
 
 .backgroundcolor {
@@ -902,7 +902,7 @@ a {
 }
 
 .widgetTitle {
-  font-weight: 500;
+font-weight: 500;
 font-size: 200%;
 text-align: left;
 /* line-height: 41px; */
@@ -929,5 +929,6 @@ font-style: normal;
 font-weight: 500;
 font-size: 22px;
 line-height: 30px;
+color: white;
 }
 

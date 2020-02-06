@@ -8,7 +8,7 @@ const useStyles = makeStyles ({
 
 root:{
     bottom: '0',
-    background: '#B8E4FA',
+    background: '#0F3088',
     height: '8vh',
     zIndex: '100'
 },
@@ -43,14 +43,14 @@ export default function Footer() {
             <div className ={classes.root} style={{display: 'flex', width: '100%'}}> 
                 <div style={{width: '50%', display: 'flex', alignItems: 'center', marginLeft: '2%'}}>
                     <Typography className='footerTitle' align="center" style={{fontSize: '20px'}}>
-                        <p style={{textAlign: "lef"}}>TallyAI <br/> Copyright © 2020</p>
+                        <p style={{textAlign: "left"}}>TallyAI <br/> Copyright © 2020</p>
                     </Typography>
                 </div>
                 <div style={{width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', height: '8vh'}}> 
-                    <Link className="FooterButton" to="/AboutUs">About</Link>
-                    <Link className="FooterButton" to="/AboutUs">Team</Link>
-                    <Link className="FooterButton" to="/Policy">Terms Of Service</Link>
-                    <Link className="FooterButton" to="/Policy">Privacy Policy</Link>
+                    {/* <Link className="FooterButton" to="/AboutUs">About</Link> */}
+                    <Link className="FooterButton" to="/AboutUs">Meet the Team</Link>
+                    <Link className="FooterButton" to="/Policy">Terms Of Service & Policy</Link>
+                    {/* <Link className="FooterButton" to="/Policy">Privacy Policy</Link> */}
                 </div>
             </div>}          
         </footer>
