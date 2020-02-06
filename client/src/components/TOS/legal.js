@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
@@ -44,11 +44,15 @@ function a11yProps(index) {
     };
 }
 
-const Policy = () => {
+const Policy = (props) => {
 
     const classes = useStyles();
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(props.match.params.doc === "tos" ? 1 : 0);
+
+    useEffect(() => {
+        setValue(props.match.params.doc === "tos" ? 1 : 0)
+    }, [props.match.params.doc])
 
     const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -83,7 +87,7 @@ const Policy = () => {
         >
   
             <TabPanel value={value} index={0} dir={theme.direction}>
-                <div style={{textAlign: "left", paddingLeft: '10%', paddingRight: '10%', paddingBottom: '3', paddingtop: '3%', fontWeight: 'bold'}}>
+                <div style={{textAlign: "left", paddingLeft: '10%', paddingRight: '10%', paddingBottom: '3', paddingtop: '3%', fontWeight: 'bold', minHeight: "70vh"}}>
                     <h4>Privacy Policy</h4> 
                     <p>Your privacy is important to us. It is Tally AI's policy to respect your privacy regarding any information we may collect from you across our website, http://tally-ai.com, and other sites we own and operate. We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.</p>
                     <p>We only retain collected information for as long as necessary to provide you with your requested service. What data we store, we’ll protect within commercially acceptable means to prevent loss and theft, as well as unauthorized access, disclosure, copying, use or modification.</p> 

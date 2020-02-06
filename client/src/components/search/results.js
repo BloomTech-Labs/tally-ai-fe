@@ -28,7 +28,26 @@ const Results = props => {
     The tentativeSelection contains business information from Yelp,
     including the businessId used for requests to DS API.
   */
+ 
+/*  
+    ten·ta·tive
+    /ˈten(t)ədiv/
+
+    adjective
+
+    not certain or fixed; provisional.
+    "a tentative conclusion"
+
+    done without confidence; hesitant.
+    "he eventually tried a few tentative steps round his hospital room" 
+*/
   const [tentativeSelection, setTentativeSelection] = useState("");
+
+  useEffect(() => {
+    if(tentativeSelection != ""){
+      select();
+    }
+  }, [tentativeSelection])
 
   let history = useHistory();
 
@@ -39,9 +58,10 @@ const Results = props => {
       to the store under state.businessInfo
     - routes the user to the dashboard
   */
-  const select = e => {
+  const select = () => {
     props.resetSearchResults();
     props.select(tentativeSelection);
+    console.log("Select working, tentative", tentativeSelection);
   };
 
   console.log("props", props);
@@ -92,7 +112,7 @@ const Results = props => {
     }
     console.log("Animation class", animationClass);
 
-    const results = props.businesses.data.reduce((acc, result) => 
+    const results = props.businesses.data.reduce((acc, result) => //acc?
         // For now, only render results that already exist in the database
         dbContains(result.id)
           ? [...acc, ( 
@@ -100,7 +120,7 @@ const Results = props => {
               data={result}
               select={select}
               key={result.id}
-              setTentativeSelection={setTentativeSelection}x
+              setTentativeSelection={setTentativeSelection}
               className={`result ${
                 result.id === tentativeSelection.businessId
                   ? "selected"

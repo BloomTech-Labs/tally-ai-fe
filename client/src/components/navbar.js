@@ -114,7 +114,7 @@ function NavBar(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{position: "fixed"}}>
       {isOnHomePage() ? <div className="landing-top-section"
       >
 

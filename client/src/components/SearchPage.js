@@ -137,6 +137,7 @@ const SearchPage = props => {
           className="search-widget"
           style={{
             backgroundSize: "cover",
+            minHeight: "110vh"
           }}
         >
           {/* <h1>See what customers are saying about your business!</h1> */}
@@ -144,7 +145,7 @@ const SearchPage = props => {
           <div
             className="search-form"
             style={{
-              height: "100vh",
+              minHeight: "90vh",
               width: "100%",
               display: "flex",
               justifyContent: "flex-start",
@@ -252,7 +253,7 @@ const SearchPage = props => {
                   });
                 }}
               >
-                Submit
+                Search
               </Button>
             </form>
           </div>

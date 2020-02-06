@@ -97,6 +97,14 @@ star-rating {
   -ms-overflow-style: none;
 }
 
+.MuiDrawer-paperAnchorDockedLeft {
+  -ms-overflow-style: none;
+}
+
+.MuiDrawer-paperAnchorDockedLeft::-webkit-scrollbar {
+  display: none;
+}
+
 .expand-search-results {
   animation-name: expandResults;
   animation-duration: 1s;
@@ -142,6 +150,11 @@ star-rating {
 
   /* prevent the animation from resetting after done playinig */
   animation-fill-mode: forwards;
+}
+
+.result:hover {
+  background-color: lightgray;
+  transition: 0.3s;
 }
 
 .result img {
@@ -743,8 +756,8 @@ position: absolute;
 }
 
 .MeetTheTeam {
-  height: 35vh;
-  /* background: linear-gradient(353.46deg, #E3F2FD 11.16%, #BBDEFB 82.03%); */
+  height: 25vh;
+  /* background: linear-gradient(179.93deg, #B5E4FE 0.09%, #BDF5FF 12.8%, #FFFFFF 33.12%); */
 }
 
 /* let className = props.competitor ? "competitorTab" : "businessTab";
@@ -931,4 +944,5 @@ font-size: 22px;
 line-height: 30px;
 color: white;
 }
+
 

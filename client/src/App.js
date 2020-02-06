@@ -64,7 +64,7 @@ function App(props) {
       <Route path="/Login/" component={Login} />
       <Route path="/Compset" component={CompSet} />
       <Route path="/AboutUs" component={AboutUs} />
-      <Route path="/Policy" component={Policy} />
+      <Route path="/Legal/:doc" component={Policy} />
       <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={EditAccount} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
