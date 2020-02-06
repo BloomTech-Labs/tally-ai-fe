@@ -16,7 +16,9 @@ export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
 
 
 // Select business and add info to the store
-export const SELECT_BUSINESS = "SELECT_BUSINESS";
+export const SELECT_BUSINESS_START = "SELECT_BUSINESS_START";
+export const SELECT_BUSINESS_SUCCESS = "SELECT_BUSINESS_SUCCESS";
+export const SELECT_BUSINESS_FAILURE = "SELECT_BUSINESS_FAILURE";
 
 //adding businesses to user's owned businesses list
 export const ADD_BUSINESS_START = "ADD_BUSINESS_START";
@@ -189,9 +191,25 @@ export const fetchTopAndBottom = id => dispatch => {
 };
 
 // Select business and add info to the store at state.businessInfo
-export const selectBusiness = businessInfo => dispatch => {
+export const selectBusiness = (previousBusinessInfo, businessInfo) => dispatch => {
+  if(businessInfo){//only request yelp data if both previous and new info are provided. This is useful while selecting new tabs
+    console.error("SECOND PARAMETER PROVIDED, not selecting new tab, params: ", previousBusinessInfo, businessInfo);
+  dispatch({ type: SELECT_BUSINESS_START, payload: businessInfo });//Predict that the selection will be successful by setting currentlySelectedBusiness immediatly, so that the user doesn't need to wait until address/rating info is gotten
+  axiosWithYelpAuth()
+  .get("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + businessInfo.businessId)
+  .then(res => {
+    dispatch({ type: SELECT_BUSINESS_SUCCESS, payload: {...businessInfo, address: res.data.location.display_address, reviewCount: res.data.review_count, averageRating: res.data.rating} });
+  })
+  .catch(err => {
+    dispatch({
+      type: SELECT_BUSINESS_FAILURE,
+      payload: previousBusinessInfo//revert back!
+    });
+  });
+}else{
+  dispatch({ type: SELECT_BUSINESS_SUCCESS, payload: previousBusinessInfo });
+}
   console.log("\nAdding business selection to the store...\n");
-  dispatch({ type: SELECT_BUSINESS, payload: businessInfo });
 };
 
 // export const fetchBusinessData = id => dispatch => {

@@ -103,7 +103,7 @@ const SearchPage = props => {
       props.addBusiness(selection, localStorage.getItem("userID"));
     }//.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
     props.setActiveTabs(props.activeTabs, props.activeTabs.concat([selection]), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
-    props.selectBusiness(selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
+    props.selectBusiness(props.selectedBusiness, selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
 

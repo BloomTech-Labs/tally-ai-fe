@@ -163,7 +163,8 @@ const Results = props => {
 };
 
 const mapStateToProps = state => ({
-  businesses: state.searchResults
+  businesses: state.searchResults,
+  selectedBusiness: state.currentlySelectedBusiness
 });
 
 export default connect(mapStateToProps, { selectBusiness, resetSearchResults })(Results);

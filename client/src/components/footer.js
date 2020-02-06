@@ -47,11 +47,9 @@ export default function Footer() {
                     </Typography>
                 </div>
                 <div style={{width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', height: '8vh'}}> 
-                    {/* <Link className="FooterButton" to="/AboutUs">About</Link> */}
-                    <Link className="FooterButton" to="/AboutUs">Meet the Team</Link>
+                    <Link className="FooterButton" to="/About">About</Link>
                     <Link className="FooterButton" to="/Legal/tos">Terms Of Service</Link>
                     <Link className="FooterButton" to="/Legal/privacy">Privacy Policy</Link>
-                    {/* <Link className="FooterButton" to="/Policy">Privacy Policy</Link> */}
                 </div>
             </div>}          
         </footer>

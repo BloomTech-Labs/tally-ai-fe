@@ -5,6 +5,7 @@ import { shouldUpdateLoggedInUser } from "../actions/index";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {Link} from "react-router-dom";
 
 import axios from "axios"
 
@@ -25,11 +26,12 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(2),
     },
     button: {
+        marginTop: "30px", 
+        backgroundColor: "#1E4DC7", 
+        color: "white",
         margin: theme.spacing(1),
-        marginTop: '2%',
-        marginBottom: '9%',
-        width: '15%',
-        color:'#1E4DC7'
+        marginBottom: '30px',
+        width: '15%'
     },
     input: {
         display: 'none',
@@ -101,7 +103,7 @@ function Registration(props) {
             <form className={classes.container} onSubmit={(e) => submitHandler(e)}>
                 <div style={{ width: "80%", marginLeft: "10%", marginRight: "10%", borderRadius: "47px", marginTop: "50px", marginBottom: "50px", height: "70vh", background: "white" }}>
                     <div style={{ width: "91%", marginLeft: "9%", textAlign: "left", fontSize: "24px", paddingTop: "25px" }}>
-                        <h1>Sign up for an account!</h1>
+                        <h1>Sign up for an account</h1>
                     </div>
                     <div style={{ width: "100%" }}>
                         <TextField
@@ -183,6 +185,11 @@ function Registration(props) {
                     </div>
                     <div style={{ width: "100%" }}>
                         <Button className={classes.button} variant="outlined" type="submit">Register</Button>
+                    </div>
+                    <div>
+                        <p>
+                            Already have an account? <Link style={{padding: "0", color: "black"}} to='/Login/'>Sign in here</Link>
+                        </p>
                     </div>
                 </div>
             </form>

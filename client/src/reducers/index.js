@@ -4,7 +4,9 @@ import {
   FETCH_BUSINESS_SUCCESS,
   FETCH_BUSINESS_FAILURE,
   // Select business from results
-  SELECT_BUSINESS,
+  SELECT_BUSINESS_START,
+  SELECT_BUSINESS_SUCCESS,
+  SELECT_BUSINESS_FAILURE,
 
   //adding businesses to user's owned businesses list
   ADD_BUSINESS_START,
@@ -287,7 +289,7 @@ function reducer(state = initialState, action) {
         tabs: {
           activeTabs: action.payload,
           isFetching: false,
-          error: null//idec
+          error: null //idec
         }
       };
 
@@ -324,10 +326,20 @@ function reducer(state = initialState, action) {
       };
 
     // Select business
-    case SELECT_BUSINESS:
+    case SELECT_BUSINESS_START:
       return {
         ...state,
-        currentlySelectedBusiness: { ...action.payload }
+        currentlySelectedBusiness: { ...action.payload } //set data immediatly (missing data that we're waiting on Yelp for)
+      };
+    case SELECT_BUSINESS_SUCCESS:
+      return {
+        ...state,
+        currentlySelectedBusiness: { ...action.payload } //fill in the new address, rating and review count info
+      };
+    case SELECT_BUSINESS_FAILURE:
+      return {
+        ...state,
+        currentlySelectedBusiness: { ...action.payload } //revert back to old data
       };
 
     //adding businesses to user's owned businesses list
@@ -591,13 +603,13 @@ function reducer(state = initialState, action) {
           businesses: action.payload.competitors.map(business => {
             return {
               //id: 16
-// name: "Cartel Coffee Lab"
-// city: "Phoenix"
-// state: "AZ"
-// yelp:
-// yelp_id: "j0_DUr3vBXY-JP-b0bf93A"
-// url: "https://www.yelp.com/biz/cartel-coffee-lab-phoenix-2?adjust_creative=qO78hV4p7yy-o3z8K5osow&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=qO78hV4p7yy-o3z8K5osow"
-// image_url: 
+              // name: "Cartel Coffee Lab"
+              // city: "Phoenix"
+              // state: "AZ"
+              // yelp:
+              // yelp_id: "j0_DUr3vBXY-JP-b0bf93A"
+              // url: "https://www.yelp.com/biz/cartel-coffee-lab-phoenix-2?adjust_creative=qO78hV4p7yy-o3z8K5osow&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=qO78hV4p7yy-o3z8K5osow"
+              // image_url:
               id: business.id,
               businessId: business.yelp.yelp_id, //default tab selected by default
               // for side bar
@@ -610,7 +622,7 @@ function reducer(state = initialState, action) {
             };
           }),
           isSetting: false,
-          error: null,
+          error: null
         },
         loggedInUser: {
           ...state.loggedInUser,
@@ -633,7 +645,7 @@ function reducer(state = initialState, action) {
             };
           }),
           isSetting: false,
-          error: null,
+          error: null
         },
         activeWidgets: [widgets[0].name, widgets[1].name],
         tabs: {
@@ -805,7 +817,6 @@ function reducer(state = initialState, action) {
           }
         }
       };
-      
 
     // Unknown action type (default)
     default:

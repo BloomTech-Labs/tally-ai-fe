@@ -9,6 +9,7 @@ import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
 import SearchPage from "./components/SearchPage"
 // Components
+import RestrictMobile from "./components/RestrictMobile"
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import Search from "./components/search.js";
@@ -57,13 +58,14 @@ function App(props) {
 
   return (
     <div className="App">
+      <RestrictMobile />
       <NavBar />
       <PublicRoute exact path="/" component={Search} />
       <Route path="/Dashboard/" component={DashboardGrid} />
       <Route path="/Register/" component={registration} />
       <Route path="/Login/" component={Login} />
       <Route path="/Compset" component={CompSet} />
-      <Route path="/AboutUs" component={AboutUs} />
+      <Route path="/About" component={AboutUs} />
       <Route path="/Legal/:doc" component={Policy} />
       <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={EditAccount} />

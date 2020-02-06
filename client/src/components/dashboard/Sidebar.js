@@ -21,7 +21,7 @@ import burger from "../images/burger.jpg";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { fetchBusinesses, selectBusiness } from "../../actions/index.js";
+import { fetchBusinesses } from "../../actions/index.js";
 
 const drawerWidth = 375;
 
@@ -187,6 +187,5 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(connect(mapStateToProps, {
-  fetchBusinesses,
-  selectBusiness
+  fetchBusinesses
 })(ClippedDrawer));

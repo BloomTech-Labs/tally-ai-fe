@@ -60,7 +60,7 @@ const BusinessTab = props => {
     } else if (selected) {
       let biz = getBusinessFromID(newActiveTabs[0].businessId);
       if (biz) {
-        props.selectBusiness(biz);
+        props.selectBusiness(props.selectedBusiness, biz);
         console.log("selecting biz:", biz);
       } else {
         props.selectBusiness(newActiveTabs[0]);
@@ -72,7 +72,12 @@ const BusinessTab = props => {
   }
 
   return (
-    <div className={className} onClick={() => { props.selectBusiness(tabBusiness); }}>
+    <div className={className} onClick={() => { 
+      businessesContains(tabBusiness) ?
+      props.selectBusiness(props.selectedBusiness, tabBusiness)
+      :
+      props.selectBusiness(tabBusiness)
+      }}>
       <div className="deleteTab" onClick={(e) => e.stopPropagation() & deleteTab()}>X</div>
       {businessesContains(tabBusiness) ? (
         <div>
