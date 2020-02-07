@@ -266,10 +266,10 @@ const PhraseRank = props => {
 
   //a widget that maps the rank of a phrase over time
   return (
-    <div style={{width: "100%", height: "100%"}}>
+    <div className="widget">
     <h3 className="widgetTitle">Trends</h3>
     <p className="widgetSubtitle">See what word phrases are said more or less in your reviews over time.</p>
-    <div style={{width: "90%", height: "65%"}}>
+    <div className="graphContainer">
     <ResponsiveContainer>
     <LineChart
       data={formattedData}

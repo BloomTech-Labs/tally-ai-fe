@@ -13,15 +13,13 @@ const WidgetThumbnail = props => {
   const [selected, setSelected] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-//   function getOverlay() {
-//     if (selected) {
-//       return "";
-//     } else if (hovered) {
-//       return <img src={Hovered} alt="Selected" class="overlayImg"></img>;
-//     } else {
-//       return;
-//     }
-//   }
+  function getSelectedClass() {
+    if (selected) {
+      return "Selected";
+    } else {
+      return "";
+    }
+  }
 
   useEffect(() => {
     if (props.activeWidgets.includes(props.widgetName)) {
@@ -35,7 +33,7 @@ const WidgetThumbnail = props => {
   return (
     <div
       id={props.widgetName + "Thumbnail"}
-      className="widgetThumbnail"
+      className={"widgetThumbnail" + getSelectedClass()}
       onClick={() => {
         if (!selected) {
           //add since it's selected now:
