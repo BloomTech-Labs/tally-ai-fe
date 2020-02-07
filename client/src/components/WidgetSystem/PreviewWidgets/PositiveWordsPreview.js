@@ -9,9 +9,7 @@ import {
     Legend
 } from "recharts";
 
-import StarRatingImg from "../../images/BarGraphPreview.svg"
-
-const PositiveWords = () => {
+const TopBottomWordsPreview = () => {
 
     return (
         <div>
@@ -39,4 +37,4 @@ const PositiveWords = () => {
     );
 }
 
-export default PositiveWords;
+export default TopBottomWordsPreview;

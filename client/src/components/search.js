@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     marginTop: "2%",
     marginBottom: "6%",
-    width: "15%",
+    width: "18%",
     backgroundColor: "#619FFF",
     color: "white"
 
