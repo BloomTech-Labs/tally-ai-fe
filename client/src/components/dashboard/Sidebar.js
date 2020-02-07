@@ -43,7 +43,8 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    marginTop: '8vh'
+    marginTop: '8vh',//below header
+    height: "87vh"//above footer
   },
   content: {
     flexGrow: 0,
@@ -103,7 +104,7 @@ function ClippedDrawer(props) {
       >
 
 {businessesContains(props.selectedBusiness.businessId) || !(localStorage.getItem("token")) ? 
-        <div style={{ position: "fixed", display: "flex", alignItems: "center", fontSize: "12px", paddingBottom: "50px", paddingLeft: "36px", paddingTop: "47px", background: "white", width: "339px", borderBottom: "1px solid lightgray", borderRight: "1px solid lightgray"}}>
+        <div style={{ zIndex: "1000", position: "fixed", display: "flex", alignItems: "center", fontSize: "12px", paddingBottom: "50px", paddingLeft: "36px", paddingTop: "47px", background: "white", width: "339px", borderBottom: "1px solid lightgray", borderRight: "1px solid lightgray"}}>
           <div><img src={props.selectedBusiness.businessImg} style={{ height: "100px", width: "100px", borderRadius: "100%", marginRight: "11px"}} /></div>
           <div style={{textAlign: "left"}}>
             <p style={{marginTop: "0", fontWeight: "600", fontSize: "23px"}}>{props.selectedBusiness.businessName}</p> {/* pass in business title prop here */}
@@ -121,7 +122,7 @@ function ClippedDrawer(props) {
 
 
         <Divider style={{backgroundColor: "transparent", marginTop: "200px"}}/>
-        <div style={{ fontSize: "15px" }}>
+        <div style={{ fontSize: "15px"}}>
           <h1>Add to dashboard</h1>
         </div>
 

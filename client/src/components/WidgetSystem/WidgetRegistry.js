@@ -1,22 +1,28 @@
 import React from "react";
 
-import TopBottomWords from "./Widgets/PositiveWords";
+import PositiveWords from "./Widgets/PositiveWords";
+import PositiveWordsPreview from "./PreviewWidgets/PositiveWordsPreview"
+
 import PhraseRank from "./Widgets/PhraseRank";
-import RadarWidget from "./Widgets/RadarWidget";
-import ReviewFrequency from "./Widgets/ReviewFrequency";
-import RatingOverTime from "./Widgets/RatingOverTime";
-import ExampleWidget6 from "./Widgets/NegativeWords";
 import PhraseRankPreview from "./PreviewWidgets/PhraseRankPreview";
-import TopBottomWordsPreview from "./PreviewWidgets/TopBottomWordsPreview";
-import RatingOverTimePreview from "./PreviewWidgets/RatingOverTimePreview";
-import ExampleWidget6Preview from "./PreviewWidgets/ExampleWidget6Preview";
-import ReviewFrequencyPreview from "./PreviewWidgets/ReviewFrequencyPreview";
+
+import RadarWidget from "./Widgets/RadarWidget";
 import RadarWidgetPreview from "./PreviewWidgets/RadarWidgetPreview";
+
+import ReviewFrequency from "./Widgets/ReviewFrequency";
+import ReviewFrequencyPreview from "./PreviewWidgets/ReviewFrequencyPreview";
+
+import RatingOverTime from "./Widgets/RatingOverTime";
+import RatingOverTimePreview from "./PreviewWidgets/RatingOverTimePreview";
+
+import NegativeWords from "./Widgets/NegativeWords";
+import NegativeWordsPreview from "./PreviewWidgets/NegativeWordsPreview";
+
 
 //Update this array whenever a new widget is added
 export let widgets = [
-  { name: "topbottomwords", component: <TopBottomWords />, previewComponent: <TopBottomWordsPreview/> },
-  { name: "NegativeWords", component: <ExampleWidget6 />, previewComponent: <ExampleWidget6Preview/> },
+  { name: "topbottomwords", component: <PositiveWords />, previewComponent: <PositiveWordsPreview/> },
+  { name: "NegativeWords", component: <NegativeWords />, previewComponent: <NegativeWordsPreview/> },
   { name: "phraserank", component: <PhraseRank />, previewComponent: <PhraseRankPreview/>  },
   // { name: "radarchart", component: <RadarWidget />, previewComponent: <RadarWidgetPreview/>},
   { name: "reviewfrequency", component: <ReviewFrequency />, previewComponent: <ReviewFrequencyPreview/>  },
@@ -25,7 +31,7 @@ export let widgets = [
     name: "projection",
     component: (
       <div>
-        <p>YOU CAN DROP HERE</p>
+        {/* <p>YOU CAN DROP HERE</p> */}
       </div>
     )
   }

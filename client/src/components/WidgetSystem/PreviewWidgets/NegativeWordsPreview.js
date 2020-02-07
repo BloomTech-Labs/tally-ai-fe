@@ -9,13 +9,14 @@ import {
     Legend
 } from "recharts";
 
-import StarRatingImg from "../../images/BarGraphPreview.svg"
+import NegativePreview from "../../images/NegativeWordsPreview.svg"
 
 const NegativeWordsPreview = () => {
 
     return (
         <div>
             <h3>Negative Words</h3>
+            <img className="widgetPreviewImage" src={NegativePreview}></img>
         </div>
     );
 }
