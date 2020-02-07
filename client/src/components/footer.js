@@ -61,7 +61,7 @@ export default function Footer() {
                     </Typography>
                 </div>
                 <div style={{width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', height: '5vh'}}>
-                    <a style={{height: '3vh', marginRight: '-10%'}} href="https://github.com/Lambda-School-Labs/tally-ai-fe"><img src={GitHub}></img></a>
+                    <a style={{height: '3vh', width: '3vh', marginRight: '-10%'}} href="https://github.com/Lambda-School-Labs/tally-ai-fe"><img style={{height: '3vh', width: '3vh'}} src={GitHub}></img></a>
                     <Link className="FooterButton" to="/About">About</Link>
                     <Link style={{marginLeft: '-8%', marginRight: '-8%'}} className="FooterButton" to="/Legal/tos">Terms Of Service</Link>
                     <Link className="FooterButton" to="/Legal/privacy">Privacy Policy</Link>
