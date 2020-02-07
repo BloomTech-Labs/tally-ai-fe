@@ -8,31 +8,14 @@ import {
     Tooltip,
     Legend
 } from "recharts";
+import StarRatingImg from "../../images/StarRatingGraphPreview.svg"
 
 const RatingOverTimePreview = () => {
 
     return (
         <div>
-            <h3>Rating Over Time</h3>
-            {/* <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="example" stroke="#B287A3" />;
-
-            </LineChart> */}
+            <h3>Star Rating</h3>
+            <img className="widgetPreviewImage" src={StarRatingImg}></img>
         </div>
     );
 }

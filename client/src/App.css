@@ -679,7 +679,7 @@ star-rating {
   font-family: Avenir;
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 33px;
   color: white;
 }
@@ -941,7 +941,7 @@ a {
   font-family: Avenir;
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
+  font-size: 15px;
   line-height: 30px;
   color: white;
 }

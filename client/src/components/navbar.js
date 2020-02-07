@@ -48,7 +48,7 @@ import Avatar from '@material-ui/core/Avatar';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    //backgroundColor: '#3f51b5',
+    // backgroundColor: '#3f51b5',
     position: 'fixed',
     zIndex: '5'
   },
@@ -243,15 +243,15 @@ function NavBar(props) {
                             <ListItemText className="homeNavLink"  primary="Home" />
                           </ListItem> */}
 
-                        <ListItem style={{ color: "white", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/About">
+                        <ListItem style={{ color: "white", width: '15%', minWidth: "100px", fontSize: '18px', textAlign: 'center', paddingRight:'40px' }} button onClick={handleClose} component={Link} to="/About">
                           <ListItemText className="homeNavLink" primary="About" />
                         </ListItem>
 
-                        <ListItem style={{ color: "white", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/Login">
+                        <ListItem style={{ color: "white", width: '15%', minWidth: "100px", fontSize: '18px', textAlign: 'center', paddingRight:'40px' }} button onClick={handleClose} component={Link} to="/Login">
                           <ListItemText className="homeNavLink" primary="Sign In" />
                         </ListItem>
 
-                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "black", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center', backgroundColor: 'white', borderRadius: '40px' }} component={Link} to="/Register">
+                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "black", width: '15%', minWidth: "100px", fontSize: '18px', textAlign: 'center', paddingRight:'40px', backgroundColor: 'white', borderRadius: '40px' }} component={Link} to="/Register">
                           <ListItemText style={{ background: '#67FFD2;' }} primary="Sign Up" />
                         </ListItem>
                       </div>
@@ -263,7 +263,7 @@ function NavBar(props) {
               </Toolbar>
             </AppBar>
             ) : (
-              <AppBar style={{ position: "fixed", boxShadow: "none", backgroundColor: "white", height: "8vh", width: "100%" }} >
+              <AppBar style={{ position: "fixed", boxShadow: "none", backgroundColor: "transparent", height: "8vh", width: "100%" }} >
               <Toolbar style={{ minHeight: "0", color: 'black' }}>
                 {/* <Typography variant="h3" className={classes.title} style={{border: "1px solid black", width: "400px"}}>
             Tally AI
@@ -283,15 +283,15 @@ function NavBar(props) {
                             <ListItemText className="homeNavLink"  primary="Home" />
                           </ListItem> */}
 
-                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/About">
+                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '18px', textAlign: 'center', paddingLeft:'25%' }} button onClick={handleClose} component={Link} to="/About">
                           <ListItemText className="homeNavLink" primary="About" />
                         </ListItem>
 
-                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center' }} button onClick={handleClose} component={Link} to="/Login">
+                        <ListItem style={{ width: '15%', minWidth: "100px", fontSize: '18px', textAlign: 'center', paddingLeft:'40px' }} button onClick={handleClose} component={Link} to="/Login">
                           <ListItemText className="homeNavLink" primary="Sign In" />
                         </ListItem>
 
-                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "white", width: '15%', minWidth: "100px", fontSize: '1rem', textAlign: 'center', backgroundColor: '#1E4DC7', borderRadius: '40px' }} component={Link} to="/Register">
+                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "white", width: '100px', height:'33px', minWidth: "100px", fontSize: '18px', textAlign: 'center', backgroundColor: '#1E4DC7', borderRadius: '40px' }} component={Link} to="/Register">
                           <ListItemText style={{ background: '#67FFD2;' }} primary="Sign Up" />
                         </ListItem>
                       </div>
