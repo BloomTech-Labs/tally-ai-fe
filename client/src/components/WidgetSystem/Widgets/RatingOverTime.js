@@ -37,11 +37,11 @@ const RatingOverTime = props => {
   }
 
   return (
-    <div style={{width: "100%", height: "100%"}}>
+    <div className="widget">
       <h3 className="widgetTitle">Star Rating</h3>
       <p className="widgetSubtitle">Look at how your star rating changes over time compared to the weekly average to identify important time periods.</p>
 
-      <div style={{width: "90%", height: "60%"}}>
+      <div className="graphContainer">
     <ResponsiveContainer>
         <ComposedChart
           data={props.data}

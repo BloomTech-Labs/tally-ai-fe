@@ -34,10 +34,10 @@ const RadarWidget = props => {
 
   console.log("RADAR DATA", props.data);
   return (
-    <div className="radarChart" style={{ width: "100%", height: "100%" }}>
+    <div className="widget">
       <h3 className="widgetTitle">Radar Data</h3>
       <p className="widgetSubtitle">A cool Radar Chart</p>
-      <div style={{ width: "90%", height: "65%" }}>
+      <div className="graphContainer">
         <ResponsiveContainer            margin={{
                 top: 5,
                 right: 30,
