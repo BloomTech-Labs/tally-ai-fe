@@ -22,23 +22,23 @@ const PhraseRankPreview = props => {
 
 export default PhraseRankPreview;
 
-const PhraseRankPreview = props => {
+// const PhraseRankPreview = props => {
 
-    return (
-        <div>
-            <h3>Phrase Sentiment Over Time</h3>
+//     return (
+//         <div>
+//             <h3>Phrase Sentiment Over Time</h3>
 
-        </div>
-    );
-}
+//         </div>
+//     );
+// }
 
-export default PhraseRankPreview;
+// export default PhraseRankPreview;
 
-const PhraseRankPreview = props => {
+// const PhraseRankPreview = props => {
 
-    return (
-        <div>
-            <h3>Phrase Sentiment Over Time</h3>
+//     return (
+//         <div>
+//             <h3>Phrase Sentiment Over Time</h3>
             {/* <LineChart
                 width={500}
                 height={300}
@@ -58,17 +58,17 @@ const PhraseRankPreview = props => {
                 <Line type="monotone" dataKey="example" stroke="#B287A3" />;
 
             </LineChart> */}
-        </div>
-    );
-}
+//         </div>
+//     );
+// }
 
-export default PhraseRankPreview;
+// export default PhraseRankPreview;
 
-const PhraseRankPreview = props => {
+// const PhraseRankPreview = props => {
 
-    return (
-        <div>
-            <h3>Phrase Sentiment Over Time</h3>
+//     return (
+//         <div>
+//             <h3>Phrase Sentiment Over Time</h3>
             {/* <LineChart
                 width={500}
                 height={300}
@@ -88,8 +88,8 @@ const PhraseRankPreview = props => {
                 <Line type="monotone" dataKey="example" stroke="#B287A3" />;
 
             </LineChart> */}
-        </div>
-    );
-}
+//         </div>
+//     );
+// }
 
-export default PhraseRankPreview;
+// export default PhraseRankPreview;
