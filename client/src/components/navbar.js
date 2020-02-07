@@ -251,7 +251,7 @@ function NavBar(props) {
                           <ListItemText className="homeNavLink" primary="Sign In" />
                         </ListItem>
 
-                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "black", width: '15%', minWidth: "100px", fontSize: '18px', textAlign: 'center', paddingRight:'40px', backgroundColor: 'white', borderRadius: '40px' }} component={Link} to="/Register">
+                        <ListItem style={{ boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.25)", color: "black", width: '15%', minWidth: "100px", fontSize: '18px', textAlign: 'center', marginRight:'40px', backgroundColor: 'white', borderRadius: '40px' }} component={Link} to="/Register">
                           <ListItemText style={{ background: '#67FFD2;' }} primary="Sign Up" />
                         </ListItem>
                       </div>

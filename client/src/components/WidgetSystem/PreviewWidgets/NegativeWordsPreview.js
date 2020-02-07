@@ -11,14 +11,13 @@ import {
 
 import StarRatingImg from "../../images/BarGraphPreview.svg"
 
-const RatingOverTimePreview = () => {
+const NegativeWordsPreview = () => {
 
     return (
         <div>
-            <h3>Star Rating</h3>
-            <img className="widgetPreviewImage" src={StarRatingImg}></img>
+            <h3>Negative Words</h3>
         </div>
     );
 }
 
-export default RatingOverTimePreview;
+export default NegativeWordsPreview;
