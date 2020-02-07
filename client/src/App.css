@@ -191,7 +191,9 @@ star-rating {
   /*width: 40vmax;
   height: 40vmax;*/
   width: 45%;
-  height: 500px;
+  height: 55%;
+  min-height: 547px;
+  min-width: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -199,6 +201,11 @@ star-rating {
   border-radius: 20px;
   background-color: white;
   margin: 1vw;
+}
+
+.widget {
+  height: 100%;
+  min-height: 547px;
 }
 
 .widgetList {
@@ -273,7 +280,8 @@ star-rating {
 }
 
 .dashboardgrid {
-  margin-top: 8vh;
+  margin-top: 8vh;/* below header */
+  margin-bottom: 5vh;/* above footer */
   display: flex;
   min-height: 100vh; /* Make sure the page's height is at least one page long */
   background-color: #f5f5f5;
@@ -507,10 +515,7 @@ star-rating {
   opacity: 0.5;
 }
 
-.widgetThumbnail {
-  width: 37vmin;
-  height: 37vmin;
-}
+
 
 .businessStats {
   padding-top: 20px;
@@ -932,6 +937,7 @@ a {
   /* line-height: 41px; */
   text-align: left;
   padding-left: 40px;
+  padding-right: 40px;
   opacity: 0.64;
   margin: 0;
   margin-top: -10px;
@@ -975,4 +981,49 @@ a {
     z-index: 1000000000000; /* Specify a stack order in case you're using a different order for other elements */
     cursor: not-allowed; /* Add a pointer on hover */
   }
+}
+
+.widgetThumbnail.widgetPreviewImage {
+  filter: brightness(100%);
+}
+
+.widgetThumbnail:hover .widgetPreviewImage {
+
+  animation-name: darkenThumbnail;
+  animation-duration: .25s;
+  /* prevent the animation from resetting after done playinig */
+  animation-fill-mode: forwards;
+  }
+
+  @keyframes darkenThumbnail {
+  /* flex-basis is how big the results column is in this flex row, auto should take whatever is left over from the search-form */
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(70%);
+  }
+}
+
+.widgetThumbnailSelected .widgetPreviewImage {
+  filter: brightness(70%);
+}
+
+.widgetSelector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.wordListItem {
+  font-size: 100%;
+  color: white;
+  width: 100%;
+}
+
+.graphContainer {
+  width: 90%;
+  height: 300px;
+  padding-top: 50px;
 }

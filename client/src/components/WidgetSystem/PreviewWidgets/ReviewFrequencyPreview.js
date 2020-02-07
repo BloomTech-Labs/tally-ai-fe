@@ -9,14 +9,14 @@ import {
     Legend
 } from "recharts";
 
-import StarRatingImg from "../../images/BarGraphPreview.svg"
+import LineGraph from "../../images/LineGraphPreview.svg"
 
 const ReviewFrequencyPreview = () => {
 
     return (
         <div>
             <h3>Review Frequency</h3>
-            <img className="widgetPreviewImage" src={StarRatingImg}></img>
+            <img className="widgetPreviewImage" src={LineGraph}></img>
         </div>
     );
 }
