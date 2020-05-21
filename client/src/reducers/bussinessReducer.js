@@ -18,6 +18,7 @@ import {
     REMOVE_BUSINESS_SUCCESS,
     REMOVE_BUSINESS_FAILURE,
 } from '../actions/bussinessAction';
-import reducer from '.';
+import bussinessreducer from '.';
 
-export default reducer
+export default bussinessreducer
+
