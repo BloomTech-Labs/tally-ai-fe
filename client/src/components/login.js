@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 
 import axios from "axios";
 
+import GoogleBtn from './googleAuth/GoogleBtn';
+
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -114,6 +116,9 @@ const Login = props => {
                         <p>
                             Need an account? <Link style={{padding: "0", color: "black"}} to='/Register/'>Register here</Link>
                         </p>
+                    </div>
+                    <div>
+                        <GoogleBtn />
                     </div>
                 </div>
             </form>
