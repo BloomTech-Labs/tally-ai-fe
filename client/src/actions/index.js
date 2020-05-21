@@ -9,36 +9,9 @@ import axios from "axios";
 */
 
 // Yelp Business Search
-export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
-export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";
-export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
 
 
 
-// Select business and add info to the store
-export const SELECT_BUSINESS_START = "SELECT_BUSINESS_START";
-export const SELECT_BUSINESS_SUCCESS = "SELECT_BUSINESS_SUCCESS";
-export const SELECT_BUSINESS_FAILURE = "SELECT_BUSINESS_FAILURE";
-
-//adding businesses to user's owned businesses list
-export const ADD_BUSINESS_START = "ADD_BUSINESS_START";
-export const ADD_BUSINESS_SUCCESS = "ADD_BUSINESS_SUCCESS";
-export const ADD_BUSINESS_FAILURE = "ADD_BUSINESS_FAILURE";
-
-//removing businesses from user's owned businesses list
-export const REMOVE_BUSINESS_START = "REMOVE_BUSINESS_START";
-export const REMOVE_BUSINESS_SUCCESS = "REMOVE_BUSINESS_SUCCESS";
-export const REMOVE_BUSINESS_FAILURE = "REMOVE_BUSINESS_FAILURE";
-
-//adding competitors to user's competitor list
-export const ADD_COMPETITOR_START = "ADD_COMPETITOR_START";
-export const ADD_COMPETITOR_SUCCESS = "ADD_COMPETITOR_SUCCESS";
-export const ADD_COMPETITOR_FAILURE = "ADD_COMPETITOR_FAILURE";
-
-//removing competitors from user's competitor list
-export const REMOVE_COMPETITOR_START = "REMOVE_COMPETITOR_START";
-export const REMOVE_COMPETITOR_SUCCESS = "REMOVE_COMPETITOR_SUCCESS";
-export const REMOVE_COMPETITOR_FAILURE = "REMOVE_COMPETITOR_FAILURE";
 
 
 // TopBottomWords

@@ -8,7 +8,7 @@
  REMOVE_COMPETITOR_START,
  REMOVE_COMPETITOR_SUCCESS,
  REMOVE_COMPETITOR_FAILURE,
- } from '../actions/index'
+ } from '../actions/competiorAction'
 import competitorReducer from '.';
 
 export default competitorReducer
