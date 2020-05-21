@@ -41,16 +41,22 @@ const useStyles = makeStyles(theme => ({
 
 function EditAccount(props){
     /*
-        User can enter updates to first name, last name, email, or password.
+        User can enter updates to first name, last name, or password.
         If password is updated, they must confirm the password.
     */
 
     const classes = useStyles();
 
+    useEffect(()=>{
+            setCredentials({...props.userInfo.data, password: "",
+            confirmPassword: ""})
+        
+        
+    },[props.userInfo])
+
     const [userCredentials, setCredentials] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
+        firstName: "",
+        lastName: "",
         password: "",
         confirmPassword: ""
     });
@@ -58,7 +64,7 @@ function EditAccount(props){
     console.log(props);
 
     const changeHandler = e => {
-
+        setCredentials({...userCredentials, [e.target.name]: e.target.value})
     }
 
 
@@ -101,9 +107,9 @@ function EditAccount(props){
                 variant ="outlined"
                 margin="normal"
                 type="text"
-                name="first_name"
+                name="firstName"
                 className={classes.textField}
-                value={userCredentials.first_name}
+                value={userCredentials.firstName}
                 onChange={changeHandler}
                 placeholder="First Name"
                 />
@@ -112,22 +118,11 @@ function EditAccount(props){
                 variant ="outlined"
                 margin="normal"
                 type="text"
-                name="last_name"
+                name="lastName"
                 className={classes.textField}
-                value={userCredentials.last_name}
+                value={userCredentials.lastName}
                 onChange={changeHandler}
                 placeholder="Last Name"
-                />
-            <TextField 
-                label ="Email"
-                variant ="outlined"
-                margin="normal"
-                type="email"
-                name="email"
-                className={classes.textField}
-                value={userCredentials.email}
-                onChange={changeHandler}
-                placeholder="Email"
                 />
             <TextField 
                 label ="Password"
@@ -162,7 +157,7 @@ function EditAccount(props){
 
 const mapStateToProps = state => {
     return {
-        test: state
+        userInfo: state.loggedInUser
     };
 };
 
