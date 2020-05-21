@@ -1,7 +1,32 @@
 import {
+  // Yelp Business Search
+  FETCH_BUSINESS_START,
+  FETCH_BUSINESS_SUCCESS,
+  FETCH_BUSINESS_FAILURE,
+  // Select business from results
+  SELECT_BUSINESS_START,
+  SELECT_BUSINESS_SUCCESS,
+  SELECT_BUSINESS_FAILURE,
 
+  //adding businesses to user's owned businesses list
+  ADD_BUSINESS_START,
+  ADD_BUSINESS_SUCCESS,
+  ADD_BUSINESS_FAILURE,
 
- 
+  //removing businesses from user's owned businesses list
+  REMOVE_BUSINESS_START,
+  REMOVE_BUSINESS_SUCCESS,
+  REMOVE_BUSINESS_FAILURE,
+
+  //adding competitors to user's competitor list
+  ADD_COMPETITOR_START,
+  ADD_COMPETITOR_SUCCESS,
+  ADD_COMPETITOR_FAILURE,
+
+  //removing competitors from user's competitor list
+  REMOVE_COMPETITOR_START,
+  REMOVE_COMPETITOR_SUCCESS,
+  REMOVE_COMPETITOR_FAILURE,
 
   // Data for TopBottomWords
   FETCH_TOP_AND_BOTTOM_START,
@@ -105,7 +130,45 @@ const initialState = {
     ]
   },
 
-  
+  competitors: {
+    //TODO: Change name to competitors
+    isSetting: false,
+    error: null,
+    businesses: [
+      // {
+      //   businessId: "19878f9d6s77237-asd",
+      //   // for side bar
+      //   businessName: "Example Business",
+      //   businessImg: "https://assets.entrepreneur.com/franchise/282553-cover-image-1564755271.jpeg?width=800",
+      //   // for top-of-page info cards
+      //   reviewCount: 0,
+      //   averageRating: 0,
+      //   changeInRating: ""
+      // },
+      // {
+      //   // for DS API calls
+      //   businessId: "19878f9d6s71235assd",
+      //   // for side bar
+      //   businessName: "VERAMEAT",
+      //   businessImg: "https://www.shopkeep.com/wp-content/uploads/2016/07/retail-store_retail-business-plan-e1468443541681.jpg",
+      //   // for top-of-page info cards
+      //   reviewCount: 0,
+      //   averageRating: 0,
+      //   changeInRating: ""
+      // },
+      // {
+      //   // for DS API calls
+      //   businessId: "19878ffdgdfgb7237-asd",
+      //   // for side bar
+      //   businessName: "Bicycles",
+      //   businessImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshfmpFtjour-4iJgDPY7uZ0Ki3Kua13zPonqqdiSAu27YFsW48Q&s",
+      //   // for top-of-page info cards
+      //   reviewCount: 0,
+      //   averageRating: 0,
+      //   changeInRating: ""
+      // }
+    ] //array of businesses
+  },
   //Defaults to [widgets[0].name, widgets[1].name]. Later we can load some saved dashboard widgets from the db (should still have a default value here so they don't start out with an empty dashboard)
   //Array order really matters with activeWidgets, since it determines in which order they'll render. When the user drags an element to a new position on the screen, we need to translate that position to array position
   activeWidgets: [widgets[0].name, widgets[1].name],
