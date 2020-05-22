@@ -66,5 +66,13 @@
   "setupFiles": [
     "<rootDir>/config/polyfills.js",
     "<rootDir>/setupTests.js"
-  ]
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/__tests__/**"
+    ]
+  },
 }
