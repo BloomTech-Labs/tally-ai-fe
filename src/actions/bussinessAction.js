@@ -5,7 +5,7 @@ import axios from "axios";
 // Yelp Business Search
 export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
 export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";
-export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE";
+export const FETCH_BUSINESS_FAILURE = "FETCH_BUSINESS_FAILURE"; 2
 
 
 
