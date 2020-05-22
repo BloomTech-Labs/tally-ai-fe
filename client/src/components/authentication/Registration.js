@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-import Button from '@material-ui/core/Button';
+import { Button, LinearProgress } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+import RegistrationSchema from './RegistrationSchema';
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -46,6 +49,7 @@ const Registration = () => {
 
 	const handleChange = e => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value });
+		console.log(credentials);
 	};
 
 	const handleSubmit = e => {
@@ -59,88 +63,144 @@ const Registration = () => {
 				<Typography component='h1' variant='h5'>
 					Sign up for an account
 				</Typography>
-				<form className={classes.form}>
-					<Grid container spacing={2}>
-						<Grid item xs={12} sm={6}>
-							<TextField
-								autoComplete='fname'
-								name='firstName'
-								variant='outlined'
-								required
-								fullWidth
-								id='firstName'
-								label='First Name'
-								autoFocus
-								onChange={handleChange}
-							/>
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								id='lastName'
-								label='Last Name'
-								name='lastName'
-								autoComplete='lname'
-								onChange={handleChange}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								id='email'
-								label='Email'
-								name='email'
-								autoComplete='email'
-								onChange={handleChange}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								name='password'
-								label='Password'
-								type='password'
-								id='password'
-								autoComplete='current-password'
-								onChange={handleChange}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								name='confirmedPassword'
-								label='Confirm Password'
-								type='password'
-								id='confirmedPassword'
-								autoComplete='current-password'
-								onChange={handleChange}
-							/>
-						</Grid>
-					</Grid>
-					<Button
-						type='submit'
-						variant='contained'
-						color='primary'
-						className={classes.submit}
-					>
-						Sign Up
-					</Button>
-					<Grid container justify='flex-end'>
-						<Grid item>
-							<p>
-								Already have an account? <Link to='/Login'>Sign in</Link>
-							</p>
-						</Grid>
-					</Grid>
-				</form>
+				<Formik
+					initialValues={credentials}
+					onSubmit={handleSubmit}
+					validationSchema={RegistrationSchema}
+				>
+					{props => {
+						const {
+							values,
+							touched,
+							errors,
+							isSubmitting,
+							handleChange,
+							handleBlur,
+							handleSubmit,
+							handleReset
+						} = props;
+						return (
+							<Form className={classes.form} noValidate>
+								<Grid container spacing={2}>
+									<Grid item xs={12} sm={6}>
+										<TextField
+											autoComplete='fname'
+											name='firstName'
+											variant='outlined'
+											required
+											fullWidth
+											id='firstName'
+											label='First Name'
+											autoFocus
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={
+												errors.firstName && touched.firstName ? true : false
+											}
+											helperText={
+												errors.firstName &&
+												touched.firstName &&
+												errors.firstName
+											}
+										/>
+									</Grid>
+									<Grid item xs={12} sm={6}>
+										<TextField
+											variant='outlined'
+											required
+											fullWidth
+											id='lastName'
+											label='Last Name'
+											name='lastName'
+											autoComplete='lname'
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={errors.lastName && touched.lastName ? true : false}
+											helperText={
+												errors.lastName && touched.lastName && errors.lastName
+											}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<TextField
+											error={errors.email && touched.email ? true : false}
+											variant='outlined'
+											required
+											fullWidth
+											id='email'
+											label='Email'
+											name='email'
+											autoComplete='email'
+											onChange={handleChange}
+											onBlur={handleBlur}
+											helperText={errors.email && touched.email && errors.email}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<TextField
+											variant='outlined'
+											required
+											fullWidth
+											name='password'
+											label='Password'
+											type='password'
+											id='password'
+											autoComplete='current-password'
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={errors.password && touched.password ? true : false}
+											helperText={
+												errors.password && touched.password && errors.password
+											}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<TextField
+											variant='outlined'
+											required
+											fullWidth
+											name='confirmedPassword'
+											label='Confirm Password'
+											type='password'
+											id='confirmedPassword'
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={
+												errors.confirmedPassword && touched.confirmedPassword
+													? true
+													: false
+											}
+											helperText={
+												errors.confirmedPassword &&
+												touched.confirmedPassword &&
+												errors.confirmedPassword
+											}
+										/>
+									</Grid>
+								</Grid>
+								{isSubmitting && <LinearProgress />}
+								<Button
+									type='submit'
+									variant='contained'
+									color='primary'
+									className={classes.submit}
+								>
+									Sign Up
+								</Button>
+								<Grid container justify='flex-end'>
+									<Grid item>
+										<p>
+											Already have an account?{' '}
+											<Link to='/Login' style={{ color: 'dodgerblue' }}>
+												Sign in
+											</Link>
+										</p>
+									</Grid>
+								</Grid>
+							</Form>
+						);
+					}}
+				</Formik>
 			</div>
 		</Container>
 	);
