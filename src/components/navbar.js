@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/index';
-import { Register } from './registration';
+import { Register } from './authentication/Registration';
 import EditAccount from "./settings/editaccount"
 
 import { connect } from "react-redux";
