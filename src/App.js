@@ -13,7 +13,7 @@ import RestrictMobile from "./components/RestrictMobile"
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import Search from "./components/search.js";
-import DashboardGrid from "./components/dashboard/dashboard";
+import DashboardGrid from "./components/dashboard/Dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
 import EditAccount from "./components/settings/editaccount";
