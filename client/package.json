@@ -19,6 +19,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "fetch-mock": "^8.3.1",
+    "formik": "^2.1.4",
     "keymirror": "^0.1.1",
     "netlify-cli": "^2.25.0",
     "prop-types": "^15.7.2",
@@ -36,7 +37,8 @@
     "recharts": "^2.0.0-beta.1",
     "redux": "^4.0.4",
     "redux-mock-store": "^1.5.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.29.0"
   },
   "scripts": {
     "start": "react-scripts start",

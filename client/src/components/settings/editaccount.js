@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import * as yup from 'yup';
+import { Formik,Form,Field } from "formik";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -30,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     marginTop: '2%',
     marginBottom: '6%',
-    width: '15%'
+    width: '12em'
     },
     input: {
     display: 'none',
@@ -38,6 +40,19 @@ const useStyles = makeStyles(theme => ({
     
   }));
 
+  let settingsSchema = yup.object().shape({
+    firstName: yup.string().required('First name is required!'),
+    lastName: yup.string().required('Last name is required!'),
+    password: yup.string()
+        .min(6, "Password must contain at least 6 characters")
+        .oneOf([yup.ref("confirmPassword"), null], "Passwords do not Match"),
+    confirmPassword: yup.string()
+        .oneOf([yup.ref("password"), null], "Passwords do not Match")
+        .min(6, "Password must contain at least 6 characters")
+        
+  });
+
+//   .oneOf([yup.ref("password"), null], "Passwords do not Match")
 
 function EditAccount(props){
     /*
@@ -63,14 +78,15 @@ function EditAccount(props){
 
     console.log(props);
 
-    const changeHandler = e => {
+    const handleChange = e => {
         setCredentials({...userCredentials, [e.target.name]: e.target.value})
+        console.log(userCredentials);
     }
 
 
     // Submit updated account info to back end
-    const submitHandler = event => {
-        event.preventDefault();
+    const handleSubmit = event => {
+        
         console.log(userCredentials);
         
         // Check that confirmPassword matches password.
@@ -80,6 +96,7 @@ function EditAccount(props){
             alert("Your confirmed password does not match.");
             return;
         }
+        
 
         // Package the updated info to send to the back end.
         // Notice we're only sending the data entered by the user - 
@@ -95,61 +112,102 @@ function EditAccount(props){
 
     return (
         <div >
-            <div style={{textAlign:"center", height: "100vh"}}>
-            <div style={{paddingTop:"175px", color: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)"}}>
-            <form className ={classes.container} onSubmit= {submitHandler} style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", borderRadius: "5%"}}>
-                <div style={{}}>
-                    <h1>Account</h1>
-                    <h3>Change your basic account settings</h3>
+            <div style={{textAlign:"center", height: "95vh"}}>
+                <div style={{paddingTop:"175px", color: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)"}}>
+                    <Formik
+                        initialValues={userCredentials}
+                        onSubmit={handleSubmit}
+                        validationSchema={settingsSchema}
+                        enableReinitialize={true}
+                        validateOnChange={false}
+                    >
+                    {props => {
+                        const {
+                            values,
+							touched,
+							errors,
+							isSubmitting,
+							handleBlur,
+							handleSubmit,
+							handleReset
+                        } = props;
+                    
+                        return (
+                            <form className ={classes.container} onSubmit={handleSubmit} noValidate style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", borderRadius: "5%"}}>
+                                <div>
+                                    <h1>Account</h1>
+                                    <h3>Change your basic account settings</h3>
+                                </div>
+                                <TextField 
+                                    label ="First Name"
+                                    variant ="outlined"
+                                    margin="normal"
+                                    type="text"
+                                    name="firstName"
+                                    autoFocus
+                                    className={classes.textField}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={props.values.firstName}
+                                    placeholder="First Name"
+                                    error={
+                                        errors.firstName && touched.firstName ? true : false
+                                    }
+                                    helperText={
+                                        errors.firstName &&
+                                        touched.firstName &&
+                                        errors.firstName
+                                    }
+                                    />
+                                <TextField 
+                                    label ="Last Name"
+                                    variant ="outlined"
+                                    margin="normal"
+                                    type="text"
+                                    name="lastName"
+                                    className={classes.textField}
+                                    onChange={handleChange}
+                                    placeholder="Last Name"
+                                    value={props.values.lastName}
+                                    error ={errors.lastName && touched.lastName ? true: false}
+                                    helperText={
+                                        errors.lastName && touched.lastName && errors.lastName
+                                    }
+                                    />
+                                <TextField 
+                                    label ="Password"
+                                    variant ="outlined"
+                                    margin="normal"
+                                    type="password"
+                                    name="password"
+                                    
+                                    className={classes.textField}
+                                    onChange={handleChange}
+                                    placeholder="Password"
+                                    error ={errors.password && touched.password ? true: false}
+                                    helperText = {errors.password && touched.password && errors.password}
+                                    />
+                                <TextField 
+                                    label ="Confirm Password"
+                                    variant ="outlined"
+                                    margin="normal"
+                                    type="password"
+                                    name="confirmPassword"
+                                    className={classes.textField}
+                                    onChange={handleChange}
+                                    placeholder="Confirm Password"
+                                    error ={errors.confirmPassword && touched.confirmPassword ? true: false}
+                                    helperText = {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                                    /> 
+                                <Button className ={classes.button} variant="outlined" color="black" type ="submit">Submit Changes</Button>
+                            </form>  
+
+                        )
+                    }}
+                    </Formik>
+                    
+                    
                 </div>
-            <TextField 
-                label ="First Name"
-                variant ="outlined"
-                margin="normal"
-                type="text"
-                name="firstName"
-                className={classes.textField}
-                value={userCredentials.firstName}
-                onChange={changeHandler}
-                placeholder="First Name"
-                />
-            <TextField 
-                label ="Last Name"
-                variant ="outlined"
-                margin="normal"
-                type="text"
-                name="lastName"
-                className={classes.textField}
-                value={userCredentials.lastName}
-                onChange={changeHandler}
-                placeholder="Last Name"
-                />
-            <TextField 
-                label ="Password"
-                variant ="outlined"
-                margin="normal"
-                type="password"
-                name="password"
-                 
-                className={classes.textField}
-                value={userCredentials.password}
-                onChange={changeHandler}
-                placeholder="Password"
-                />
-            <TextField 
-                label ="Confirm Password"
-                variant ="outlined"
-                margin="normal"
-                type="password"
-                name="confirmPassword"
-                className={classes.textField}
-                value={userCredentials.confirmPassword}
-                onChange={changeHandler}
-                placeholder="Confirm Password"
-                /> 
-                <Button className ={classes.button} variant="outlined" color="black" type ="submit">Edit</Button>
-                </form>  
-            </div>
             </div>
         </div>
     )
