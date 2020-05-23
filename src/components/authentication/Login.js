@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { shouldUpdateLoggedInUser } from "../actions/index";
+import { shouldUpdateLoggedInUser } from "../../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import GoogleBtn from '../google/GoogleBtn';
 
 import axios from "axios";
 
@@ -110,6 +111,7 @@ const Login = props => {
                         />
                     </div>
                     <Button style={{ marginTop: "30px", backgroundColor: "#1E4DC7;", color: "white", width: "40%" }} className={classes.button} variant="outlined" color="black" type="submit">Login</Button>
+                    <GoogleBtn />
                     <div>
                         <p>
                             Need an account? <Link style={{padding: "0", color: "black"}} to='/Register/'>Register here</Link>
