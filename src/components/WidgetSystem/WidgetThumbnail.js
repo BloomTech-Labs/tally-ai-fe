@@ -5,8 +5,7 @@ import { getWidgetPreviewFromName } from "./WidgetRegistry";
 import { setActiveWidgets } from "../../actions/index";
 import { connect } from "react-redux";
 
-import Hovered from "../../images/PreviewHovered.png";
-import Selected from "../../images/PreviewSelected.png";
+
 
 //It's like WidgetContainer but it renders a preview instead of the actual widget
 const WidgetThumbnail = props => {
