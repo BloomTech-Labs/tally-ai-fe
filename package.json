@@ -1,17 +1,18 @@
 {
-  "name": "client",
+  "name": "tally-ai-fe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
-    "@material-ui/core": "^4.7.2",
+    "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.5.1",
     "@material/layout-grid": "^4.0.0",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.3",
+    "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+<<<<<<< HEAD:client/package.json
     "aos": "2.3.4",
     "axios": "^0.19.0",
     "d3": "^5.15.0",
@@ -20,31 +21,40 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "fetch-mock": "^8.3.1",
     "formik": "^2.1.4",
+=======
+    "aos": "^2.3.4",
+    "axios": "^0.19.2",
+>>>>>>> master:package.json
     "keymirror": "^0.1.1",
-    "netlify-cli": "^2.25.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-avatar": "^3.9.0",
-    "react-d3-library": "^1.1.8",
-    "react-dom": "^16.12.0",
-    "react-fontawesome": "^1.7.1",
-    "react-redux": "^7.1.3",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react": "^16.13.1",
+    "react-avatar": "^3.9.6",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
     "react-star-ratings": "^2.3.0",
     "react-swipeable-views": "^0.13.8",
+<<<<<<< HEAD:client/package.json
     "react-test-renderer": "^16.12.0",
     "recharts": "^2.0.0-beta.1",
     "redux": "^4.0.4",
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "yup": "^0.29.0"
+=======
+    "recharts": "^1.8.5",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2"
+>>>>>>> master:package.json
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "CI=true npm test --coverage --watchAll=false || true"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,8 +75,12 @@
     "cypress": "^3.7.0",
     "jest": "^24.9.0"
   },
-  "setupFiles": [
-    "<rootDir>/config/polyfills.js",
-    "<rootDir>/setupTests.js"
-  ]
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/__tests__/**"
+    ]
+  }
 }
