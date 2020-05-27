@@ -15,6 +15,7 @@
     "aos": "^2.3.4",
     "axios": "^0.19.2",
     "keymirror": "^0.1.1",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-avatar": "^3.9.6",
     "react-dom": "^16.13.1",
@@ -25,16 +26,14 @@
     "react-swipeable-views": "^0.13.8",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "scss":"node-sass --watch scss -o css"
+    "scss": "node-sass --watch scss -o css"
   },
   "eslintConfig": {
     "extends": "react-app"
