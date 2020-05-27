@@ -45,14 +45,17 @@ const useStyles = makeStyles(theme => ({
     lastName: yup.string().required('Last name is required!'),
     password: yup.string()
         .min(6, "Password must contain at least 6 characters")
-        .oneOf([yup.ref("confirmPassword"), null], "Passwords do not Match"),
-    confirmPassword: yup.string()
-        .oneOf([yup.ref("password"), null], "Passwords do not Match")
-        .min(6, "Password must contain at least 6 characters")
+        .test("password", "Passwords must match", function(value) {
+            return this.parent.confirmPassword === value
+            }),
+        
+    confirmPassword: yup.string().min(6, "Password must contain at least 6 characters")
+        .test("password", "Passwords must match", function(value) {
+            return this.parent.password === value
+            }),
         
   });
 
-//   .oneOf([yup.ref("password"), null], "Passwords do not Match")
 
 function EditAccount(props){
     /*
@@ -92,10 +95,6 @@ function EditAccount(props){
         // Check that confirmPassword matches password.
         // This should handle catching changes to password without
         // the confirmation of those changes.
-        if(userCredentials.password !== userCredentials.confirmPassword){
-            alert("Your confirmed password does not match.");
-            return;
-        }
         
 
         // Package the updated info to send to the back end.
@@ -131,7 +130,7 @@ function EditAccount(props){
 							handleSubmit,
 							handleReset
                         } = props;
-                    
+
                         return (
                             <form className ={classes.container} onSubmit={handleSubmit} noValidate style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", borderRadius: "5%"}}>
                                 <div>
