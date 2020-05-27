@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(2),
     },
     button: {
-        marginTop: "30px", 
-        backgroundColor: "#1E4DC7", 
+        marginTop: "30px",
+        backgroundColor: "#1E4DC7",
         color: "white",
         margin: theme.spacing(1),
         marginBottom: '30px',
@@ -77,7 +77,8 @@ function Registration(props) {
             delete formattedUserCredentials.confirmedPassword;
 
             axios
-                .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, formattedUserCredentials)
+            .post('http://localhost:5000/api/auth/register', formattedUserCredentials)
+                // .post(`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`, formattedUserCredentials)
                 .then(
                     res => {
                         console.log("Registered successfully", res);
