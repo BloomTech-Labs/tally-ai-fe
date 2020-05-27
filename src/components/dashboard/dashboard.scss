@@ -10,3 +10,35 @@ p{
     font-size: 1rem;
     font-weight: bold;
 }
+
+.business-results{
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 20;
+    margin-bottom: 5%;
+}
+.competitors-results{
+    width: 90%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 20;
+    margin-bottom: 5%;
+}
+.h2dashboard{
+    color: black;
+    margin-left: 3vh;
+}

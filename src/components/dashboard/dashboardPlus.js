@@ -94,25 +94,10 @@ function DashboardPlus(props) {
 
   return (
     <div>
-      <div className="business-results"
-        style={{
-          width: "90%",
-          height: "40%",
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          backgroundColor: "white",
-          marginLeft: "5%",
-          marginTop: '5%',
-          borderRadius: 20,
-          marginBottom: '5%',
-
-        }}>
+      <div className="business-results">
         {/* <div style={{ width: "100%", height: "60vh", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around" }}> */}
 
-        <h2 style={{ color: "black", marginLeft: "3vh" }}>My Businesses</h2>
+        <h2  className="h2dashboard" >My Businesses</h2>
         <Tooltip title="Add a Business" arrow>
           <Card className={classes.card} onClick={() => { props.history.push("/search/business") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
             <Fab disabled aria-label="add" >
@@ -137,24 +122,9 @@ function DashboardPlus(props) {
         }
         {/* </div> */}
       </div>
-      <div className="competitors-results"
-        style={{
-          width: "90%",
-          height: "40%",
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          backgroundColor: "white",
-          marginLeft: "5%",
-          marginTop: '5%',
-          borderRadius: 20,
-          marginBottom: '5%',
+      <div className="competitors-results">
 
-        }}>
-
-        <h2 style={{ color: "black", marginLeft: "3vh" }}>My Competitors</h2>
+        <h2 className="h2dashboard">My Competitors</h2>
 
 
         <Tooltip title="Add a Competitor" arrow>
