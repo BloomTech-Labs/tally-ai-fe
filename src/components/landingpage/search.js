@@ -99,18 +99,7 @@ const Search = props => {
       >
         {/* <h1>See what customers are saying about your business!</h1> */}
 
-        <div
-          className="search-form"
-          style={{
-            height: "100vh",
-            width: "100%",
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            color: "#0D47A1",
-            marginLeft: "10%",
-          }}
-        >
+        <div className="search-form">
           {/* <div class="mdc-text-field mdc-text-field--outlined">
             <input type="text" id="tf-outlined" class="mdc-text-field__input"></input>
             <div class="mdc-notched-outline"></div>
