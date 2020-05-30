@@ -1,19 +1,19 @@
 import React from 'react';
-import toptablet from "./images/toptablet.png"
-import bottomtablet from "./images/bottomtablet.png"
-import TopOrangePolygon from "./images/TopOrangePolygon.png"
-import YellowTopReactangle from "./images/YellowTopReactangle.png"
-import BlueTopRectangle from "./images/BlueTopRectangle.png"
-import BottomBlueRectangle from "./images/BottomBlueRectangle.png"
-import BottomPolygon2 from "./images/BottomPolygon2.png"
-import BottomRectangle from "./images/BottomRectangle.png"
+import toptablet from "../../components/images/toptablet.png"
+import bottomtablet from "../../components/images/bottomtablet.png"
+import TopOrangePolygon from "../../components/images/TopOrangePolygon.png"
+import YellowTopReactangle from "../../components/images/YellowTopReactangle.png"
+import BlueTopRectangle from "../../components/images/BlueTopRectangle.png"
+import BottomBlueRectangle from "../../components/images/BottomBlueRectangle.png"
+import BottomPolygon2 from "../../components/images/BottomPolygon2.png"
+import BottomRectangle from "../../components/images/BottomRectangle.png"
 import Divider from "@material-ui/core/Divider";
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import magnifier from "./images/Magnifier.png"
-import wavyLine from "./images/wavyLine.png"
+import magnifier from "../../components/images/Magnifier.png"
+import wavyLine from "../../components/images/wavyLine.png"
 
 const HomeInfo = () => {
     AOS.init()

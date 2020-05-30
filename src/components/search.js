@@ -11,11 +11,11 @@ import Results from "../components/search/results";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeIcons from "./homeIcons";
-import HomeInfo from "./HomeInfoText";
-import HomeFeatures from "./HomeFeatures";
-import HomeBottomSection from "./HomeBottomSection";
-import HomePitches from './HomePitches';
+import HomeIcons from "./home/homeIcons"
+import HomeInfo from "./home/HomeInfoText";
+import HomeFeatures from "./home/HomeFeatures";
+import HomeBottomSection from "./home/HomeBottomSection";
+import HomePitches from './home/HomePitches';
 
 import { fetchBusinesses, selectBusiness } from "../actions/index";
 import { searchResultsPlaceholder } from "../actions/index";

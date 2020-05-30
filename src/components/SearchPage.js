@@ -18,10 +18,10 @@ import Typography from "@material-ui/core/Typography";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeIcons from "./homeIcons";
-import HomeInfo from "./HomeInfoText";
-import HomeFeatures from "./HomeFeatures";
-import HomeBottomSection from "./HomeBottomSection";
+import HomeIcons from "./home/homeIcons";
+import HomeInfo from "./home/HomeInfoText";
+import HomeFeatures from "./home/HomeFeatures";
+import HomeBottomSection from "./home/HomeBottomSection";
 
 import {
   fetchBusinesses,

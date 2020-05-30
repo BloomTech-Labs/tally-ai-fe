@@ -3,7 +3,7 @@ import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import ipad from './images/ipad.png';
+import ipad from '../../components/images/ipad.png';
 
 const HomePitches = () => { 
     AOS.init()
