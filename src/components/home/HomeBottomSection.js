@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import abstractlines from './images/abstractlines.png'
+import abstractlines from '../../components/images/abstractlines.png'
 
 const HomeBottomSection = () => {
     AOS.init()
