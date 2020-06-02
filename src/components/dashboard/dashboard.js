@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 
-import Tabs from "./Tabs";
+
 
 import WidgetDisplayList from "../WidgetSystem/WidgetDisplayList";
 import WidgetAdditionList from "../WidgetSystem/WidgetAdditionList";
@@ -62,7 +62,7 @@ function DashboardGrid(props) {
       <div >
         {localStorage.getItem("token") && localStorage.getItem("userID") ? (
           <div >
-            <Tabs />
+            
             {businessesContains(props.businessInfo.businessId) ? (
               <div>
                 <div className="businessStats">
