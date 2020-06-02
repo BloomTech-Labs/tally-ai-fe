@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Sidebar from "../dashboard/Sidebar.js";
+
 import * as yup from 'yup';
 import { Formik,Form,Field } from "formik";
 
@@ -11,13 +13,17 @@ import {connect } from "react-redux"
 import { fetchEditAccount } from "../../actions/index";
 
 const useStyles = makeStyles(theme => ({
+    title: {
+        marginRight: "auto",
+        marginLeft: "10%",
+    },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: 'white',
-       
+        paddingRight: "0"
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -32,7 +38,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     marginTop: '2%',
     marginBottom: '6%',
-    width: '12em'
+    marginRight: "10%",
+    width: '20%',
+    fontWeight: "bold",
+    alignSelf: "flex-end"
     },
     input: {
     display: 'none',
@@ -66,9 +75,10 @@ function EditAccount(props){
     const classes = useStyles();
 
     useEffect(()=>{
-            setCredentials({...props.userInfo.data, password: "",
-            confirmPassword: ""})
         
+        props.userInfo.firstName && setCredentials({...props.userInfo.data, password: "",
+        confirmPassword: ""})
+        console.log("useEffect")
         
     },[props.userInfo])
 
@@ -84,11 +94,13 @@ function EditAccount(props){
     const handleChange = e => {
         setCredentials({...userCredentials, [e.target.name]: e.target.value})
         console.log(userCredentials);
+        
     }
 
 
     // Submit updated account info to back end
     const handleSubmit = event => {
+        
         
         console.log(userCredentials);
         
@@ -109,9 +121,14 @@ function EditAccount(props){
 
     }
 
+    console.log("component")
+
     return (
+        
         <div >
+            
             <div style={{textAlign:"center", height: "95vh"}}>
+                
                 <div style={{paddingTop:"175px", color: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)"}}>
                     <Formik
                         initialValues={userCredentials}
@@ -132,10 +149,10 @@ function EditAccount(props){
                         } = props;
 
                         return (
-                            <form className ={classes.container} onSubmit={handleSubmit} noValidate style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", borderRadius: "5%"}}>
-                                <div>
-                                    <h1>Account</h1>
-                                    <h3>Change your basic account settings</h3>
+                            <form className ={classes.container} onSubmit={handleSubmit} noValidate style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", borderRadius: "5px"}}>
+                                <div className={classes.title}>
+                                    <h1>Account Settings</h1>
+                                    <h3>Change basic account settings</h3>
                                 </div>
                                 <TextField 
                                     label ="First Name"
@@ -198,7 +215,7 @@ function EditAccount(props){
                                     error ={errors.confirmPassword && touched.confirmPassword ? true: false}
                                     helperText = {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                                     /> 
-                                <Button className ={classes.button} variant="outlined" color="black" type ="submit">Submit Changes</Button>
+                                <Button className ={classes.button} color="primary" type ="submit">Done</Button>
                             </form>  
 
                         )
@@ -213,6 +230,7 @@ function EditAccount(props){
 }
 
 const mapStateToProps = state => {
+    console.log("redux state")
     return {
         userInfo: state.loggedInUser
     };
