@@ -77,9 +77,6 @@ import {
   FETCH_RADAR_FAILURE
 } from "../actions/index.js";
 
-import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
-import dummyReviewsOverTime from "../dummyData/dummyReviewsOverTime";
-
 import { widgets } from "../components/WidgetSystem/WidgetRegistry";
 
 const initialState = {

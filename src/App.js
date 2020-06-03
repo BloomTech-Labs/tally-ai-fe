@@ -3,7 +3,6 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
-import { axiosWithAuth } from "./auth/axiosWithAuth"
 import { setUserInfo, getUserInfo, shouldUpdateLoggedInUser } from "./actions/index";
 import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";

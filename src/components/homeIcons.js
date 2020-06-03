@@ -1,10 +1,4 @@
 import React from 'react'
-import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
-import { faChartBar } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAssistiveListeningSystems } from "@fortawesome/free-solid-svg-icons"
-import { faFlag } from "@fortawesome/free-solid-svg-icons"
-import { faChartLine } from "@fortawesome/free-solid-svg-icons"
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -12,7 +6,6 @@ import 'aos/dist/aos.css';
 import AnalyzeDataIcon from "../components/images/AnalyzeDataIcon.png";
 import DownloadReviewsIcon from "../components/images/DownloadReviewsIcon.png";
 import InsightsIcon from "../components/images/InsightsIcon.png";
-import { fontSize } from '@material-ui/system';
 
 const HomeIcons = () => {
     AOS.init()
