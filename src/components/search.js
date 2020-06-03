@@ -8,9 +8,6 @@ import Button from "@material-ui/core/Button";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HomeIcons from "./homeIcons";
 import HomeInfo from "./HomeInfoText";
 import HomeFeatures from "./HomeFeatures";
@@ -18,7 +15,6 @@ import HomeBottomSection from "./HomeBottomSection";
 import HomePitches from './HomePitches';
 
 import { fetchBusinesses, selectBusiness } from "../actions/index";
-import { searchResultsPlaceholder } from "../actions/index";
 
 import axios from "axios";
 

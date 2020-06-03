@@ -1,13 +1,8 @@
 import React from 'react';
-import toptablet from "./images/toptablet.png"
 import bottomtablet from "./images/bottomtablet.png"
-import TopOrangePolygon from "./images/TopOrangePolygon.png"
-import YellowTopReactangle from "./images/YellowTopReactangle.png"
-import BlueTopRectangle from "./images/BlueTopRectangle.png"
 import BottomBlueRectangle from "./images/BottomBlueRectangle.png"
 import BottomPolygon2 from "./images/BottomPolygon2.png"
 import BottomRectangle from "./images/BottomRectangle.png"
-import Divider from "@material-ui/core/Divider";
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
