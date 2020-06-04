@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 
 
+import WidgetDisplayList from "../WidgetSystem/WidgetDisplayList";
 
 import Sidebar from "./Sidebar";
 
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function DashboardGrid(props) {
-  
+  const classes = useStyles();
 
   // Fetch data for widgets
   useEffect(() => {
