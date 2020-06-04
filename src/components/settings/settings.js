@@ -1,96 +1,112 @@
 import React, { useState, useEffect } from 'react';
 
-import EditAccount from "./editaccount"
+import EditAccount from "./editaccount";
+import EditPassword from "./EditPassword.js";
 
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import {AccountCircle,Lock} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Modal from '@material-ui/core/Modal';
 
 import { fetchEditAccount, selectBusiness } from "../../actions/index"
 
 import { connect } from 'react-redux';
 
-const params = {
-    slidesPerView: 3,
-    spaceBetween: 30,
-    pagination: {
-        clickable: true,
-    },
-    scrollbar: {
-        el: '.swiper-scrollbar',
-        hide: false
-    },
-}
 
 const useStyles = makeStyles(theme => ({
-    card: {
+    root: {
 
+        
+        boxSizing: "border-box",
+        
+        minHeight: "95vh",
+        
+        marginLeft: "15%", 
+        marginRight: "15%", 
+        paddingBottom: "4rem",
+        borderRadius: "2px",
+        paddingTop: "8rem",
+    },
+    title:{
+        textAlign: "left",
+        paddingLeft: "2rem",
+        paddingTop:" 0",
+        backgroundColor: "rgba(223, 223, 223, 0.46)",
+        borderBottom: `1px solid ${theme.palette.divider}`,
+    },
+    textTitle:{
+        margin:"0",
+        paddingBottom: ".5rem",
+        paddingTop: "1.4rem",
+    },
+    textTitle2:{
+        margin: "0",
+        paddingBottom: "1.4rem"
+    },
+    tabContainer:{
         display: 'flex',
-        flexDirection: 'column',
-        transitionDuration: '0.3s',
-        width: "35%",
-        height: "50%",
-        margin: 20,
-        padding: 20,
-        borderRadius: 20
+        flexDirection: "row",
+        backgroundColor: "rgba(223, 223, 223, 0.46)",
+        fontWeight: "bold",
+        
     },
-    paper: {
-        position: 'absolute',
-        width: 600,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+    tabs:{
+        fontWeight:"bold"
     },
+    tab:{
+        flexDirection: "row"
+    },
+    svg:{
+        verticalAlign:"middle" 
+    }
+
 }));
+
+function a11yProps(index) {
+    return {
+      id: `vertical-tab-${index}`,
+      'aria-controls': `vertical-tabpanel-${index}`,
+    };
+  }
 
 function Settings(props) {
 
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const [openAccount, setOpenAccount] = React.useState(false);
+    const [value, setValue] = React.useState(0);
 
-    const handleOpenAccount = () => {
-        setOpenAccount(true);
-    }
-
-    const handleCloseAccount = () => {
-        setOpenAccount(false);
-    }
-
-    // Add following useEffect once registration/login endpoints are up
-
-
-    // useEffect(() => {
-    //     if(props.loggedUser > 0){
-    //         props.addBusiness(props.loggedUser)
-    //         // add favorites here
-    //     } else {
-    //         props.history.push('/Login')
-    //     }
-    // }, [props.loggedUser]);
-
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
+  
     return (
-        <div >
-            <div style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around', }}>
-                {/* <div className="icon-buttons" style={{ width: '15%', height: '80%', backgroundColor: '#2C98F0', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center' }}>
-                    <div onClick={handleOpenAccount} style={{ width: '100%', cursor: "pointer" }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div> */}
-                        <EditAccount loggedUser={localStorage.getItem("userID")} loggedUserInfo={props.loggedUserInfo} fetchEditAccount={props.fetchEditAccount} />
-                </div>
-                {/* <div className="favorites-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', border: "1px solid grey" }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', width: '75%', marginBottom: '50%' }}><h3>Favorites</h3></div>
-                </div> */}
+      <div className={classes.root}>
+        <div className={classes.title}>
+            <h1 className={classes.textTitle}>Settings</h1>
+            <h3 className={classes.textTitle2}>Change basic account settings</h3>
         </div>
-    )
+        <div className={classes.tabContainer}>
+            <Tabs
+            orientation="vertical"
+            indicatorColor="primary"
+            value={value}
+            onChange={handleChange}
+            aria-label="Vertical tabs"
+            className={classes.tabs}
+            >
+            <Tab className={classes.tab} label={<><AccountCircle className={classes.svg}/> <span>Account</span></>} {...a11yProps(0)} />
+            <Tab label={<><Lock/> Password</>} {...a11yProps(1)} />
+            <Tab label="Help" {...a11yProps(2)} />
 
-}
+
+            </Tabs>
+            {value === 0 && <EditAccount index={0}/>}
+            {value === 1 && <EditPassword index={1}/>}
+        </div>
+      </div>
+    );
+  }
 
 const mapStateToProps = state => {
     return {

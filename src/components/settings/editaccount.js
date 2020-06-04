@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from "../dashboard/Sidebar.js";
 
 import * as yup from 'yup';
 import { Formik,Form,Field } from "formik";
@@ -13,57 +12,54 @@ import {connect } from "react-redux"
 import { fetchEditAccount } from "../../actions/index";
 
 const useStyles = makeStyles(theme => ({
+    root:{
+        flex: "3",
+        minHeight: "410px"
+    },
     title: {
         marginRight: "auto",
         marginLeft: "10%",
+        display: "none",
     },
-    container: {
+    form: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'white',
-        paddingRight: "0"
+        paddingRight: "0",
+        flex: "1",
+        height: "100%"
     },
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: '80%'
+      width: '80%',
+      backgroundColor: "#F6F8F9",
     },
     dense: {
       marginTop: theme.spacing(2),
     },
    
     button: {
-    margin: theme.spacing(1),
-    marginTop: '2%',
-    marginBottom: '6%',
+    marginTop: 'auto',
     marginRight: "10%",
-    width: '20%',
+    marginBottom: '6%',
+    width: '4rem',
     fontWeight: "bold",
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
     },
     input: {
     display: 'none',
     },
     
-  }));
+}));
 
-  let settingsSchema = yup.object().shape({
+let settingsSchema = yup.object().shape({
     firstName: yup.string().required('First name is required!'),
     lastName: yup.string().required('Last name is required!'),
-    password: yup.string()
-        .min(6, "Password must contain at least 6 characters")
-        .test("password", "Passwords must match", function(value) {
-            return this.parent.confirmPassword === value
-            }),
-        
-    confirmPassword: yup.string().min(6, "Password must contain at least 6 characters")
-        .test("password", "Passwords must match", function(value) {
-            return this.parent.password === value
-            }),
-        
-  });
+    city: yup.string(),
+    state: yup.string(),
+});
 
 
 function EditAccount(props){
@@ -76,8 +72,7 @@ function EditAccount(props){
 
     useEffect(()=>{
         
-        props.userInfo.firstName && setCredentials({...props.userInfo.data, password: "",
-        confirmPassword: ""})
+        props.userInfo && setCredentials({...props.userInfo.data,city:"",state:""})
         console.log("useEffect")
         
     },[props.userInfo])
@@ -85,8 +80,8 @@ function EditAccount(props){
     const [userCredentials, setCredentials] = useState({
         firstName: "",
         lastName: "",
-        password: "",
-        confirmPassword: ""
+        city: "",
+        state: "",
     });
 
     console.log(props);
@@ -100,137 +95,126 @@ function EditAccount(props){
 
     // Submit updated account info to back end
     const handleSubmit = event => {
-        
-        
-        console.log(userCredentials);
-        
-        // Check that confirmPassword matches password.
-        // This should handle catching changes to password without
-        // the confirmation of those changes.
-        
-
-        // Package the updated info to send to the back end.
-        // Notice we're only sending the data entered by the user - 
-        // ie, the data that's been changed from "" to something else
-        // - and not including the confirmPassword.
-        const updatedCredentials = Object.keys(userCredentials).reduce((acc, key) => 
-            userCredentials[key] !== "" && key !== "confirmPassword"
-            ? {...acc, [key]: userCredentials[key]}
-            : acc
-            , {});
-
+        console.log(props.userInfo);
+        console.log({first_name:userCredentials.firstName,last_name:userCredentials.lastName})
+        props.fetchEditAccount(props.userInfo.data.id,{first_name:userCredentials.firstName,last_name:userCredentials.lastName})
     }
 
     console.log("component")
 
     return (
         
-        <div >
+        <div
+            role="Account Change Panel"
+            id={`vertical-tabpanel-${props.index}`}
+            aria-labelledby={`vertical-tab-${props.index}`}
+            className={classes.root}
             
-            <div style={{textAlign:"center", height: "95vh"}}>
+        >
                 
-                <div style={{paddingTop:"175px", color: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)"}}>
-                    <Formik
-                        initialValues={userCredentials}
-                        onSubmit={handleSubmit}
-                        validationSchema={settingsSchema}
-                        enableReinitialize={true}
-                        validateOnChange={false}
-                    >
-                    {props => {
-                        const {
-                            values,
-							touched,
-							errors,
-							isSubmitting,
-							handleBlur,
-							handleSubmit,
-							handleReset
-                        } = props;
-
-                        return (
-                            <form className ={classes.container} onSubmit={handleSubmit} noValidate style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", borderRadius: "5px"}}>
-                                <div className={classes.title}>
-                                    <h1>Account Settings</h1>
-                                    <h3>Change basic account settings</h3>
-                                </div>
-                                <TextField 
-                                    label ="First Name"
-                                    variant ="outlined"
-                                    margin="normal"
-                                    type="text"
-                                    name="firstName"
-                                    autoFocus
-                                    className={classes.textField}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={props.values.firstName}
-                                    placeholder="First Name"
-                                    error={
-                                        errors.firstName && touched.firstName ? true : false
-                                    }
-                                    helperText={
-                                        errors.firstName &&
-                                        touched.firstName &&
-                                        errors.firstName
-                                    }
-                                    />
-                                <TextField 
-                                    label ="Last Name"
-                                    variant ="outlined"
-                                    margin="normal"
-                                    type="text"
-                                    name="lastName"
-                                    className={classes.textField}
-                                    onChange={handleChange}
-                                    placeholder="Last Name"
-                                    value={props.values.lastName}
-                                    error ={errors.lastName && touched.lastName ? true: false}
-                                    helperText={
-                                        errors.lastName && touched.lastName && errors.lastName
-                                    }
-                                    />
-                                <TextField 
-                                    label ="Password"
-                                    variant ="outlined"
-                                    margin="normal"
-                                    type="password"
-                                    name="password"
-                                    
-                                    className={classes.textField}
-                                    onChange={handleChange}
-                                    placeholder="Password"
-                                    error ={errors.password && touched.password ? true: false}
-                                    helperText = {errors.password && touched.password && errors.password}
-                                    />
-                                <TextField 
-                                    label ="Confirm Password"
-                                    variant ="outlined"
-                                    margin="normal"
-                                    type="password"
-                                    name="confirmPassword"
-                                    className={classes.textField}
-                                    onChange={handleChange}
-                                    placeholder="Confirm Password"
-                                    error ={errors.confirmPassword && touched.confirmPassword ? true: false}
-                                    helperText = {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
-                                    /> 
-                                <Button className ={classes.button} color="primary" type ="submit">Done</Button>
-                            </form>  
-
-                        )
-                    }}
-                    </Formik>
+           
+                
+            
+                <Formik
+                    initialValues={userCredentials}
+                    onSubmit={handleSubmit}
+                    validationSchema={settingsSchema}
+                    enableReinitialize={true}
+                    validateOnChange={false}
                     
-                    
-                </div>
-            </div>
+                >
+                {props => {
+                    const {
+                        values,
+                        touched,
+                        errors,
+                        isSubmitting,
+                        handleBlur,
+                        handleSubmit,
+                        handleReset
+                    } = props;
+
+                    return (
+                        <form className ={classes.form} onSubmit={handleSubmit} noValidate>
+                            <div className={classes.title}>
+                                <h3>Personal Settings</h3>
+                                
+                            </div>
+                            <TextField 
+                                label ="First Name"
+                                variant ="outlined"
+                                margin="normal"
+                                type="text"
+                                name="firstName"
+                                className={classes.textField}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={props.values.firstName}
+                                placeholder="First Name"
+                                error={
+                                    errors.firstName && touched.firstName ? true : false
+                                }
+                                helperText={
+                                    errors.firstName &&
+                                    touched.firstName &&
+                                    errors.firstName
+                                }
+                                />
+                            <TextField 
+                                label ="Last Name"
+                                variant ="outlined"
+                                margin="normal"
+                                type="text"
+                                name="lastName"
+                                className={classes.textField}
+                                onChange={handleChange}
+                                placeholder="Last Name"
+                                value={props.values.lastName}
+                                error ={errors.lastName && touched.lastName ? true: false}
+                                helperText={
+                                    errors.lastName && touched.lastName && errors.lastName
+                                }
+                                />
+                            <TextField 
+                                label ="City"
+                                variant ="outlined"
+                                margin="normal"
+                                type="city"
+                                name="city"
+                                
+                                className={classes.textField}
+                                onChange={handleChange}
+                                placeholder="City"
+                                error ={errors.city && touched.city ? true: false}
+                                helperText = {errors.city && touched.city && errors.city}
+                                />
+                            <TextField 
+                                label ="State"
+                                variant ="outlined"
+                                margin="normal"
+                                type="state"
+                                name="state"
+                                className={classes.textField}
+                                onChange={handleChange}
+                                placeholder="State"
+                                error ={errors.state && touched.state ? true: false}
+                                helperText = {errors.state && touched.state && errors.state}
+                                /> 
+                            <Button className ={classes.button} disabled={isSubmitting} color="primary" type ="submit">Done</Button>
+                        </form>  
+
+                    )
+                }}
+                </Formik>
+                
+                
+            
         </div>
     )
 }
 
 const mapStateToProps = state => {
-    console.log("redux state")
+    console.log("redux state",state)
     return {
         userInfo: state.loggedInUser
     };

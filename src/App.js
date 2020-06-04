@@ -16,7 +16,7 @@ import Search from "./components/search.js";
 import DashboardGrid from "./components/dashboard/dashboard";
 import registration from "./components/registration";
 import Login from "./components/login";
-import EditAccount from "./components/settings/editaccount";
+import Settings from "./components/settings/settings.js";
 import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
@@ -68,7 +68,7 @@ function App(props) {
       <Route path="/About" component={AboutUs} />
       <Route path="/Legal/:doc" component={Policy} />
       <Route path="/DashboardPlus/" component={DashboardPlus} />
-      <PrivateRoute path="/Settings/" component={EditAccount} />
+      <PrivateRoute path="/Settings/" component={Settings} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
       <Footer />
     </div>
