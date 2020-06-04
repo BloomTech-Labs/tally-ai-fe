@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Grid } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
 
 
 
-import WidgetDisplayList from "../WidgetSystem/WidgetDisplayList";
-import WidgetAdditionList from "../WidgetSystem/WidgetAdditionList";
+
+
 import Sidebar from "./Sidebar";
 
 import {
@@ -34,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function DashboardGrid(props) {
-  const classes = useStyles();
+  
 
   // Fetch data for widgets
   useEffect(() => {
