@@ -86,7 +86,8 @@ const initialState = {
   loggedInUser: {
     data: {
       firstName: null,
-      lastName: null
+      lastName: null,
+      id:null
     },
     shouldUpdate: true,
     isFetching: false,
@@ -683,7 +684,8 @@ function reducer(state = initialState, action) {
               : state.loggedInUser.data.firstName,
             lastName: action.payload.last_name_name
               ? action.payload.last_name
-              : state.loggedInUser.data.lastName
+              : state.loggedInUser.data.lastName,
+            ...state.loggedInUser.data
           },
           isFetching: false,
           error: null

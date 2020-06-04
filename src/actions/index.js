@@ -437,7 +437,7 @@ export const getUserInfo = (userID) => dispatch => {
 
       let userInfo = {
         competitors: res.data.favorites,
-        loggedInUser: { firstName: res.data.first_name, lastName: res.data.last_name },
+        loggedInUser: { firstName: res.data.first_name, lastName: res.data.last_name,id: userID },
         businesses: res.data.businesses,
         activeWidgets: res.data.preferences && res.data.preferences.activeWidgets ? res.data.preferences.activeWidgets : [],
         activeTabs: res.data.preferences && res.data.preferences.activeTabs ? res.data.preferences.activeTabs : []
