@@ -45,7 +45,7 @@ const Login = () => {
 	const handleSubmit = async () => {
 		try {
 			const { data } = await axios.post(
-				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`,
+				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login`,
 				credentials
 			)
 			console.log(data)
