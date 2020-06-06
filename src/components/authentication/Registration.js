@@ -45,11 +45,6 @@ const Registration = () => {
 
 	const classes = useStyles()
 
-	// const handleChange = e => {
-	// 	setCredentials({ ...credentials, [e.target.name]: e.target.value })
-	// 	console.log(credentials)
-	// }
-
 	const handleSubmit = async () => {
 		const { firstName, lastName, email, password } = credentials
 		try {
@@ -62,7 +57,6 @@ const Registration = () => {
 					password
 				}
 			)
-			console.log(data)
 		} catch (err) {
 			console.log(err)
 		}
