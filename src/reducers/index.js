@@ -671,6 +671,7 @@ function reducer(state = initialState, action) {
         loggedInUser: {
           ...state.loggedInUser,
           isFetching: true,
+          success: false,
           error: null
         }
       };
@@ -688,6 +689,7 @@ function reducer(state = initialState, action) {
             ...state.loggedInUser.data
           },
           isFetching: false,
+          success: true,
           error: null
         }
       };
@@ -695,6 +697,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
+        success: false,
         error: action.payload
       };
 
