@@ -598,7 +598,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         widgetData: {
-          ...state.widgetData,
+          ..state.widgetData,
           keyWords: {
             ...state.widgetData.keyWords,
             isFetching: true,
