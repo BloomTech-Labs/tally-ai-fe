@@ -4,16 +4,63 @@ import EditAccount from "./editaccount";
 import EditPassword from "./EditPassword.js";
 
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {AccountCircle,Lock} from '@material-ui/icons';
+import {AccountCircle,Lock,Help} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 
 import { fetchEditAccount, selectBusiness } from "../../actions/index"
 
 import { connect } from 'react-redux';
 
+const StyledTab = withStyles((theme) => ({
+    root: {
+      textTransform: 'none',
+      fontWeight: theme.typography.fontWeightRegular,
+      fontSize: theme.typography.pxToRem(16),
+      '&:focus': {
+        opacity: 1,
+        fontWeight: "bold",
+        
+      },
+      '&$selected': {
+        color: 'black',
+        fontWeight: theme.typography.fontWeightMedium,
+      },
+      '&:hover':{
+          opacity: 1,
+          fontWeight: "bold",
+      }
+    },
+    wrapper: ()=>({
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    }),
+    labelIcon: {
+        '& $wrapper *:first-child': {
+              marginBottom: 0,
+              marginRight: 16,
+              fontSize: 20,
+        },    
+    },
+    selected: () => ({
+        '& $wrapper': {
+          fontWeight: `bold`,
+          color: "black !important"
+        },
+      }),
+  }))((props) => <Tab disableRipple {...props} />);
+
+  const StyledTabs = withStyles({
+    root:{
+        minWidth: 200,
+        paddingLeft: "2%",
+    },
+    indicator: {
+      display: 'none',
+    },
+  })((props) => <Tabs {...props}  TabIndicatorProps={{ children: <span /> }}/>);
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,7 +81,6 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: "2rem",
         paddingTop:" 0",
         backgroundColor: "rgba(223, 223, 223, 0.46)",
-        borderBottom: `1px solid ${theme.palette.divider}`,
     },
     textTitle:{
         margin:"0",
@@ -49,18 +95,8 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: "row",
         backgroundColor: "rgba(223, 223, 223, 0.46)",
-        fontWeight: "bold",
         
     },
-    tabs:{
-        fontWeight:"bold"
-    },
-    tab:{
-        flexDirection: "row"
-    },
-    svg:{
-        verticalAlign:"middle" 
-    }
 
 }));
 
@@ -84,23 +120,22 @@ function Settings(props) {
       <div className={classes.root}>
         <div className={classes.title}>
             <h1 className={classes.textTitle}>Settings</h1>
-            <h3 className={classes.textTitle2}>Change basic account settings</h3>
+            <h2 className={classes.textTitle2}>Change basic account settings</h2>
         </div>
         <div className={classes.tabContainer}>
-            <Tabs
+            <StyledTabs
             orientation="vertical"
             indicatorColor="primary"
             value={value}
             onChange={handleChange}
             aria-label="Vertical tabs"
-            className={classes.tabs}
             >
-            <Tab className={classes.tab} label={<><AccountCircle className={classes.svg}/> <span>Account</span></>} {...a11yProps(0)} />
-            <Tab label={<><Lock/> Password</>} {...a11yProps(1)} />
-            <Tab label="Help" {...a11yProps(2)} />
+            <StyledTab label="Account" icon={<AccountCircle/>} {...a11yProps(0)} />
+            <StyledTab label="Password" icon={<Lock/>} {...a11yProps(1)} />
+            <StyledTab label="Help" icon={<Help/>} {...a11yProps(2)} />
 
 
-            </Tabs>
+            </StyledTabs>
             {value === 0 && <EditAccount index={0}/>}
             {value === 1 && <EditPassword index={1}/>}
         </div>

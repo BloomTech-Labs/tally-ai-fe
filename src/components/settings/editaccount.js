@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Alert from "./Alert.js";
 
 import * as yup from 'yup';
 import { Formik,Form,Field } from "formik";
@@ -6,6 +7,7 @@ import { Formik,Form,Field } from "formik";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import {connect } from "react-redux"
 
@@ -14,7 +16,7 @@ import { fetchEditAccount } from "../../actions/index";
 const useStyles = makeStyles(theme => ({
     root:{
         flex: "3",
-        minHeight: "410px"
+        minHeight: "440px"
     },
     title: {
         marginRight: "auto",
@@ -36,27 +38,20 @@ const useStyles = makeStyles(theme => ({
       width: '80%',
       backgroundColor: "#F6F8F9",
     },
-    dense: {
-      marginTop: theme.spacing(2),
-    },
-   
     button: {
     marginTop: 'auto',
     marginRight: "10%",
-    marginBottom: '6%',
+    marginBottom: '2%',
     width: '4rem',
     fontWeight: "bold",
     alignSelf: "flex-end",
-    },
-    input: {
-    display: 'none',
     },
     
 }));
 
 let settingsSchema = yup.object().shape({
-    firstName: yup.string().required('First name is required!'),
-    lastName: yup.string().required('Last name is required!'),
+    firstName: yup.string().required('First Name Required'),
+    lastName: yup.string().required('Last Name Required'),
     city: yup.string(),
     state: yup.string(),
 });
@@ -72,10 +67,14 @@ function EditAccount(props){
 
     useEffect(()=>{
         
-        props.userInfo && setCredentials({...props.userInfo.data,city:"",state:""})
+        props.userInfo && !props.userInfo.isFetching && setCredentials({...props.userInfo.data,city:"",state:""})
+        submitStatus && props.userInfo.success && setOpen({message: "Account Updated", status: true,sever:"success"})
+        submitStatus && props.userInfo.error && setOpen({message: props.userInfo.error,status: true,sever:"error"})
         console.log("useEffect")
         
-    },[props.userInfo])
+    },[props.userInfo.data])
+
+
 
     const [userCredentials, setCredentials] = useState({
         firstName: "",
@@ -83,8 +82,19 @@ function EditAccount(props){
         city: "",
         state: "",
     });
+    const [open, setOpen] = useState({message:"", status: false,sever:"success"});
+    const [submitStatus, setSubmitStatus] = useState(false);
+
 
     console.log(props);
+
+    const handleClose = (e,reason) =>{
+        if (reason === 'clickaway') {
+            return;
+          }
+      
+          setOpen({message:"", status:false});
+    }
 
     const handleChange = e => {
         setCredentials({...userCredentials, [e.target.name]: e.target.value})
@@ -98,6 +108,7 @@ function EditAccount(props){
         console.log(props.userInfo);
         console.log({first_name:userCredentials.firstName,last_name:userCredentials.lastName})
         props.fetchEditAccount(props.userInfo.data.id,{first_name:userCredentials.firstName,last_name:userCredentials.lastName})
+        setSubmitStatus(true)
     }
 
     console.log("component")
@@ -111,104 +122,106 @@ function EditAccount(props){
             className={classes.root}
             
         >
-                
-           
-                
             
-                <Formik
-                    initialValues={userCredentials}
-                    onSubmit={handleSubmit}
-                    validationSchema={settingsSchema}
-                    enableReinitialize={true}
-                    validateOnChange={false}
-                    
-                >
-                {props => {
-                    const {
-                        values,
-                        touched,
-                        errors,
-                        isSubmitting,
-                        handleBlur,
-                        handleSubmit,
-                        handleReset
-                    } = props;
-
-                    return (
-                        <form className ={classes.form} onSubmit={handleSubmit} noValidate>
-                            <div className={classes.title}>
-                                <h3>Personal Settings</h3>
-                                
-                            </div>
-                            <TextField 
-                                label ="First Name"
-                                variant ="outlined"
-                                margin="normal"
-                                type="text"
-                                name="firstName"
-                                className={classes.textField}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={props.values.firstName}
-                                placeholder="First Name"
-                                error={
-                                    errors.firstName && touched.firstName ? true : false
-                                }
-                                helperText={
-                                    errors.firstName &&
-                                    touched.firstName &&
-                                    errors.firstName
-                                }
-                                />
-                            <TextField 
-                                label ="Last Name"
-                                variant ="outlined"
-                                margin="normal"
-                                type="text"
-                                name="lastName"
-                                className={classes.textField}
-                                onChange={handleChange}
-                                placeholder="Last Name"
-                                value={props.values.lastName}
-                                error ={errors.lastName && touched.lastName ? true: false}
-                                helperText={
-                                    errors.lastName && touched.lastName && errors.lastName
-                                }
-                                />
-                            <TextField 
-                                label ="City"
-                                variant ="outlined"
-                                margin="normal"
-                                type="city"
-                                name="city"
-                                
-                                className={classes.textField}
-                                onChange={handleChange}
-                                placeholder="City"
-                                error ={errors.city && touched.city ? true: false}
-                                helperText = {errors.city && touched.city && errors.city}
-                                />
-                            <TextField 
-                                label ="State"
-                                variant ="outlined"
-                                margin="normal"
-                                type="state"
-                                name="state"
-                                className={classes.textField}
-                                onChange={handleChange}
-                                placeholder="State"
-                                error ={errors.state && touched.state ? true: false}
-                                helperText = {errors.state && touched.state && errors.state}
-                                /> 
-                            <Button className ={classes.button} disabled={isSubmitting} color="primary" type ="submit">Done</Button>
-                        </form>  
-
-                    )
-                }}
-                </Formik>
+        
+            <Formik
+                initialValues={userCredentials}
+                onSubmit={handleSubmit}
+                validationSchema={settingsSchema}
+                enableReinitialize={true}
+                validateOnChange={false}
                 
-                
+            >
+            {props => {
+                const {
+                    values,
+                    touched,
+                    errors,
+                    isSubmitting,
+                    handleBlur,
+                    handleSubmit,
+                    handleReset
+                } = props;
+
+                return (
+                    <form className ={classes.form} onSubmit={handleSubmit} noValidate>
+                        <div className={classes.title}>
+                            <h3>Personal Settings</h3>
+                            
+                        </div>
+                        <TextField 
+                            
+                            label ={errors.firstName && touched.firstName ? errors.firstName : "First Name"}
+                            id="firstName"
+                            variant ="outlined"
+                            margin="normal"
+                            type="text"
+                            name="firstName"
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={props.values.firstName}
+                            placeholder="First Name"
+                            error={
+                                errors.firstName && touched.firstName ? true : false
+                            }
+                            
+                            />
+                        <TextField 
+                            label ={errors.lastName && touched.lastName ? errors.lastName : "Last Name"}
+                            id="lastName"
+                            variant ="outlined"
+                            margin="normal"
+                            type="text"
+                            name="lastName"
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="Last Name"
+                            value={props.values.lastName}
+                            error ={errors.lastName && touched.lastName ? true: false}
+                            />
+                        <TextField
+                            label ="City"
+                            id="city"
+                            variant ="outlined"
+                            margin="normal"
+                            type="city"
+                            name="city"
+                            
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="City"
+                            error ={errors.city && touched.city ? true: false}
+                            helperText = {errors.city && touched.city && errors.city}
+                            />
+                        <TextField 
+                            label ="State"
+                            id="state"
+                            variant ="outlined"
+                            margin="normal"
+                            type="state"
+                            name="state"
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="State"
+                            error ={errors.state && touched.state ? true: false}
+                            helperText = {errors.state && touched.state && errors.state}
+                            /> 
+                        <Button className ={classes.button} color="primary" type ="submit">Submit</Button>
+                    </form>  
+
+                )
+            }}
+            </Formik>
             
+            <Snackbar open={open.status} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={open.sever}>
+                {open.message}
+                </Alert>
+            </Snackbar>   
         </div>
     )
 }

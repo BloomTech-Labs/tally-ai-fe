@@ -14,7 +14,7 @@ import {fetchEditAccount} from "../../actions/index.js";
 const useStyles = makeStyles(theme => ({
     root:{
         flex: "3",
-        minHeight: "410px"
+        minHeight: "440px"
     },
     title:{
         marginRight: "auto",
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
         marginTop: 'auto',
-        marginBottom: '6%',
+        marginBottom: '2%',
         marginRight: "10%",
         width: '4rem',
         fontWeight: "bold",
@@ -137,7 +137,7 @@ function EditPassword(props){
                                 error ={errors.confirmPassword && touched.confirmPassword ? true: false}
                                 helperText = {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                                 /> 
-                            <Button className ={classes.button} color="primary" type ="submit">Done</Button>
+                            <Button className ={classes.button} color="primary" type ="submit">Submit</Button>
 
                         </form>
                     )
