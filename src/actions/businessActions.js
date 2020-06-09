@@ -1,3 +1,6 @@
+import { axiosWithAuth } from '../auth/axiosWithAuth';
+import { axiosWithYelpAuth } from '../auth/axiosWithYelpAuth';
+
 // Yelp Business Search
 export const FETCH_BUSINESS_START = "FETCH_BUSINESS_START";
 export const FETCH_BUSINESS_SUCCESS = "FETCH_BUSINESS_SUCCESS";

@@ -23,7 +23,26 @@ import {
       isSetting: false,
       error: null,
       businesses: []
-    }
+    },
+
+    currentlySelectedBusiness: {
+      businessId: null, //default tab selected by default
+      // for side bar
+      businessName: null,
+      businessImg: null,
+      // for top-of-page info cards
+      reviewCount: 0,
+      averageRating: 0,
+      changeInRating: "",
+      address: ""
+    },
+
+    searchResults: {
+      isFetching: false,
+      error: null,
+      data: null
+    },
+
   };
 
   function businessReducer(state = initialState, action) {

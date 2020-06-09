@@ -12,13 +12,14 @@ import Fab from '@material-ui/core/Fab';
 
 import {
   fetchBusinesses,
-  addBusiness,
-  addCompetitor,
-  removeBusiness,
-  removeCompetitor,
   selectBusiness,
-  setActiveTabs
-} from "../../actions/index";
+  addBusiness,
+  removeBusiness
+   
+} from "../../actions/businessActions";
+
+import {addCompetitor,  
+  removeCompetitor, } from '../../actions/competitorsActions'
 
 const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
@@ -173,10 +174,9 @@ function DashboardPlus(props) {
 }
 
 const mapStateToProps = state => ({
-  competitors: state.competitors.businesses,
-  businesses: state.userBusinesses.businesses,
-  activeTabs: state.tabs.activeTabs,
-  selectedBusiness: state.currentlySelectedBusiness
+  competitors: state.competitor.competitors.businesses,
+  businesses: state.business.userBusinesses.businesses,  
+  selectedBusiness: state.business.currentlySelectedBusiness
 });
 
 export default withRouter(connect(mapStateToProps, {
@@ -184,7 +184,6 @@ export default withRouter(connect(mapStateToProps, {
   addBusiness,
   addCompetitor,
   removeBusiness,
-  removeCompetitor,
-  setActiveTabs,
+  removeCompetitor,  
   selectBusiness
 })(DashboardPlus));

@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { axiosWithAuth } from '../auth/axiosWithAuth'
+
 export const SET_ACTIVE_WIDGETS = 'SET_ACTIVE_WIDGETS'
 
 // TopBottomWords
@@ -113,3 +116,23 @@ export const fetchAllData = id => async dispatch => {
 			dispatch({ type: FETCH_RADAR_FAILURE, payload: err })
 		})
 }
+
+export const fetchWordsOverTime = id => dispatch => {
+  dispatch({ type: FETCH_WORDS_OVER_TIME_START });
+  console.log("\nFetching words over time...\n");
+  const dsEndpoint = `https://cors-anywhere.herokuapp.com/http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=1`;
+  console.log(`Fetch Words Over Time endpoint:\n${dsEndpoint}`);
+  axios
+    .get(dsEndpoint)
+    .then(res => {
+      console.log("WORDS OVER TIME ACTION FETCH SUCCESS, PAYLOAD: ", res.data);
+      dispatch({ type: FETCH_WORDS_OVER_TIME_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FETCH_WORDS_OVER_TIME_FAILURE, payload: err });
+    });
+};
+
+export const setActiveWidgets = (widgetArray) => dispatch => {
+	dispatch({ type: SET_ACTIVE_WIDGETS, payload: widgetArray });
+  }

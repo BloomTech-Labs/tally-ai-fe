@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import BusinessTab from "./Tab";
 
-import { setActiveTabs, selectBusiness } from "../../actions/index";
+import { setActiveTabs, selectBusiness } from "../../actions/businessActions";
 
 const useStyles= makeStyles({
   root: {

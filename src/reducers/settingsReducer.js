@@ -1,8 +1,13 @@
 import {
 	FETCH_EDITACCOUNT_START,
 	FETCH_EDITACCOUNT_SUCCESS,
-	FETCH_EDITACCOUNT_FAILURE
+	FETCH_EDITACCOUNT_FAILURE,
+	GET_USER_DATA_START,
+	GET_USER_DATA_SUCCESS,
+	UPDATE_LOGGED_IN_USER
 } from '../actions/settingsActions'
+
+import {widgets} from '../components/WidgetSystem/WidgetRegistry';
 
 const initialState = {
 	loggedInUser: {
