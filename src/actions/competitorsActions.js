@@ -1,3 +1,5 @@
+import { axiosWithAuth } from '../auth/axiosWithAuth';
+
 //adding competitors to user's competitor list
 export const ADD_COMPETITOR_START = "ADD_COMPETITOR_START";
 export const ADD_COMPETITOR_SUCCESS = "ADD_COMPETITOR_SUCCESS";

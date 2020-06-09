@@ -1,3 +1,5 @@
+import { widgets } from '../components/WidgetSystem/WidgetRegistry'
+
 import {
   // Data for TopBottomWords
   FETCH_TOP_AND_BOTTOM_START,
@@ -55,8 +57,9 @@ const initialState = {
           isFetching: false,
           error: null,
           data: null
-        }
-      }
+        },
+       
+      }, activeWidgets: [widgets[0].name, widgets[1].name]
 }
 
 const widgetsReducer = (state=initialState, action) => {
@@ -73,7 +76,7 @@ const widgetsReducer = (state=initialState, action) => {
       return {
         ...state,
         widgetData: {
-          ..state.widgetData,
+          ...state.widgetData,
           keyWords: {
             ...state.widgetData.keyWords,
             isFetching: true,

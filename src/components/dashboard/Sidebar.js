@@ -7,7 +7,7 @@ import WidgetThumbnail from "../WidgetSystem/WidgetThumbnail";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { fetchBusinesses } from "../../actions/index.js";
+import { fetchBusinesses } from "../../actions/businessActions";
 
 const drawerWidth = 375;
 
@@ -168,9 +168,9 @@ function ClippedDrawer(props) {
 }
 
 const mapStateToProps = state => ({
-  businesses: state.userBusinesses.businesses,
-  selectedBusiness: state.currentlySelectedBusiness,
-  allBusinesses: state.userBusinesses.businesses.concat(state.competitors.businesses)
+  businesses: state.business.userBusinesses.businesses,
+  selectedBusiness: state.business.currentlySelectedBusiness,
+  allBusinesses: state.business.userBusinesses.businesses.concat(state.competitor.competitors.businesses)
 });
 
 export default withRouter(connect(mapStateToProps, {

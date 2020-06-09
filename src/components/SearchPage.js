@@ -10,14 +10,16 @@ import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
 
 import {
-  fetchBusinesses,
-  addBusiness,
   addCompetitor,
-  removeBusiness,
   removeCompetitor,
+} from "../actions/competitorsActions";
+
+import {
+  fetchBusinesses,
   selectBusiness,
-  setActiveTabs
-} from "../actions/index";
+  addBusiness,
+  removeBusiness
+} from '../actions/businessActions';
 
 import axios from "axios";
 
@@ -88,7 +90,7 @@ const SearchPage = props => {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
     }//.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
-    props.setActiveTabs(props.activeTabs, props.activeTabs.concat([selection]), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
+   
     props.selectBusiness(props.selectedBusiness, selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
@@ -253,10 +255,9 @@ const SearchPage = props => {
 };
 
 const mapStateToProps = state => ({
-  competitors: state.competitors.businesses,
-  businesses: state.userBusinesses.businesses,
-  activeTabs: state.tabs.activeTabs,
-  selectedBusiness: state.currentlySelectedBusiness
+  competitors: state.competitor.competitors.businesses,
+  businesses: state.business.userBusinesses.businesses,
+  selectedBusiness: state.business.currentlySelectedBusiness
 });
 
 export default connect(mapStateToProps, {
@@ -265,6 +266,5 @@ export default connect(mapStateToProps, {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness,
-  setActiveTabs
+  selectBusiness
 })(SearchPage);

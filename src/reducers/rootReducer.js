@@ -5,7 +5,7 @@ import settingsReducer from '../reducers/settingsReducer'
 import widgetsReducer from '../reducers/widgetsReducer'
 
 const rootReducer = combineReducers({
-	businesses: businessReducer,
+	business: businessReducer,
 	competitor: competitorReducer,
 	settings: settingsReducer,
 	widgets: widgetsReducer

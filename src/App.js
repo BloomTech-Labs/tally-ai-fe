@@ -3,7 +3,7 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
-import { setUserInfo, getUserInfo, shouldUpdateLoggedInUser } from "./actions/index";
+import { setUserInfo, getUserInfo, shouldUpdateLoggedInUser } from "./actions/settingsActions";
 import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
 import SearchPage from "./components/SearchPage"
@@ -75,8 +75,8 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-  loggedInUser: state.loggedInUser,
-  activeTabs: state.activeTabs
+  loggedInUser: state.settings.loggedInUser,
+  activeTabs: state.settings.activeTabs
 });
 
 export default withRouter(connect(mapStateToProps, { setUserInfo, getUserInfo, shouldUpdateLoggedInUser })(App));

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/index';
+import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/settingsActions';
 
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -288,10 +288,10 @@ function NavBar(props) {
 
 const mapStateToProps = state => {
   return {
-    loggedUser: state.loggedInUser.userID,
-    loggedInUser: state.loggedInUser.data,
-    isFetching: state.loggedInUser.isFetching,
-    error: state.loggedInUser.error
+    loggedUser: state.settings.loggedInUser.userID,
+    loggedInUser: state.settings.loggedInUser.data,
+    isFetching: state.settings.loggedInUser.isFetching,
+    error: state.settings.loggedInUser.error
   };
 };
 

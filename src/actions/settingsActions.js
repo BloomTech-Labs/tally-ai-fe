@@ -1,3 +1,5 @@
+import { axiosWithAuth } from '../auth/axiosWithAuth';
+
 // Edit Account
 export const FETCH_EDITACCOUNT_START = 'FETCH_EDITACCOUNT_START'
 export const FETCH_EDITACCOUNT_SUCCESS = 'FETCH_EDITACCOUNT_SUCCESS'
