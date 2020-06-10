@@ -1,32 +1,27 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import { Route } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { axiosWithAuth } from './auth/axiosWithAuth';
-import {
-	setUserInfo,
-	getUserInfo,
-	shouldUpdateLoggedInUser
-} from './actions/index';
-import PrivateRoute from './auth/PrivateRoute';
-import PublicRoute from './auth/PublicRoute';
-import SearchPage from './components/SearchPage';
+import React, { useEffect } from "react";
+import "./App.css";
+import { Route } from "react-router-dom";
+import { withRouter } from 'react-router-dom'
+import { connect } from "react-redux";
+import { setUserInfo, getUserInfo, shouldUpdateLoggedInUser } from "./actions/settingsActions";
+import PrivateRoute from "./auth/PrivateRoute";
+import PublicRoute from "./auth/PublicRoute";
+import SearchPage from "./components/SearchPage"
 // Components
-import RestrictMobile from './components/RestrictMobile';
-import NavBar from './components/navbar';
-import Footer from './components/footer';
-import Search from './components/search.js';
-import DashboardGrid from './components/dashboard/dashboard';
-import Registration from './components/authentication/Registration';
-import Login from './components/authentication/Login';
-import EditAccount from './components/settings/editaccount';
-import CompSet from './components/compSet';
-import AboutUs from './components/aboutus';
-import DashboardPlus from './components/dashboard/dashboardPlus';
-import Policy from './components/TOS/legal';
+import RestrictMobile from "./components/RestrictMobile"
+import NavBar from "./components/navbar";
+import Footer from "./components/footer";
+import Search from "./components/search.js";
+import DashboardGrid from "./components/dashboard/dashboard";
+import registration from "./components/authentication/Registration";
+import Login from "./components/authentication/Login";
+import EditAccount from "./components/settings/editaccount";
+import CompSet from "./components/compSet";
+import AboutUs from "./components/aboutus";
+import DashboardPlus from "./components/dashboard/dashboardPlus";
+import Policy from "./components/TOS/legal";
 
-import { widgets } from './components/WidgetSystem/WidgetRegistry';
+import { widgets } from "./components/WidgetSystem/WidgetRegistry"
 
 function App(props) {
 	useEffect(() => {
@@ -78,8 +73,8 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-	loggedInUser: state.loggedInUser,
-	activeTabs: state.activeTabs
+  loggedInUser: state.settings.loggedInUser,
+  activeTabs: state.settings.activeTabs
 });
 
 export default withRouter(

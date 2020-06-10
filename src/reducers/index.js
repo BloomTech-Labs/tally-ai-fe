@@ -77,9 +77,6 @@ import {
   FETCH_RADAR_FAILURE
 } from "../actions/index.js";
 
-import dummyWordsOverTime from "../dummyData/dummyWordsOverTime";
-import dummyReviewsOverTime from "../dummyData/dummyReviewsOverTime";
-
 import { widgets } from "../components/WidgetSystem/WidgetRegistry";
 
 const initialState = {
@@ -229,6 +226,12 @@ function reducer(state = initialState, action) {
 
   //TODO: seperate this switch into multiple files, it's way too long
   switch (action.type) {
+    /*
+      -------------------
+      DASHBOARD COMPONENT
+            START
+      -------------------
+    */
     case FETCH_RADAR_START:
       return {
         ...state,
@@ -265,6 +268,23 @@ function reducer(state = initialState, action) {
           }
         }
       };
+    /*
+      -------------------
+      DASHBOARD COMPONENT
+              END
+      -------------------
+    */
+
+
+  /*
+    -----------------------
+    DASHBORD PLUS COMPONENT,
+    TAB COMPONENT,
+    TABS COMPONENT,
+    SearchPage COMPONENT
+            START
+    -----------------------
+  */
     case SET_TABS_START:
       return {
         ...state,
@@ -293,7 +313,27 @@ function reducer(state = initialState, action) {
         }
       };
 
-    // Yelp Business Search
+    /*
+      -----------------------
+      DASHBORD PLUS COMPONENT,
+      TAB COMPONENT,
+      TABS COMPONENT,
+      SearchPage COMPONENT
+              END
+      -----------------------
+    */
+
+    /*
+      Yelp Business Search
+      --------------------------------
+      SIDEBAR COMPONENT,
+      DASHBORD PLUS COMPONENT,
+      landingpage > SEARCH COMPONENT,
+      components > SEARCH COMPONENT,
+      SearchPage COMPONENT
+                  START
+      --------------------------------
+    */
     case FETCH_BUSINESS_START:
       return {
         ...state,
@@ -324,8 +364,32 @@ function reducer(state = initialState, action) {
           error: action.payload
         }
       };
+      /*
+        Yelp Business Search
+        --------------------------------
+        SIDEBAR COMPONENT,
+        DASHBORD PLUS COMPONENT,
+        landingpage > SEARCH COMPONENT,
+        components > SEARCH COMPONENT,
+        SearchPage COMPONENT
+                      END
+        --------------------------------
+      */
 
-    // Select business
+    /*
+      Select business and add info to the store at state.businessInfo
+      -----------------------
+      DASHBORD PLUS COMPONENT,
+      TAB COMPONENT,
+      TABS COMPONENT,
+      landingpage > SEARCH COMPONENT,
+      components > SEARCH COMPONENT,
+      RESULTS COMPONENT,
+      SETTINGS COMPONENT,
+      SearchPage COMPONENT
+              START
+      -----------------------
+    */
     case SELECT_BUSINESS_START:
       return {
         ...state,
@@ -341,6 +405,20 @@ function reducer(state = initialState, action) {
         ...state,
         currentlySelectedBusiness: { ...action.payload } //revert back to old data
       };
+    /*
+      Select business and add info to the store at state.businessInfo
+      -----------------------
+      DASHBORD PLUS COMPONENT,
+      TAB COMPONENT,
+      TABS COMPONENT,
+      landingpage > SEARCH COMPONENT,
+      components > SEARCH COMPONENT,
+      RESULTS COMPONENT,
+      SETTINGS COMPONENT,
+      SearchPage COMPONENT
+              END
+      -----------------------
+    */
 
     //adding businesses to user's owned businesses list
     case ADD_BUSINESS_START:
