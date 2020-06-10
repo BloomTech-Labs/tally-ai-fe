@@ -1,9 +1,12 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import * as yup from "yup";
 import {Formik, Form, Field} from "formik"
 
 import {makeStyles} from "@material-ui/core/styles";
 import {TextField,Button} from "@material-ui/core";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from "./Alert.js";
+
 
 
 import {connect} from "react-redux";
@@ -50,24 +53,43 @@ const useStyles = makeStyles(theme => ({
 
 let passwordSchema = yup.object().shape({
     password: yup.string()
-        .min(6, "Password must contain at least 6 characters").required("Please enter your new password")
-        .test("password", "Passwords must match", function(value) {
+        .min(6, "New Password must contain at least 6 characters").required("New Password Required")
+        .test("password", "New Password must match", function(value) {
             return this.parent.confirmPassword === value
             }),
         
-    confirmPassword: yup.string().min(6, "Password must contain at least 6 characters").required("Please enter your new password")
-        .test("password", "Passwords must match", function(value) {
+    confirmPassword: yup.string().min(6, "Confirm Password must contain at least 6 characters").required("Confirm Password Required")
+        .test("password", "Confirm Password must match", function(value) {
             return this.parent.password === value
             }),
 })
 
 
 function EditPassword(props){
+    const classes = useStyles();
+
+    useEffect(()=>{
+
+        submitStatus && props.userInfo.success && setOpen({message: "Account Updated", status: true,sever:"success"})
+        submitStatus && props.userInfo.error && setOpen({message: props.userInfo.error,status: true,sever:"error"})
+    
+    },[props.userInfo.data])
 
     const [passwordCreds, setPasswordCreds]= useState({
         password: "",
         confirmPassword: "",
     })
+
+    const [open, setOpen] = useState({message:"", status: false,sever:"success"});
+    const [submitStatus, setSubmitStatus] = useState(false);
+
+    const handleClose = (e,reason) =>{
+        if (reason === 'clickaway') {
+            return;
+          }
+      
+          setOpen({message:"", status:false});
+    }
 
     const handleChange = e => {
         setPasswordCreds({...passwordCreds, [e.target.name]: e.target.value})
@@ -75,10 +97,14 @@ function EditPassword(props){
     }
 
     const handleSubmit = event => {
-        console.log(passwordCreds)
+        console.log({password: passwordCreds.password})
+        props.fetchEditAccount(props.userInfo.data.id,{password: passwordCreds.password})
+        setSubmitStatus(true)
+        setPasswordCreds({password: "",
+        confirmPassword: ""})
     }
 
-    const classes = useStyles();
+    
 
     return (
         <div
@@ -93,7 +119,7 @@ function EditPassword(props){
                 onSubmit={handleSubmit}
                 validationSchema={passwordSchema}
                 enableReinitialize={true}
-                validateOnChange={true}
+                validateOnChange={false}
             >
                 {props => {
                     const {
@@ -113,29 +139,33 @@ function EditPassword(props){
                             </div>
 
                             <TextField 
-                                label ="New Password"
+                                label ={errors.password && touched.password ? errors.password: "New Password"}
+                                id="password"
                                 variant ="outlined"
                                 margin="normal"
                                 type="password"
                                 name="password"
-                                
                                 className={classes.textField}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.password}
                                 placeholder="New Password"
                                 error ={errors.password && touched.password ? true: false}
-                                helperText = {errors.password && touched.password && errors.password}
                                 />
                             <TextField 
-                                label ="Confirm Password"
+                                label ={errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : "Confirm Password"}
+                                id="confirmPassword"
                                 variant ="outlined"
                                 margin="normal"
                                 type="password"
                                 name="confirmPassword"
                                 className={classes.textField}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.confirmPassword}
                                 placeholder="Confirm Password"
                                 error ={errors.confirmPassword && touched.confirmPassword ? true: false}
-                                helperText = {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                                
                                 /> 
                             <Button className ={classes.button} color="primary" type ="submit">Submit</Button>
 
@@ -147,6 +177,13 @@ function EditPassword(props){
 
             </Formik>
 
+
+            <Snackbar open={open.status} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={open.sever}>
+                {open.message}
+                </Alert>
+            </Snackbar> 
+
         </div>
     )
 
@@ -154,7 +191,7 @@ function EditPassword(props){
 
 const mapStateToProps = state => {
     return {
-
+        userInfo: state.loggedInUser
     };
 };
 

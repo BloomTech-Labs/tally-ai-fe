@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import EditAccount from "./editaccount";
 import EditPassword from "./EditPassword.js";
+import HelpForm from "./Help.js";
 
 import PropTypes from 'prop-types';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
@@ -138,6 +139,7 @@ function Settings(props) {
             </StyledTabs>
             {value === 0 && <EditAccount index={0}/>}
             {value === 1 && <EditPassword index={1}/>}
+            {value === 2 && <HelpForm index={2}/>}
         </div>
       </div>
     );
