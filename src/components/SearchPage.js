@@ -8,30 +8,18 @@ import Button from "@material-ui/core/Button";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import Link from "@material-ui/core/Link";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeIcons from "./homeIcons";
-import HomeInfo from "./HomeInfoText";
-import HomeFeatures from "./HomeFeatures";
-import HomeBottomSection from "./HomeBottomSection";
+import {
+  addCompetitor,
+  removeCompetitor,
+} from "../actions/competitorsActions";
 
 import {
   fetchBusinesses,
-  addBusiness,
-  addCompetitor,
-  removeBusiness,
-  removeCompetitor,
   selectBusiness,
-  setActiveTabs
-} from "../actions/index";
+  addBusiness,
+  removeBusiness
+} from '../actions/businessActions';
 
 import axios from "axios";
 
@@ -102,7 +90,7 @@ const SearchPage = props => {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
     }//.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
-    props.setActiveTabs(props.activeTabs, props.activeTabs.concat([selection]), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
+   
     props.selectBusiness(props.selectedBusiness, selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
@@ -267,10 +255,9 @@ const SearchPage = props => {
 };
 
 const mapStateToProps = state => ({
-  competitors: state.competitors.businesses,
-  businesses: state.userBusinesses.businesses,
-  activeTabs: state.tabs.activeTabs,
-  selectedBusiness: state.currentlySelectedBusiness
+  competitors: state.competitor.competitors.businesses,
+  businesses: state.business.userBusinesses.businesses,
+  selectedBusiness: state.business.currentlySelectedBusiness
 });
 
 export default connect(mapStateToProps, {
@@ -279,6 +266,5 @@ export default connect(mapStateToProps, {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness,
-  setActiveTabs
+  selectBusiness
 })(SearchPage);

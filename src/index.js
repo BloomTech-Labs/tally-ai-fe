@@ -11,7 +11,7 @@ import keyMirror from 'keymirror';
 
 import { BrowserRouter as Router } from "react-router-dom";
 
-import rootReducer from "./reducers/index"
+import rootReducer from "./reducers/rootReducer"
 
 // export const types = keyMirror({
 //     FETCH_BUSINESS_START: null,

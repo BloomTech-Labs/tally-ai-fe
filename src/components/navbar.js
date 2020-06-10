@@ -1,47 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/index';
+import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/settingsActions';
 import { Register } from './authentication/Registration';
 import EditAccount from './settings/editaccount';
-
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-import clsx from 'clsx';
-
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import HomeIcon from '@material-ui/icons/Home';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import CreateIcon from '@material-ui/icons/Create';
 import SettingsIcon from '@material-ui/icons/Settings';
-import InfoIcon from '@material-ui/icons/Info';
-import CompareIcon from '@material-ui/icons/Compare';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
@@ -520,13 +498,12 @@ function NavBar(props) {
 }
 
 const mapStateToProps = state => {
-	return {
-		loggedUser: state.loggedInUser.userID,
-		loggedInUser: state.loggedInUser.data,
-		isFetching: state.loggedInUser.isFetching,
-		error: state.loggedInUser.error
-	};
-};
+  return {
+    loggedUser: state.settings.loggedInUser.userID,
+    loggedInUser: state.settings.loggedInUser.data,
+    isFetching: state.settings.loggedInUser.isFetching,
+    error: state.settings.loggedInUser.error
+  };
 
 export default withRouter(
 	connect(mapStateToProps, { fetchEditAccount, shouldUpdateLoggedInUser })(
