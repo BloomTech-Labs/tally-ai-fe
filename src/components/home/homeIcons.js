@@ -1,10 +1,4 @@
 import React from 'react'
-import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
-import { faChartBar } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAssistiveListeningSystems } from "@fortawesome/free-solid-svg-icons"
-import { faFlag } from "@fortawesome/free-solid-svg-icons"
-import { faChartLine } from "@fortawesome/free-solid-svg-icons"
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';

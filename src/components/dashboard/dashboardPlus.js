@@ -1,39 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import Link from "@material-ui/core/Link";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
-import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 
-import SearchPage from "../../components/SearchPage"
-
-// import Results from "../components/search/results";
-
 import {
   fetchBusinesses,
-  addBusiness,
-  addCompetitor,
-  removeBusiness,
-  removeCompetitor,
   selectBusiness,
-  setActiveTabs
-} from "../../actions/index";
+  addBusiness,
+  removeBusiness
+   
+} from "../../actions/businessActions";
 
-import axios from "axios";
+import {addCompetitor,  
+  removeCompetitor, } from '../../actions/competitorsActions'
 
 const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
@@ -158,10 +144,9 @@ function DashboardPlus(props) {
 }
 
 const mapStateToProps = state => ({
-  competitors: state.competitors.businesses,
-  businesses: state.userBusinesses.businesses,
-  activeTabs: state.tabs.activeTabs,
-  selectedBusiness: state.currentlySelectedBusiness
+  competitors: state.competitor.competitors.businesses,
+  businesses: state.business.userBusinesses.businesses,  
+  selectedBusiness: state.business.currentlySelectedBusiness
 });
 
 export default withRouter(connect(mapStateToProps, {
@@ -169,7 +154,6 @@ export default withRouter(connect(mapStateToProps, {
   addBusiness,
   addCompetitor,
   removeBusiness,
-  removeCompetitor,
-  setActiveTabs,
+  removeCompetitor,  
   selectBusiness
 })(DashboardPlus));

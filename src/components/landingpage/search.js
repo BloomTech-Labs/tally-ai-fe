@@ -16,7 +16,6 @@ import HomeFeatures from "../home/HomeFeatures";
 import HomeBottomSection from "../home/HomeBottomSection"
 
 import { fetchBusinesses, selectBusiness } from "../actions/index";
-import { searchResultsPlaceholder } from "../actions/index";
 
 import axios from "axios";
 
