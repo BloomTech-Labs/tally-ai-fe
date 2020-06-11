@@ -14,7 +14,7 @@ import {
   fetchWordsOverTime,
   fetchTopAndBottom,
   fetchAllData
-} from "../../actions/index";
+} from "../../actions/widgetsActions";
 import DashboardPlus from "./dashboardPlus";
 
 const useStyles = makeStyles(theme => ({
@@ -150,13 +150,14 @@ function DashboardGrid(props) {
 const mapStateToProps = state => ({
   // words: state.widgetData.keyWords.data,
   // isFetching: state.widgetData.keyWords.isFetching,
-  id: state.currentlySelectedBusiness.businessId,
-  businessInfo: state.currentlySelectedBusiness,
-  businesses: state.userBusinesses.businesses.concat(
-    state.competitors.businesses
+  // id: state.business.ci
+  id: state.business.currentlySelectedBusiness.businessId,
+  businessInfo: state.business.currentlySelectedBusiness,
+  businesses: state.business.userBusinesses.businesses.concat(
+    state.competitor.competitors.businesses
   ),
-  userBusinesses: state.userBusinesses.businesses,
-  competitors: state.competitors.businesses
+  userBusinesses: state.business.userBusinesses.businesses,
+  competitors: state.competitor.competitors.businesses
 });
 
 export default connect(mapStateToProps, {

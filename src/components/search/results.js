@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import Result from "./result";
-import { selectBusiness, resetSearchResults } from "../../actions/index";
+import { selectBusiness, resetSearchResults } from "../../actions/businessActions";
 
 import dbContains from "../../dbIds";
 
@@ -163,8 +163,8 @@ const Results = props => {
 };
 
 const mapStateToProps = state => ({
-  businesses: state.searchResults,
-  selectedBusiness: state.currentlySelectedBusiness
+  businesses: state.business.searchResults,
+  selectedBusiness: state.business.currentlySelectedBusiness
 });
 
 export default connect(mapStateToProps, { selectBusiness, resetSearchResults })(Results);
