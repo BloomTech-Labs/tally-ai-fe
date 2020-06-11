@@ -9,13 +9,16 @@ import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
 import { library } from "@fortawesome/fontawesome-svg-core";
-
+import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HomeIcons from "../home/homeIcons";
 import HomeInfo from "../home/HomeInfoText";
 import HomeFeatures from "../home/HomeFeatures";
-import HomeBottomSection from "../home/HomeBottomSection"
+import HomeBottomSection from "../home/HomeBottomSection";
+import HomePitches from '../home/HomePitches';
 
 import { fetchBusinesses, selectBusiness } from "../actions/index";
+import { searchResultsPlaceholder } from "../actions/index";
 
 import axios from "axios";
 
@@ -28,13 +31,15 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
-    alignItems: "center",
+    textAlign:"left",
+    alignContent:'center',
     width: "40%"
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: "100%"
+    width: "100%",
+    marginTop: "1%"
   },
   dense: {
     marginTop: theme.spacing(2)
@@ -44,9 +49,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     marginTop: "2%",
     marginBottom: "6%",
-    width: "15%",
+    width: "18%",
     backgroundColor: "#619FFF",
     color: "white"
+
   },
   input: {
     display: "none"
@@ -86,8 +92,8 @@ const Search = props => {
   }, [searchLocation]);
 
   return (
-    <div>
-      <div className="backgroundcolor">
+    <div className="backgroundcolor">
+      <div >
       <div
         className="search-widget"
         style={{
@@ -97,7 +103,18 @@ const Search = props => {
       >
         {/* <h1>See what customers are saying about your business!</h1> */}
 
-        <div className="search-form">
+        <div
+          className="search-form"
+          style={{
+            height: "100vh",
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-start",
+            marginTop: "16vh",
+            color: "black",
+            marginLeft: "10%",
+          }}
+        >
           {/* <div class="mdc-text-field mdc-text-field--outlined">
             <input type="text" id="tf-outlined" class="mdc-text-field__input"></input>
             <div class="mdc-notched-outline"></div>
@@ -107,11 +124,11 @@ const Search = props => {
             <div class="mdc-notched-outline__trailing"></div>
             </div> */}
           {/* <h1>Search for a business to get started</h1> */}
-          <form className={classes.container}>
-            <div className="YelpBusinessH1">
-            <h1>See what customers are saying about your business!</h1>
+          <form className={(props.searchResults ? " growSearch" : classes.container)}>
+            <div className="YelpBusinessH1" style={{textAlign:'left', fontSize:'135%', fontWeight:'900'}}>
+            <h1 style={{paddingLeft:'2%'}}>See what customers are saying about your business!</h1>
             </div>
-            <h2 className="YelpBusinessH2">Search for a Yelp Business to get started</h2>
+            <h2 className="YelpBusinessH2" style={{paddingLeft: '2%', textAlign:'left'}}>Search for a Yelp Business to get started</h2>
             <TextField
               label="Business Name"
               variant="outlined"
@@ -173,6 +190,7 @@ const Search = props => {
               variant="outlined"
               color="blue"
               type="submit"
+              style={{borderRadius:'40px', width:'20%'}}
               onClick={e => {
                 e.preventDefault();
                 // props.searchResultsPlaceholder(placeholderBusinesses);
@@ -182,27 +200,40 @@ const Search = props => {
                 });
               }}
             >
-              Submit
+              Search
             </Button>
           </form>
           
         </div>
         <Results select={resultsSelection}/>
       </div>
-      <img src={tallySearchLogo} alt="tally search logo" style={{position:'absolute', top:'0px', right:'0px', width:'50%' }} />
-      </div>{/*  closes div containing backgroundcolor */}
-      <div>
-        <HomeIcons />
-        <HomeInfo />
-        <HomeFeatures />
-        <HomeBottomSection />
-      </div>
       
+      {/*  closes div containing backgroundcolor */}
+      {/* Made it conditionally render the content at the bottom of the landing page. Once the results come in, the marketing content disappears */}
+      {!props.searchResults
+        ? (
+          <div>
+          <img src={tallySearchLogo} alt="tally search logo" style={{position:'absolute', top:'0px', right:'0px', width:'50%' }} />
+            <div>
+              <HomeIcons />
+              <HomeInfo />
+              <HomeFeatures />
+              <HomePitches />
+              <HomeBottomSection />
+            </div>
+            </div>   
+        )
+        : (
+          <div></div>
+        )
+      }
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
+  searchResults: state.searchResults.data,
   selectedBusiness: state.currentlySelectedBusiness
 });
 

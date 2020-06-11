@@ -3,9 +3,10 @@ import React from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import AnalyzeDataIcon from "../components/images/AnalyzeDataIcon.png";
-import DownloadReviewsIcon from "../components/images/DownloadReviewsIcon.png";
-import InsightsIcon from "../components/images/InsightsIcon.png";
+import AnalyzeDataIcon from "../../components/images/AnalyzeDataIcon.png";
+import DownloadReviewsIcon from "../../components/images/DownloadReviewsIcon.png";
+import InsightsIcon from "../../components/images/InsightsIcon.png";
+import { fontSize } from '@material-ui/system';
 
 const HomeIcons = () => {
     AOS.init()
