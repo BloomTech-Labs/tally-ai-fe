@@ -503,7 +503,7 @@ const mapStateToProps = state => {
     loggedInUser: state.settings.loggedInUser.data,
     isFetching: state.settings.loggedInUser.isFetching,
     error: state.settings.loggedInUser.error
-  };
+  }};
 
 export default withRouter(
 	connect(mapStateToProps, { fetchEditAccount, shouldUpdateLoggedInUser })(
