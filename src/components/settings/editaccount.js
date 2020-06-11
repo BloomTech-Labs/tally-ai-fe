@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import * as yup from 'yup';
-import { Formik,Form,Field } from "formik";
+import { Formik} from "formik";
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -138,10 +138,9 @@ function EditAccount(props){
                     values,
                     touched,
                     errors,
-                    isSubmitting,
                     handleBlur,
                     handleSubmit,
-                    handleReset
+                    
                 } = props;
 
                 return (
@@ -161,7 +160,7 @@ function EditAccount(props){
                             className={classes.textField}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={props.values.firstName}
+                            value={values.firstName}
                             placeholder="First Name"
                             error={
                                 errors.firstName && touched.firstName ? true : false
@@ -179,7 +178,7 @@ function EditAccount(props){
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Last Name"
-                            value={props.values.lastName}
+                            value={values.lastName}
                             error ={errors.lastName && touched.lastName ? true: false}
                             />
                         <TextField

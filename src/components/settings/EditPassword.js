@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import * as yup from "yup";
-import {Formik, Form, Field} from "formik"
+import {Formik} from "formik"
 
 import {makeStyles} from "@material-ui/core/styles";
 import {TextField,Button} from "@material-ui/core";
@@ -126,7 +126,7 @@ function EditPassword(props){
                         values,
                         touched,
                         errors,
-                        isSubmitting,
+                        
                         handleBlur,
                         handleSubmit,
 
