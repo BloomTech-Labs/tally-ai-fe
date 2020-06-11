@@ -14,6 +14,8 @@
     "@testing-library/user-event": "^7.1.2",
     "aos": "^2.3.4",
     "axios": "^0.19.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "keymirror": "^0.1.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
@@ -33,7 +35,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "scss": "node-sass --watch scss -o css"
+    "scss": "node-sass --watch scss -o css",
+    "coverage": "CI=true npm test --coverage --watchAll=false || true"
   },
   "eslintConfig": {
     "extends": "react-app"
