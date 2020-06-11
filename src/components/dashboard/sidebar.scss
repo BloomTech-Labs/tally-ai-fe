@@ -1,0 +1,20 @@
+.bussinessContains{
+    z-index: 1000;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 47px, 0px, 50px, 36px;
+    background:#fff;
+    width: 339px;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+.sidebarDivder{
+    background-color: transparent;
+    margin-top: 200px;
+}
+.widgetSelector{
+    margin-top: 4%;
+    border-radius: 10px;
+}

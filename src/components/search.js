@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-import { makeStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-import Tooltip from '@material-ui/core/Tooltip'
-import Button from '@material-ui/core/Button'
-import GpsFixedIcon from '@material-ui/icons/GpsFixed'
-import { InputAdornment } from '@material-ui/core'
-import Results from '../components/search/results'
-import HomeIcons from './homeIcons'
-import HomeInfo from './HomeInfoText'
-import HomeFeatures from './HomeFeatures'
-import HomeBottomSection from './HomeBottomSection'
-import HomePitches from './HomePitches'
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import Button from "@material-ui/core/Button";
+import GpsFixedIcon from "@material-ui/icons/GpsFixed";
+import { InputAdornment } from "@material-ui/core";
+import Results from "../components/search/results";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import HomeIcons from "./home/homeIcons"
+import HomeInfo from "./home/HomeInfoText";
+import HomeFeatures from "./home/HomeFeatures";
+import HomeBottomSection from "./home/HomeBottomSection";
+import HomePitches from './home/HomePitches';
 
-import { fetchBusinesses, selectBusiness } from '../actions/businessActions'
+import { fetchBusinesses, selectBusiness } from "../actions/index";
+import { searchResultsPlaceholder } from "../actions/index";
 
-import axios from 'axios'
+import axios from "axios";
 
-import tallySearchLogo from '../components/images/tallySearchLogo.png'
+import tallySearchLogo from "../components/images/tallySearchLogo.png";
 
-const mapsKey = process.env.REACT_APP_MAPS_KEY
+const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
 const useStyles = makeStyles(theme => ({
 	container: {
