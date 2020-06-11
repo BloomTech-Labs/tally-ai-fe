@@ -30,8 +30,8 @@ const HomeInfo = () => {
                 <div className="leftpara">
                     <img src={magnifier} alt="Magnifying glass image" style={{float:'left', width:'70vw'}}/>
                     <div className="leftpara-text">
-                    <h1 style={{fontSize:'48px', lineHeight:'66px', fontWeight:'900', textAlign:'left'}}>Build the business your customers want</h1>
-                    <p style={{fontSize:'20px', lineHeight:'32px', fontWeight:'800', fontStyle:'normal', textAlign:'left', marginTop:'-1%'}}>Understand your online reviews and feedback to improve ineffeciences.</p>
+                    <h1 >Build the business your customers want</h1>
+                    <p>Understand your online reviews and feedback to improve ineffeciences.</p>
                     </div>
                 </div>
                 <div className="TopTabletIMG">
