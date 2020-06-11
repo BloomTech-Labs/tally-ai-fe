@@ -1,64 +1,54 @@
-import React, { Component } from 'react';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import {GoogleLogin, } from 'react-google-login';
 
-const CLIENT_ID = '608950634863-oocf4589motggau92gukloto2l01fgha.apps.googleusercontent.com';
+const CLIENT_ID = '608950634863-oocf4589motggau92gukloto2l01fgha.apps.googleusercontent.com'
 
-class GoogleBtn extends Component {
-    constructor(props) {
-      super(props);
-  
-      this.state = {
-        isLogined: false,
-        accessToken: ''
-      };
-  
-      this.login = this.login.bind(this);
-      this.handleLoginFailure = this.handleLoginFailure.bind(this);
-      this.logout = this.logout.bind(this);
-      this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
-    }
-  
-    login (response) {
-        console.log('Google info: ', response)
-    }
-  
-    logout (response) {
-      this.setState(state => ({
-        isLogined: false,
-        accessToken: ''
-      }));
-    }
-  
-    handleLoginFailure (response) {
-      alert('Failed to log in')
-    }
-  
-    handleLogoutFailure (response) {
-      alert('Failed to log out')
-    }
-  
-    render() {
-      return (
-      <div>
-        { this.state.isLogined ?
-          <GoogleLogout
-            clientId={ CLIENT_ID }
-            buttonText='Logout'
-            onLogoutSuccess={ this.logout }
-            onFailure={ this.handleLogoutFailure }
-          >
-          </GoogleLogout>: <GoogleLogin
+const responseGoogle = res => {
+    console.log('Failure', res)
+}
+
+const GoogleBtn = () => {
+    const [creds, setCreds] = useState({
+        gId: '',        
+        email: '',
+        firstName: '',
+        lastName: '',
+    })
+
+    const [auth, setAuth] = useState({
+        accessToken: '',
+        idToken: ''
+    })
+
+    const handleLogin = res => {
+        setCreds({
+            ...creds,
+            gId: res.googleId,
+            email: res.profileObj.email,
+            firstName: res.profileObj.givenName,
+            lastName: res.profileObj.familyName
+        });
+        setAuth({
+            ...auth,
+            accessToken: res.access_token,
+            idToken: res.id_token
+        })
+        console.log(res)
+    };
+
+    return (
+        <div className='googleBtn'>
+            <GoogleLogin 
             clientId={CLIENT_ID}
             buttonText='Sign in with Google'
-            onSuccess={ this.login }
-            onFailure={ this.handleLoginFailure }
-            cookiePolicy={ 'single_host_origin' }
+            onSuccess={handleLogin}
+            onFailure={responseGoogle}
+            isSignedIn={true}
             responseType='code,token'
-          />
-        }
-      </div>
+            />
+        </div>
     )
-}
 }
 
 export default GoogleBtn;
