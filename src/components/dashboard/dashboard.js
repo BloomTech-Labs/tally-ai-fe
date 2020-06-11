@@ -2,21 +2,19 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Grid } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
 
-import Tabs from "./Tabs";
+
+
 
 import WidgetDisplayList from "../WidgetSystem/WidgetDisplayList";
-import WidgetAdditionList from "../WidgetSystem/WidgetAdditionList";
+
 import Sidebar from "./Sidebar";
 
 import {
   fetchWordsOverTime,
   fetchTopAndBottom,
   fetchAllData
-} from "../../actions/index";
+} from "../../actions/widgetsActions";
 import DashboardPlus from "./dashboardPlus";
 
 const useStyles = makeStyles(theme => ({
@@ -59,31 +57,31 @@ function DashboardGrid(props) {
         <Sidebar />
       </div>
       {/* // TODO: DOCUMENT WHAT'S GOING ON HERE */}
-      <div style={{ width: "100%" }}>
+      <div >
         {localStorage.getItem("token") && localStorage.getItem("userID") ? (
-          <div style={{ width: "100%" }}>
-            <Tabs />
+          <div >
+            
             {businessesContains(props.businessInfo.businessId) ? (
               <div>
                 <div className="businessStats">
                   <div className="reviews">
-                    <p style={{ fontWeight: "bold" }}>
+                    <p >
                       {props.businessInfo.reviewCount}
                     </p>
                     <br />
-                    <p style={{ fontSize: "1rem" }}>Total Reviews</p>
+                    <p >Total Reviews</p>
                   </div>
                   <div className="ratings">
-                    <p style={{ fontWeight: "bold" }}>
+                    <p >
                       {props.businessInfo.averageRating}
                     </p>
                     <br />
-                    <p style={{ fontSize: "1rem" }}>Overall Rating</p>
+                    <p >Overall Rating</p>
                   </div>
                   <div className="changeofrating">
-                    <p style={{ fontWeight: "bold" }}>11%</p>
+                    <p >11%</p>
                     <br />
-                    <p style={{ fontSize: "1rem" }}>Change in Rating</p>
+                    <p >Change in Rating</p>
                   </div>
                 </div>
                 <WidgetDisplayList />
@@ -100,23 +98,23 @@ function DashboardGrid(props) {
             )}
             <div className="businessStats">
               <div className="reviews">
-                <p style={{ fontWeight: "bold" }}>
+                <p >
                   {props.businessInfo.reviewCount}
                 </p>
                 <br />
                 <p style={{ fontSize: "1rem" }}>Total Reviews</p>
               </div>
               <div className="ratings">
-                <p style={{ fontWeight: "bold" }}>
+                <p >
                   {props.businessInfo.averageRating}
                 </p>
                 <br />
                 <p style={{ fontSize: "1rem" }}>Overall Rating</p>
               </div>
               <div className="changeofrating">
-                <p style={{ fontWeight: "bold" }}>11%</p>
+                <p >11%</p>
                 <br />
-                <p style={{ fontSize: "1rem" }}>Change in Rating</p>
+                <p >Change in Rating</p>
               </div>
             </div>
             <WidgetDisplayList />
@@ -152,13 +150,14 @@ function DashboardGrid(props) {
 const mapStateToProps = state => ({
   // words: state.widgetData.keyWords.data,
   // isFetching: state.widgetData.keyWords.isFetching,
-  id: state.currentlySelectedBusiness.businessId,
-  businessInfo: state.currentlySelectedBusiness,
-  businesses: state.userBusinesses.businesses.concat(
-    state.competitors.businesses
+  // id: state.business.ci
+  id: state.business.currentlySelectedBusiness.businessId,
+  businessInfo: state.business.currentlySelectedBusiness,
+  businesses: state.business.userBusinesses.businesses.concat(
+    state.competitor.competitors.businesses
   ),
-  userBusinesses: state.userBusinesses.businesses,
-  competitors: state.competitors.businesses
+  userBusinesses: state.business.userBusinesses.businesses,
+  competitors: state.competitor.competitors.businesses
 });
 
 export default connect(mapStateToProps, {

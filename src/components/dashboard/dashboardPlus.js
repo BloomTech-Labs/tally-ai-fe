@@ -1,39 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import Link from "@material-ui/core/Link";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
-import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 
-import SearchPage from "../../components/SearchPage"
-
-// import Results from "../components/search/results";
-
 import {
   fetchBusinesses,
-  addBusiness,
-  addCompetitor,
-  removeBusiness,
-  removeCompetitor,
   selectBusiness,
-  setActiveTabs
-} from "../../actions/index";
+  addBusiness,
+  removeBusiness
+   
+} from "../../actions/businessActions";
 
-import axios from "axios";
+import {addCompetitor,  
+  removeCompetitor, } from '../../actions/competitorsActions'
 
 const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
@@ -94,25 +80,10 @@ function DashboardPlus(props) {
 
   return (
     <div>
-      <div className="business-results"
-        style={{
-          width: "90%",
-          height: "40%",
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          backgroundColor: "white",
-          marginLeft: "5%",
-          marginTop: '5%',
-          borderRadius: 20,
-          marginBottom: '5%',
-
-        }}>
+      <div className="business-results">
         {/* <div style={{ width: "100%", height: "60vh", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around" }}> */}
 
-        <h2 style={{ color: "black", marginLeft: "3vh" }}>My Businesses</h2>
+        <h2  className="h2dashboard" >My Businesses</h2>
         <Tooltip title="Add a Business" arrow>
           <Card className={classes.card} onClick={() => { props.history.push("/search/business") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
             <Fab disabled aria-label="add" >
@@ -137,24 +108,9 @@ function DashboardPlus(props) {
         }
         {/* </div> */}
       </div>
-      <div className="competitors-results"
-        style={{
-          width: "90%",
-          height: "40%",
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          backgroundColor: "white",
-          marginLeft: "5%",
-          marginTop: '5%',
-          borderRadius: 20,
-          marginBottom: '5%',
+      <div className="competitors-results">
 
-        }}>
-
-        <h2 style={{ color: "black", marginLeft: "3vh" }}>My Competitors</h2>
+        <h2 className="h2dashboard">My Competitors</h2>
 
 
         <Tooltip title="Add a Competitor" arrow>
@@ -188,10 +144,9 @@ function DashboardPlus(props) {
 }
 
 const mapStateToProps = state => ({
-  competitors: state.competitors.businesses,
-  businesses: state.userBusinesses.businesses,
-  activeTabs: state.tabs.activeTabs,
-  selectedBusiness: state.currentlySelectedBusiness
+  competitors: state.competitor.competitors.businesses,
+  businesses: state.business.userBusinesses.businesses,  
+  selectedBusiness: state.business.currentlySelectedBusiness
 });
 
 export default withRouter(connect(mapStateToProps, {
@@ -199,7 +154,6 @@ export default withRouter(connect(mapStateToProps, {
   addBusiness,
   addCompetitor,
   removeBusiness,
-  removeCompetitor,
-  setActiveTabs,
+  removeCompetitor,  
   selectBusiness
 })(DashboardPlus));

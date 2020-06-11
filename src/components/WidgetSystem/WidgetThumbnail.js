@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { getWidgetPreviewFromName } from "./WidgetRegistry";
 
-import { setActiveWidgets } from "../../actions/index";
+import { setActiveWidgets } from "../../actions/widgetsActions";
 import { connect } from "react-redux";
 
-import Hovered from "../../images/PreviewHovered.png";
-import Selected from "../../images/PreviewSelected.png";
+
 
 //It's like WidgetContainer but it renders a preview instead of the actual widget
 const WidgetThumbnail = props => {
@@ -58,7 +57,7 @@ const WidgetThumbnail = props => {
 };
 
 const mapStateToProps = state => ({
-  activeWidgets: state.activeWidgets
+  activeWidgets: state.widgets.activeWidgets
 });
 
 export default connect(mapStateToProps, { setActiveWidgets })(WidgetThumbnail);

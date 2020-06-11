@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import abstractlines from './images/abstractlines.png'
+import abstractlines from '../../components/images/abstractlines.png'
 
 const HomeBottomSection = () => {
     AOS.init()
@@ -27,12 +27,12 @@ const HomeBottomSection = () => {
         data-aos-mirror="true"
         data-aos-once="true"
         >
-            <div style={{display: 'flex', width: '100%%'}}>
-                <div className="BottomSection" style={{width: '50%', marginLeft: '25%'}}>
+            <div style={{display: 'flex', width: '100%'}}>
+                <div className="BottomSection">
                         <h1 className="BottomTitle">Unlock your business data with Tally AI</h1>
                         <Link onClick={scrollToTop} to='/' className="FeaturesButton">GET STARTED</Link>
                 </div>
-                <div style={{width: '25%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', marginBottom: '3%'}}>
+                <div className="bottom-style">
                     <img src={abstractlines} alt=' blueabstract lines'/>
                 </div>
             </div>
