@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 import { widgets } from "../WidgetSystem/WidgetRegistry";
 import WidgetThumbnail from "../WidgetSystem/WidgetThumbnail";
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import burger from "../images/burger.jpg";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { fetchBusinesses } from "../../actions/index.js";
+import { fetchBusinesses } from "../../actions/businessActions";
 
 const drawerWidth = 375;
 
@@ -104,11 +90,11 @@ function ClippedDrawer(props) {
       >
 
 {businessesContains(props.selectedBusiness.businessId) || !(localStorage.getItem("token")) ? 
-        <div style={{ zIndex: "1000", position: "fixed", display: "flex", alignItems: "center", fontSize: "12px", paddingBottom: "50px", paddingLeft: "36px", paddingTop: "47px", background: "white", width: "339px", borderBottom: "1px solid lightgray", borderRight: "1px solid lightgray"}}>
+        <div  className="bussinessContains">
           <div><img src={props.selectedBusiness.businessImg} style={{ height: "100px", width: "100px", borderRadius: "100%", marginRight: "11px"}} /></div>
-          <div style={{textAlign: "left"}}>
-            <p style={{marginTop: "0", fontWeight: "600", fontSize: "23px"}}>{props.selectedBusiness.businessName}</p> {/* pass in business title prop here */}
-            <p style={{ opacity: ".87", fontSize: "17px", marginTop: "-10px", marginBottom: "0"}}>
+          <div>
+            <p  >{props.selectedBusiness.businessName}</p> {/* pass in business title prop here */}
+            <p >
               {props.selectedBusiness.address ? props.selectedBusiness.address[0] +"\n" + props.selectedBusiness.address[1] : <></> }
               {/* 12345 Strawberry Rd.<br />
               Los Angeles, CA 98765 */}
@@ -121,8 +107,8 @@ function ClippedDrawer(props) {
 
 
 
-        <Divider style={{backgroundColor: "transparent", marginTop: "200px"}}/>
-        <div style={{ fontSize: "15px"}}>
+        <Divider className="sidebarDivder" />
+        <div >
           <h1>Add to dashboard</h1>
         </div>
 
@@ -165,10 +151,7 @@ function ClippedDrawer(props) {
             </div>
           </CardActions>
         </Card> */}
-        <div
-          className="widgetSelector"
-          style={{ marginTop: "4%", borderRadius: "10px" }}
-        >
+        <div className="widgetSelector">
           {/* Render Available Widgets */}
           {availableWidgets.map(widgetName => {
             return (
@@ -182,9 +165,9 @@ function ClippedDrawer(props) {
 }
 
 const mapStateToProps = state => ({
-  businesses: state.userBusinesses.businesses,
-  selectedBusiness: state.currentlySelectedBusiness,
-  allBusinesses: state.userBusinesses.businesses.concat(state.competitors.businesses)
+  businesses: state.business.userBusinesses.businesses,
+  selectedBusiness: state.business.currentlySelectedBusiness,
+  allBusinesses: state.business.userBusinesses.businesses.concat(state.competitor.competitors.businesses)
 });
 
 export default withRouter(connect(mapStateToProps, {

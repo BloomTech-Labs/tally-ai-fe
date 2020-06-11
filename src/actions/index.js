@@ -116,7 +116,17 @@ export const FETCH_RADAR_FAILURE = "FETCH_RADAR_FAILURE";
   ACTIONS
   -------
 */
-// Yelp Business Search
+
+/*
+  Yelp Business Search
+  -----------------
+  SIDEBAR COMPONENT,
+  DASHBORD PLUS COMPONENT,
+  landingpage > SEARCH COMPONENT,
+  components > SEARCH COMPONENT,
+  SearchPage COMPONENT
+  -----------------
+*/
 export const fetchBusinesses = business => dispatch => {
   console.log("action business query", business);
 
@@ -156,10 +166,24 @@ export const fetchBusinesses = business => dispatch => {
     });
 };
 
+/*
+  ------------------------------------------
+  WidgetSystem > WidgetDisplayList COMPONENT,
+  WidgetSystem > WidgetThumbnail COMPONENT
+  ------------------------------------------
+*/
 export const setActiveWidgets = (widgetArray) => dispatch => {
   dispatch({ type: SET_ACTIVE_WIDGETS, payload: widgetArray });
 }
 
+/*
+  -----------------------
+  DASHBORD PLUS COMPONENT,
+  TAB COMPONENT,
+  TABS COMPONENT,
+  SearchPage COMPONENT
+  -----------------------
+*/
 export const setActiveTabs = (oldTabsArray, newTabsArray, userID) => dispatch => {
   console.log("Setting tabs on back end to ", newTabsArray);
   dispatch({ type: SET_TABS_START, payload: newTabsArray});//predict that the request will be successful and update state immediatly so the user doesn't have to wait
@@ -169,7 +193,12 @@ export const setActiveTabs = (oldTabsArray, newTabsArray, userID) => dispatch =>
     .catch(err => dispatch({ type: SET_TABS_FAILURE, payload: oldTabsArray }))//revert to old array if an error occurs
 }
 
-// TopBottomWords
+/*
+  TopBottomWords
+  -------------------
+  DASHBOARD COMPONENT
+  -------------------
+  */
 export const fetchTopAndBottom = id => dispatch => {
   const dsEndpoint = `https://cors-anywhere.herokuapp.com/http://django-tally.nv9fjcsgss.us-west-2.elasticbeanstalk.com/yelp/${id}?viztype=0`;
   console.log("Running fetchTopAndBottom.");
@@ -190,7 +219,19 @@ export const fetchTopAndBottom = id => dispatch => {
     });
 };
 
-// Select business and add info to the store at state.businessInfo
+/*
+  Select business and add info to the store at state.businessInfo
+  -----------------------
+  DASHBORD PLUS COMPONENT,
+  TAB COMPONENT,
+  TABS COMPONENT,
+  landingpage > SEARCH COMPONENT,
+  components > SEARCH COMPONENT,
+  RESULTS COMPONENT,
+  SETTINGS COMPONENT,
+  SearchPage COMPONENT
+  -----------------------
+*/
 export const selectBusiness = (previousBusinessInfo, businessInfo) => dispatch => {
   if(businessInfo){//only request yelp data if both previous and new info are provided. This is useful while selecting new tabs
     console.error("SECOND PARAMETER PROVIDED, not selecting new tab, params: ", previousBusinessInfo, businessInfo);
@@ -218,7 +259,13 @@ export const selectBusiness = (previousBusinessInfo, businessInfo) => dispatch =
 // }
 
 
-// Select business and add info to the store at state.businessInfo
+/*
+  Select business and add info to the store at state.businessInfo
+  -----------------------
+  DASHBORD PLUS COMPONENT,
+  SearchPage COMPONENT
+  -----------------------
+*/
 export const addBusiness = (businessInfo, userID) => dispatch => {
   console.log("business in addBusiness: ", businessInfo);
   // businessInfo must be in this format
@@ -277,7 +324,13 @@ export const addBusiness = (businessInfo, userID) => dispatch => {
 };
 
 
-// Select business and add info to the store at state.businessInfo
+/*
+  Select business and add info to the store at state.businessInfo
+  -----------------------
+  DASHBORD PLUS COMPONENT,
+  SearchPage COMPONENT
+  -----------------------
+*/
 export const removeBusiness = (businessID, userID) => dispatch => {
   console.log("\removing business from the store...\n");
   //dispatch({ type: REMOVE_BUSINESS_START, payload: businessInfo });
@@ -302,7 +355,13 @@ export const removeBusiness = (businessID, userID) => dispatch => {
 };
 
 
-// Select business and add info to the store at state.businessInfo
+/* 
+  Select business and add info to the store at state.businessInfo
+  -----------------------
+  DASHBORD PLUS COMPONENT,
+  SearchPage COMPONENT
+  -----------------------
+*/
 export const addCompetitor = (businessInfo, userID) => dispatch => {
   console.log("\nAdding competitor to the store...\n");
   //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
@@ -339,7 +398,13 @@ export const addCompetitor = (businessInfo, userID) => dispatch => {
 };
 
 
-// Select business and add info to the store at state.businessInfo
+/*
+  Select business and add info to the store at state.businessInfo
+  -----------------------
+  DASHBORD PLUS COMPONENT,
+  SearchPage COMPONENT
+  -----------------------
+  */
 export const removeCompetitor = (businessID, userID) => dispatch => {
 
   console.log("\Removing competitor from the store...\n");
@@ -398,11 +463,21 @@ export const searchResultsPlaceholder = results => dispatch => {
 //   type: 'LOGOUT_USER'
 // });
 
+/*
+  -----------------
+  RESULTS COMPONENT
+  -----------------
+*/
 export const resetSearchResults = () => dispatch => {
   dispatch({ type: FETCH_BUSINESS_SUCCESS, payload: null });
 }
 
-//set user's store data
+/*
+  set user's store data
+  ------------------------
+  App.js FILE
+  ------------------------
+  */
 export const setUserInfo = (userData) => dispatch => {
   // userInfo: {  
   //   favorites
@@ -414,7 +489,12 @@ export const setUserInfo = (userData) => dispatch => {
 
 }
 
-//get user data from the back end
+/*
+  get user data from the back end
+  ------------------------
+  App.js FILE
+  ------------------------
+*/
 export const getUserInfo = (userID) => dispatch => {
   // userInfo: {  
   //   favorites
@@ -452,14 +532,28 @@ export const getUserInfo = (userID) => dispatch => {
 
 }
 
-// Used at Login
+/*
+  Used at Login
+  -----------------------
+  REGISTRATION COMPONENT,
+  NAVBAR COMPONENT,
+  App.js FILE
+  -----------------------
+*/
 export const shouldUpdateLoggedInUser = (shouldUpdate) => dispatch => {
 
   dispatch({ type: UPDATE_LOGGED_IN_USER, payload: shouldUpdate });
 
 };
 
-// Used at Edit Account
+/*
+  Used at Edit Account
+  ----------------------
+  EDIT ACCOUNT COMPONENT,
+  SETTINGS COMPONENT,
+  NAVBAR COMPONENT
+  ---------------------- 
+*/
 export const fetchEditAccount = (id, newInfo) => dispatch => {
   //   newInfo: {
   //     "email": string (optional),
@@ -477,7 +571,13 @@ export const fetchEditAccount = (id, newInfo) => dispatch => {
     .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
 };
 
-// PhraseRank
+/*
+  PhraseRank
+  -------------------
+  DASHBOARD COMPONENT,
+  WidgetSystem > Widgets > PhraseRank COMPONENT
+  -------------------
+  */
 export const fetchWordsOverTime = id => dispatch => {
   dispatch({ type: FETCH_WORDS_OVER_TIME_START });
   console.log("\nFetching words over time...\n");
@@ -513,6 +613,11 @@ export const fetchReviewsOverTime = id => dispatch => {
 //   fetchTopAndBottom(id);
 // };
 
+/*
+  ------------------------------
+  ToggleFavoriteButton COMPONENT
+  ------------------------------
+*/
 export const setFavorites = (favorites, userID) => dispatch => {
 
   //TODO: Add eddpoint to set a user's favorites, have endpoint return the new list of favorites on success
@@ -566,6 +671,11 @@ export const removeFavorite = (favorite, userID) => dispatch => {
 
 }
 
+/* 
+  -------------------
+  DASHBOARD COMPONENT
+  -------------------
+*/
 export const fetchAllData = id => async dispatch => {
 
   if (!id) {

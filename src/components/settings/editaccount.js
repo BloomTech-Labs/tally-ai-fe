@@ -229,7 +229,7 @@ function EditAccount(props){
 const mapStateToProps = state => {
     console.log("redux state",state)
     return {
-        userInfo: state.loggedInUser
+        userInfo: state.settings.loggedInUser
     };
 };
 

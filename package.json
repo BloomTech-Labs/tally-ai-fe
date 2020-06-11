@@ -22,9 +22,11 @@
     "fetch-mock": "^8.3.1",
     "formik": "^2.1.4",
     "keymirror": "^0.1.1",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-avatar": "^3.9.6",
     "react-dom": "^16.13.1",
+    "react-google-login": "^5.1.20",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -42,6 +44,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "scss": "node-sass --watch scss -o css",
     "coverage": "CI=true npm test --coverage --watchAll=false || true"
   },
   "eslintConfig": {
