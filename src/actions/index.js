@@ -517,7 +517,7 @@ export const getUserInfo = (userID) => dispatch => {
 
       let userInfo = {
         competitors: res.data.favorites,
-        loggedInUser: { firstName: res.data.first_name, lastName: res.data.last_name,id: userID },
+        loggedInUser: { firstName: res.data.first_name, lastName: res.data.last_name, userId: res.data.user_id },
         businesses: res.data.businesses,
         activeWidgets: res.data.preferences && res.data.preferences.activeWidgets ? res.data.preferences.activeWidgets : [],
         activeTabs: res.data.preferences && res.data.preferences.activeTabs ? res.data.preferences.activeTabs : []
@@ -568,7 +568,10 @@ export const fetchEditAccount = (id, newInfo) => dispatch => {
   axiosWithAuth()
     .put("/users/" + id, newInfo)
     .then(res => dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: res.data }) & console.log(res.data, "fetchEditAccount"))
-    .catch(err => dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response }))
+    .catch(err => {
+      const {data, status} = err.response;
+      dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload:{...data,status} });
+    })
 };
 
 /*
