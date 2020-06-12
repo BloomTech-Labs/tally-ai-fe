@@ -13,7 +13,8 @@ const initialState = {
 	loggedInUser: {
 		data: {
 			firstName: null,
-			lastName: null
+			lastName: null,
+			userId: null
 		},
 		shouldUpdate: true,
 		isFetching: false,
@@ -30,6 +31,7 @@ const settingsReducer = (state = initialState, action) => {
 				loggedInUser: {
 					...state.loggedInUser,
 					isFetching: true,
+					success: null,
 					error: null
 				}
 			}
@@ -43,24 +45,34 @@ const settingsReducer = (state = initialState, action) => {
 							: state.loggedInUser.data.firstName,
 						lastName: action.payload.last_name_name
 							? action.payload.last_name
-							: state.loggedInUser.data.lastName
+							: state.loggedInUser.data.lastName,
+						id: action.payload.userId 
+							? action.payload.userId
+							: state.loggedInUser.data.userId
 					},
 					isFetching: false,
+					success: true,
 					error: null
 				}
 			}
 		case FETCH_EDITACCOUNT_FAILURE:
 			return {
 				...state,
-				isFetching: false,
-				error: action.payload
+				loggedInUser:{
+					...state.loggedInUser,
+					isFetching: false,
+					success: false,
+					error: action.payload
+				  }
 			}
 		case GET_USER_DATA_START:
 			return {
 				...state,
 				loggedInUser: {
 					...state.loggedInUser,
-					isFetching: true
+					isFetching: true,
+					
+					error: false
 				}
 			}
 		case GET_USER_DATA_SUCCESS:
@@ -88,7 +100,7 @@ const settingsReducer = (state = initialState, action) => {
 				loggedInUser: {
 					...state.loggedInUser,
 					data: action.payload.loggedInUser,
-					isFetching: false
+					isFetching: false,
 				},
 				userBusinesses: {
 					...state.userBusinesses,

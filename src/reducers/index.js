@@ -749,7 +749,7 @@ function reducer(state = initialState, action) {
         loggedInUser: {
           ...state.loggedInUser,
           isFetching: true,
-          success: false,
+          success: null,
           error: null
         }
       };
@@ -774,9 +774,13 @@ function reducer(state = initialState, action) {
     case FETCH_EDITACCOUNT_FAILURE:
       return {
         ...state,
-        isFetching: false,
-        success: false,
-        error: action.payload
+        loggedInUser:{
+          ...state.loggedInUser,
+          isFetching: false,
+          success: false,
+          error: action.payload
+        }
+        
       };
 
     // PhraseRank
