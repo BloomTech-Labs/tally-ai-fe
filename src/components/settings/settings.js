@@ -1,6 +1,6 @@
 import React from 'react'
 
-import EditAccount from "./editaccount";
+import EditAccount from "./Editaccount";
 import EditPassword from "./EditPassword.js";
 import HelpForm from "./Help.js";
 
@@ -11,7 +11,7 @@ import Tab from '@material-ui/core/Tab';
 import {AccountCircle,Lock,Help} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 
-import { fetchEditAccount } from '../../actions/settingsActions'
+
 import { selectBusiness } from '../../actions/businessActions'
 
 import { connect } from 'react-redux'
@@ -148,7 +148,6 @@ function Settings(props) {
 
 const mapStateToProps = state => {
 	return {
-		loggedUser: state.settings.loggedInUser.userID,
 		isFetching: state.settings.loggedInUser.isFetching,
 		error: state.settings.loggedInUser.error,
 		// loggedUserInfo: state.loggedUserInfo,
@@ -157,6 +156,5 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-	fetchEditAccount,
 	addBusiness: selectBusiness
 })(Settings)

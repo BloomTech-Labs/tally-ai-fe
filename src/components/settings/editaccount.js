@@ -11,8 +11,7 @@ import Alert from "./Alert.js";
 
 
 import {connect } from "react-redux"
-
-import { fetchEditAccount } from "../../actions/index";
+import { fetchEditAccount } from '../../actions/settingsActions'
 
 const useStyles = makeStyles(theme => ({
     root:{
@@ -70,11 +69,16 @@ function EditAccount(props){
         
         props.userInfo && !props.userInfo.isFetching && setCredentials({...props.userInfo.data,city:"",state:""})
         submitStatus && props.userInfo.success && setOpen({message: "Account Updated", status: true,sever:"success"})
-        submitStatus && props.userInfo.error && setOpen({message: props.userInfo.error,status: true,sever:"error"})
-        console.log("useEffect")
+        submitStatus && props.userInfo.error && setOpen({message: "Unable to Update Account",status: true,sever:"error"})
+        console.log("useEffect",!props.userInfo.success)
         
-    },[props.userInfo.data])
+    },[props.userInfo])
 
+    useEffect(()=>{
+
+        setSubmitting(props.userInfo.isFetching)
+
+    },[props.userInfo.isFetching])
 
 
     const [userCredentials, setCredentials] = useState({
@@ -85,6 +89,7 @@ function EditAccount(props){
     });
     const [open, setOpen] = useState({message:"", status: false,sever:"success"});
     const [submitStatus, setSubmitStatus] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
 
     console.log(props);
@@ -94,7 +99,7 @@ function EditAccount(props){
             return;
           }
       
-          setOpen({message:"", status:false});
+          setOpen({message:"", status:false, ...open.sever});
     }
 
     const handleChange = e => {
@@ -108,7 +113,7 @@ function EditAccount(props){
     const handleSubmit = event => {
         console.log(props.userInfo);
         console.log({first_name:userCredentials.firstName,last_name:userCredentials.lastName})
-        props.fetchEditAccount(props.userInfo.data.id,{first_name:userCredentials.firstName,last_name:userCredentials.lastName})
+        props.fetchEditAccount(props.userInfo.data.userId,{first_name:userCredentials.firstName,last_name:userCredentials.lastName})
         setSubmitStatus(true)
     }
 
@@ -210,7 +215,7 @@ function EditAccount(props){
                             error ={errors.state && touched.state ? true: false}
                             helperText = {errors.state && touched.state && errors.state}
                             /> 
-                        <Button className ={classes.button} color="primary" type ="submit">Submit</Button>
+                        <Button className ={classes.button} disabled={submitting} color="primary" type ="submit">Submit</Button>
                     </form>  
 
                 )

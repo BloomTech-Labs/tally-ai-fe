@@ -11,8 +11,7 @@ import Alert from "./Alert.js";
 
 import {connect} from "react-redux";
 
-import {fetchEditAccount} from "../../actions/index.js";
-
+import { fetchEditAccount } from '../../actions/settingsActions'
 
 const useStyles = makeStyles(theme => ({
     root:{
@@ -72,8 +71,14 @@ function EditPassword(props){
 
         submitStatus && props.userInfo.success && setOpen({message: "Account Updated", status: true,sever:"success"})
         submitStatus && props.userInfo.error && setOpen({message: props.userInfo.error,status: true,sever:"error"})
-    
-    },[props.userInfo.data])
+        console.log("useEffect",props.userInfo.success)
+    },[props.userInfo])
+
+    useEffect(()=>{
+
+        setSubmitting(props.userInfo.isFetching)
+
+    },[props.userInfo.isFetching])
 
     const [passwordCreds, setPasswordCreds]= useState({
         password: "",
@@ -82,13 +87,14 @@ function EditPassword(props){
 
     const [open, setOpen] = useState({message:"", status: false,sever:"success"});
     const [submitStatus, setSubmitStatus] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
     const handleClose = (e,reason) =>{
         if (reason === 'clickaway') {
             return;
           }
       
-          setOpen({message:"", status:false});
+          setOpen({message:"", status:false, ...open.sever});
     }
 
     const handleChange = e => {
@@ -98,7 +104,7 @@ function EditPassword(props){
 
     const handleSubmit = event => {
         console.log({password: passwordCreds.password})
-        props.fetchEditAccount(props.userInfo.data.id,{password: passwordCreds.password})
+        props.fetchEditAccount(props.userInfo.data.userId,{password: passwordCreds.password})
         setSubmitStatus(true)
         setPasswordCreds({password: "",
         confirmPassword: ""})
@@ -167,7 +173,7 @@ function EditPassword(props){
                                 error ={errors.confirmPassword && touched.confirmPassword ? true: false}
                                 
                                 /> 
-                            <Button className ={classes.button} color="primary" type ="submit">Submit</Button>
+                            <Button className ={classes.button} disabled={submitting} color="primary" type ="submit">Submit</Button>
 
                         </form>
                     )
