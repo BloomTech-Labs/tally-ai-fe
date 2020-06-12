@@ -1,6 +1,6 @@
 import React from 'react'
 
-import EditAccount from "./Editaccount";
+import EditAccount from "./EditAccount";
 import EditPassword from "./EditPassword.js";
 import HelpForm from "./Help.js";
 

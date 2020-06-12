@@ -15,7 +15,7 @@ import Search from "./components/search.js";
 import DashboardGrid from "./components/dashboard/dashboard";
 import Registration from "./components/authentication/Registration";
 import Login from "./components/authentication/Login";
-import Settings from "./components/settings/settings.js";
+import Settings from "./components/settings/Settings.js";
 import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
