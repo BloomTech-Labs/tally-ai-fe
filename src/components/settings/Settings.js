@@ -4,12 +4,11 @@ import EditAccount from "./EditAccount";
 import EditPassword from "./EditPassword.js";
 import HelpForm from "./Help.js";
 
-import PropTypes from 'prop-types';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {AccountCircle,Lock,Help} from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
+
 
 
 import { selectBusiness } from '../../actions/businessActions'
