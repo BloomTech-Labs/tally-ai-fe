@@ -43,6 +43,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "cypress": "cypress open",
     "eject": "react-scripts eject",
     "scss": "node-sass --watch scss -o css",
     "coverage": "CI=true npm test --coverage --watchAll=false || true"
@@ -63,7 +64,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^3.7.0",
+    "cypress": "^4.8.0",
     "jest": "^24.9.0"
   },
   "jest": {
