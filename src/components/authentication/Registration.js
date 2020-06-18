@@ -78,7 +78,6 @@ const Registration = () => {
 							errors,
 							isSubmitting,
 							handleBlur,
-							handleReset,
 							handleChange
 						} = props
 						return (
