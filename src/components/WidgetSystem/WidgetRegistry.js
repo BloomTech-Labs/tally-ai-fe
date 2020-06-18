@@ -6,8 +6,7 @@ import PositiveWordsPreview from "./PreviewWidgets/PositiveWordsPreview"
 import PhraseRank from "./Widgets/PhraseRank";
 import PhraseRankPreview from "./PreviewWidgets/PhraseRankPreview";
 
-import RadarWidget from "./Widgets/RadarWidget";
-import RadarWidgetPreview from "./PreviewWidgets/RadarWidgetPreview";
+
 
 import ReviewFrequency from "./Widgets/ReviewFrequency";
 import ReviewFrequencyPreview from "./PreviewWidgets/ReviewFrequencyPreview";
