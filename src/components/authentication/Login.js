@@ -69,8 +69,7 @@ const Login = () => {
 							errors,
 							isSubmitting,
 							handleBlur,
-							handleChange,
-							handleReset
+							handleChange
 						} = props
 						return (
 							<Form className={classes.form} noValidate>
