@@ -6,17 +6,17 @@ describe('Form', () => {
     it('it focuses the input', () => {
       cy.focused().should('have.id', 'firstName')
     })
-    it('accepts input', () => {
-        const input = "First Name"
+    it('accepts first name input', () => {
+        const firstName = "First Name"
         cy.get('#firstName')
-          .type(input)
-          .should('have.value', input)
+          .type(firstName)
+          .should('have.value', firstName)
       })
-      it('accepts another input', () => {
-          const input2 = "Last Name"
+      it('accepts last name input', () => {
+          const lastName = "Last Name"
           cy.get('#lastName')
-          .type(input2)
-          .should('have.value', input2)
+          .type(lastName)
+          .should('have.value', lastName)
       })
       it('accepts email', () => {
         const email = "test123@test.com"
