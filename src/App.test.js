@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import fetchMock from 'fetch-mock';
+// import fetchMock from 'fetch-mock';
 import mockStore from 'redux-mock-store';
 import { render } from '@testing-library/react';
 import renderer from 'react-test-renderer';
@@ -11,7 +11,7 @@ import Enzyme, { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 // import expect from 'jest'
 import reducer from './reducers/index.js';
-import DashboardGrid from "./components/dashboard";
+import DashboardGrid from "./components/dashboard/dashboard.js";
 import Search from "./components/search";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";

@@ -54,7 +54,7 @@ export default function Footer() {
     return(
         <footer>
             {isOnLogin() || isOnRegister() ? <div style={{background: 'none', color: 'none', height: '0vh'}}></div> :
-            <div className ={classes.root} style={{zIndex: "999999999", position: position, display: 'flex', width: '100%'}}> 
+            <div className ={classes.root} style={{zIndex: "200", position: position, display: 'flex', width: '100%'}}> 
                 <div style={{width: '50%', display: 'flex', alignItems: 'center', marginLeft: '2%'}}>
                     <Typography className='footerTitle' align="center" style={{fontSize: '20px'}}>
                         <p style={{textAlign: "left", margin: "0"}}>TallyAI Copyright © 2020</p>

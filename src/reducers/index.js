@@ -83,7 +83,8 @@ const initialState = {
   loggedInUser: {
     data: {
       firstName: null,
-      lastName: null
+      lastName: null,
+      id:null
     },
     shouldUpdate: true,
     isFetching: false,
@@ -748,6 +749,7 @@ function reducer(state = initialState, action) {
         loggedInUser: {
           ...state.loggedInUser,
           isFetching: true,
+          success: null,
           error: null
         }
       };
@@ -761,17 +763,24 @@ function reducer(state = initialState, action) {
               : state.loggedInUser.data.firstName,
             lastName: action.payload.last_name_name
               ? action.payload.last_name
-              : state.loggedInUser.data.lastName
+              : state.loggedInUser.data.lastName,
+            ...state.loggedInUser.data
           },
           isFetching: false,
+          success: true,
           error: null
         }
       };
     case FETCH_EDITACCOUNT_FAILURE:
       return {
         ...state,
-        isFetching: false,
-        error: action.payload
+        loggedInUser:{
+          ...state.loggedInUser,
+          isFetching: false,
+          success: false,
+          error: action.payload
+        }
+        
       };
 
     // PhraseRank

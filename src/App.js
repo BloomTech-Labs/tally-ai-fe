@@ -12,10 +12,10 @@ import RestrictMobile from "./components/RestrictMobile"
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import Search from "./components/search.js";
-import DashboardGrid from "./components/dashboard/Dashboard";
-import registration from "./components/registration";
-import Login from "./components/login";
-import EditAccount from "./components/settings/editaccount";
+import DashboardGrid from "./components/dashboard/dashboard";
+import Registration from "./components/authentication/Registration";
+import Login from "./components/authentication/Login";
+import Settings from "./components/settings/Settings.js";
 import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
@@ -65,7 +65,7 @@ function App(props) {
 			<Route path='/About' component={AboutUs} />
 			<Route path='/Legal/:doc' component={Policy} />
 			<Route path='/DashboardPlus/' component={DashboardPlus} />
-			<PrivateRoute path='/Settings/' component={EditAccount} />
+			<PrivateRoute path='/Settings/' component={Settings} />
 			<PrivateRoute path='/Search/:searchMode' exact component={SearchPage} />
 			<Footer />
 		</div>

@@ -19,9 +19,11 @@ export const fetchEditAccount = (id, newInfo) => dispatch => {
 				dispatch({ type: FETCH_EDITACCOUNT_SUCCESS, payload: res.data }) &
 				console.log(res.data, 'fetchEditAccount')
 		)
-		.catch(err =>
-			dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload: err.response })
-		)
+		.catch(err =>{
+			const {data, status} = err.response
+			dispatch({ type: FETCH_EDITACCOUNT_FAILURE, payload:{...data,status} })
+			console.log({...data,status})
+		})
 }
 
 export const shouldUpdateLoggedInUser = shouldUpdate => dispatch => {
@@ -42,7 +44,8 @@ export const getUserInfo = userID => dispatch => {
 				competitors: res.data.favorites,
 				loggedInUser: {
 					firstName: res.data.first_name,
-					lastName: res.data.last_name
+					lastName: res.data.last_name,
+					userId : res.data.user_id
 				},
 				businesses: res.data.businesses,
 				activeWidgets:
