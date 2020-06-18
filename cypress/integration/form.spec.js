@@ -24,4 +24,16 @@ describe('Form', () => {
         .type(email)
         .should('have.value', email)
     })
+    it('accepts password', () => {
+        const password = "123456789"
+        cy.get('#password')
+        .type(password)
+        .should('have.value', password)
+    })
+    it('accepts confirm password', () => {
+        const confirmPassword = "123456789"
+        cy.get('#confirmedPassword')
+        .type(confirmPassword)
+        .should('have.value', confirmPassword)
+    })
   })
