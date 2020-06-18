@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
@@ -35,18 +35,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Login = () => {
-	const [credentials, setCredentials] = useState({
-		email: '',
-		password: ''
-	})
-
 	const classes = useStyles()
 
-	const handleSubmit = async () => {
+	const handleSubmit = async values => {
 		try {
 			const { data } = await axios.post(
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login`,
-				credentials
+				values
 			)
 		} catch (err) {
 			console.log(err)
@@ -61,8 +56,11 @@ const Login = () => {
 					Sign in
 				</Typography>
 				<Formik
-					initialValues={credentials}
-					onSubmit={handleSubmit}
+					initialValues={{
+						email: '',
+						password: ''
+					}}
+					onSubmit={(values, actions) => handleSubmit(values)}
 					validationSchema={LoginSchema}
 				>
 					{props => {
@@ -114,6 +112,12 @@ const Login = () => {
 									variant='contained'
 									color='primary'
 									className={classes.submit}
+									disabled={
+										(errors.email && touched.email) ||
+										(errors.password && touched.password)
+											? true
+											: false
+									}
 								>
 									Sign In
 								</Button>
