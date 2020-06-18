@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
@@ -35,18 +35,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Registration = () => {
-	const [credentials, setCredentials] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		password: '',
-		confirmedPassword: ''
-	})
-
 	const classes = useStyles()
 
-	const handleSubmit = async () => {
-		const { firstName, lastName, email, password } = credentials
+	const handleSubmit = async values => {
+		const { firstName, lastName, email, password } = values
 		try {
 			const { data } = await axios.post(
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`,
@@ -70,8 +62,14 @@ const Registration = () => {
 					Sign up for an account
 				</Typography>
 				<Formik
-					initialValues={credentials}
-					onSubmit={handleSubmit}
+					initialValues={{
+						firstName: '',
+						lastName: '',
+						email: '',
+						password: '',
+						confirmedPassword: ''
+					}}
+					onSubmit={(values, actions) => handleSubmit(values)}
 					validationSchema={RegistrationSchema}
 				>
 					{props => {
@@ -80,7 +78,6 @@ const Registration = () => {
 							errors,
 							isSubmitting,
 							handleBlur,
-							handleReset,
 							handleChange
 						} = props
 						return (
@@ -189,6 +186,15 @@ const Registration = () => {
 									color='primary'
 									className={classes.submit}
 									fullWidth
+									disabled={
+										(errors.firstName && touched.firstName) ||
+										(errors.lastName && touched.lastName) ||
+										(errors.email && touched.email) ||
+										(errors.password && touched.password) ||
+										(errors.confirmedPassword && touched.confirmedPassword)
+											? true
+											: false
+									}
 								>
 									Sign Up
 								</Button>
