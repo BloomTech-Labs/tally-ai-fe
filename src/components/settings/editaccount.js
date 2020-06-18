@@ -1,168 +1,240 @@
 import React, { useState, useEffect } from 'react';
 
+import * as yup from 'yup';
+import { Formik} from "formik";
+
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from "./Alert.js";
+
 
 import {connect } from "react-redux"
-
-import { fetchEditAccount } from "../../actions/index";
+import { fetchEditAccount } from '../../actions/settingsActions'
 
 const useStyles = makeStyles(theme => ({
-    container: {
+    root:{
+        flex: "3",
+        minHeight: "440px"
+    },
+    title: {
+        marginRight: "auto",
+        marginLeft: "10%",
+        display: "none",
+    },
+    form: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'white',
-       
+        paddingRight: "0",
+        flex: "1",
+        height: "100%"
     },
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: '80%'
+      width: '80%',
+      backgroundColor: "#F6F8F9",
     },
-    dense: {
-      marginTop: theme.spacing(2),
-    },
-   
     button: {
-    margin: theme.spacing(1),
-    marginTop: '2%',
-    marginBottom: '6%',
-    width: '15%'
-    },
-    input: {
-    display: 'none',
+    marginTop: 'auto',
+    marginRight: "10%",
+    marginBottom: '2%',
+    width: '4rem',
+    fontWeight: "bold",
+    alignSelf: "flex-end",
     },
     
-  }));
+}));
+
+let settingsSchema = yup.object().shape({
+    firstName: yup.string().required('First Name Required'),
+    lastName: yup.string().required('Last Name Required'),
+    city: yup.string(),
+    state: yup.string(),
+});
 
 
 function EditAccount(props){
     /*
-        User can enter updates to first name, last name, email, or password.
+        User can enter updates to first name, last name, or password.
         If password is updated, they must confirm the password.
     */
 
     const classes = useStyles();
 
+    useEffect(()=>{
+        
+        props.userInfo && !props.userInfo.isFetching && setCredentials({...props.userInfo.data,city:"",state:""})
+        submitStatus && props.userInfo.success && setOpen({message: "Account Updated", status: true,sever:"success"})
+        submitStatus && props.userInfo.error && setOpen({message: "Unable to Update Account",status: true,sever:"error"})
+        console.log("useEffect",!props.userInfo.success)
+        
+    },[props.userInfo])
+
+    useEffect(()=>{
+
+        setSubmitting(props.userInfo.isFetching)
+
+    },[props.userInfo.isFetching])
+
+
     const [userCredentials, setCredentials] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
+        firstName: "",
+        lastName: "",
+        city: "",
+        state: "",
     });
+    const [open, setOpen] = useState({message:"", status: false,sever:"success"});
+    const [submitStatus, setSubmitStatus] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+
 
     console.log(props);
 
-    const changeHandler = e => {
+    const handleClose = (e,reason) =>{
+        if (reason === 'clickaway') {
+            return;
+          }
+      
+          setOpen({message:"", status:false, ...open.sever});
+    }
 
+    const handleChange = e => {
+        setCredentials({...userCredentials, [e.target.name]: e.target.value})
+        console.log(userCredentials);
+        
     }
 
 
     // Submit updated account info to back end
-    const submitHandler = event => {
-        event.preventDefault();
-        console.log(userCredentials);
-        
-        // Check that confirmPassword matches password.
-        // This should handle catching changes to password without
-        // the confirmation of those changes.
-        if(userCredentials.password !== userCredentials.confirmPassword){
-            alert("Your confirmed password does not match.");
-            return;
-        }
-
-        // Package the updated info to send to the back end.
-        // Notice we're only sending the data entered by the user - 
-        // ie, the data that's been changed from "" to something else
-        // - and not including the confirmPassword.
-        const updatedCredentials = Object.keys(userCredentials).reduce((acc, key) => 
-            userCredentials[key] !== "" && key !== "confirmPassword"
-            ? {...acc, [key]: userCredentials[key]}
-            : acc
-            , {});
-
+    const handleSubmit = event => {
+        console.log(props.userInfo);
+        console.log({first_name:userCredentials.firstName,last_name:userCredentials.lastName})
+        props.fetchEditAccount(props.userInfo.data.userId,{first_name:userCredentials.firstName,last_name:userCredentials.lastName})
+        setSubmitStatus(true)
     }
 
+    console.log("component")
+
     return (
-        <div >
-            <div style={{textAlign:"center", height: "100vh"}}>
-            <div style={{paddingTop:"175px", color: "linear-gradient(341.24deg, #E3F2FD 11.16%, #BBDEFB 82.03%)"}}>
-            <form className ={classes.container} onSubmit= {submitHandler} style={{ boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)", width: "50%", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", borderRadius: "5%"}}>
-                <div style={{}}>
-                    <h1>Account</h1>
-                    <h3>Change your basic account settings</h3>
-                </div>
-            <TextField 
-                label ="First Name"
-                variant ="outlined"
-                margin="normal"
-                type="text"
-                name="first_name"
-                className={classes.textField}
-                value={userCredentials.first_name}
-                onChange={changeHandler}
-                placeholder="First Name"
-                />
-            <TextField 
-                label ="Last Name"
-                variant ="outlined"
-                margin="normal"
-                type="text"
-                name="last_name"
-                className={classes.textField}
-                value={userCredentials.last_name}
-                onChange={changeHandler}
-                placeholder="Last Name"
-                />
-            <TextField 
-                label ="Email"
-                variant ="outlined"
-                margin="normal"
-                type="email"
-                name="email"
-                className={classes.textField}
-                value={userCredentials.email}
-                onChange={changeHandler}
-                placeholder="Email"
-                />
-            <TextField 
-                label ="Password"
-                variant ="outlined"
-                margin="normal"
-                type="password"
-                name="password"
-                 
-                className={classes.textField}
-                value={userCredentials.password}
-                onChange={changeHandler}
-                placeholder="Password"
-                />
-            <TextField 
-                label ="Confirm Password"
-                variant ="outlined"
-                margin="normal"
-                type="password"
-                name="confirmPassword"
-                className={classes.textField}
-                value={userCredentials.confirmPassword}
-                onChange={changeHandler}
-                placeholder="Confirm Password"
-                /> 
-                <Button className ={classes.button} variant="outlined" color="black" type ="submit">Edit</Button>
-                </form>  
-            </div>
-            </div>
+        
+        <div
+            role="Account Change Panel"
+            id={`vertical-tabpanel-${props.index}`}
+            aria-labelledby={`vertical-tab-${props.index}`}
+            className={classes.root}
+            
+        >
+            
+        
+            <Formik
+                initialValues={userCredentials}
+                onSubmit={handleSubmit}
+                validationSchema={settingsSchema}
+                enableReinitialize={true}
+                validateOnChange={false}
+                
+            >
+            {props => {
+                const {
+                    values,
+                    touched,
+                    errors,
+                    handleBlur,
+                    handleSubmit,
+                    
+                } = props;
+
+                return (
+                    <form className ={classes.form} onSubmit={handleSubmit} noValidate>
+                        <div className={classes.title}>
+                            <h3>Personal Settings</h3>
+                            
+                        </div>
+                        <TextField 
+                            
+                            label ={errors.firstName && touched.firstName ? errors.firstName : "First Name"}
+                            id="firstName"
+                            variant ="outlined"
+                            margin="normal"
+                            type="text"
+                            name="firstName"
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.firstName}
+                            placeholder="First Name"
+                            error={
+                                errors.firstName && touched.firstName ? true : false
+                            }
+                            
+                            />
+                        <TextField 
+                            label ={errors.lastName && touched.lastName ? errors.lastName : "Last Name"}
+                            id="lastName"
+                            variant ="outlined"
+                            margin="normal"
+                            type="text"
+                            name="lastName"
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="Last Name"
+                            value={values.lastName}
+                            error ={errors.lastName && touched.lastName ? true: false}
+                            />
+                        <TextField
+                            label ="City"
+                            id="city"
+                            variant ="outlined"
+                            margin="normal"
+                            type="city"
+                            name="city"
+                            
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="City"
+                            error ={errors.city && touched.city ? true: false}
+                            helperText = {errors.city && touched.city && errors.city}
+                            />
+                        <TextField 
+                            label ="State"
+                            id="state"
+                            variant ="outlined"
+                            margin="normal"
+                            type="state"
+                            name="state"
+                            className={classes.textField}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="State"
+                            error ={errors.state && touched.state ? true: false}
+                            helperText = {errors.state && touched.state && errors.state}
+                            /> 
+                        <Button className ={classes.button} disabled={submitting} color="primary" type ="submit">Submit</Button>
+                    </form>  
+
+                )
+            }}
+            </Formik>
+            
+            <Snackbar open={open.status} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={open.sever}>
+                {open.message}
+                </Alert>
+            </Snackbar>   
         </div>
     )
 }
 
 const mapStateToProps = state => {
+    console.log("redux state",state)
     return {
-        test: state
+        userInfo: state.settings.loggedInUser
     };
 };
 
