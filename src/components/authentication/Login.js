@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
-import Button from '@material-ui/core/Button'
+import { Button, LinearProgress } from '@material-ui/core'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
@@ -106,6 +106,7 @@ const Login = () => {
 										errors.password && touched.password && errors.password
 									}
 								/>
+								{isSubmitting && <LinearProgress />}
 								<Button
 									type='submit'
 									fullWidth
