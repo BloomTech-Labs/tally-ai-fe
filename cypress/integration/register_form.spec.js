@@ -4,19 +4,19 @@ describe('Form', () => {
     })
   
     it('it focuses the input', () => {
-      cy.focused().should('have.id', 'firstName')
+      cy.focused().should('have.id', 'first_name')
     })
     it('accepts first name input', () => {
-        const firstName = "First Name"
-        cy.get('#firstName')
-          .type(firstName)
-          .should('have.value', firstName)
+        const first_name = "First Name"
+        cy.get('#first_name')
+          .type(first_name)
+          .should('have.value', first_name)
       })
       it('accepts last name input', () => {
-          const lastName = "Last Name"
-          cy.get('#lastName')
-          .type(lastName)
-          .should('have.value', lastName)
+          const last_name = "Last Name"
+          cy.get('#last_name')
+          .type(last_name)
+          .should('have.value', last_name)
       })
       it('accepts email', () => {
         const email = "test123@test.com"
