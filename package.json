@@ -40,12 +40,14 @@
     "yup": "^0.29.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+	  "start": "react-scripts start",
     "build": "react-scripts build",
-    "cypress:coverage:run": "cypress run || true",
+    "test": "react-scripts test",
+    "cypress:open": "cypress open",
+    "eject": "react-scripts eject",
     "start:coverage": "react-scripts -r @cypress/instrument-cra start",
-    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true"
-  },
+    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true"  
+}
   "eslintConfig": {
     "extends": "react-app"
   },
