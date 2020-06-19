@@ -40,7 +40,7 @@ const Login = () => {
 	const handleSubmit = async values => {
 		try {
 			const { data } = await axios.post(
-				`https://cors-anywhere.herokuapp.com/https://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login`,
+				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login`,
 				values
 			)
 		} catch (err) {
