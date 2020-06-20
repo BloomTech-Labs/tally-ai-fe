@@ -38,13 +38,13 @@ const Registration = () => {
 	const classes = useStyles()
 
 	const handleSubmit = async values => {
-		const { first_name, last_name, email, password } = values
+		const { firstName, lastName, email, password } = values
 		try {
 			const { data } = await axios.post(
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`,
 				{
-					first_name,
-					last_name,
+					firstName,
+					lastName,
 					email,
 					password
 				}
@@ -63,8 +63,8 @@ const Registration = () => {
 				</Typography>
 				<Formik
 					initialValues={{
-						first_name: '',
-						last_name: '',
+						firstName: '',
+						lastName: '',
 						email: '',
 						password: '',
 						confirmedPassword: ''
@@ -86,22 +86,22 @@ const Registration = () => {
 									<Grid item xs={12} sm={6}>
 										<TextField
 											autoComplete='fname'
-											name='first_name'
+											name='firstName'
 											variant='outlined'
 											required
 											fullWidth
-											id='first_name'
+											id='firstName'
 											label='First Name'
 											autoFocus
 											onChange={handleChange}
 											onBlur={handleBlur}
 											error={
-												errors.first_name && touched.first_name ? true : false
+												errors.firstName && touched.firstName ? true : false
 											}
 											helperText={
-												errors.first_name &&
-												touched.first_name &&
-												errors.first_name
+												errors.firstName &&
+												touched.firstName &&
+												errors.firstName
 											}
 										/>
 									</Grid>
@@ -110,15 +110,15 @@ const Registration = () => {
 											variant='outlined'
 											required
 											fullWidth
-											id='last_name'
+											id='lastName'
 											label='Last Name'
-											name='last_name'
+											name='lastName'
 											autoComplete='lname'
 											onChange={handleChange}
 											onBlur={handleBlur}
-											error={errors.last_name && touched.last_name ? true : false}
+											error={errors.lastName && touched.lastName ? true : false}
 											helperText={
-												errors.last_name && touched.last_name && errors.last_name
+												errors.lastName && touched.lastName && errors.lastName
 											}
 										/>
 									</Grid>
@@ -187,8 +187,8 @@ const Registration = () => {
 									className={classes.submit}
 									fullWidth
 									disabled={
-										(errors.first_name && touched.first_name) ||
-										(errors.last_name && touched.last_name) ||
+										(errors.firstName && touched.firstName) ||
+										(errors.lastName && touched.lastName) ||
 										(errors.email && touched.email) ||
 										(errors.password && touched.password) ||
 										(errors.confirmedPassword && touched.confirmedPassword)
