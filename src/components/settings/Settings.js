@@ -149,7 +149,6 @@ const mapStateToProps = state => {
 	return {
 		isFetching: state.settings.loggedInUser.isFetching,
 		error: state.settings.loggedInUser.error,
-		// loggedUserInfo: state.loggedUserInfo,
 		competitors: state.competitor.competitors.businesses
 	}
 }

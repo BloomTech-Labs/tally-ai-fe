@@ -58,10 +58,6 @@ let settingsSchema = yup.object().shape({
 
 
 function EditAccount(props){
-    /*
-        User can enter updates to first name, last name, or password.
-        If password is updated, they must confirm the password.
-    */
 
     const classes = useStyles();
 
@@ -108,8 +104,6 @@ function EditAccount(props){
         
     }
 
-
-    // Submit updated account info to back end
     const handleSubmit = event => {
         console.log(props.userInfo);
         console.log({first_name:userCredentials.firstName,last_name:userCredentials.lastName})
