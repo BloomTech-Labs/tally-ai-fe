@@ -2,10 +2,10 @@ import * as Yup from 'yup';
 
 // prettier-ignore
 const RegistrationSchema = Yup.object().shape({
-  firstName: Yup
+  first_name: Yup
     .string()
     .required('First name is required!'),
-  lastName: Yup
+  last_name: Yup
     .string()
     .required('Last name is required!'),
   email: Yup

@@ -39,16 +39,21 @@ const Registration = () => {
 
 	const handleSubmit = async values => {
 		const { first_name, last_name, email, password } = values
+		
+		
 		try {
 			const { data } = await axios.post(
-				`https://cors-anywhere.herokuapp.com/https://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`,
+				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`,
 				{
 					first_name,
 					last_name,
 					email,
 					password
 				}
+				
+				
 			)
+			
 		} catch (err) {
 			console.log(err)
 		}
