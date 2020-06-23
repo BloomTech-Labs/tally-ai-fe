@@ -15,7 +15,7 @@ const RegistrationSchema = Yup.object().shape({
   password: Yup
     .string()
 		.required('Password is required!')
-		.min(6, 'Password must be 6 characters min!'),
+		.min(8, 'Password must be 8 characters min!'),
   confirmedPassword: Yup
     .string()
 		.oneOf([Yup.ref('password'), null], 'Passwords must match!')
