@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
@@ -34,13 +34,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const Registration = () => {
+const Registration = props => {
+	const [error, setError] = useState(null)
+	console.log('props:', props)
 	const classes = useStyles()
 
 	const handleSubmit = async values => {
 		const { first_name, last_name, email, password } = values
-		
-		
+
 		try {
 			const { data } = await axios.post(
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`,
@@ -50,14 +51,9 @@ const Registration = () => {
 					email,
 					password
 				}
-				
-				
 			)
-		console.log(data);
-		
-			
 		} catch (err) {
-			console.log(err)
+			setError(err.response.data.errors[0])
 		}
 	}
 
@@ -68,6 +64,11 @@ const Registration = () => {
 				<Typography component='h1' variant='h5'>
 					Sign up for an account
 				</Typography>
+				{error && (
+					<Typography variant='overline' color='error'>
+						{error}
+					</Typography>
+				)}
 				<Formik
 					initialValues={{
 						first_name: '',
@@ -123,9 +124,13 @@ const Registration = () => {
 											autoComplete='lname'
 											onChange={handleChange}
 											onBlur={handleBlur}
-											error={errors.last_name && touched.last_name ? true : false}
+											error={
+												errors.last_name && touched.last_name ? true : false
+											}
 											helperText={
-												errors.last_name && touched.last_name && errors.last_name
+												errors.last_name &&
+												touched.last_name &&
+												errors.last_name
 											}
 										/>
 									</Grid>
