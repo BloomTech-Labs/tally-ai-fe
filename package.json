@@ -43,15 +43,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    
     "cypress": "cypress open",
     "eject": "react-scripts eject",
     "scss": "node-sass --watch scss -o css",
     "cypress:coverage:run": "cypress run || true",
-		"start:coverage": "react-scripts -r @cypress/instrument-cra start",
-		"cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true",
-		"test": "yarn cypress:coverage:run && yarn test:jest",
-		"coverage": "yarn cypress:coverage:run; yarn test:jest; true"
+    "start:coverage": "react-scripts -r @cypress/instrument-cra start",
+    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true",
+    "test": "yarn cypress:coverage:run && yarn test:jest",
+    "coverage": "yarn cypress:coverage:run; yarn test:jest; true"
   },
   "eslintConfig": {
     "extends": "react-app"
