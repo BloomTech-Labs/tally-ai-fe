@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
 import LoginSchema from './LoginSchema'
+import { local } from 'd3'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const Login = () => {
+const Login = props => {
 	const [error, setError] = useState(null)
 	const classes = useStyles()
 
@@ -44,6 +45,9 @@ const Login = () => {
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login`,
 				values
 			)
+			localStorage.setItem('token', data.token)
+			localStorage.setItem('userID', data.id)
+			data && props.history.push('/Dashboard/')
 		} catch (err) {
 			setError(err.response.data.message)
 		}

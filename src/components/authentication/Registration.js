@@ -52,6 +52,8 @@ const Registration = props => {
 					password
 				}
 			)
+
+			data && props.history.push('/Dashboard')
 		} catch (err) {
 			setError(err.response.data.errors[0])
 		}
