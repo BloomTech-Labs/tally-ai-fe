@@ -1,5 +1,5 @@
 # The name of the workflow
-name: build
+name: CodeClimate
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
