@@ -4,6 +4,7 @@ name: build
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
 on:
+  pull_request:
   push:
     branches:
       - master
