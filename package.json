@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^7.1.2",
     "aos": "2.3.4",
     "axios": "^0.19.0",
+    "coverage": "^0.4.1",
     "d3": "^5.15.0",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
@@ -40,14 +41,18 @@
     "yup": "^0.29.0"
   },
   "scripts": {
-	  "start": "react-scripts start",
-	  "build": "react-scripts build",
-	  "test": "react-scripts test",
-	  "cypress:open": "cypress open",
-	  "eject": "react-scripts eject",
-	  "start:coverage": "react-scripts -r @cypress/instrument-cra start",
-	  "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true"  
-},
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    
+    "cypress": "cypress open",
+    "eject": "react-scripts eject",
+    "scss": "node-sass --watch scss -o css",
+    "cypress:coverage:run": "cypress run || true",
+		"start:coverage": "react-scripts -r @cypress/instrument-cra start",
+		"cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true",
+		"test": "yarn cypress:coverage:run",
+		"coverage": "yarn cypress:coverage:run"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
