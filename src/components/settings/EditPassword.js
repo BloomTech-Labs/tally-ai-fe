@@ -52,12 +52,12 @@ const useStyles = makeStyles(theme => ({
 
 let passwordSchema = yup.object().shape({
     password: yup.string()
-        .min(6, "New Password must contain at least 6 characters").required("New Password Required")
+        .min(8, "New Password must contain at least 6 characters").required("New Password Required")
         .test("password", "New Password must match", function(value) {
             return this.parent.confirmPassword === value
             }),
         
-    confirmPassword: yup.string().min(6, "Confirm Password must contain at least 6 characters").required("Confirm Password Required")
+    confirmPassword: yup.string().min(8, "Confirm Password must contain at least 6 characters").required("Confirm Password Required")
         .test("password", "Confirm Password must match", function(value) {
             return this.parent.password === value
             }),
@@ -66,6 +66,10 @@ let passwordSchema = yup.object().shape({
 
 function EditPassword(props){
     const classes = useStyles();
+    const [submitStatus, setSubmitStatus] = useState(false);
+    const [open, setOpen] = useState({message:"", status: false,sever:"success"});
+    const [submitting, setSubmitting] = useState(false);
+
 
     useEffect(()=>{
 
@@ -85,9 +89,7 @@ function EditPassword(props){
         confirmPassword: "",
     })
 
-    const [open, setOpen] = useState({message:"", status: false,sever:"success"});
-    const [submitStatus, setSubmitStatus] = useState(false);
-    const [submitting, setSubmitting] = useState(false);
+    
 
     const handleClose = (e,reason) =>{
         if (reason === 'clickaway') {
@@ -114,7 +116,6 @@ function EditPassword(props){
 
     return (
         <div
-            role="Password Change Panel"
             id={`Password-tabpanel-${props.index}`}
             aria-labelledby={`vertical-tab-${props.index}`}
             className={classes.root}

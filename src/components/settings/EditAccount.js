@@ -116,7 +116,6 @@ function EditAccount(props){
     return (
         
         <div
-            role="Account Change Panel"
             id={`vertical-tabpanel-${props.index}`}
             aria-labelledby={`vertical-tab-${props.index}`}
             className={classes.root}
