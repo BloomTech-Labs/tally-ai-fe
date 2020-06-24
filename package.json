@@ -51,7 +51,7 @@
 		"start:coverage": "react-scripts -r @cypress/instrument-cra start",
 		"cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true",
 		"test": "yarn cypress:coverage:run",
-		"coverage": "yarn cypress:coverage:run; yarn test:jest; true"
+		"coverage": "yarn cypress:coverage:run"
   },
   "eslintConfig": {
     "extends": "react-app"
