@@ -57,8 +57,8 @@ function NavBar(props) {
 
 	function isLoggedIn() {
 		return (
-			props.loggedInUser.firstName &&
-			props.loggedInUser.lastName &&
+			// props.loggedInUser.firstName &&
+			// props.loggedInUser.lastName &&
 			localStorage.getItem('token') &&
 			localStorage.getItem('userID')
 		);
@@ -169,7 +169,7 @@ function NavBar(props) {
 										}}
 										onClick={handleMenu}
 									>
-										{props.loggedInUser.firstName[0].toUpperCase()}
+										{/* {props.loggedInUser.firstName[0].toUpperCase()} */}
 									</Avatar>
 								</div>
 								<Menu
