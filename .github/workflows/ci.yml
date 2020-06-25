@@ -1,5 +1,5 @@
 # The name of the workflow
-name: build
+name: CodeClimate
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
@@ -36,12 +36,11 @@ jobs:
       - uses: paambaati/codeclimate-action@v2.4.0
         env:
           # An environment variable, the value is a GitHub repo secret
-          CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterId }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATEREPORTERID }}
         with:
           # Run our `coverage` script in our `package.json`
-          coverageCommand: npm run coverage
+          coverageCommand: npm run cypress:coverage
           # By default, this looks for a `coverage` folder in the root of your project, but you may need to change this
-          coverageLocations: |
-            ${{github.workspace}}/coverage/cypress-coverage/clover.xml:clover
+          coverageLocations: "./coverage/clover.xml:clover"
           # Great for troubleshooting
           debug: true

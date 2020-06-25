@@ -4,7 +4,6 @@ import {
 	fetchEditAccount
 } from '../actions/settingsActions'
 import { Register } from './authentication/Registration'
-import EditAccount from './settings/editaccount'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'

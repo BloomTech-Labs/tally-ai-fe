@@ -13,6 +13,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import rootReducer from "./reducers/rootReducer"
 
+
+
 // export const types = keyMirror({
 //     FETCH_BUSINESS_START: null,
 //     FETCH_BUSINESS_FAILURE: null,
@@ -25,10 +27,10 @@ const store = createStore(
 );
 
 ReactDOM.render(
-<Provider store ={store}>
-    <Router><App /></Router>
-</Provider>, 
-document.getElementById('root'));
+    <Provider store={store}>
+        <Router><App /></Router>
+    </Provider>,
+    document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
