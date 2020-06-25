@@ -40,7 +40,5 @@ jobs:
         with:
           # Run our `coverage` script in our `package.json`
           coverageCommand: npm run coverage
-          coverageLocations: |
-            ${{github.workspace}}/coverage/cypress-coverage/clover.xml:clover
           # Great for troubleshooting
           debug: true
