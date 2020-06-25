@@ -480,7 +480,7 @@ function NavBar(props) {
 											to='/Register'
 										>
 											<ListItemText
-												style={{ background: '#67FFD2;' }}
+												style={{ background: '#67FFD2' }}
 												primary='Sign Up'
 											/>
 										</ListItem>
