@@ -35,31 +35,28 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const Registration = () => {
-	const [credentials, setCredentials] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		password: '',
-		confirmedPassword: ''
-	})
-
+const Registration = props => {
+	const [error, setError] = useState(null)
+	console.log('props:', props)
 	const classes = useStyles()
 
-	const handleSubmit = async () => {
-		const { firstName, lastName, email, password } = credentials
+	const handleSubmit = async values => {
+		const { first_name, last_name, email, password } = values
+
 		try {
 			const { data } = await axios.post(
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/register`,
 				{
-					firstName,
-					lastName,
+					first_name,
+					last_name,
 					email,
 					password
 				}
 			)
+
+			data && props.history.push('/Dashboard')
 		} catch (err) {
-			console.log(err)
+			setError(err.response.data.errors[0])
 		}
 	}
 
@@ -70,9 +67,20 @@ const Registration = () => {
 				<Typography component='h1' variant='h5'>
 					Sign up for an account
 				</Typography>
+				{error && (
+					<Typography variant='overline' color='error'>
+						{error}
+					</Typography>
+				)}
 				<Formik
-					initialValues={credentials}
-					onSubmit={handleSubmit}
+					initialValues={{
+						first_name: '',
+						last_name: '',
+						email: '',
+						password: '',
+						confirmedPassword: ''
+					}}
+					onSubmit={(values, actions) => handleSubmit(values)}
 					validationSchema={RegistrationSchema}
 				>
 					{props => {
@@ -81,7 +89,6 @@ const Registration = () => {
 							errors,
 							isSubmitting,
 							handleBlur,
-							handleReset,
 							handleChange
 						} = props
 						return (
@@ -90,22 +97,22 @@ const Registration = () => {
 									<Grid item xs={12} sm={6}>
 										<TextField
 											autoComplete='fname'
-											name='firstName'
+											name='first_name'
 											variant='outlined'
 											required
 											fullWidth
-											id='firstName'
+											id='first_name'
 											label='First Name'
 											autoFocus
 											onChange={handleChange}
 											onBlur={handleBlur}
 											error={
-												errors.firstName && touched.firstName ? true : false
+												errors.first_name && touched.first_name ? true : false
 											}
 											helperText={
-												errors.firstName &&
-												touched.firstName &&
-												errors.firstName
+												errors.first_name &&
+												touched.first_name &&
+												errors.first_name
 											}
 										/>
 									</Grid>
@@ -114,15 +121,19 @@ const Registration = () => {
 											variant='outlined'
 											required
 											fullWidth
-											id='lastName'
+											id='last_name'
 											label='Last Name'
-											name='lastName'
+											name='last_name'
 											autoComplete='lname'
 											onChange={handleChange}
 											onBlur={handleBlur}
-											error={errors.lastName && touched.lastName ? true : false}
+											error={
+												errors.last_name && touched.last_name ? true : false
+											}
 											helperText={
-												errors.lastName && touched.lastName && errors.lastName
+												errors.last_name &&
+												touched.last_name &&
+												errors.last_name
 											}
 										/>
 									</Grid>
@@ -190,6 +201,15 @@ const Registration = () => {
 									color='primary'
 									className={classes.submit}
 									fullWidth
+									disabled={
+										(errors.first_name && touched.first_name) ||
+										(errors.last_name && touched.last_name) ||
+										(errors.email && touched.email) ||
+										(errors.password && touched.password) ||
+										(errors.confirmedPassword && touched.confirmedPassword)
+											? true
+											: false
+									}
 								>
 									Sign Up
 								</Button>

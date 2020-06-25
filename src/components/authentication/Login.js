@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
 
-import Button from '@material-ui/core/Button'
+import { Button, LinearProgress } from '@material-ui/core'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
@@ -13,6 +14,7 @@ import Container from '@material-ui/core/Container'
 import GoogleLoginBtn from '../google/GoogleLoginBtn'
 
 import LoginSchema from './LoginSchema'
+import { shouldUpdateLoggedInUser } from '../../actions/settingsActions'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -35,22 +37,25 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const Login = () => {
-	const [credentials, setCredentials] = useState({
-		email: '',
-		password: ''
-	})
-
+const Login = props => {
+	const { loggedInUser } = useSelector(state => state.settings)
+	console.log('loggedInUser', loggedInUser)
+	const dispatch = useDispatch()
+	const [error, setError] = useState(null)
 	const classes = useStyles()
 
-	const handleSubmit = async () => {
+	const handleSubmit = async values => {
 		try {
 			const { data } = await axios.post(
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login`,
-				credentials
+				values
 			)
+			localStorage.setItem('token', data.token)
+			localStorage.setItem('userID', data.id)
+			dispatch(shouldUpdateLoggedInUser(true))
+			data && props.history.push('/Dashboard/')
 		} catch (err) {
-			console.log(err)
+			setError(err.response.data.message)
 		}
 	}
 
@@ -61,9 +66,17 @@ const Login = () => {
 				<Typography component='h1' variant='h5'>
 					Sign in
 				</Typography>
+				{error && (
+					<Typography variant='overline' color='error'>
+						{error}
+					</Typography>
+				)}
 				<Formik
-					initialValues={credentials}
-					onSubmit={handleSubmit}
+					initialValues={{
+						email: '',
+						password: ''
+					}}
+					onSubmit={(values, actions) => handleSubmit(values)}
 					validationSchema={LoginSchema}
 				>
 					{props => {
@@ -72,8 +85,7 @@ const Login = () => {
 							errors,
 							isSubmitting,
 							handleBlur,
-							handleChange,
-							handleReset
+							handleChange
 						} = props
 						return (
 							<Form className={classes.form} noValidate>
@@ -109,12 +121,19 @@ const Login = () => {
 										errors.password && touched.password && errors.password
 									}
 								/>
+								{isSubmitting && <LinearProgress />}
 								<Button
 									type='submit'
 									fullWidth
 									variant='contained'
 									color='primary'
 									className={classes.submit}
+									disabled={
+										(errors.email && touched.email) ||
+										(errors.password && touched.password)
+											? true
+											: false
+									}
 								>
 									Sign In
 								</Button>

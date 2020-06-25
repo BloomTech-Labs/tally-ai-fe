@@ -2,10 +2,10 @@ import * as Yup from 'yup';
 
 // prettier-ignore
 const RegistrationSchema = Yup.object().shape({
-  firstName: Yup
+  first_name: Yup
     .string()
     .required('First name is required!'),
-  lastName: Yup
+  last_name: Yup
     .string()
     .required('Last name is required!'),
   email: Yup
@@ -15,7 +15,7 @@ const RegistrationSchema = Yup.object().shape({
   password: Yup
     .string()
 		.required('Password is required!')
-		.min(6, 'Password must be 6 characters min!'),
+		.min(8, 'Password must be 8 characters min!'),
   confirmedPassword: Yup
     .string()
 		.oneOf([Yup.ref('password'), null], 'Passwords must match!')
