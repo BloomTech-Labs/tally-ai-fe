@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/settingsActions';
-import { Register } from './authentication/Registration';
-import EditAccount from './settings/editaccount';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import {
+	shouldUpdateLoggedInUser,
+	fetchEditAccount
+} from '../actions/settingsActions'
+import { Register } from './authentication/Registration'
+import EditAccount from './settings/editaccount'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Menu from '@material-ui/core/Menu';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Menu from '@material-ui/core/Menu'
+import List from '@material-ui/core/List'
+import Divider from '@material-ui/core/Divider'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import Avatar from '@material-ui/core/Avatar';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import SettingsIcon from '@material-ui/icons/Settings'
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd'
+import DashboardIcon from '@material-ui/icons/Dashboard'
+import Avatar from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -35,72 +38,71 @@ const useStyles = makeStyles(theme => ({
 	title: {
 		flexGrow: 1
 	}
-}));
+}))
 
 function NavBar(props) {
-	const classes = useStyles();
-	const [auth, setAuth] = React.useState(true);
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const open = Boolean(anchorEl);
+	const classes = useStyles()
+	const [auth, setAuth] = React.useState(true)
+	const [anchorEl, setAnchorEl] = React.useState(null)
+	const open = Boolean(anchorEl)
 
 	const handleChange = event => {
-		setAuth(event.target.checked);
-	};
+		setAuth(event.target.checked)
+	}
 
 	const handleMenu = event => {
-		setAnchorEl(event.currentTarget);
-	};
+		setAnchorEl(event.currentTarget)
+	}
 
 	const handleClose = () => {
-		setAnchorEl(null);
-	};
+		setAnchorEl(null)
+	}
 
 	function isLoggedIn() {
 		return (
-			props.loggedInUser.firstName &&
-			props.loggedInUser.lastName &&
-			localStorage.getItem('token') &&
-			localStorage.getItem('userID')
-		);
+			// props.loggedInUser.firstName &&
+			// props.loggedInUser.lastName &&
+			localStorage.getItem('token') && localStorage.getItem('userID')
+		)
 	}
 
 	function businessSearch() {
-		props.history.push('/search/business');
-		console.log('businessSearch');
+		props.history.push('/search/business')
+		console.log('businessSearch')
 	}
 
 	function settings() {
-		props.history.push('/settings');
+		props.history.push('/settings')
 	}
 
 	function competitorSearch() {
-		props.history.push('/search/competitor');
-		console.log('compSearch');
+		props.history.push('/search/competitor')
+		console.log('compSearch')
 	}
 
 	const handleClick = event => {
 		//event.preventDefault()
-		localStorage.removeItem('token');
-		localStorage.removeItem('userID');
-		props.shouldUpdateLoggedInUser(true);
-	};
+		localStorage.removeItem('token')
+		localStorage.removeItem('userID')
+		props.shouldUpdateLoggedInUser(true)
+	}
 
 	function isOnHomePage() {
 		//this function is neccessary because match.params will always be "/" even while on /dashboard since the nav bar is always rendered to "/" (path is unexact "/")
 
-		var url = window.location;
-		var firstParam = url.pathname.split('/')[1];
+		var url = window.location
+		var firstParam = url.pathname.split('/')[1]
 
-		return firstParam === '';
+		return firstParam === ''
 	}
 
 	function isOnDashboard() {
 		//this function is neccessary because match.params will always be "/" even while on /dashboard since the nav bar is always rendered to "/" (path is unexact "/")
 
-		var url = window.location;
-		var firstParam = url.pathname.split('/')[1];
+		var url = window.location
+		var firstParam = url.pathname.split('/')[1]
 
-		return firstParam.toUpperCase() === 'Dashboard'.toUpperCase();
+		return firstParam.toUpperCase() === 'Dashboard'.toUpperCase()
 	}
 
 	return (
@@ -169,7 +171,7 @@ function NavBar(props) {
 										}}
 										onClick={handleMenu}
 									>
-										{props.loggedInUser.firstName[0].toUpperCase()}
+										{/* {props.loggedInUser.firstName[0].toUpperCase()} */}
 									</Avatar>
 								</div>
 								<Menu
@@ -206,8 +208,8 @@ function NavBar(props) {
 										<ListItem
 											button
 											onClick={() => {
-												handleClose();
-												businessSearch();
+												handleClose()
+												businessSearch()
 											}}
 											component={Link}
 										>
@@ -225,8 +227,8 @@ function NavBar(props) {
 										<ListItem
 											button
 											onClick={() => {
-												handleClose();
-												competitorSearch();
+												handleClose()
+												competitorSearch()
 											}}
 											component={Link}
 										>
@@ -244,8 +246,8 @@ function NavBar(props) {
 										<ListItem
 											button
 											onClick={() => {
-												handleClose();
-												settings();
+												handleClose()
+												settings()
 											}}
 											component={Link}
 										>
@@ -494,19 +496,19 @@ function NavBar(props) {
 				</AppBar>
 			)}
 		</div>
-	);
+	)
 }
 
 const mapStateToProps = state => {
-  return {
-    loggedUser: state.settings.loggedInUser.userID,
-    loggedInUser: state.settings.loggedInUser.data,
-    isFetching: state.settings.loggedInUser.isFetching,
-    error: state.settings.loggedInUser.error
-  };
-};
+	return {
+		loggedUser: state.settings.loggedInUser.userID,
+		loggedInUser: state.settings.loggedInUser.data,
+		isFetching: state.settings.loggedInUser.isFetching,
+		error: state.settings.loggedInUser.error
+	}
+}
 export default withRouter(
 	connect(mapStateToProps, { fetchEditAccount, shouldUpdateLoggedInUser })(
 		NavBar
 	)
-);
+)
