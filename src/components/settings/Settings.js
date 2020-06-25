@@ -1,6 +1,6 @@
 import React from 'react'
 
-import EditAccount from "./editaccount";
+import EditAccount from "./EditAccount.js";
 import EditPassword from "./EditPassword.js";
 import HelpForm from "./Help.js";
 
@@ -149,7 +149,6 @@ const mapStateToProps = state => {
 	return {
 		isFetching: state.settings.loggedInUser.isFetching,
 		error: state.settings.loggedInUser.error,
-		// loggedUserInfo: state.loggedUserInfo,
 		competitors: state.competitor.competitors.businesses
 	}
 }
