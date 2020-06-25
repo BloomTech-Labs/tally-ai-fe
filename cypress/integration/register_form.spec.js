@@ -35,6 +35,11 @@ describe('Form', () => {
         cy.get('#confirmedPassword')
         .type(confirmPassword)
         .should('have.value', confirmPassword)
+
+        
+    })
+    it('Clicks Submit',() => {
+      cy.get('form').submit()
     })
     
   })
