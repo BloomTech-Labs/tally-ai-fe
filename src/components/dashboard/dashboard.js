@@ -79,7 +79,7 @@ function DashboardGrid(props) {
 								<WidgetDisplayList />
 							</div>
 						) : (
-							<DashboardPlus />
+							<DashboardPlus /> 1
 						)}
 					</div>
 				) : props.businessInfo.businessId ? ( //if a business is selected
