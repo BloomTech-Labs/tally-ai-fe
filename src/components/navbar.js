@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import {
-	shouldUpdateLoggedInUser,
-	fetchEditAccount
-} from '../actions/settingsActions'
-import { Register } from './authentication/Registration'
-import EditAccount from './settings/editaccount'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/settingsActions';
+import { Register } from './authentication/Registration';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
