@@ -5,7 +5,8 @@ describe("Account Settings", ()=>{
     });
 
     it("should update nav bar", ()=>{
-        cy.window().its("store").invoke("getState").should('be.empty')
+        cy.window().its("store").invoke("getState").should('exist')
+        // cy.window().its("store").invoke("dispatch", {type: "UPDATE_LOGGED_IN_USER", payload: "true"})
     })
 
     it("should select setting tab",()=>{
