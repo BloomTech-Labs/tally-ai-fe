@@ -6,7 +6,10 @@
 .pnp.js
 
 # testing
-/coverage
+coverage
+.nyc_output
+/cypress/screenshots
+/cypress/videos
 
 # production
 /build
@@ -26,3 +29,4 @@ yarn-error.log*
 .env
 .server-env.js
 package-lock.json
+

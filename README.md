@@ -65,7 +65,7 @@ See https://www.yelp.com/developers/documentation/v3/
 ||||
 
 # Testing
-- Jest
+- Cypress
 
 # Installation Instructions
 
