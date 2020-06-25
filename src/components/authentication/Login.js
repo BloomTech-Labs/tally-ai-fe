@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, LinearProgress } from '@material-ui/core'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -12,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
 import LoginSchema from './LoginSchema'
-import { local } from 'd3'
+import { shouldUpdateLoggedInUser } from '../../actions/settingsActions'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -36,6 +37,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Login = props => {
+	const { loggedInUser } = useSelector(state => state.settings)
+	console.log('loggedInUser', loggedInUser)
+	const dispatch = useDispatch()
 	const [error, setError] = useState(null)
 	const classes = useStyles()
 
@@ -47,6 +51,7 @@ const Login = props => {
 			)
 			localStorage.setItem('token', data.token)
 			localStorage.setItem('userID', data.id)
+			dispatch(shouldUpdateLoggedInUser(true))
 			data && props.history.push('/Dashboard/')
 		} catch (err) {
 			setError(err.response.data.message)
