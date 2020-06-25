@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/settingsActions';
-import { Register } from './authentication/Registration';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import {
+	shouldUpdateLoggedInUser,
+	fetchEditAccount
+} from '../actions/settingsActions'
+import { Register } from './authentication/Registration'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -480,7 +483,7 @@ function NavBar(props) {
 											to='/Register'
 										>
 											<ListItemText
-												style={{ background: '#67FFD2;' }}
+												style={{ background: '#67FFD2' }}
 												primary='Sign Up'
 											/>
 										</ListItem>
