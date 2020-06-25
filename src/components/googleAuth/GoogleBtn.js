@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import axios from 'axios';
 
 const CLIENT_ID = '608950634863-oocf4589motggau92gukloto2l01fgha.apps.googleusercontent.com';
 

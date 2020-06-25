@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, LinearProgress } from '@material-ui/core'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -10,8 +11,10 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
+import GoogleLoginBtn from '../google/GoogleLoginBtn'
 
 import LoginSchema from './LoginSchema'
+import { shouldUpdateLoggedInUser } from '../../actions/settingsActions'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -34,7 +37,11 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const Login = () => {
+const Login = props => {
+	const { loggedInUser } = useSelector(state => state.settings)
+	console.log('loggedInUser', loggedInUser)
+	const dispatch = useDispatch()
+	const [error, setError] = useState(null)
 	const classes = useStyles()
 
 	const handleSubmit = async values => {
@@ -43,11 +50,12 @@ const Login = () => {
 				`https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login`,
 				values
 			)
-			console.log(data);
-			
-			
+			localStorage.setItem('token', data.token)
+			localStorage.setItem('userID', data.id)
+			dispatch(shouldUpdateLoggedInUser(true))
+			data && props.history.push('/Dashboard/')
 		} catch (err) {
-			console.log(err)
+			setError(err.response.data.message)
 		}
 	}
 
@@ -58,6 +66,11 @@ const Login = () => {
 				<Typography component='h1' variant='h5'>
 					Sign in
 				</Typography>
+				{error && (
+					<Typography variant='overline' color='error'>
+						{error}
+					</Typography>
+				)}
 				<Formik
 					initialValues={{
 						email: '',
@@ -124,6 +137,7 @@ const Login = () => {
 								>
 									Sign In
 								</Button>
+								
 								<Grid container justify='center'>
 									<Grid item>
 										<p>
@@ -141,6 +155,7 @@ const Login = () => {
 						)
 					}}
 				</Formik>
+				<GoogleLoginBtn />
 			</div>
 		</Container>
 	)
