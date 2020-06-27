@@ -1,16 +1,24 @@
 describe("Account Settings", ()=>{
     before(()=>{
         
-        cy.login("adrian-parra@lambdastudents.com","Fluffy342")
+        cy.login("testaccount@test.com","testAccount")
     });
 
-    it("should update nav bar", ()=>{
-        cy.window().its("store").invoke("getState").should('exist')
-        // cy.window().its("store").invoke("dispatch", {type: "UPDATE_LOGGED_IN_USER", payload: "true"})
+    it("should visit Account settings",()=>{
+        
+        cy.visit("/settings")
+        cy.url().should("contain","/settings");
+        cy.contains("First Name").should("exist")
+        cy.contains("Last Name").should("exist")
+    });
+
+    it("should type full name, ",()=>{
+        cy.get("#firstName").type("Account").should("have.value", "Account")
+        cy.get("#lastName").type("Test").should("have.value", "Test")
     })
 
-    it("should select setting tab",()=>{
-        cy.url().should("contain","/dashboard");
-    });
+    it("should have submit button", ()=>{
+        cy.get('button[data-testid="account-settings"]').click({force: true});
+    })
 
 })
