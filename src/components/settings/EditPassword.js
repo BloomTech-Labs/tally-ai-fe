@@ -174,7 +174,7 @@ function EditPassword(props){
                                 error ={errors.confirmPassword && touched.confirmPassword ? true: false}
                                 
                                 /> 
-                            <Button className ={classes.button} disabled={submitting} color="primary" type ="submit">Submit</Button>
+                            <Button data-testid="password-settings" className ={classes.button} disabled={submitting} color="primary" type ="submit">Submit</Button>
 
                         </form>
                     )

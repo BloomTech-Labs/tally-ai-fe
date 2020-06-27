@@ -160,6 +160,7 @@ function NavBar(props) {
                       <AccountCircle />
                     </IconButton> */}
 									<Avatar
+										data-testid="settings"
 										style={{
 											backgroundColor: 'white',
 											color: 'black',
@@ -480,7 +481,6 @@ function NavBar(props) {
 											to='/Register'
 										>
 											<ListItemText
-												style={{ background: '#67FFD2' }}
 												primary='Sign Up'
 											/>
 										</ListItem>
