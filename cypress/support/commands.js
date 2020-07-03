@@ -9,8 +9,25 @@
 // ***********************************************
 //
 //
+
+
 // -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
+Cypress.Commands.add("login", (email, password) => { 
+    cy.request({
+        url: "http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login",
+        method:"POST",
+        body:{
+            email,password
+        }
+    })
+    .then(res =>{
+        expect(res.status).to.eq(200);
+        window.localStorage.setItem("token", res.body.token)
+        window.localStorage.setItem("userID", res.body.id)
+        console.log(res)
+    })
+    cy.visit("/dashboard")
+ })
 //
 //
 // -- This is a child command --
