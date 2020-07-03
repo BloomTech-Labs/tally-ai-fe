@@ -208,7 +208,7 @@ function EditAccount(props){
                             error ={errors.state && touched.state ? true: false}
                             helperText = {errors.state && touched.state && errors.state}
                             /> 
-                        <Button className ={classes.button} disabled={submitting} color="primary" type ="submit">Submit</Button>
+                        <Button data-testid="account-settings" className={classes.button} disabled={submitting} color="primary" type ="submit">Submit</Button>
                     </form>  
 
                 )
