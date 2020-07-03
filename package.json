@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
-    "@material-ui/core": "^4.9.14",
+    "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material/layout-grid": "^4.0.0",
@@ -69,7 +69,7 @@
   "devDependencies": {
     "@cypress/code-coverage": "^3.8.1",
     "@cypress/instrument-cra": "^1.1.1",
-    "cypress": "^4.8.0",
+    "cypress": "^4.9.0",
     "jest": "^24.9.0",
     "start-server-and-test": "^1.11.0"
   },
