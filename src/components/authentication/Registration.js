@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import GoogleRegisterBtn from '../google/GoogleRegisterBtn';
+import GoogleLoginBtn from '../google/GoogleLoginBtn';
 
 import RegistrationSchema from './RegistrationSchema'
 
@@ -41,7 +41,7 @@ const Registration = props => {
 	const classes = useStyles()
 
 	const handleSubmit = async values => {
-		const { first_name, last_name, email, password } = values
+		const { first_name, last_name, email, password,type } = values
 
 		try {
 			const { data } = await axios.post(
@@ -50,7 +50,8 @@ const Registration = props => {
 					first_name,
 					last_name,
 					email,
-					password
+					password,
+					type
 				}
 			)
 
@@ -78,7 +79,8 @@ const Registration = props => {
 						last_name: '',
 						email: '',
 						password: '',
-						confirmedPassword: ''
+						confirmedPassword: '',
+						type:"tally"
 					}}
 					onSubmit={(values, actions) => handleSubmit(values)}
 					validationSchema={RegistrationSchema}
@@ -230,7 +232,7 @@ const Registration = props => {
 						)
 					}}
 				</Formik>
-				<GoogleRegisterBtn />
+				<GoogleLoginBtn />
 			</div>
 		</Container>
 	)
