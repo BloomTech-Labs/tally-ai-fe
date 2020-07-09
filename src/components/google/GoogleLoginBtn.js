@@ -20,7 +20,7 @@ const GoogleLoginBtn = () => {
             email: res.profileObj.email,
             type: "google"
         };
-        axios.post('https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/auth/login', newProfile)
+        axios.post('https://cors-anywhere.herokuapp.com/http://tallyai.us-east-1.elasticbeanstalk.com/api/google/login', newProfile)
             .then(res => {
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('userID', res.data.id)
