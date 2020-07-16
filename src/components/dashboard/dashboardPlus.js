@@ -36,17 +36,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative"
 
   },
-  // root: {
-  //   flexGrow: 1,
-  //   display: "flex",
-  //   paddingTop: "5%",
-  //   flexDirection: "column"
-  // },
-  // paper: {
-  //   padding: theme.spacing(1),
-  //   textAlign: "center",
-  //   color: theme.palette.text.secondary
-  // }
+ 
 }));
 
 function DashboardPlus(props) {
@@ -85,7 +75,7 @@ function DashboardPlus(props) {
 
         <h2  className="h2dashboard" >My Businesses</h2>
         <Tooltip title="Add a Business" arrow>
-          <Card className={classes.card} onClick={() => { props.history.push("/search/business") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
+          <Card className="card" onClick={() => { props.history.push("/search/business") }}>
             <Fab disabled aria-label="add" >
               <AddIcon />
             </Fab>
@@ -95,13 +85,12 @@ function DashboardPlus(props) {
         {
           props.businesses.slice(0, 10).map(business => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(business); props.selectBusiness(props.selectedBusiness, business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
+              <Card className="card"onClick={() => { modifyActiveTab(business); props.selectBusiness(props.selectedBusiness, business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
                 <Tooltip title="Delete" arrow>
                 <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}} />
                 </Tooltip>
                 <h3>{business.businessName}</h3>
-                <img style={{ objectFit: "cover", width: "100%", height: "80%", borderRadius: "10%" }}
-                  src={business.businessImg} />
+                <img src={business.businessImg} />
               </Card>
             )
           })
@@ -126,14 +115,13 @@ function DashboardPlus(props) {
         {
           props.competitors.slice(0, 10).map(competitor => {
             return (
-              <Card className={classes.card} onClick={() => { modifyActiveTab(competitor); props.selectBusiness(props.selectedBusiness, competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
+              <Card className="card" onClick={() => { modifyActiveTab(competitor); props.selectBusiness(props.selectedBusiness, competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
                 <Tooltip title="Delete" arrow>
                 <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}}>
                 </DeleteForeverOutlinedIcon>
                 </Tooltip>
                 <h3>{competitor.businessName}</h3>
-                <img style={{ objectFit: "cover", width: "100%", height: "80%", borderRadius: "10%" }}
-                  src={competitor.businessImg} />
+                <img src={competitor.businessImg} />
               </Card>
             )
           })
