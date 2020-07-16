@@ -36,10 +36,7 @@ const HomeFeatures = () => {
                     <p>Add all your competitors and easily track of them using our advanced dashboard.</p>
                 </div>
 
-                {/* <div className="FeatuesTable4">
-                    <h2 className="FeaturesHeaders">Email Delivery</h2>
-                    <p>Description about the feature goes here.Description about the feature goes here.Description about the feature goes here.Description about the feature goes here.</p>
-                </div> */}
+              
             </div>
 
         </div>
