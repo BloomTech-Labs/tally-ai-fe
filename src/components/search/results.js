@@ -44,7 +44,7 @@ const Results = props => {
   const [tentativeSelection, setTentativeSelection] = useState("");
 
   useEffect(() => {
-    if(tentativeSelection != ""){
+    if(tentativeSelection !== ""){
       select();
     }
   }, [tentativeSelection])

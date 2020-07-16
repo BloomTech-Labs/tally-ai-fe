@@ -93,12 +93,12 @@ function DashboardGrid(props) {
 							<div className='reviews'>
 								<p>{props.businessInfo.reviewCount}</p>
 								<br />
-								<p style={{ fontSize: '1rem' }}>Total Reviews</p>
+								<p>Total Reviews</p>
 							</div>
 							<div className='ratings'>
 								<p>{props.businessInfo.averageRating}</p>
 								<br />
-								<p style={{ fontSize: '1rem' }}>Overall Rating</p>
+								<p>Overall Rating</p>
 							</div>
 							<div className='changeofrating'>
 								<p>11%</p>
