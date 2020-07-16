@@ -18,6 +18,7 @@ import HomeBottomSection from "../home/HomeBottomSection"
 import { fetchBusinesses, selectBusiness } from "../actions/index";
 
 import axios from "axios";
+import './search.scss'
 
 import tallySearchLogo from "../components/images/tallySearchLogo.png";
 
