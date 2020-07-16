@@ -9,6 +9,7 @@ import BottomRectangle from "../../components/images/BottomRectangle.png"
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import './home.scss'
 
 import magnifier from "../../components/images/Magnifier.png"
 import wavyLine from "../../components/images/wavyLine.png"

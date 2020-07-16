@@ -2,7 +2,7 @@ import React from 'react';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import './home.scss'
 const HomeFeatures = () => {
     AOS.init()
     return (

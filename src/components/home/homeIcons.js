@@ -2,6 +2,7 @@ import React from 'react'
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import './home.scss'
 
 import AnalyzeDataIcon from "../../components/images/AnalyzeDataIcon.png";
 import DownloadReviewsIcon from "../../components/images/DownloadReviewsIcon.png";
