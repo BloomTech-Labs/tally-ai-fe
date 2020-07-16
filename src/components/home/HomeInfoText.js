@@ -71,9 +71,9 @@ const HomeInfo = () => {
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="true">
-                    <h1 style={{position:'absolute', marginLeft:'280px', marginTop:'200px', width:'380px', height:'167px', textAlign:'right', fontWeight:'900'}}>Be informed.  Make the right decisions.</h1>
+                    <h1>Be informed.  Make the right decisions.</h1>
                     <img src={wavyLine} alt="blue wavy line" style={{width:'100%'}} />
-                    <h1 style={{position:'absolute', marginTop:'-350px', left:'60%', width:'380px', lineHeight:'50px', fontWeight:'900', textAlign:'left'}}>Build the business your customers want</h1>
+                    <h1 className="bottom-h1-info">Build the business your customers want</h1>
                 </div>
 
         </div>
