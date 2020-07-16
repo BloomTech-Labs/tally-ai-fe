@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import keyMirror from 'keymirror';
+
 
 import { BrowserRouter as Router } from "react-router-dom";
 
