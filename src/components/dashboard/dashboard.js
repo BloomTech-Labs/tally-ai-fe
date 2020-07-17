@@ -7,7 +7,7 @@ import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 
 import Sidebar from './Sidebar'
 import './dashboard.scss'
-import './sidebar.scss'
+
 import {
 	fetchWordsOverTime,
 	fetchTopAndBottom,
