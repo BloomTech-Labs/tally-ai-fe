@@ -52,8 +52,8 @@ const HomeInfo = () => {
                     data-aos-mirror="true"
                     data-aos-once="true"> 
                 <div className="rightpara">  
-                    <h1 style={{fontSize:'48px', lineHeight:'66px', fontWeight:'900', textAlign:'left'}}>Keep track of your competitors</h1>
-                    <p style={{fontSize:'20px', lineHeight:'32px', fontWeight:'800', textAlign:'left'}}>Keep a close eye on the competition by simply adding businesses to your easy-to-use dashboard and see what their customers are saying about them.</p>
+                    <h1>Keep track of your competitors</h1>
+                    <p>Keep a close eye on the competition by simply adding businesses to your easy-to-use dashboard and see what their customers are saying about them.</p>
                 </div>
                 <div className="BottomTabletIMG">
                     <img className="HomePicture5" src={BottomBlueRectangle} alt='Blue Rectangle' />
@@ -72,7 +72,7 @@ const HomeInfo = () => {
                     data-aos-mirror="true"
                     data-aos-once="true">
                     <h1>Be informed.  Make the right decisions.</h1>
-                    <img src={wavyLine} alt="blue wavy line" style={{width:'100%'}} />
+                    <img src={wavyLine} alt="blue wavy line"  />
                     <h1 className="bottom-h1-info">Build the business your customers want</h1>
                 </div>
 
