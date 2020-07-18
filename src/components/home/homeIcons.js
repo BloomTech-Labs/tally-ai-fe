@@ -38,7 +38,7 @@ const HomeIcons = () => {
                 <div className="chart-icon">
                   
                     <img src={DownloadReviewsIcon} alt="Downloading Reviews Icon" />
-                    <h1 style={{fontSize:'24px'}}>Analyze Data</h1>
+                    <h1>Analyze Data</h1>
                     
                 </div>
                 <div className="arrow-icon">
