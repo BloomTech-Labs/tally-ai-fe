@@ -29,7 +29,7 @@ const HomeInfo = () => {
 
             <div className="top-card">
                 <div className="leftpara">
-                    <img src={magnifier} alt="Magnifying glass image" style={{float:'left', width:'70vw'}}/>
+                    <img src={magnifier} alt="Magnifying glass image" />
                     <div className="leftpara-text">
                     <h1 >Build the business your customers want</h1>
                     <p>Understand your online reviews and feedback to improve ineffeciences.</p>
