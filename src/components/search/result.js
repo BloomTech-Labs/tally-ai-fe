@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 import ToggleFavoriteButton from "../ToggleFavoriteButton";
-
+import  './results.scss'
 /*
 =======
 import { makeStyles } from '@material-ui/core/styles';
@@ -54,25 +54,8 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
       className={className}
     >
 
-      <img
-        style={{
-          alignSelf: "center",
-          height: "100%",
-          width: "33%",
-          objectFit: "cover"
-        }}
-        src={data.image_url}
-      />
-      <div
-        className="result-text"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyItems: "space-between",
-          paddingLeft: "5%",
-          cursor: "pointer"
-        }}
-      >
+      <img src={data.image_url} />
+      <div className="result-text">
         <h2>{data.name}</h2>
         <StarRatings
           rating={data.rating}
