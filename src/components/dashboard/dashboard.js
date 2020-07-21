@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 
 import Sidebar from './Sidebar'
-import './dashboard.scss'
+
 
 import {
 	fetchWordsOverTime,
