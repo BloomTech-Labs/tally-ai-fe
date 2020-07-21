@@ -23,6 +23,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Avatar from "@material-ui/core/Avatar";
+import "./navbar.scss";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -235,20 +236,12 @@ function NavBar(props) {
         <AppBar className="dashboard-bar">
           <Toolbar className="dash-toolbar">
             <div className="toolbar-div1">
-              <Link
-                className="dash-link"
-                style={{
-                  color: "#0D47A1",
-                  textDecoration: "none",
-                  fontSize: "2vh",
-                }}
-                to="/"
-              >
-                <h1 style={{ color: "white" }}>tally</h1>
+              <Link className="dash-link" to="/">
+                <h1>tally</h1>
               </Link>
             </div>
             <div className="dash-div">
-              <div className="list-container" style={{ width: "100%" }}>
+              <div className="list-container">
                 <List>
                   <div className="list-div2">
                     <ListItem
