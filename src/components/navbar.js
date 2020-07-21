@@ -25,23 +25,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import Avatar from "@material-ui/core/Avatar";
 import "./navbar.scss";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    // backgroundColor: '#3f51b5',
-    position: "fixed",
-    zIndex: "5",
-  },
-  menuButton: {
-    marginRight: theme.spacing(1),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
-
 function NavBar(props) {
-  const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
