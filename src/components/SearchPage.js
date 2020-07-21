@@ -8,86 +8,46 @@ import Button from "@material-ui/core/Button";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "../components/search/results";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import Link from "@material-ui/core/Link";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeIcons from "./home/homeIcons";
-import HomeInfo from "./home/HomeInfoText";
-import HomeFeatures from "./home/HomeFeatures";
-import HomeBottomSection from "./home/HomeBottomSection";
-
-import {
-  addCompetitor,
-  removeCompetitor,
-} from "../actions/competitorsActions";
+import { addCompetitor, removeCompetitor } from "../actions/competitorsActions";
 
 import {
   fetchBusinesses,
   selectBusiness,
   addBusiness,
-  removeBusiness
-} from '../actions/businessActions';
+  removeBusiness,
+} from "../actions/businessActions";
+
+import "./searchPage.scss";
 
 import axios from "axios";
 
 const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
     alignItems: "center",
-    margin: "auto"
+    margin: "auto",
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: "100%"
+    width: "100%",
   },
-  dense: {
-    marginTop: theme.spacing(2)
-  },
-
   button: {
     margin: theme.spacing(1),
     marginTop: "2%",
     marginBottom: "6%",
-    width: "15%"
+    width: "15%",
   },
-  input: {
-    display: "none"
-  },
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    transitionDuration: "0.3s",
-    width: "35%",
-    height: "50%",
-    margin: 20,
-    padding: 20,
-    borderRadius: 20
-  },
-  paper: {
-    position: "absolute",
-    width: 600,
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
-  }
 }));
 
 //searchMode true = competitor search
 //searchMode false = my biz search
-const SearchPage = props => {
+const SearchPage = (props) => {
   const classes = useStyles();
 
   const [searchTerm, setSearchTerm] = useState();
@@ -103,15 +63,20 @@ const SearchPage = props => {
     } else {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
-    }//.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
-   
+    } //.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
+
     props.selectBusiness(props.selectedBusiness, selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
 
   useEffect(() => {
-    console.log("Added business resulting in new state: competitors ", props.competitors, "businesses", props.businesses);
-  }, [props.competitors, props.businesses])
+    console.log(
+      "Added business resulting in new state: competitors ",
+      props.competitors,
+      "businesses",
+      props.businesses
+    );
+  }, [props.competitors, props.businesses]);
 
   useEffect(() => {
     if (searchLocation.latitude && searchLocation.longitude) {
@@ -120,11 +85,11 @@ const SearchPage = props => {
         .get(
           `https://maps.googleapis.com/maps/api/geocode/json?latlng=${searchLocation.latitude},${searchLocation.longitude}&sensor=true&key=${mapsKey}`
         )
-        .then(res => {
+        .then((res) => {
           console.log("Got location", res);
           setReadableLocation(res.data.results[4].formatted_address);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error("Could not get location from coords");
         });
     }
@@ -135,40 +100,14 @@ const SearchPage = props => {
   return (
     <div>
       <div>
-        <div
-          className="search-widget"
-          style={{
-            backgroundSize: "cover",
-            minHeight: "110vh"
-          }}
-        >
+        <div className="search-widget">
           {/* <h1>See what customers are saying about your business!</h1> */}
 
-          <div
-            className="search-form"
-            style={{
-              minHeight: "90vh",
-              width: "100%",
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              color: "#0D47A1",
-              
-            }}
-          >
-            {/* <div class="mdc-text-field mdc-text-field--outlined">
-            <input type="text" id="tf-outlined" class="mdc-text-field__input"></input>
-            <div class="mdc-notched-outline"></div>
-            <div class="mdc-notched-outline__notch">
-            <label for="tf-outlined" class="mdc-floating-label">Your Name</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-            </div> */}
+          <div className="search-form">
             {/* <h1>Search for a business to get started</h1> */}
             <form className={classes.container}>
               <div className="YelpBusinessH1">
                 {props.match.params.searchMode === "competitor" ? (
-
                   <h1>Search for a Competitor</h1>
                 ) : (
                   <h1>Search for your Business</h1>
@@ -181,7 +120,7 @@ const SearchPage = props => {
                 type="text"
                 className={classes.textField}
                 placeholder="Business Name"
-                onChange={e => {
+                onChange={(e) => {
                   setSearchTerm(e.target.value);
                   console.log(
                     "Setting search term value to state",
@@ -205,40 +144,30 @@ const SearchPage = props => {
                     ? readableLocation
                     : "City or State"
                 }
-                onChange={e => {
+                onChange={(e) => {
                   setSearchLocation(e.target.value);
                 }}
-                //     endAdornment={<InputAdornment position="end">
-                //     <GpsFixedIcon
-                //       aria-label="locator-icon"
-                //     //   onClick={handleClickShowPassword}
-                //     //   onMouseDown={handleMouseDownPassword}
-                //       edge="end"
-                //     >
-                //       {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
-                //     </GpsFixedIcon>
-                //   </InputAdornment>
-
-                // <Tooltip title="Use your current location" arrow>
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <Tooltip title="Use your current location" arrow>
                         <GpsFixedIcon
+                          className="gps-fixed-icon"
                           onClick={() => {
                             if (navigator.geolocation) {
-                              navigator.geolocation.getCurrentPosition(loc => {
-                                setSearchLocation(loc.coords);
-                              });
+                              navigator.geolocation.getCurrentPosition(
+                                (loc) => {
+                                  setSearchLocation(loc.coords);
+                                }
+                              );
                             } else {
                               alert("Failed to access browser geolocation");
                             }
                           }}
-                          style={{ cursor: "pointer" }}
                         />
                       </Tooltip>
                     </InputAdornment>
-                  )
+                  ),
                 }}
               ></TextField>
               <Button
@@ -246,12 +175,12 @@ const SearchPage = props => {
                 variant="outlined"
                 color="blue"
                 type="submit"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   // props.searchResultsPlaceholder(placeholderBusinesses);
                   props.fetchBusinesses({
                     name: searchTerm,
-                    location: searchLocation
+                    location: searchLocation,
                   });
                 }}
               >
@@ -268,10 +197,10 @@ const SearchPage = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   competitors: state.competitor.competitors.businesses,
   businesses: state.business.userBusinesses.businesses,
-  selectedBusiness: state.business.currentlySelectedBusiness
+  selectedBusiness: state.business.currentlySelectedBusiness,
 });
 
 export default connect(mapStateToProps, {
@@ -280,5 +209,5 @@ export default connect(mapStateToProps, {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness
+  selectBusiness,
 })(SearchPage);
