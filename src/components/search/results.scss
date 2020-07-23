@@ -1,0 +1,17 @@
+img{
+    align-self: center;
+    height: 100%;
+    width: 33%;
+    object-fit: cover;
+}
+.result-text{
+    display: flex;
+    flex-direction: column;
+    justify-items: space-between;
+    cursor: pointer;
+}
+.search-results{
+    overflow-y: scroll;
+    margin-top: 8vh;
+    height: 102vh;
+}

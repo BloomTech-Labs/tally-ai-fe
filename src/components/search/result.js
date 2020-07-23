@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 import ToggleFavoriteButton from "../ToggleFavoriteButton";
-
+import  './results.scss'
 /*
 =======
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,22 +30,7 @@ data {
 
 const Result = ({ data, setTentativeSelection, select, className }) => {
   const [isSelected, setIsSelected] = useState(false);
-  /*
-  const useStyles = makeStyles({
-    card: {
-      width: "80%",
-      height: "30%",
-      margin: 20,
-      padding: 20
-      // display: 'flex',
-      // // alignItems: 'center',
-      // // justifyItems: 'center',
-      // justifyContent: 'space-between',
-      // // alignContent: 'space-between'
-    }
-  });
-  const classes = useStyles();
-*/
+
   return (
     <div
       onClick={e => {
@@ -65,30 +50,12 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
           state: data.location.state,
           address: data.location.display_address // Added this for the sidebar; don't have a column in DB yet
         });
-          //select(e);
       }}
       className={className}
     >
 
-      <img
-        style={{
-          alignSelf: "center",
-          height: "100%",
-          width: "33%",
-          objectFit: "cover"
-        }}
-        src={data.image_url}
-      />
-      <div
-        className="result-text"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyItems: "space-between",
-          paddingLeft: "5%",
-          cursor: "pointer"
-        }}
-      >
+      <img src={data.image_url} />
+      <div className="result-text">
         <h2>{data.name}</h2>
         <StarRatings
           rating={data.rating}

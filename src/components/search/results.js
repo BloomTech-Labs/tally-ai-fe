@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import Result from "./result";
 import { selectBusiness, resetSearchResults } from "../../actions/businessActions";
-
+import './results.scss'
 import dbContains from "../../dbIds";
 
 /*Required business data for Result
@@ -44,7 +44,7 @@ const Results = props => {
   const [tentativeSelection, setTentativeSelection] = useState("");
 
   useEffect(() => {
-    if(tentativeSelection != ""){
+    if(tentativeSelection !== ""){
       select();
     }
   }, [tentativeSelection])
@@ -146,10 +146,7 @@ const Results = props => {
     
 
     return (
-      <div
-        className={"search-results" + animationClass}
-        style={{ overflowY: "scroll", marginTop: "8vh", height: "102vh" }} // change margin top to 20vh if you want it to be even with the left div
-      >
+      <div className={"search-results" + animationClass}>
         {
           props.businesses.data.length 
             ? results.length 

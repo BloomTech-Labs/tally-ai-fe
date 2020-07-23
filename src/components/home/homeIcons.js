@@ -2,6 +2,7 @@ import React from 'react'
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import './home.scss'
 
 import AnalyzeDataIcon from "../../components/images/AnalyzeDataIcon.png";
 import DownloadReviewsIcon from "../../components/images/DownloadReviewsIcon.png";
@@ -29,22 +30,22 @@ const HomeIcons = () => {
             </div>
             <div className="mid-section">
                 <div className="flag-icon">
-                    {/* <FontAwesomeIcon icon={faFlag} size="8x" style={{ color: '#DFAB26'}}/> */}
+                   
                     <img src={AnalyzeDataIcon} alt="Analyzing Data Icon" />
                     <h1 style={{fontSize:'24px'}}>Download Reviews</h1>
-                    {/* <p className="DataPara" style={{fontWeight:'bold'}}>Download and review your data with ease!</p> */}
+                   
                 </div>
                 <div className="chart-icon">
-                    {/* <FontAwesomeIcon icon={faChartBar} size="8x" style={{ color: '#D496BB'}}/> */}
+                  
                     <img src={DownloadReviewsIcon} alt="Downloading Reviews Icon" />
-                    <h1 style={{fontSize:'24px'}}>Analyze Data</h1>
-                    {/* <p className="DataPara" style={{fontWeight:'bold'}}>Quickly and easily analyze data using our simple yet effective Data Charts!</p> */}
+                    <h1>Analyze Data</h1>
+                    
                 </div>
                 <div className="arrow-icon">
-                    {/* <FontAwesomeIcon icon={faChartLine} size="8x" style={{ color: '#0D47A1'}}/> */}
+                    
                     <img src={InsightsIcon} alt="Insights Icon" />
-                    <h1 style={{fontSize:'24px'}}>Generate Insights</h1>
-                    {/* <p className="DataPara" style={{fontWeight:'bold'}}>Gather useful information that can help you improve your business!</p> */}
+                    <h1>Generate Insights</h1>
+                    
                 </div>
             </div>
         </div>
