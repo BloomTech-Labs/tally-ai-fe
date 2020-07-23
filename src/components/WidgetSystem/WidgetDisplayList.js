@@ -69,7 +69,7 @@ const WidgetDisplayList = (props) => {
 
     return (
         <div>
-            {/* <h4>Widgets</h4> */}
+            <h4>Widgets</h4>
             <div className="widgetList" onDragOver={(event) => {
 
                 event.preventDefault(); /* allow widgets to be droppable when being dragged over widgetList by preventingDefault*/
