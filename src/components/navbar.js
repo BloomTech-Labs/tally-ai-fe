@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { shouldUpdateLoggedInUser, fetchEditAccount } from '../actions/settingsActions';
-import { Register } from './authentication/Registration';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';

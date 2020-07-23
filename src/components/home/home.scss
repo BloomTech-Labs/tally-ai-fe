@@ -31,12 +31,66 @@
 .top-card h1 { 
 font-size: 48px;
 line-height: 66px;
-}
-.top-card p{
-    font-size: 20px;
-    line-height: 32px;
+
+p{
+    font-style: 20px;
+    line-height: 32;
     font-weight: 800;
     font-style: normal;
     text-align: left;
     margin-top: -1%;
+}
+img{
+    float: left;
+    width: 70vw;
+}
+
+}
+.arrow-icon{
+    h1{
+        font-size: 24px;
+    }
+}
+.wavy-line{
+    h1{
+        position: absolute;
+        margin-left: 280px;
+        margin-top: 280px;
+        width: 380px;
+        height: 167px;
+        text-align: right;
+        font-weight: 900;
+    }
+    .bottom-h1-info{
+        position: absolute;
+        margin-top: -350px;
+        left: 60%;
+        width: 380px;
+        line-height: 50px;
+        font-weight: 900;
+        text-align: left;
+
+    }
+    img{
+        width: 100%;
+    }
+}
+.rightpara{
+    h1{
+        font-size: 48px;
+        line-height: 66px;
+        font-weight: 900;
+        text-align-last: left;
+    }
+    p{
+        font-size: 20px;
+        line-height: 32px;
+        font-weight: 800;
+        text-align-last: left;
+    }
+}
+.chart-icon{
+    h1{
+        font-size: 24px;
+    }
 }
