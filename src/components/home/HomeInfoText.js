@@ -9,6 +9,7 @@ import BottomRectangle from "../../components/images/BottomRectangle.png"
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import './home.scss'
 
 import magnifier from "../../components/images/Magnifier.png"
 import wavyLine from "../../components/images/wavyLine.png"
@@ -28,7 +29,7 @@ const HomeInfo = () => {
 
             <div className="top-card">
                 <div className="leftpara">
-                    <img src={magnifier} alt="Magnifying glass image" style={{float:'left', width:'70vw'}}/>
+                    <img src={magnifier} alt="Magnifying glass image" />
                     <div className="leftpara-text">
                     <h1 >Build the business your customers want</h1>
                     <p>Understand your online reviews and feedback to improve ineffeciences.</p>
@@ -51,8 +52,8 @@ const HomeInfo = () => {
                     data-aos-mirror="true"
                     data-aos-once="true"> 
                 <div className="rightpara">  
-                    <h1 style={{fontSize:'48px', lineHeight:'66px', fontWeight:'900', textAlign:'left'}}>Keep track of your competitors</h1>
-                    <p style={{fontSize:'20px', lineHeight:'32px', fontWeight:'800', textAlign:'left'}}>Keep a close eye on the competition by simply adding businesses to your easy-to-use dashboard and see what their customers are saying about them.</p>
+                    <h1>Keep track of your competitors</h1>
+                    <p>Keep a close eye on the competition by simply adding businesses to your easy-to-use dashboard and see what their customers are saying about them.</p>
                 </div>
                 <div className="BottomTabletIMG">
                     <img className="HomePicture5" src={BottomBlueRectangle} alt='Blue Rectangle' />
@@ -70,9 +71,9 @@ const HomeInfo = () => {
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="true">
-                    <h1 style={{position:'absolute', marginLeft:'280px', marginTop:'200px', width:'380px', height:'167px', textAlign:'right', fontWeight:'900'}}>Be informed.  Make the right decisions.</h1>
-                    <img src={wavyLine} alt="blue wavy line" style={{width:'100%'}} />
-                    <h1 style={{position:'absolute', marginTop:'-350px', left:'60%', width:'380px', lineHeight:'50px', fontWeight:'900', textAlign:'left'}}>Build the business your customers want</h1>
+                    <h1>Be informed.  Make the right decisions.</h1>
+                    <img src={wavyLine} alt="blue wavy line"  />
+                    <h1 className="bottom-h1-info">Build the business your customers want</h1>
                 </div>
 
         </div>

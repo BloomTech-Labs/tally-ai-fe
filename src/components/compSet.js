@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import "./compSet.scss";
 
+
 function CompSet(props) {
   return (
     <div className="favorites-section">

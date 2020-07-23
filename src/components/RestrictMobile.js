@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 //simple component that renders on all pages with css media query that enables or disables it
 const RestrictMobile = () => {

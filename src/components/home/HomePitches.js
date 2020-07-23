@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import ipad from '../../components/images/ipad.png';
-
+import './home.scss'
 const HomePitches = () => { 
     AOS.init()
     return (

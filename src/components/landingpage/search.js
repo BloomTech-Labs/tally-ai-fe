@@ -19,6 +19,7 @@ import { fetchBusinesses, selectBusiness } from "../actions/index";
 
 import axios from "axios";
 
+
 import tallySearchLogo from "../components/images/tallySearchLogo.png";
 
 const mapsKey = process.env.REACT_APP_MAPS_KEY;
