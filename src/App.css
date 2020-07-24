@@ -6,7 +6,8 @@
 }
 
 .displayFlex {
-  display: flex;
+  display: grid;
+  
 }
 
 form {
