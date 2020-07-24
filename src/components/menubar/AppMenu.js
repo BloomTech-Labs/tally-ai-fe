@@ -15,7 +15,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MapIcon from '@material-ui/icons/Map';
 import StarIcon from '@material-ui/icons/Star';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import InfoIcon from '@material-ui/icons/Info';
 import './AppMenu.scss';
+
 
 const AppMenu: React.FC = (props) => {
   const classes = useStyles()
@@ -25,7 +27,7 @@ const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("userID")
 
-    window.location.href='/login'
+    window.location.href='/'
 }
 
   return (
