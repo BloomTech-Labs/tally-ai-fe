@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 
-import Sidebar from './Sidebar'
+import MenuBar from '../menubar/Menubar'
 
 
 import {
@@ -52,7 +52,7 @@ function DashboardGrid(props) {
 	return (
 		<div className='dashboardgrid'>
 			<div>
-				<Sidebar />
+				<MenuBar />
 			</div>
 			{/* // TODO: DOCUMENT WHAT'S GOING ON HERE */}
 			<div>

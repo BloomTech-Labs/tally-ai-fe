@@ -142,7 +142,6 @@ function NavBar(props) {
                     </ListItemIcon>
                     <ListItemText primary="Dashboard" />
                   </ListItem>
-
                   <Link
                     className="menu-link"
                     to={{ pathname: "Search", searchMode: false }}

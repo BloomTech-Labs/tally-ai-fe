@@ -7,9 +7,9 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 
 import AppMenu from './AppMenu.js'
-import { Dashboard } from '@material-ui/icons'
 
-const App: React.FC = () => {
+
+const MenuBar: React.FC = () => { 
   const classes = useStyles()
 
   return (
@@ -25,7 +25,7 @@ const App: React.FC = () => {
       </Drawer>
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
-          <Typography>Im the content</Typography>
+          
         </Container>
       </main>
     </div>
@@ -58,4 +58,4 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default App
+export default MenuBar
