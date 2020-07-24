@@ -4,10 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Drawer from '@material-ui/core/Drawer'
 import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
-
 import AppMenu from './AppMenu.js'
-
 
 const MenuBar: React.FC = () => { 
   const classes = useStyles()
