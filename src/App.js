@@ -24,7 +24,7 @@ import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
 import Policy from "./components/TOS/legal";
-
+import Menubar from './components/menubar/Menubar'
 import { widgets } from "./components/WidgetSystem/WidgetRegistry";
 
 function App(props) {
@@ -67,6 +67,7 @@ function App(props) {
       <Route path="/Login/" component={Login} />
       <Route path="/Compset" component={CompSet} />
       <Route path="/About" component={AboutUs} />
+      <Route path="/Menu" component={Menubar} />
       <Route path="/Legal/:doc" component={Policy} />
       <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={Settings} />
