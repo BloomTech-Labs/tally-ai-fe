@@ -58,7 +58,7 @@ function App(props) {
   }, [props.loggedInUser.shouldUpdate]);
 
   return (
-    <div className="App">
+    <div className={(localStorage.getItem("token") ? ('displayFlex') : ('App'))}>
       <RestrictMobile />
       <NavBar />
       <PublicRoute exact path="/" component={Search} />
@@ -79,6 +79,7 @@ function App(props) {
 
 const mapStateToProps = (state) => ({
   loggedInUser: state.settings.loggedInUser,
+  success: state.settings.loggedInUser.success,
   activeTabs: state.settings.activeTabs,
 });
 

@@ -1,7 +1,8 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
-//Material ui items
+//Material ui components 
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -15,35 +16,39 @@ import HelpIcon from '@material-ui/icons/Help';
 import MapIcon from '@material-ui/icons/Map';
 import StarIcon from '@material-ui/icons/Star';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import './AppMenu.scss';
 
-const AppMenu: React.FC = () => {
+const AppMenu: React.FC = (props) => {
   const classes = useStyles()
 
 
+const handleLogout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("userID")
 
+    window.location.href='/login'
+}
 
   return (
     <List component="nav" className={classes.appMenu} disablePadding>
-      <ListItem button className={classes.menuItem}>
-        <ListItemIcon className={classes.menuItemIcon}>
-          <HomeIcon />
-        </ListItemIcon>
-        <ListItemText primary="Dashboard" />
-      </ListItem>
-<br/><br/><br/><br/>
-      <ListItem button className={classes.menuItem}>
-        <ListItemIcon className={classes.menuItemIcon}>
-          <AccountCircleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Profile" />
-      </ListItem>
+      <NavLink to='/Dashboard'>
+        <ListItem button id='dashboardListItem' className={classes.menuItem}>
+          <ListItemIcon className={classes.menuItemIcon}>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+      </NavLink>
 
-      <ListItem button className={classes.menuItem}>
-        <ListItemIcon className={classes.menuItemIcon}>
-          <HelpIcon />
-        </ListItemIcon>
-        <ListItemText primary="Help" />
-      </ListItem>
+      <NavLink to='/Settings'>
+        <ListItem button className={classes.menuItem}>
+          <ListItemIcon className={classes.menuItemIcon}>
+            <AccountCircleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Settings" />
+        </ListItem>
+      </NavLink>
+
 
       <ListItem button className={classes.menuItem}>
         <ListItemIcon className={classes.menuItemIcon}>
@@ -60,7 +65,8 @@ const AppMenu: React.FC = () => {
           <ListItemText primary="Ratings" />
       </ListItem>
 
-      <ListItem button className={classes.menuItem}>
+
+      <ListItem button onClick={handleLogout} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -70,7 +76,7 @@ const AppMenu: React.FC = () => {
   )
 }
 
-const drawerWidth = 240
+const drawerWidth = 200
 
 const useStyles = makeStyles(theme =>
   createStyles({

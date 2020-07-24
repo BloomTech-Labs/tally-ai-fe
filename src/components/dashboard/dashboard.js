@@ -19,8 +19,6 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		flexGrow: 1,
 		display: 'flex',
-		paddingTop: '5%',
-		flexDirection: 'column'
 	},
 	paper: {
 		padding: theme.spacing(1),
@@ -51,9 +49,7 @@ function DashboardGrid(props) {
 
 	return (
 		<div className='dashboardgrid'>
-			<div>
-				<MenuBar />
-			</div>
+			
 			{/* // TODO: DOCUMENT WHAT'S GOING ON HERE */}
 			<div>
 				{localStorage.getItem('token') && localStorage.getItem('userID') ? (

@@ -20,6 +20,7 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Avatar from "@material-ui/core/Avatar";
 import "./navbar.scss";
+import MenuBar from './menubar/Menubar';
 
 function NavBar(props) {
   const [auth, setAuth] = React.useState(true);
@@ -100,165 +101,167 @@ function NavBar(props) {
           </Link>
         </div>
       ) : isLoggedIn() ? (
-        <AppBar className="app-bar" position="fixed">
-          <Toolbar classname="toolbar">
-            <div className="toolbar-div1">
-              <Link className="toolbar-link" to="/">
-                <h1>tally</h1>
-              </Link>
-            </div>
-            <div className="toolbar-div2">
-              <List className="toolbar-list">
-                <div className="list-div">
-                  <Avatar
-                    data-testid="settings"
-                    className="avatars"
-                    onClick={handleMenu}
-                  ></Avatar>
-                </div>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <ListItem
-                    button
-                    onClick={handleClose}
-                    component={Link}
-                    to="/Dashboard"
-                  >
-                    <ListItemIcon>
-                      <DashboardIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Dashboard" />
-                  </ListItem>
-                  <Link
-                    className="menu-link"
-                    to={{ pathname: "Search", searchMode: false }}
-                  >
-                    <ListItem
-                      button
-                      onClick={() => {
-                        handleClose();
-                        businessSearch();
-                      }}
-                      component={Link}
-                    >
-                      <ListItemIcon>
-                        <LibraryAddIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Add a Business" />
-                    </ListItem>
-                  </Link>
+        <MenuBar />
+        // <AppBar className="app-bar" position="fixed">
+        //   <Toolbar classname="toolbar">
+        //     <div className="toolbar-div1">
+        //       <Link className="toolbar-link" to="/">
+        //         <h1>tally</h1>
+        //       </Link>
+        //     </div>
+        //     <div className="toolbar-div2">
+        //       <List className="toolbar-list">
+        //         <div className="list-div">
+        //           <Avatar
+        //             data-testid="settings"
+        //             className="avatars"
+        //             onClick={handleMenu}
+        //           ></Avatar>
+        //         </div>
+        //         <Menu
+        //           id="menu-appbar"
+        //           anchorEl={anchorEl}
+        //           anchorOrigin={{
+        //             vertical: "top",
+        //             horizontal: "right",
+        //           }}
+        //           keepMounted
+        //           transformOrigin={{
+        //             vertical: "top",
+        //             horizontal: "right",
+        //           }}
+        //           open={open}
+        //           onClose={handleClose}
+        //         >
+        //           <ListItem
+        //             button
+        //             onClick={handleClose}
+        //             component={Link}
+        //             to="/Dashboard"
+        //           >
+        //             <ListItemIcon>
+        //               <DashboardIcon />
+        //             </ListItemIcon>
+        //             <ListItemText primary="Dashboard" />
+        //           </ListItem>
+        //           <Link
+        //             className="menu-link"
+        //             to={{ pathname: "Search", searchMode: false }}
+        //           >
+        //             <ListItem
+        //               button
+        //               onClick={() => {
+        //                 handleClose();
+        //                 businessSearch();
+        //               }}
+        //               component={Link}
+        //             >
+        //               <ListItemIcon>
+        //                 <LibraryAddIcon />
+        //               </ListItemIcon>
+        //               <ListItemText primary="Add a Business" />
+        //             </ListItem>
+        //           </Link>
 
-                  <Link className="menu-link" to="Search">
-                    <ListItem
-                      button
-                      onClick={() => {
-                        handleClose();
-                        competitorSearch();
-                      }}
-                      component={Link}
-                    >
-                      <ListItemIcon>
-                        <LibraryAddIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Add a Competitor" />
-                    </ListItem>
-                  </Link>
+        //           <Link className="menu-link" to="Search">
+        //             <ListItem
+        //               button
+        //               onClick={() => {
+        //                 handleClose();
+        //                 competitorSearch();
+        //               }}
+        //               component={Link}
+        //             >
+        //               <ListItemIcon>
+        //                 <LibraryAddIcon />
+        //               </ListItemIcon>
+        //               <ListItemText primary="Add a Competitor" />
+        //             </ListItem>
+        //           </Link>
 
-                  <Link className="menu-link" to="Settings">
-                    <ListItem
-                      button
-                      onClick={() => {
-                        handleClose();
-                        settings();
-                      }}
-                      component={Link}
-                    >
-                      <ListItemIcon>
-                        <SettingsIcon />
-                      </ListItemIcon>
-                      <ListItemText primary=" Account Settings" />
-                    </ListItem>
-                  </Link>
-                  <Divider />
+        //           <Link className="menu-link" to="Settings">
+        //             <ListItem
+        //               button
+        //               onClick={() => {
+        //                 handleClose();
+        //                 settings();
+        //               }}
+        //               component={Link}
+        //             >
+        //               <ListItemIcon>
+        //                 <SettingsIcon />
+        //               </ListItemIcon>
+        //               <ListItemText primary=" Account Settings" />
+        //             </ListItem>
+        //           </Link>
+        //           <Divider />
 
-                  <ListItem
-                    button
-                    onClick={handleClick}
-                    component={Link}
-                    to="/"
-                  >
-                    <ListItemIcon>
-                      <ExitToAppIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Log Out" />
-                  </ListItem>
-                </Menu>
-              </List>
-            </div>
-          </Toolbar>
-        </AppBar>
+        //           <ListItem
+        //             button
+        //             onClick={handleClick}
+        //             component={Link}
+        //             to="/"
+        //           >
+        //             <ListItemIcon>
+        //               <ExitToAppIcon />
+        //             </ListItemIcon>
+        //             <ListItemText primary="Log Out" />
+        //           </ListItem>
+        //         </Menu>
+        //       </List>
+        //     </div>
+        //   </Toolbar>
+        // </AppBar>
       ) : //not logged in
       isOnDashboard() ? (
-        <AppBar className="dashboard-bar">
-          <Toolbar className="dash-toolbar">
-            <div className="toolbar-div1">
-              <Link className="dash-link" to="/">
-                <h1>tally</h1>
-              </Link>
-            </div>
-            <div className="dash-div">
-              <div className="list-container">
-                <List>
-                  <div className="list-div2">
-                    <ListItem
-                      className="list-item"
-                      button
-                      onClick={handleClose}
-                      component={Link}
-                      to="/About"
-                    >
-                      <ListItemText className="homeNavLink" primary="About" />
-                    </ListItem>
+        <MenuBar />
+        // <AppBar className="dashboard-bar">
+        //   <Toolbar className="dash-toolbar">
+        //     <div className="toolbar-div1">
+        //       <Link className="dash-link" to="/">
+        //         <h1>tally</h1>
+        //       </Link>
+        //     </div>
+        //     <div className="dash-div">
+        //       <div className="list-container">
+        //         <List>
+        //           <div className="list-div2">
+        //             <ListItem
+        //               className="list-item"
+        //               button
+        //               onClick={handleClose}
+        //               component={Link}
+        //               to="/About"
+        //             >
+        //               <ListItemText className="homeNavLink" primary="About" />
+        //             </ListItem>
 
-                    <ListItem
-                      className="list-item"
-                      button
-                      onClick={handleClose}
-                      component={Link}
-                      to="/Login"
-                    >
-                      <ListItemText className="homeNavLink" primary="Sign In" />
-                    </ListItem>
+        //             <ListItem
+        //               className="list-item"
+        //               button
+        //               onClick={handleClose}
+        //               component={Link}
+        //               to="/Login"
+        //             >
+        //               <ListItemText className="homeNavLink" primary="Sign In" />
+        //             </ListItem>
 
-                    <ListItem
-                      className="list-item2"
-                      component={Link}
-                      to="/Register"
-                    >
-                      <ListItemText
-                        style={{ background: "#67FFD2;" }}
-                        primary="Sign Up"
-                      />
-                    </ListItem>
-                  </div>
-                </List>
-              </div>
-            </div>
-          </Toolbar>
-        </AppBar>
+        //             <ListItem
+        //               className="list-item2"
+        //               component={Link}
+        //               to="/Register"
+        //             >
+        //               <ListItemText
+        //                 style={{ background: "#67FFD2;" }}
+        //                 primary="Sign Up"
+        //               />
+        //             </ListItem>
+        //           </div>
+        //         </List>
+        //       </div>
+        //     </div>
+        //   </Toolbar>
+        // </AppBar>
       ) : (
         <AppBar className="last-bar">
           <Toolbar className="last-toolbar">
