@@ -72,7 +72,6 @@ function App(props) {
       <Route path="/DashboardPlus/" component={DashboardPlus} />
       <PrivateRoute path="/Settings/" component={Settings} />
       <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
-      <Footer />
     </div>
   );
 }
