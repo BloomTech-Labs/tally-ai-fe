@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-
 import { makeStyles } from '@material-ui/core/styles'
-
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
-
-import MenuBar from '../menubar/Menubar'
 
 
 import {

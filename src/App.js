@@ -14,7 +14,6 @@ import SearchPage from "./components/SearchPage";
 // Components
 import RestrictMobile from "./components/RestrictMobile";
 import NavBar from "./components/navbar";
-import Footer from "./components/footer";
 import Search from "./components/search.js";
 import DashboardGrid from "./components/dashboard/dashboard";
 import Registration from "./components/authentication/Registration";
