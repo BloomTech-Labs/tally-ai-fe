@@ -308,9 +308,9 @@ const PhraseRank = props => {
 //     error: null,
 //     data: { words: dummyWordsOverTime }
 const mapStateToProps = state => ({
-  data: state.widgetData.wordsOverTime.data,
-  error: state.widgetData.wordsOverTime.error,
-  isFetching: state.widgetData.wordsOverTime.isFetching
+  data: state.widgets.widgetData.wordsOverTime.data,
+  error: state.widgets.widgetData.wordsOverTime.error,
+  isFetching: state.widgets.widgetData.wordsOverTime.isFetching
 });
 
 export default connect(mapStateToProps, { fetchWordsOverTime })(PhraseRank);

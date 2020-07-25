@@ -75,9 +75,9 @@ const ReviewsOverTime = props => {
 };
 
 const mapStateToProps = state => ({
-  data: state.widgetData.reviewsOverTime.data,
-  isFetching: state.widgetData.reviewsOverTime.isFetching,
-  error: state.widgetData.reviewsOverTime.error
+  data: state.widgets.widgetData.reviewsOverTime.data,
+  isFetching: state.widgets.widgetData.reviewsOverTime.isFetching,
+  error: state.widgets.widgetData.reviewsOverTime.error
 });
 
 export default connect(mapStateToProps)(ReviewsOverTime);

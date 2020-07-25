@@ -121,7 +121,7 @@ const WidgetDisplayList = (props) => {
 }
 
 const mapStateToProps = state => ({
-    activeWidgets: state.activeWidgets
+    activeWidgets: state.widgets.activeWidgets
   });
   
   export default connect(mapStateToProps, { setActiveWidgets })(WidgetDisplayList);

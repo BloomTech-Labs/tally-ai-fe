@@ -63,9 +63,9 @@ const TopBottomWords = props => {
 };
 
 const mapStateToProps = state => ({
-  words: state.widgetData.keyWords.data,
-  isFetching: state.widgetData.keyWords.isFetching,
-  error: state.widgetData.keyWords.error
+  words: state.widgets.widgetData.keyWords.data,
+  isFetching: state.widgets.widgetData.keyWords.isFetching,
+  error: state.widgets.widgetData.keyWords.error
 });
 
 export default connect(mapStateToProps)(TopBottomWords);

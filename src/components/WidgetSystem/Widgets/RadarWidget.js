@@ -76,9 +76,9 @@ const RadarWidget = props => {
 };
 
 const mapStateToProps = state => ({
-  data: state.widgetData.radarWidget.data,
-  isFetching: state.widgetData.radarWidget.isFetching,
-  error: state.widgetData.radarWidget.error
+  data: state.widgets.widgetData.radarWidget.data,
+  isFetching: state.widgets.widgetData.radarWidget.isFetching,
+  error: state.widgets.widgetData.radarWidget.error
 });
 
 export default connect(mapStateToProps, {})(RadarWidget);
