@@ -26,7 +26,7 @@ import { widgets } from "./components/WidgetSystem/WidgetRegistry"
 function App(props) {
 	useEffect(() => {
 		console.log('getting user data');
-		if (localStorage.getItem('token') && localStorage.getItem('userID')) {
+		if (localStorage.getItem('token') && localStorage.getItem('userID') && props.loggedInUser.shouldUpdate) {
 			//we're logged in but there's no user info in the store, lets fix that
 
 			props.getUserInfo(localStorage.getItem('userID'));
@@ -55,8 +55,8 @@ function App(props) {
 
 	return (
 		<div className='App'>
-			<RestrictMobile />
-			<NavBar />
+			{/* <RestrictMobile /> */}
+			{/* <NavBar /> */}
 			<PublicRoute exact path='/' component={Search} />
 			<Route path='/Dashboard/' component={DashboardGrid} />
 			<Route path='/Register/' component={Registration} />
@@ -67,7 +67,7 @@ function App(props) {
 			<Route path='/DashboardPlus/' component={DashboardPlus} />
 			<PrivateRoute path='/Settings/' component={Settings} />
 			<PrivateRoute path='/Search/:searchMode' exact component={SearchPage} />
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }
