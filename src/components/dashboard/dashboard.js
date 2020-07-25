@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-
 import { makeStyles } from '@material-ui/core/styles'
-
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
-
-import Sidebar from './Sidebar'
 
 
 import {
@@ -19,8 +15,6 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		flexGrow: 1,
 		display: 'flex',
-		paddingTop: '5%',
-		flexDirection: 'column'
 	},
 	paper: {
 		padding: theme.spacing(1),
@@ -51,9 +45,7 @@ function DashboardGrid(props) {
 
 	return (
 		<div className='dashboardgrid'>
-			<div>
-				<Sidebar />
-			</div>
+			
 			{/* // TODO: DOCUMENT WHAT'S GOING ON HERE */}
 			<div>
 				{localStorage.getItem('token') && localStorage.getItem('userID') ? (

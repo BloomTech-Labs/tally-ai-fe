@@ -1,6 +1,14 @@
 .App {
   text-align: center;
 }
+.homeNavLink{
+  text-shadow: black;
+}
+
+.displayFlex {
+  display: grid;
+  
+}
 
 form {
   padding-right: 20px;
