@@ -50,16 +50,7 @@ const handleLogout = () => {
         </ListItem>
       </NavLink>
 
-
-      <ListItem button className={classes.menuItem}>
-        <ListItemIcon className={classes.menuItemIcon}>
-          <MapIcon />
-        </ListItemIcon>
-        <ListItemText primary="Map" />
-      </ListItem>
-
-
-      <ListItem button className={classes.menuItem}>
+          <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
             <StarIcon />
           </ListItemIcon>
