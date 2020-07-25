@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
           <div className="socials-container">
             <a href="https://github.com/Lambda-School-Labs/tally-ai-fe">
-              <img src={GitHub} />
+              <img src={GitHub} alt="github logo"/>
             </a>
             <Link className="FooterButton" to="/About">
               About

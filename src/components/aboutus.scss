@@ -22,11 +22,17 @@ div {
       width: 22%;
 
       img {
-        border-radius: 100%;
-        height: 18vh;
+        height: 100px;
+        width: 100px;
+        display: block;
+        border-radius: 50%;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px
+       
       }
 
       h1 {
+        text-align: left;
         font-style: normal;
         font-weight: 500;
         font-size: 22px;
@@ -34,6 +40,7 @@ div {
       }
 
       h3 {
+        text-align: left;
         font-style: normal;
         font-weight: 500;
         font-size: 15px;
@@ -54,11 +61,16 @@ div {
       width: 20%;
 
       img {
-        border-radius: 100%;
-        height: 18vh;
+        height: 100px;
+        width: 100px;
+        display: block;
+        border-radius: 50%;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px
       }
 
       h1 {
+        text-align: left;
         font-style: normal;
         font-weight: 500;
         font-size: 22px;
@@ -66,6 +78,7 @@ div {
       }
 
       h3 {
+        text-align: left;
         font-style: normal;
         font-weight: 500;
         font-size: 15px;
@@ -88,11 +101,16 @@ div {
       margin-left: 150px;
 
       img {
-        border-radius: 100%;
-        height: 18vh;
+        height: 100px;
+        width: 100px;
+        display: block;
+        border-radius: 50%;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px
       }
 
       h1 {
+        text-align: left;
         font-style: normal;
         font-weight: 500;
         font-size: 22px;
@@ -100,6 +118,7 @@ div {
       }
 
       h3 {
+        text-align: left;
         font-style: normal;
         font-weight: 500;
         font-size: 15px;
