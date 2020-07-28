@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 
-import { makeStyles,  withStyles } from "@material-ui/core/styles";
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import { makeStyles } from "@material-ui/core/styles";
+
 
 import AddIcon from '@material-ui/icons/Add';
 
@@ -56,11 +56,12 @@ function DashboardPlus(props) {
   const classes = useStyles();
 
   //get the currently selected tab, and set it to the newly selected business
+  //this might be deleted since we are not using tabs no more
   function modifyActiveTab(business) {
 
     let contains = null;
     props.activeTabs.forEach((tab) => {
-      if (tab.businessId === business.businessId) {
+      if (tab.business_id === business.business_id) {
         contains = tab;
       }
     })
@@ -68,10 +69,10 @@ function DashboardPlus(props) {
       props.selectBusiness(props.selectedBusiness, contains);//the user is trying to add a business that they already have a tab open for, just set that tab as selected
     } else {
       props.activeTabs.forEach((tab) => {
-        if (tab.businessId === props.selectedBusiness.businessId) {//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
+        if (tab.business_id === props.selectedBusiness.business_id) {//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
           
           let tabIndex;
-          let newTabsArray = props.activeTabs.filter((item, index) => {  if(item.businessId === tab.businessId) { tabIndex = index;} return item.businessId != tab.businessId });//remove the tab we want to modify
+          let newTabsArray = props.activeTabs.filter((item, index) => {  if(item.business_id === tab.business_id) { tabIndex = index;} return item.business_id != tab.business_id });//remove the tab we want to modify
           newTabsArray.splice(tabIndex, 0, {...business});//add back the tab but with the new name
           
           props.setActiveTabs(props.activeTabs, newTabsArray, localStorage.getItem("userID"))
@@ -146,7 +147,7 @@ function DashboardPlus(props) {
               return (
                 <Grid item>
                   <Card >
-                    <CardActionArea onClick={() => { modifyActiveTab(competitor); props.selectBusiness(props.selectedBusiness, competitor); }}> 
+                    <CardActionArea onClick={() => { props.selectBusiness(props.selectedBusiness, competitor); }}> 
                       <CardHeader
                         avatar={ <Avatar classes={{root: classes.avatar}} alt={competitor.businessName} src={competitor.img ? competitor.img : competitor.businessName}/> }
                         title={competitor.businessName}

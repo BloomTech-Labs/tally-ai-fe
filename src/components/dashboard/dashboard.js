@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -7,7 +7,7 @@ import RestaurantIcon from '@material-ui/icons/Restaurant';
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 
-import Sidebar from './Sidebar'
+
 
 import {
 	fetchWordsOverTime,
@@ -86,12 +86,8 @@ function DashboardGrid(props) {
 
 	// Fetch data for widgets
 	useEffect(() => {
-		console.log('Fetching all widget data with ID ', props.id)
-
-		// Only fetch data if a selected business is in the businesses or competitors array
-		// or if the user is not logged in
 		if (
-			businessesContains(props.businessInfo.businessId) ||
+			businessesContains(props.businessInfo.business_id) ||
 			!localStorage.getItem('token')
 		) {
 			props.fetchAllData(props.id)
@@ -103,13 +99,9 @@ function DashboardGrid(props) {
 	return (
 		<Grid className={classes.root}>
 			<>
-				{/* <Sidebar /> */}
-			</>
-			{/*Side bar removal to overlay/// fragmenting div*/}
-			<>
 				{localStorage.getItem('token') && localStorage.getItem('userID') ? (
 					<>
-						{businessesContains(props.businessInfo.businessId) ? (
+						{businessesContains(props.businessInfo.business_id) ? (
 							<Grid justify="center">
 								<Grid container className={classes.businessContainer}>
 									{/* <Card className={classes.card}>
@@ -137,63 +129,72 @@ function DashboardGrid(props) {
 										<p>Overall Rating</p>
 									</Paper>
 									<Paper  variant="outlined" className={classes.paper}>
-										<p className={classes.count} >{"0000"}</p>
+										<p className={classes.count} >{props.businessInfo.change_in_rating}</p>
 										<p>Change in Rating</p>
 									</Paper>
 								</Grid>
-								Widget data
-								{/* <WidgetDisplayList /> */}
+								
+								<WidgetDisplayList />
 							</Grid>
 						) : (
 							<DashboardPlus /> 
 						)}
 					</>
-				) : props.businessInfo.businessId ? ( //if a business is selected
-					<div>
-						{console.log(
-							'Not Redirecting cause business selected while on dashboard. Business selected:',
-							props.businessInfo.businessId
-						)}
-						<div className='businessStats'>
-							<div className='reviews'>
-								<p>{props.businessInfo.reviewCount}</p>
-								<br />
-								<p style={{ fontSize: '1rem' }}>Total Reviews</p>
-							</div>
-							<div className='ratings'>
-								<p>{props.businessInfo.averageRating}</p>
-								<br />
-								<p style={{ fontSize: '1rem' }}>Overall Rating</p>
-							</div>
-							<div className='changeofrating'>
-								<p>11%</p>
-								<br />
+				) : props.businessInfo.business_id ? ( //if a business is selected
+					<Grid justify="center">
+						<Grid container className={classes.businessContainer}>
+							{/* <Card className={classes.card}>
+								<CardActionArea disableSpacing className={classes.actions}>
+									<CardHeader
+										avatar={
+											<Avatar className={classes.avatar} src={props.businessInfo.businessImg ? props.businessInfo.businessImg : null}>
+
+												<RestaurantIcon/>
+											</Avatar>
+										}
+										title={props.businessInfo.businessName}
+										subheader={props.businessInfo.address}
+
+									/>
+								</CardActionArea>
+							</Card> */}
+							<Paper  variant="outlined" className={classes.paper} >
+								<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
+								
+								<p>Total Reviews</p>
+							</Paper>
+							<Paper  variant="outlined" className={classes.paper} >
+								<p className={classes.count} >{props.businessInfo.business_stars} stars</p>
+								<p>Overall Rating</p>
+							</Paper>
+							<Paper  variant="outlined" className={classes.paper}>
+								<p className={classes.count} >{"0000"}</p>
 								<p>Change in Rating</p>
-							</div>
-						</div>
-						{/* <WidgetDisplayList /> */}
-					</div>
+							</Paper>
+						</Grid>
+						
+						<WidgetDisplayList />
+					</Grid>
 				) : (
 					console.log(
 						'Redirecting cause no business selected while on dashboard. Business selected:',
-						props.businessInfo.businessId
-					) & props.history.push('/') //FIXME: while deployed, instead of re-routing to just tally-ai.com/ it goes to tally-ai.com/index.html. This causes errors.
+						props.businessInfo.business_id
+					) & props.history.push('/') 
 				)}
 			</>
 		</Grid>
 	)
 
 	//used to check if this is an actual business or just a new tab
-	function businessesContains(businessId) {
-		console.log('props.businesses in businessContains: ', props.businesses)
+	function businessesContains(business_id) {
 
-		if (!businessId) {
+		if (!business_id) {
 			return false
 		}
 
 		let found = false
 		props.businesses.forEach(element => {
-			if (element.businessId === businessId) {
+			if (element.business_id === business_id) {
 				found = true
 			}
 		})
@@ -202,10 +203,7 @@ function DashboardGrid(props) {
 }
 
 const mapStateToProps = state => ({
-	// words: state.widgetData.keyWords.data,
-	// isFetching: state.widgetData.keyWords.isFetching,
-	// id: state.business.ci
-	id: state.business.currentlySelectedBusiness.businessId,
+	id: state.business.currentlySelectedBusiness.business_id,
 	businessInfo: state.business.currentlySelectedBusiness,
 	businesses: state.business.userBusinesses.businesses.concat(
 		state.competitor.competitors.businesses
