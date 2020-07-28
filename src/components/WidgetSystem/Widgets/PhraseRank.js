@@ -11,6 +11,10 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
+
+import { Typography, Paper,Container } from "@material-ui/core";
+import { useStyles } from "../WidgetRegistry";
+
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // const data = [
@@ -207,6 +211,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 //how phrases rank
 const PhraseRank = props => {
+  const classes = useStyles();
   const [formattedData, setFormattedData] = useState();
 
   // useEffect(() => {
@@ -214,9 +219,9 @@ const PhraseRank = props => {
   // }, []);
 
   useEffect(() => {
-    console.log("useEfffect working");
+    // console.log("useEfffect working");
     if (props.data != null) {
-      console.log("Data? ", props.data);
+      // console.log("Data? ", props.data);
       //format data
       let tempFormattedData = [];
       props.data.forEach(date => {
@@ -228,7 +233,7 @@ const PhraseRank = props => {
         });
         tempFormattedData.push(tempObject);
       });
-      console.log("Result", tempFormattedData);
+      // console.log("Result", tempFormattedData);
       setFormattedData(tempFormattedData);
     }
   }, [props.data]);
@@ -261,15 +266,16 @@ const PhraseRank = props => {
   }
 
   if (!formattedData) {
-    return <div>formatting data</div>;
+    return <div>Formatting data</div>;
   }
 
   //a widget that maps the rank of a phrase over time
   return (
-    <div className="widget">
-    <h3 className="widgetTitle">Trends</h3>
-    <p className="widgetSubtitle">See what word phrases are said more or less in your reviews over time.</p>
-    <div className="graphContainer">
+    <>
+    <Typography variant="h5" className={classes.title}>Trends</Typography>
+    <Paper className={classes.paper}>
+    <Typography variant="subtitle1" gutterBottom  className={classes.subTitle}>See what word phrases are said more or less in your reviews over time.</Typography>
+    <Container className={classes.graph}>
     <ResponsiveContainer>
     <LineChart
       data={formattedData}
@@ -287,7 +293,7 @@ const PhraseRank = props => {
       <Legend />
 
       {getLineNames().map(lineName => {
-        console.log("Adding line with name", lineName);
+        // console.log("Adding line with name", lineName);
         return <Line type="monotone" dataKey={lineName} stroke="#B287A3" />;
       })}
 
@@ -299,8 +305,9 @@ const PhraseRank = props => {
       <Line type="monotone" dataKey="specials" stroke="#482728" /> */}
     </LineChart>
     </ResponsiveContainer>
-    </div>
-    </div>
+    </Container>
+    </Paper>
+    </>
   );
 };
 // wordsOverTime: {

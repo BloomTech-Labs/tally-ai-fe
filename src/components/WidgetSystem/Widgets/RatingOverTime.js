@@ -13,6 +13,9 @@ import {
 } from "recharts";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { Typography, Paper,Container } from "@material-ui/core";
+import { useStyles } from "../WidgetRegistry";
+
 const exampleData = {
   star_data: [
     {date: "2019-12-07", cumulative_avg_rating: 4.5, weekly_avg_rating: 3.0}, 
@@ -27,6 +30,8 @@ const exampleData = {
 };
 
 const RatingOverTime = props => {
+  const classes = useStyles();
+
   console.log("Data in RatingOverTime: ", props.data);
 
   if (props.isFetching || !props.data) {
@@ -37,37 +42,39 @@ const RatingOverTime = props => {
   }
 
   return (
-    <div className="widget">
-      <h3 className="widgetTitle">Star Rating</h3>
-      <p className="widgetSubtitle">Look at how your star rating changes over time compared to the weekly average to identify important time periods.</p>
+    <>
+      <Typography variant="h5" className={classes.title}>Star Rating</Typography>
+      <Paper className={classes.paper}>
+        <Typography variant="subtitle1" gutterBottom  className={classes.subTitle}>Look at how your star rating changes over time compared to the weekly average to identify important time periods.</Typography>
 
-      <div className="graphContainer">
-    <ResponsiveContainer>
-        <ComposedChart
-          data={props.data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}
-        >
-          <XAxis dataKey="date" />
-          <YAxis type="number" domain={[0, 5]}/>
-          <CartesianGrid />
-          <Tooltip />
-          <Legend />
-          {/* {exampleData.star_data.map(point => (<Bar dataKey={point.weekly_avg_rating} barSize={20} fill="#413ea0" />))} */}
-          <Bar dataKey="weekly_avg_rating" barSize={20} fill="#413ea0" />
-          <Line
-            type="monotone"
-            dataKey="cumulative_avg_rating"
-            stroke="#ff7300"
-          />
-        </ComposedChart>
-        </ResponsiveContainer>
-        </div>
-    </div>
+        <Container className={classes.graph}>
+          <ResponsiveContainer>
+            <ComposedChart
+              data={props.data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5
+              }}
+            >
+              <XAxis dataKey="date" />
+              <YAxis type="number" domain={[0, 5]}/>
+              <CartesianGrid />
+              <Tooltip />
+              <Legend />
+              {/* {exampleData.star_data.map(point => (<Bar dataKey={point.weekly_avg_rating} barSize={20} fill="#413ea0" />))} */}
+              <Bar dataKey="weekly_avg_rating" barSize={20} fill="#413ea0" />
+              <Line
+                type="monotone"
+                dataKey="cumulative_avg_rating"
+                stroke="#ff7300"
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </Container>
+      </Paper>
+    </>
   );
 };
 

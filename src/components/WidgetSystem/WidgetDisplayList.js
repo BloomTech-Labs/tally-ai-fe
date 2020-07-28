@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import WidgetContainer from "./WidgetContainer";
 import { setActiveWidgets } from "../../actions/index";
@@ -6,7 +6,17 @@ import { connect } from "react-redux";
 
 import { widgets } from "./WidgetRegistry";
 
+import { Grid,  } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: "2rem",
+    }
+}))
+
 const WidgetDisplayList = (props) => {
+    const classes = useStyles();
 
     function getElementCenter(element) {
 
@@ -34,6 +44,7 @@ const WidgetDisplayList = (props) => {
             
             //Lets get the distance from the mouse to this widget
             let distanceFromMouseToWidget = distance(mousePosition, getElementCenter(widget));
+            console.log(distanceFromMouseToWidget)
 
             if (distanceFromMouseToWidget < closestDistanceFromMouse) {
                 //We found a new closest! Lets update our closest variables
@@ -47,76 +58,82 @@ const WidgetDisplayList = (props) => {
     }
 
     function DropWidget(event) {
-
+        console.log("dropped")
+        
         //FIXME: If the user drops the widget outside of the WidgetList, this method is never called, and projections are left/dragged widgets are never added back
 
-        let draggedWidget = localStorage.getItem("dragged");//So we can add the widget (that was deleted while dragging) back, where the user dropped it
+        // let draggedWidget = localStorage.getItem("dragged");//So we can add the widget (that was deleted while dragging) back, where the user dropped it
 
-        //mouse position vector
-        let mousePosition = { x: event.screenX, y: event.screenY }
+        // //mouse position vector
+        // let mousePosition = { x: event.screenX, y: event.screenY }
 
-        let closestWidget = getClosestWidgetToMouse(mousePosition);
+        // let closestWidget = getClosestWidgetToMouse(mousePosition);
 
-        let closestIndex = props.activeWidgets.indexOf(closestWidget.id);
+        // let closestIndex = props.activeWidgets.indexOf(closestWidget.id);
 
-        let activeWidgetsClone = props.activeWidgets.map((item) => item);
-        //Remove projections and widgets that are of the same type as draggedWidget as well so you can't have duplicate widgets on your dashboard
-        activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
-        //Add back draggedWidget in its new spot
-        activeWidgetsClone.splice(closestIndex, 0, draggedWidget)
-        props.setActiveWidgets(activeWidgetsClone);
+        // let activeWidgetsClone = props.activeWidgets.map((item) => item);
+        // //Remove projections and widgets that are of the same type as draggedWidget as well so you can't have duplicate widgets on your dashboard
+        // activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
+        // //Add back draggedWidget in its new spot
+        // activeWidgetsClone.splice(closestIndex, 0, draggedWidget)
+        // props.setActiveWidgets(activeWidgetsClone);
     }
 
     return (
-        <div>
-            {/* <h4>Widgets</h4> */}
-            <div className="widgetList" onDragOver={(event) => {
 
-                event.preventDefault(); /* allow widgets to be droppable when being dragged over widgetList by preventingDefault*/
+        
+        <Grid className={classes.root} container spacing={3} onDragOver={(event) => {
+            console.log("dragging over")
 
-                //The widget that's being dragged, we need this in storage since it's set in another file. Could change to redux state?
-                let draggedWidget = localStorage.getItem("dragged");//So we can delete the widget while its being dragged
+            // event.preventDefault(); /* allow widgets to be droppable when being dragged over widgetList by preventingDefault*/
 
-                //mouse position vector
-                let mousePosition = { x: event.pageX, y: event.pageY }
+            // //The widget that's being dragged, we need this in storage since it's set in another file. Could change to redux state?
+            // let draggedWidget = localStorage.getItem("dragged");//So we can delete the widget while its being dragged
 
-                let closestWidget = getClosestWidgetToMouse(mousePosition);
+            // //mouse position vector
+            // let mousePosition = { x: event.pageX, y: event.pageY }
 
-                let closestIndex = props.activeWidgets.indexOf(closestWidget.id);
+            // let closestWidget = getClosestWidgetToMouse(mousePosition);
 
-                //If the widgets array doesn't already contain a projection widget in closestIndex, add one and remove any out of position ones. 
-                //Otherwise, even though the mouse location changed, the projection is still correct and there is no need to re-render
-                if (!(props.activeWidgets[closestIndex] === "projection")) {
+            // let closestIndex = props.activeWidgets.indexOf(closestWidget.id);
 
-                    let activeWidgetsClone = props.activeWidgets.map((item) => item);
+            // //If the widgets array doesn't already contain a projection widget in closestIndex, add one and remove any out of position ones. 
+            // //Otherwise, even though the mouse location changed, the projection is still correct and there is no need to re-render
+            // if (!(props.activeWidgets[closestIndex] === "projection")) {
 
-                    //remove out-of-position projections
-                    activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
-                    //Add new projection in correct position
-                    activeWidgetsClone.splice(closestIndex, 0, "projection")
+            //     let activeWidgetsClone = props.activeWidgets.map((item) => item);
 
-                    props.setActiveWidgets(activeWidgetsClone);
+            //     //remove out-of-position projections
+            //     activeWidgetsClone = activeWidgetsClone.filter((widget) => { return widget === "projection" || widget === draggedWidget ? false : true; })
+            //     //Add new projection in correct position
+            //     activeWidgetsClone.splice(closestIndex, 0, "projection")
 
-                }
+            //     props.setActiveWidgets(activeWidgetsClone);
 
+            // }
+
+        }
+        } onDragLeave={
+            (e) => DropWidget(e)
+        } onDrop= {
+            (e) => DropWidget(e)
+        }
+        onDragOver={
+            (e) => console.log(e.target)
+        }
+        >
+
+            {/* Render Active Widgets */}
+            {
+                props.activeWidgets.map((widgetName) => {
+                    return (
+                        <WidgetContainer widgetName={widgetName} />
+                    )
+                })
             }
-            } onDragLeave={
-                (e) => DropWidget(e)
-            } onDrop= {
-                (e) => DropWidget(e)
-            }>
 
-                {/* Render Active Widgets */}
-                {
-                    props.activeWidgets.map((widgetName) => {
-                        return (
-                            <WidgetContainer widgetName={widgetName} />//WidgetContainer will render the correct widget based on widgetName
-                        )
-                    })
-                }
-
-            </div>
-        </div>
+        </Grid>
+        
     );
 }
 

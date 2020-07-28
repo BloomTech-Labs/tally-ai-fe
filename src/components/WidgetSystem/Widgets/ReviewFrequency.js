@@ -12,6 +12,9 @@ import {
 } from "recharts";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { Typography, Paper,Container } from "@material-ui/core";
+import { useStyles } from "../WidgetRegistry";
+
 import data from "../../../dummyData/dummyReviewsOverTime";
 
 const exampleData = [
@@ -30,6 +33,7 @@ const exampleData = [
 ];
 
 const ReviewsOverTime = props => {
+  const classes = useStyles();
 
   console.log(`\nData in ReviewsOverTime\n${props.data}\n`);
 
@@ -42,35 +46,37 @@ const ReviewsOverTime = props => {
   }
 
   return (
-    <div className="widget">
-      <h3 className="widgetTitle">Review Frequency</h3>
-      <p className="widgetSubtitle">View the frequency in reviews over time to keep track if promotional efforts are working!</p>
-      <div className="graphContainer">
-    <ResponsiveContainer>
-      <LineChart
-        data={props.data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="reviews"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-      </LineChart>
-      </ResponsiveContainer>
-      </div>
-    </div>
+    <>
+      <Typography variant="h5" className={classes.title}> Review Frequency</Typography>
+      <Paper className={classes.paper}>
+        <Typography variant="subtitle1" gutterBottom  className={classes.subTitle}>View the frequency in reviews over time to keep track if promotional efforts are working!</Typography>
+        <Container className={classes.graph}>
+          <ResponsiveContainer>
+            <LineChart
+              data={props.data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="reviews"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </Container>
+      </Paper>
+    </>
   );
 };
 
