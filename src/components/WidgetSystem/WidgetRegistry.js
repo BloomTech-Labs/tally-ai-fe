@@ -22,12 +22,12 @@ import { Subtitles } from "@material-ui/icons";
 
 //Update this array whenever a new widget is added
 export let widgets = [
-  { name: "topbottomwords", title:"Your customers are loving...", component: <PositiveWords />, previewComponent: <PositiveWordsPreview/> },
-  { name: "NegativeWords", title:"You can improve on...", component: <NegativeWords />, previewComponent: <NegativeWordsPreview/> },
-  { name: "phraserank", title:"", component: <PhraseRank />, previewComponent: <PhraseRankPreview/>  },
-  // { name: "radarchart",title:"",  component: <RadarWidget />, previewComponent: <RadarWidgetPreview/>},
-  { name: "reviewfrequency",title:"",  component: <ReviewFrequency />, previewComponent: <ReviewFrequencyPreview/>  },
-  { name: "ratingovertime",title:"", component: <RatingOverTime />, previewComponent: <RatingOverTimePreview/>  },
+  { name: "topbottomwords",  component: <PositiveWords />, previewComponent: <PositiveWordsPreview/> },
+  { name: "NegativeWords", component: <NegativeWords />, previewComponent: <NegativeWordsPreview/> },
+  { name: "phraserank", component: <PhraseRank />, previewComponent: <PhraseRankPreview/>  },
+  // { name: "radarchart", component: <RadarWidget />, previewComponent: <RadarWidgetPreview/>},
+  { name: "reviewfrequency",  component: <ReviewFrequency />, previewComponent: <ReviewFrequencyPreview/>  },
+  { name: "ratingovertime", component: <RatingOverTime />, previewComponent: <RatingOverTimePreview/>  },
   {
     name: "projection",
     component: (
