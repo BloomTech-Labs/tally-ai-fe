@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { setFavorites } from "../actions/index";
-
+import { setFavorites } from "../actions/settingsActions";
+ 
 //needs to be passed a business object of this format:
 // business: {
 //     // for DS API calls
