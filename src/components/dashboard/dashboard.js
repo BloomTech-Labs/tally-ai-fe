@@ -20,7 +20,7 @@ import DashboardPlus from './dashboardPlus'
 const useStyles = makeStyles(theme => ({
 	root: {
 		padding: "2rem 32px 0 32px",
-		margin: "4.6rem 0 0 0",
+		margin: "4.6rem 0 4.6rem 0",
 		textAlign: "center",
 		[theme.breakpoints.up("lg")] :{
 			maxWidth : "1024px",
@@ -168,7 +168,7 @@ function DashboardGrid(props) {
 								<p>Overall Rating</p>
 							</Paper>
 							<Paper  variant="outlined" className={classes.paper}>
-								<p className={classes.count} >{"0000"}</p>
+								<p className={classes.count} >{props.businessInfo.change_in_rating}</p>
 								<p>Change in Rating</p>
 							</Paper>
 						</Grid>

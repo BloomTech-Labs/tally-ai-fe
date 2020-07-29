@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useStyles } from "../WidgetRegistry";
-import { Typography, Paper } from "@material-ui/core";
+import { Typography, Paper, Grid } from "@material-ui/core";
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -10,10 +10,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const NegativeWords = props => {
 
   const classes = useStyles();
-  console.log("props.words in dashboard: ", props.words);
-
-  let colors = ["#960A00", "#AC0B00", "#C10C00", "#D31307", "#E5150B", "#F42823", "#FF4340", "#FF5C5C", "#FF6F6D", "#FF8686"];
-
   if(props.error){
     console.log("Error with props:", props);
     return <p>Error!</p>
@@ -26,12 +22,14 @@ const NegativeWords = props => {
       <Typography variant="h5" className={classes.title}>You can improve on...</Typography>
       <Paper className={classes.paper}>
       <Typography variant="subtitle1" gutterBottom className={classes.subTitle}>These are the words associated with the reviews with low ratings</Typography>
+          <Grid container className={classes.container}>
           {props.words.negative.map((word, index) => {
             
             return (
-              <div className="wordListItem" style={{ display: "flex", alignItems: "center", justifyContent: "center", height: (300/props.words.negative.length) + "px", backgroundColor: index < colors.length ? colors[index] : colors[colors.length - 1]}}><p>{word.term}</p></div>
+              <Grid item xs={6} className={classes.item}><span>{word.term}</span></Grid>
             );
           })}
+          </Grid>
       </Paper>
     </>
       );

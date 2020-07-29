@@ -10,12 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const TopBottomWords = props => {
-
   const classes = useStyles();
-
-
-  let colors = ["#002487", "#002FA0", "#003CB8", "#004ACC", "#0074DF", "#068DEE", "#15AEF0", "#18C1F7", "#21D7FF", "#29E9FF"];
-
   if(props.error){
     console.log("Error with props:", props);
     return <p>Error!</p>
@@ -28,12 +23,13 @@ const TopBottomWords = props => {
         <Typography variant="h5" className={classes.title}>Your customers are loving...</Typography>
         <Paper elevation={3} className={classes.paper}>
         <Typography variant="subtitle1" className={classes.subTitle} gutterBottom>These are the words associated with the reviews with high ratings</Typography>
-            {props.words.positive.map((word, index) => {
-              return (
-                <div className="wordListItem" style={{ display: "flex", alignItems: "center", justifyContent: "center", height: (300/props.words.positive.length) + "px", backgroundColor: index < colors.length ? colors[index] : colors[colors.length - 1]}}><p>{word.term}</p></div>
-              );
-            })}
-        
+            <Grid container className={classes.container}>
+              {props.words.positive.map((word, index) => {
+                return (
+                  <Grid item xs={6} className={classes.item}><span>{word.term}</span></Grid>
+                );
+              })}
+            </Grid>
         </Paper>
       </>
     );

@@ -65,9 +65,17 @@ export const useStyles = makeStyles(theme => ({
     height: "3.3rem",
     textAlign: "left",
     alignSelf: "flex-start",
-    padding: "0 1rem",
+    margin: "0 1.2rem",
+    width: "calc(100% - 2.4rem)",
     lineHeight: "1.1",
+    borderBottom: "1px solid #DFDFDF",
   },
+  container: {
+    marginTop: "2rem",
+  },
+  item: {
+    height: "3rem",
+  },  
   graph: {
     
     height: "340px",

@@ -36,14 +36,14 @@ function App(props) {
 				competitors: [],
 				loggedInUser: { firstName: null, lastName: null },
 				businesses: [],
-				activeWidgets: [widgets[0].name, widgets[1].name],
+				activeWidgets: [widgets[0].name, widgets[1].name, widgets[2].name, widgets[3].name, widgets[4].name],
 				activeTabs: ['defaultTab'],
 				currentlySelectedBusiness: {
-					businessId: null,
+					business_id: null,
 					businessName: null,
 					businessImg: null,
-					reviewCount: 0,
-					averageRating: 0,
+					review_count: 0,
+					business_stars: 0,
 					changeInRating: ''
 				}
 			};
@@ -56,7 +56,7 @@ function App(props) {
 	return (
 		<div className='App'>
 			{/* <RestrictMobile /> */}
-			{/* <NavBar /> */}
+			<NavBar />
 			<PublicRoute exact path='/' component={Search} />
 			<Route path='/Dashboard/' component={DashboardGrid} />
 			<Route path='/Register/' component={Registration} />
