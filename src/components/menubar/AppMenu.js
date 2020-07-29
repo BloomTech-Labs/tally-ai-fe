@@ -18,6 +18,10 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import InfoIcon from '@material-ui/icons/Info';
 import './AppMenu.scss';
 
+import { User } from 'react-feather';
+import {Settings} from 'react-feather';
+import {Map} from 'react-feather';
+import {LogOut} from 'react-feather';
 
 const AppMenu: React.FC = (props) => {
   const classes = useStyles()
@@ -35,7 +39,8 @@ const handleLogout = () => {
       <NavLink to='/Dashboard'>
         <ListItem button id='dashboardListItem' className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <HomeIcon />
+          
+          <User />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
@@ -44,7 +49,7 @@ const handleLogout = () => {
       <NavLink to='/Settings'>
         <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <AccountCircleIcon />
+            <Settings />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </ListItem>
@@ -52,15 +57,15 @@ const handleLogout = () => {
 
           <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <StarIcon />
+            <Map />
           </ListItemIcon>
-          <ListItemText primary="Ratings" />
+          <ListItemText primary="Map" />
       </ListItem>
 
 
       <ListItem button onClick={handleLogout} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <ExitToAppIcon />
+            <LogOut />
           </ListItemIcon>
           <ListItemText primary="Logout" />
       </ListItem>
