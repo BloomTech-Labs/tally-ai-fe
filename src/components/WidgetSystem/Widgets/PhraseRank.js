@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchWordsOverTime } from "../../../actions/index";
+import { fetchWordsOverTime } from "../../../actions/widgetsActions";
 import { connect } from "react-redux";
 import {
   LineChart,
@@ -11,7 +11,7 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress'; 
 
 // const data = [
 //   {

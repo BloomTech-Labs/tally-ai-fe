@@ -15,7 +15,7 @@ import HomeBottomSection from "./home/HomeBottomSection";
 import HomePitches from "./home/HomePitches";
 import "./search.scss";
 
-import { fetchBusinesses, selectBusiness } from "../actions/index";
+import { fetchBusinesses, selectBusiness } from "../actions/businessActions";
 
 import axios from "axios";
 
