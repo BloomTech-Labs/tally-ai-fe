@@ -27,7 +27,6 @@ const AppMenu: React.FC = (props) => {
 const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("userID")
-
     window.location.href='/'
 }
 
