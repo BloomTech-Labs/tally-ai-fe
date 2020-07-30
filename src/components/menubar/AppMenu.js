@@ -35,7 +35,7 @@ const handleLogout = () => {
       <NavLink to='/Dashboard'>
         <ListItem button id='dashboardListItem' className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <Settings />
+            <User />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
