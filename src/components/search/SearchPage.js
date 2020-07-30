@@ -7,7 +7,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Button from "@material-ui/core/Button";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
-import Results from "../components/search/results";
+import Results from "./results";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -18,20 +18,25 @@ import Typography from "@material-ui/core/Typography";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeIcons from "./homeIcons";
-import HomeInfo from "./HomeInfoText";
-import HomeFeatures from "./HomeFeatures";
-import HomeBottomSection from "./HomeBottomSection";
+
+import HomeIcons from "../home/homeIcons"
+import HomeInfo from "../home/HomeInfoText";
+import HomeFeatures from "../home/HomeFeatures";
+import HomeBottomSection from "../home/HomeBottomSection";
+import HomePitches from '../home/HomePitches';
+import tallySearchLogo from "../../components/images/tallySearchLogo.png";
+
+import {
+  addCompetitor,
+  removeCompetitor,
+} from "../../actions/competitorsActions";
 
 import {
   fetchBusinesses,
-  addBusiness,
-  addCompetitor,
-  removeBusiness,
-  removeCompetitor,
   selectBusiness,
-  setActiveTabs
-} from "../actions/index";
+  addBusiness,
+  removeBusiness
+} from '../../actions/businessActions';
 
 import axios from "axios";
 
@@ -55,10 +60,11 @@ const useStyles = makeStyles(theme => ({
   },
 
   button: {
-    margin: theme.spacing(1),
-    marginTop: "2%",
-    marginBottom: "6%",
-    width: "15%"
+    margin: "2rem auto 0 auto",
+    width: '6rem',
+    backgroundColor: '#1E4DC7',
+    color: 'white',
+    borderRadius:'20px',
   },
   input: {
     display: "none"
@@ -101,8 +107,8 @@ const SearchPage = props => {
     } else {
       console.log("Adding business", selection);
       props.addBusiness(selection, localStorage.getItem("userID"));
-    }//.filter((item) => !(item.businessId === props.selectedBusiness.businessId))
-    props.setActiveTabs(props.activeTabs, props.activeTabs.concat([selection]), localStorage.getItem("userID"));//add a new tab with this new business selected and remove the old one empty tab that we selected this new business from
+    }
+   
     props.selectBusiness(props.selectedBusiness, selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
@@ -111,22 +117,22 @@ const SearchPage = props => {
     console.log("Added business resulting in new state: competitors ", props.competitors, "businesses", props.businesses);
   }, [props.competitors, props.businesses])
 
-  useEffect(() => {
-    if (searchLocation.latitude && searchLocation.longitude) {
-      //The searchLocation has changed to use latitude and a logitude, lets get the user friendly location from these coords and fill in the location field with it
-      axios
-        .get(
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${searchLocation.latitude},${searchLocation.longitude}&sensor=true&key=${mapsKey}`
-        )
-        .then(res => {
-          console.log("Got location", res);
-          setReadableLocation(res.data.results[4].formatted_address);
-        })
-        .catch(err => {
-          console.error("Could not get location from coords");
-        });
-    }
-  }, [searchLocation]);
+  // useEffect(() => {
+  //   if (searchLocation.latitude && searchLocation.longitude) {
+  //     //The searchLocation has changed to use latitude and a logitude, lets get the user friendly location from these coords and fill in the location field with it
+  //     axios
+  //       .get(
+  //         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${searchLocation.latitude},${searchLocation.longitude}&sensor=true&key=${mapsKey}`
+  //       )
+  //       .then(res => {
+  //         console.log("Got location", res);
+  //         setReadableLocation(res.data.results[4].formatted_address);
+  //       })
+  //       .catch(err => {
+  //         console.error("Could not get location from coords");
+  //       });
+  //   }
+  // }, [searchLocation]);
 
   console.log("SearchMode ", props.match.params);
 
@@ -154,14 +160,6 @@ const SearchPage = props => {
               
             }}
           >
-            {/* <div class="mdc-text-field mdc-text-field--outlined">
-            <input type="text" id="tf-outlined" class="mdc-text-field__input"></input>
-            <div class="mdc-notched-outline"></div>
-            <div class="mdc-notched-outline__notch">
-            <label for="tf-outlined" class="mdc-floating-label">Your Name</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-            </div> */}
             {/* <h1>Search for a business to get started</h1> */}
             <form className={classes.container}>
               <div className="YelpBusinessH1">
@@ -226,6 +224,7 @@ const SearchPage = props => {
                           onClick={() => {
                             if (navigator.geolocation) {
                               navigator.geolocation.getCurrentPosition(loc => {
+                                console.log(loc.coords)
                                 setSearchLocation(loc.coords);
                               });
                             } else {
@@ -246,6 +245,7 @@ const SearchPage = props => {
                 type="submit"
                 onClick={e => {
                   e.preventDefault();
+                  console.log(searchTerm, searchLocation)
                   // props.searchResultsPlaceholder(placeholderBusinesses);
                   props.fetchBusinesses({
                     name: searchTerm,
@@ -261,16 +261,37 @@ const SearchPage = props => {
         </div>
       </div>
 
-      {/*  closes div containing backgroundcolor */}
+      {!props.searchResults && Object.keys(props.match.params).length ===0 ? (
+					<div>
+						<img
+							src={tallySearchLogo}
+							alt='tally search logo'
+							style={{
+								position: 'absolute',
+								top: '0px',
+								right: '0px',
+								width: '50%'
+							}}
+						/>
+						<div>
+							<HomeIcons />
+							<HomeInfo />
+							<HomeFeatures />
+							<HomePitches />
+							<HomeBottomSection />
+						</div>
+					</div>
+				) : (
+					<div></div>
+				)}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  competitors: state.competitors.businesses,
-  businesses: state.userBusinesses.businesses,
-  activeTabs: state.tabs.activeTabs,
-  selectedBusiness: state.currentlySelectedBusiness
+  competitors: state.competitor.competitors.businesses,
+  businesses: state.business.userBusinesses.businesses,
+  selectedBusiness: state.business.currentlySelectedBusiness
 });
 
 export default connect(mapStateToProps, {
@@ -279,6 +300,5 @@ export default connect(mapStateToProps, {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness,
-  setActiveTabs
+  selectBusiness
 })(SearchPage);

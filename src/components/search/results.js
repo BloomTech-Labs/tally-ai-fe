@@ -112,25 +112,25 @@ const Results = props => {
     }
     console.log("Animation class", animationClass);
 
-    const results = props.businesses.data.reduce((acc, result) => //acc?
-        // For now, only render results that already exist in the database
-        dbContains(result.id)
-          ? [...acc, ( 
-            <Result
-              data={result}
-              select={select}
-              key={result.id}
-              setTentativeSelection={setTentativeSelection}
-              className={`result ${
-                result.id === tentativeSelection.businessId
-                  ? "selected"
-                  : "not-selected"
-              }`}
-            />
-          )]
-          : acc
-          , []
-    );
+    // const results = props.businesses.data.reduce((acc, result) => //acc?
+    //     // For now, only render results that already exist in the database
+    //     dbContains(result.id)
+    //       ? [...acc, ( 
+    //         <Result
+    //           data={result}
+    //           select={select}
+    //           key={result.id}
+    //           setTentativeSelection={setTentativeSelection}
+    //           className={`result ${
+    //             result.id === tentativeSelection.businessId
+    //               ? "selected"
+    //               : "not-selected"
+    //           }`}
+    //         />
+    //       )]
+    //       : acc
+    //       , []
+    // );
 
     const Sorry = () => (
       <div>
@@ -152,9 +152,21 @@ const Results = props => {
       >
         {
           props.businesses.data.length 
-            ? results.length 
-              ? results 
-              : <Sorry/>
+            ? (props.businesses.data.map((result)=>{
+              return (
+                <Result
+                  data={result}
+                  select={select}
+                  key={result.id}
+                  setTentativeSelection={setTentativeSelection}
+                  className={`result ${
+                    result.id === tentativeSelection.businessId
+                      ? "selected"
+                      : "not-selected"
+                  }`}
+                />
+              )
+            }))
             : <NoResults />
         }
       </div>

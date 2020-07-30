@@ -6,12 +6,12 @@ import { connect } from "react-redux";
 import { setUserInfo, getUserInfo, shouldUpdateLoggedInUser } from "./actions/settingsActions";
 import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
-import SearchPage from "./components/SearchPage"
 // Components
 import RestrictMobile from "./components/RestrictMobile"
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
-import Search from "./components/search.js";
+import Search from "./components/search/search.js";
+import SearchPage from "./components/search/SearchPage"
 import DashboardGrid from "./components/dashboard/dashboard";
 import Registration from "./components/authentication/Registration";
 import Login from "./components/authentication/Login";
@@ -57,7 +57,7 @@ function App(props) {
 		<div className='App'>
 			{/* <RestrictMobile /> */}
 			<NavBar />
-			<PublicRoute exact path='/' component={Search} />
+			<PublicRoute exact path='/' component={SearchPage} />
 			<Route path='/Dashboard/' component={DashboardGrid} />
 			<Route path='/Register/' component={Registration} />
 			<Route path='/Login/' component={Login} />
