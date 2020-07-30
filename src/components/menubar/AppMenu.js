@@ -10,14 +10,13 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 
 //Icons
-import { User } from 'react-feather';
-import {Settings} from 'react-feather';
-import {Map} from 'react-feather';
-import {LogOut} from 'react-feather';
-
-//Stylesheet
+import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import MapIcon from '@material-ui/icons/Map';
+import StarIcon from '@material-ui/icons/Star';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import InfoIcon from '@material-ui/icons/Info';
 import './AppMenu.scss';
-
 
 
 const AppMenu: React.FC = (props) => {
@@ -27,6 +26,7 @@ const AppMenu: React.FC = (props) => {
 const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("userID")
+
     window.location.href='/'
 }
 
@@ -35,8 +35,7 @@ const handleLogout = () => {
       <NavLink to='/Dashboard'>
         <ListItem button id='dashboardListItem' className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-          
-          <User />
+            <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
@@ -45,7 +44,7 @@ const handleLogout = () => {
       <NavLink to='/Settings'>
         <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <Settings />
+            <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </ListItem>
@@ -53,15 +52,15 @@ const handleLogout = () => {
 
           <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <Map />
+            <StarIcon />
           </ListItemIcon>
-          <ListItemText primary="Map" />
+          <ListItemText primary="Ratings" />
       </ListItem>
 
 
       <ListItem button onClick={handleLogout} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <LogOut />
+            <ExitToAppIcon />
           </ListItemIcon>
           <ListItemText primary="Logout" />
       </ListItem>
