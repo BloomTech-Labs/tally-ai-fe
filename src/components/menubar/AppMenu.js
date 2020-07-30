@@ -10,12 +10,12 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 
 //Icons
-import HomeIcon from '@material-ui/icons/Home';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import MapIcon from '@material-ui/icons/Map';
-import StarIcon from '@material-ui/icons/Star';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import InfoIcon from '@material-ui/icons/Info';
+import {User} from 'react-feather';
+import {Settings} from 'react-feather';
+import {Map} from 'react-feather';
+import {LogOut} from 'react-feather';
+
+//stylesheet
 import './AppMenu.scss';
 
 
@@ -35,7 +35,7 @@ const handleLogout = () => {
       <NavLink to='/Dashboard'>
         <ListItem button id='dashboardListItem' className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <HomeIcon />
+            <User />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
@@ -44,7 +44,7 @@ const handleLogout = () => {
       <NavLink to='/Settings'>
         <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <AccountCircleIcon />
+            <Settings />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </ListItem>
@@ -52,7 +52,7 @@ const handleLogout = () => {
 
           <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <StarIcon />
+            <Map />
           </ListItemIcon>
           <ListItemText primary="Ratings" />
       </ListItem>
@@ -60,7 +60,7 @@ const handleLogout = () => {
 
       <ListItem button onClick={handleLogout} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <ExitToAppIcon />
+            <LogOut />
           </ListItemIcon>
           <ListItemText primary="Logout" />
       </ListItem>
