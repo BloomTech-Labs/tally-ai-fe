@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchBar() {
   const classes = useStyles();
-  const [cuisine, setCuisine] = React.useState('All');
+  const [cuisine, setCuisine] = useState('All');
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
@@ -60,20 +60,28 @@ export default function SearchBar() {
       <Paper component="form" className={classes.root}>
         <FormControl className={classes.iconButton}>
           <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
             value={cuisine}
             onChange={handleChange}
           >
-            <MenuItem value="All">
-              <em>All</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value="All">All</MenuItem>
+            <MenuItem value={1}>American</MenuItem>
+            <MenuItem value={2}>Chinese</MenuItem>
+            <MenuItem value={3}>Cuban</MenuItem>
+            <MenuItem value={4}>Greek</MenuItem>
+            <MenuItem value={5}>Hawaiian</MenuItem>
+            <MenuItem value={6}>Indian</MenuItem>
+            <MenuItem value={7}>Italian</MenuItem>
+            <MenuItem value={8}>Korean</MenuItem>
+            <MenuItem value={9}>Mediterranean</MenuItem>
+            <MenuItem value={10}>Mexican</MenuItem>
+            <MenuItem value={11}>Other</MenuItem>
+            <MenuItem value={12}>Pizza</MenuItem>
+            <MenuItem value={13}>Southern</MenuItem>
+            <MenuItem value={14}>Sushi</MenuItem>
+            <MenuItem value={15}>Thai</MenuItem>
           </Select>
         </FormControl>
 
