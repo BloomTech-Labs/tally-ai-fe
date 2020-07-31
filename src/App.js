@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { Route } from "react-router-dom";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { setUserInfo, getUserInfo, shouldUpdateLoggedInUser } from "./actions/settingsActions";
+import {
+  setUserInfo,
+  getUserInfo,
+  shouldUpdateLoggedInUser,
+} from "./actions/settingsActions";
 import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
 // Components
-import RestrictMobile from "./components/RestrictMobile"
+import RestrictMobile from "./components/RestrictMobile";
 import NavBar from "./components/navbar";
-import Footer from "./components/footer";
 import Search from "./components/search/search.js";
 import SearchPage from "./components/search/SearchPage"
 import DashboardGrid from "./components/dashboard/dashboard";
@@ -20,8 +23,8 @@ import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import DashboardPlus from "./components/dashboard/dashboardPlus";
 import Policy from "./components/TOS/legal";
-
-import { widgets } from "./components/WidgetSystem/WidgetRegistry"
+import Menubar from './components/menubar/Menubar'
+import { widgets } from "./components/WidgetSystem/WidgetRegistry";
 
 function App(props) {
 	useEffect(() => {
@@ -48,76 +51,40 @@ function App(props) {
 				}
 			};
 
-			props.setUserInfo(userInfo);
-		}
-		props.shouldUpdateLoggedInUser(false);
-	}, [props.loggedInUser.shouldUpdate]);
+      props.setUserInfo(userInfo);
+    }
+    props.shouldUpdateLoggedInUser(false);
+  }, [props.loggedInUser.shouldUpdate]);
 
-	return (
-		<div className='App'>
-			{/* <RestrictMobile /> */}
-			<NavBar />
-			<PublicRoute exact path='/' component={SearchPage} />
-			<Route path='/Dashboard/' component={DashboardGrid} />
-			<Route path='/Register/' component={Registration} />
-			<Route path='/Login/' component={Login} />
-			<Route path='/Compset' component={CompSet} />
-			<Route path='/About' component={AboutUs} />
-			<Route path='/Legal/:doc' component={Policy} />
-			<Route path='/DashboardPlus/' component={DashboardPlus} />
-			<PrivateRoute path='/Settings/' component={Settings} />
-			<PrivateRoute path='/Search/:searchMode' exact component={SearchPage} />
-			{/* <Footer /> */}
-		</div>
-	);
+  return (
+    <div className={(localStorage.getItem("token") ? ('displayFlex') : ('App'))}>
+      <RestrictMobile />
+      <NavBar />
+      <PublicRoute exact path='/' component={SearchPage} />
+      <Route path="/Dashboard/" component={DashboardGrid} />
+      <Route path="/Register/" component={Registration} />
+      <Route path="/Login/" component={Login} />
+      <Route path="/Compset" component={CompSet} />
+      <Route path="/About" component={AboutUs} />
+      <Route path="/Menu" component={Menubar} />
+      <Route path="/Legal/:doc" component={Policy} />
+      <Route path="/DashboardPlus/" component={DashboardPlus} />
+      <PrivateRoute path="/Settings/" component={Settings} />
+      <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
+    </div>
+  );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loggedInUser: state.settings.loggedInUser,
-  activeTabs: state.settings.activeTabs
+  success: state.settings.loggedInUser.success,
+  activeTabs: state.settings.activeTabs,
 });
 
 export default withRouter(
-	connect(mapStateToProps, {
-		setUserInfo,
-		getUserInfo,
-		shouldUpdateLoggedInUser
-	})(App)
+  connect(mapStateToProps, {
+    setUserInfo,
+    getUserInfo,
+    shouldUpdateLoggedInUser,
+  })(App)
 );
-
-// {
-//   "first_name": string,
-//   "last_name": string,
-//   "businesses": [
-//       {
-//           "id": integer,
-//           "name": string,
-//           "location": {
-//               "city": string,
-//               "state": string
-//           }
-//           "yelp": {
-//               "id": string,
-//               "yelp_id": string,
-//               "url": string,
-//               "image_url": string
-//           }
-//       },
-//   ],
-//   "favorites": [
-//     {
-//         "id": integer,
-//         "name": string,
-//         "location": {
-//             "city": string,
-//             "state": string
-//         }
-//         "yelp": {
-//             "id": string,
-//             "yelp_id": string,
-//             "url": string,
-//             "image_url": string
-//         }
-//     },
-// ]
-// }

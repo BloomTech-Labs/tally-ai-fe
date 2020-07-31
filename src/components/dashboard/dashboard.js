@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Grid, Paper, Card, CardActionArea, CardHeader, Avatar } from '@material-ui/core'
 import RestaurantIcon from '@material-ui/icons/Restaurant';

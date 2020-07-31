@@ -1,6 +1,14 @@
 .App {
   text-align: center;
 }
+.homeNavLink{
+  text-shadow: black;
+}
+
+.displayFlex {
+  display: grid;
+  
+}
 
 form {
   padding-right: 20px;
@@ -267,8 +275,8 @@ star-rating {
 }
 
 .dashboardgrid {
-  margin-top: 8vh;/* below header */
-  margin-bottom: 5vh;/* above footer */
+  margin-top: 8vh; /* below header */
+  margin-bottom: 5vh; /* above footer */
   display: flex;
   min-height: 100vh; /* Make sure the page's height is at least one page long */
   background-color: #f5f5f5;
@@ -502,8 +510,12 @@ star-rating {
   opacity: 0.5;
 }
 
-
-
+.businessStats {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
 
 #tallyTitle {
   text-decoration: none;
@@ -887,14 +899,13 @@ a {
 }
 
 .widgetThumbnail:hover .widgetPreviewImage {
-
   animation-name: darkenThumbnail;
-  animation-duration: .25s;
+  animation-duration: 0.25s;
   /* prevent the animation from resetting after done playinig */
   animation-fill-mode: forwards;
-  }
+}
 
-  @keyframes darkenThumbnail {
+@keyframes darkenThumbnail {
   /* flex-basis is how big the results column is in this flex row, auto should take whatever is left over from the search-form */
   from {
     filter: brightness(100%);
@@ -919,4 +930,10 @@ a {
   font-size: 100%;
   color: white;
   width: 100%;
+}
+
+.graphContainer {
+  width: 90%;
+  height: 300px;
+  padding-top: 50px;
 }

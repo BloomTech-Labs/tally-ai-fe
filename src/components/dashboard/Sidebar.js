@@ -6,7 +6,7 @@ import { widgets } from "../WidgetSystem/WidgetRegistry";
 import WidgetThumbnail from "../WidgetSystem/WidgetThumbnail";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
-
+import './sidebar.scss'
 import { fetchBusinesses } from "../../actions/businessActions";
 
 const drawerWidth = 375;

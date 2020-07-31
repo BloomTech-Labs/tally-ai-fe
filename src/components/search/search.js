@@ -19,7 +19,7 @@ import HomeBottomSection from "../home/HomeBottomSection";
 import HomePitches from '../home/HomePitches';
 
 import { fetchBusinesses, selectBusiness } from "../../actions/businessActions.js";
-import { searchResultsPlaceholder } from "../../actions/index";
+// import { searchResultsPlaceholder } from "../../actions/index";
 
 import axios from "axios";
 

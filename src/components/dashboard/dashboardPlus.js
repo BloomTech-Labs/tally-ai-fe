@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import AddIcon from '@material-ui/icons/Add';
 
+
 import {
   fetchBusinesses,
   selectBusiness,
@@ -49,7 +50,6 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
-
 }));
 
 function DashboardPlus(props) {
