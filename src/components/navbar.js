@@ -268,23 +268,19 @@ function NavBar(props) {
                 <List>
                   <div className="last-listItem">
                     <ListItem
-                      className="listItem-container"
-                      button
-                      onClick={handleClose}
+                      className="listItem-container3"
                       component={Link}
                       to="/About"
                     >
-                      <ListItemText className="homeNavLink" primary="About" />
+                      <ListItemText  primary="About" />
                     </ListItem>
 
                     <ListItem
-                      className="listItem-container2"
-                      button
-                      onClick={handleClose}
+                      className="listItem-container3"
                       component={Link}
                       to="/Login"
                     >
-                      <ListItemText className="homeNavLink" primary="Sign In" />
+                      <ListItemText  primary="Sign In" />
                     </ListItem>
 
                     <ListItem

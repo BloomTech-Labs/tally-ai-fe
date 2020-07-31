@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import WidgetContainer from "./WidgetContainer";
-import { setActiveWidgets } from "../../actions/index";
+import { setActiveWidgets } from "../../actions/widgetsActions";
 import { connect } from "react-redux";
 
 import { widgets } from "./WidgetRegistry";
