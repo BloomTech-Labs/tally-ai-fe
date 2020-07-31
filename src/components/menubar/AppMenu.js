@@ -54,7 +54,7 @@ const handleLogout = () => {
           <ListItemIcon className={classes.menuItemIcon}>
             <Map />
           </ListItemIcon>
-          <ListItemText primary="Ratings" />
+          <ListItemText primary="Map" />
       </ListItem>
 
 
