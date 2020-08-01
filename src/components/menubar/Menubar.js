@@ -29,7 +29,7 @@ const MenuBar: React.FC = () => {
   )
 }
 
-const drawerWidth = 200
+const drawerWidth = 100
 
 const useStyles = makeStyles(theme => ({
   root: {
