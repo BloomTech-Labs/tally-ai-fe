@@ -28,7 +28,7 @@ const MenuBar: React.FC = () => {
     </div>
   )
 }
-
+//This controls the drawerWidth
 const drawerWidth = 200
 
 const useStyles = makeStyles(theme => ({
