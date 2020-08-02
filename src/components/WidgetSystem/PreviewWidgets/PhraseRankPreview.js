@@ -8,7 +8,7 @@ const PhraseRankPreview = props => {
     return (
         <div>
             <h3>Phrase Sentiment Over Time</h3>
-            <img className="widgetPreviewImage" src={LineGraph}></img>
+            <img className="widgetPreviewImage" alt="Line Graph" src={LineGraph}></img>
         </div>
     );
 }
