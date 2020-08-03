@@ -50,61 +50,20 @@ star-rating {
   justify-content: space-between;
 }
 
-.formFaded {
+/* .formFaded {
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-delay: 0s;
-}
+} */
 
-.search-widget {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  /* background: linear-gradient(347.71deg, #E3F2FD 11.16%, #BBDEFB 82.03%); */
-}
 
-.growSearch {
-  animation-name: search;
-  animation-duration: 1s;
-  animation-delay: 0s;
-  animation-fill-mode: forwards;
-  align-content: left;
-}
 
-.growSearch button {
-  display: flex;
-}
-
-@keyframes search {
-  /* flex-basis is how big the results column is in this flex row, auto should take whatever is left over from the search-form */
-  from {
-    width: 40%;
-    background-color: none;
-  }
-  to {
-    width: 100%;
-    margin-left: 10%;
-    margin-top: 0;
-    margin-right: 10%;
-    background-color: none;
-  }
-}
-
-.search-results {
-  /* flex-basis: 0%; */
-  background: none;
-  width: 0px;
-}
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .search-results::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE and Edge */
-.search-results {
-  -ms-overflow-style: none;
-}
 
 .MuiDrawer-paperAnchorDockedLeft {
   -ms-overflow-style: none;
@@ -522,9 +481,6 @@ star-rating {
   color: white;
 }
 
-.YelpBusinessH1 {
-  font-size: 16px;
-}
 
 .YelpBusinessH2 {
   color: black;
@@ -546,6 +502,7 @@ star-rating {
   padding-top: 35px;
   margin-bottom: 250px;
   text-align: left;
+  flex-wrap: wrap;
 }
 
 .FeatuesTable1 {
@@ -562,6 +519,7 @@ star-rating {
   transition: transform 0.4s;
   margin-left: 3vw;
   margin-right: 3vw;
+  margin-bottom: 3rem;
 }
 
 .FeatuesTable1:hover {
@@ -581,6 +539,7 @@ star-rating {
   transition: transform 0.4s;
   margin-left: 3vw;
   margin-right: 3vw;
+  margin-bottom: 3rem;
 }
 
 .FeatuesTable2:hover {
@@ -682,16 +641,6 @@ star-rating {
   color: white;
 }
 
-.backgroundcolor {
-  min-height: 110vh;
-  background: linear-gradient(
-    185.52deg,
-    #b6e6ff 1.15%,
-    #c2fdff 24.87%,
-    #befff8 36.92%,
-    #ffffff 50.39%
-  );
-}
 
 
 
@@ -802,7 +751,9 @@ className += selected ? " selectedTab" : " unselectedTab"; */
 }
 
 .landing-top-section {
-  width: 100vw;
+  position: fixed;
+  top: 0;
+  right: 0;
   height: 8vh;
   list-style: none;
   display: flex;
