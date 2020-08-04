@@ -16,7 +16,7 @@ function CompSet(props) {
         return (
           <Card className="card">
             <CardActionArea className="card-action-area">
-              <img src={favorite.businessImg}></img>
+              <img src={favorite.businessImg} alt="Bussiness"></img>
               <CardContent>
                 <Typography>
                   <h3>{favorite.businessName}</h3>

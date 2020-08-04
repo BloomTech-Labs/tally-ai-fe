@@ -28,9 +28,10 @@ const MenuBar: React.FC = () => {
     </div>
   )
 }
-
+//Drawer width with more updates
 const drawerWidth = 200
 
+// Material Ui styles
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
