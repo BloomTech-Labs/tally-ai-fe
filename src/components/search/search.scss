@@ -1,0 +1,89 @@
+.search-background {
+  /* min-height: 110vh; */
+  background: url("../images/tallySearchLogo.png"),linear-gradient(
+    185.52deg,
+    #b6e6ff 1.15%,
+    #c2fdff 24.87%,
+    #befff8 36.92%,
+    #ffffff 50.39%
+  );
+
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 60% auto, contain;
+
+  .search-widget {
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+
+    .search-form {
+      height: 70vh;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 16vh;
+      color: black;
+      margin-left: 10%;
+      overflow: "hidden";
+
+      .growSearch {
+        animation-name: search;
+        animation-duration: 1s;
+        animation-delay: 0s;
+        animation-fill-mode: forwards;
+        align-content: left;
+      }
+
+      .growSearch button {
+        display: flex;
+      }
+
+      .YelpBusinessH1 {
+        text-align: left;
+        font-size: 135%;
+        font-weight: 900;
+
+        h1 {
+          padding-left: 2%;
+        }
+      }
+
+      .YelpBusinessH2 {
+        padding-left: 2%;
+        text-align: left;
+      }
+
+      #search-btn {
+        border-radius: 40px;
+        width: 20%;
+      }
+      
+      @keyframes search {
+        /* flex-basis is how big the results column is in this flex row, auto should take whatever is left over from the search-form */
+        from {
+          width: 40%;
+          background-color: none;
+        }
+        to {
+          width: 100%;
+          margin-left: 10%;
+          margin-top: 0;
+          margin-right: 10%;
+          background-color: none;
+        }
+      }
+    }
+
+
+  }
+  .tally-logo {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50%
+  }
+}
+
+

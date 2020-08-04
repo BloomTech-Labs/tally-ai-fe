@@ -19,6 +19,16 @@ import {
 	REMOVE_BUSINESS_FAILURE
 } from '../actions/businessActions'
 
+// 							id: business.id,
+// 							businessId: business.yelp_id, //default tab selected by default
+// 							// for side bar
+// 							businessName: business.name,
+// 							businessImg: business.image_url,
+// 							// for top-of-page info cards
+// 							reviewCount: 0,
+// 							averageRating: 0,
+// 							changeInRating: ''
+
 const initialState = {
 	userBusinesses: {
 		isSetting: false,
@@ -27,21 +37,23 @@ const initialState = {
 	},
 
 	currentlySelectedBusiness: {
-		businessId: null, //default tab selected by default
+		business_id: null, //default tab selected by default
 		// for side bar
 		businessName: null,
 		businessImg: null,
 		// for top-of-page info cards
-		reviewCount: 0,
-		averageRating: 0,
+		review_count: 0,
+		business_stars: 0,
 		changeInRating: '',
-		address: ''
+		address: '',
+		isFetching: false,
+		error: null
 	},
 
 	searchResults: {
 		isFetching: false,
 		error: null,
-		data: null
+		data:  null
 	}
 }
 
@@ -51,7 +63,7 @@ function businessReducer(state = initialState, action) {
 			return {
 				...state,
 				searchResults: {
-					...state.searchResults,
+					data: null,
 					isFetching: true,
 					error: null
 				}
@@ -79,17 +91,31 @@ function businessReducer(state = initialState, action) {
 		case SELECT_BUSINESS_START:
 			return {
 				...state,
-				currentlySelectedBusiness: { ...action.payload } //set data immediatly (missing data that we're waiting on Yelp for)
+				currentlySelectedBusiness: { 
+					...state.currentlySelectedBusiness,
+					business_id: action.payload,
+					isFetching: true,
+					error: null
+				}
 			}
 		case SELECT_BUSINESS_SUCCESS:
+			console.log(action.payload)
 			return {
 				...state,
-				currentlySelectedBusiness: { ...action.payload } //fill in the new address, rating and review count info
+				currentlySelectedBusiness: { 
+					...action.payload, 
+					isFetching: false
+				} 
 			}
 		case SELECT_BUSINESS_FAILURE:
 			return {
 				...state,
-				currentlySelectedBusiness: { ...action.payload } //revert back to old data
+				currentlySelectedBusiness: { 
+					...state.currentlySelectedBusiness,
+					business_id: null,
+					isFetching: false,
+					error: action.payload
+				} 
 			}
 
 		case ADD_BUSINESS_START:

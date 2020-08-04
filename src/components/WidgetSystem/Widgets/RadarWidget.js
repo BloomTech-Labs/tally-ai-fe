@@ -11,7 +11,12 @@ import {
 import { connect } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+import { Typography, Paper,Container } from "@material-ui/core";
+import { useStyles } from "../WidgetRegistry";
+
 const RadarWidget = props => {
+  const classes = useStyles();
+  
   if (props.isFetching || props.error || !props.data) {
     return <div>Not enough data...</div>;
   }
@@ -34,51 +39,55 @@ const RadarWidget = props => {
 
   console.log("RADAR DATA", props.data);
   return (
-    <div className="widget">
-      <h3 className="widgetTitle">Radar Data</h3>
-      <p className="widgetSubtitle">A cool Radar Chart</p>
-      <div className="graphContainer">
-        <ResponsiveContainer            margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 100
-              }}>
-          <RadarChart
-            cx={250}
-            cy={200}
-            outerRadius={110}
-            data={data}
+    <>
+      <Typography variant="h5" className={classes.title}>Radar Data</Typography>
+      <Paper className={classes.paper}>
+        <Typography variant="subtitle1" gutterBottom  className={classes.subTitle} className="widgetSubtitle">A cool Radar Chart</Typography>
+        <Container className={classes.graph}>
+          <ResponsiveContainer            
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 100
+            }}
           >
-            <PolarGrid />
-            <PolarAngleAxis dataKey="subject" />
-            <PolarRadiusAxis angle={30} domain={[0, 100]} />
-            <Radar
-              name="Data 1"
-              dataKey="data1"
-              stroke="blue"
-              fill="blue"
-              fillOpacity={0.6}
-            />
-            <Radar
-              name="Data 2"
-              dataKey="data2"
-              stroke="green"
-              fill="green"
-              fillOpacity={0.6}
-            />
-            <Legend />
-          </RadarChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
+            <RadarChart
+              cx={250}
+              cy={200}
+              outerRadius={110}
+              data={data}
+            >
+              <PolarGrid />
+              <PolarAngleAxis dataKey="subject" />
+              <PolarRadiusAxis angle={30} domain={[0, 100]} />
+              <Radar
+                name="Data 1"
+                dataKey="data1"
+                stroke="blue"
+                fill="blue"
+                fillOpacity={0.6}
+              />
+              <Radar
+                name="Data 2"
+                dataKey="data2"
+                stroke="green"
+                fill="green"
+                fillOpacity={0.6}
+              />
+              <Legend />
+            </RadarChart>
+          </ResponsiveContainer>
+        </Container>
+      </Paper>
+    </>
   );
 };
 
 const mapStateToProps = state => ({
-  data: state.widgetData.radarWidget.data,
-  isFetching: state.widgetData.radarWidget.isFetching,
-  error: state.widgetData.radarWidget.error
+  data: state.widgets.widgetData.radarWidget.data,
+  isFetching: state.widgets.widgetData.radarWidget.isFetching,
+  error: state.widgets.widgetData.radarWidget.error
 });
 
 export default connect(mapStateToProps, {})(RadarWidget);
