@@ -63,7 +63,7 @@ function businessReducer(state = initialState, action) {
 			return {
 				...state,
 				searchResults: {
-					...state.searchResults,
+					data: null,
 					isFetching: true,
 					error: null
 				}
@@ -93,6 +93,7 @@ function businessReducer(state = initialState, action) {
 				...state,
 				currentlySelectedBusiness: { 
 					...state.currentlySelectedBusiness,
+					business_id: action.payload,
 					isFetching: true,
 					error: null
 				}
@@ -110,8 +111,8 @@ function businessReducer(state = initialState, action) {
 			return {
 				...state,
 				currentlySelectedBusiness: { 
-
 					...state.currentlySelectedBusiness,
+					business_id: null,
 					isFetching: false,
 					error: action.payload
 				} 

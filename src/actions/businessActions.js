@@ -1,5 +1,4 @@
 import { axiosWithAuth } from '../auth/axiosWithAuth'
-import { axiosWithYelpAuth } from '../auth/axiosWithYelpAuth'
 
 // Yelp Business Search
 export const FETCH_BUSINESS_START = 'FETCH_BUSINESS_START'
@@ -25,57 +24,33 @@ export const fetchBusinesses = business => dispatch => {
 	console.log('action business query', business)
 
 	const name = business.name
-	//To do!!! set up fetchbusiness to return when user selects business
-	// let location
-
-	// // Check for type of location provided - coords or phrase (ie city, state, etc)?
-	// if (business.location.latitude && business.location.longitude) {
-	// 	location = `latitude=${business.location.latitude}&longitude=${business.location.longitude}`
-	// } else if (business.location) {
-	// 	location = `location=${business.location}`
-	// } else {
-	// 	dispatch({
-	// 		type: FETCH_BUSINESS_FAILURE,
-	// 		payload: 'Business location required'
-	// 	})
-	// }
-	
-	// axiosWithAuth()
-	// 	.post("/business/search", business)
-	// 		.then(res => {
-	// 			console.log(res)
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err)
-	// 		})
-	// Dynamically generate endpoint using provided location and name
-	// const yelpSearchEndpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${name}&${location}` //I've tried like a million different solutions from Google to get this to work without a 403 and a CORS error, maybe someone else has ideas cause I give up
-
-	// dispatch({ type: FETCH_BUSINESS_START })
-	// console.log('Yelp API URL: ', yelpSearchEndpoint)
-	// axiosWithAuth()
-	// 	.post("/business/search", {})
-	// 	.then(res => {
-	// 		dispatch({
-	// 			type: FETCH_BUSINESS_SUCCESS,
-	// 			payload: res.data.businesses
-	// 		})
-	// 	})
-	// 	.catch(err => {
-	// 		dispatch({
-	// 			type: FETCH_BUSINESS_FAILURE,
-	// 			payload: err
-	// 		})
-	// 	})
+		dispatch({
+			type: FETCH_BUSINESS_START,
+		})	
+	axiosWithAuth()
+		.post("/search", business)
+			.then(res => {
+				console.log(res)
+				dispatch({
+					type: FETCH_BUSINESS_SUCCESS,
+					payload: res.data
+				})
+			})
+			.catch(err => {
+				console.log(err)
+				dispatch({
+					type: FETCH_BUSINESS_FAILURE,
+					payload: err
+				})
+			})
 }
 
 export const selectBusiness = (
-	previousBusinessInfo,
 	businessInfo
 ) => dispatch => {
 	//To DO!! update request since new user not signed in can request
 
-	dispatch({type: SELECT_BUSINESS_START})
+	dispatch({type: SELECT_BUSINESS_START, payload: businessInfo.business_id})
 
 	axiosWithAuth()
 		.get(`/business/${businessInfo.business_id}`)
@@ -103,49 +78,15 @@ export const selectBusiness = (
 
 export const addBusiness = (businessInfo, userID) => dispatch => {
 	console.log('business in addBusiness: ', businessInfo)
-	// businessInfo must be in this format
-	//   {
-	//     "name": string,
-	//     "city": string,
-	//     "state": string,
-	//     "yelp": {
-	//         "id": string,
-	//         "yelp_id": string,
-	//         "url": string,
-	//         "image_url": string
-	//     }
-	// }
-
-	let backendFormat = {
-		name: businessInfo.businessName,
-		city: businessInfo.city,
-		state: businessInfo.state,
-		yelp: {
-			yelp_id: businessInfo.business_id,
-			url: businessInfo.url,
-			image_url: businessInfo.image_url
-		}
-	}
 
 	console.log(
 		'\nAdding business to the store...\n',
-		backendFormat,
 		businessInfo
 	)
-	//   business_id: "aC1dn3qBFxgk-OYC3hFMgQ"
-	// businessName: "In The Bowl"
-	// businessImg: "https://s3-media1.fl.yelpcdn.com/bphoto/NpaN9bQ0YsJfI6fEVL5_Qg/o.jpg"
-	// reviewCount: 709
-	// averageRating: 4
-	// changeInRating: ""
-	// url: "https://www.yelp.com/biz/in-the-bowl-seattle-2?adjust_creative=qO78hV4p7yy-o3z8K5osow&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=qO78hV4p7yy-o3z8K5osow"
-	// image_url: "https://s3-media1.fl.yelpcdn.com/bphoto/NpaN9bQ0YsJfI6fEVL5_Qg/o.jpg"
-	// city: "Seattle"
-	// state: "WA"
 	dispatch({ type: ADD_BUSINESS_START })
 	//endpoint
 	axiosWithAuth()
-		.post(`/users/${userID}/business`, backendFormat)
+		.post(`/users/${userID}/business`, businessInfo)
 		.then(res => {
 			dispatch({
 				type: ADD_BUSINESS_SUCCESS,

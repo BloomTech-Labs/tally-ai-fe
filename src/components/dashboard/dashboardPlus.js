@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "3rem",
   },
   addGrid: {
-    margin: "0 5.6rem",
+    margin: "0 5.2rem",
   },
 
   avatar: {
@@ -99,7 +99,7 @@ function DashboardPlus(props) {
           container 
           justify="flex-start" 
           alignItems="center" 
-          spacing={2}
+          spacing={1}
           className={classes.container}
         >
         
@@ -108,7 +108,7 @@ function DashboardPlus(props) {
               return (
                 <Grid item>
                 <Card >
-                  <CardActionArea onClick={() => {  props.selectBusiness(props.selectedBusiness, business); }}> 
+                  <CardActionArea onClick={() => {  props.selectBusiness(business); }}> 
                     <CardHeader
                       avatar={ <Avatar classes={{root: classes.avatar}} alt={business.businessName} src={business.img ? business.img : business.businessName}/> }
                       title={business.businessName}
@@ -147,7 +147,7 @@ function DashboardPlus(props) {
               return (
                 <Grid item>
                   <Card >
-                    <CardActionArea onClick={() => { props.selectBusiness(props.selectedBusiness, competitor); }}> 
+                    <CardActionArea onClick={() => { props.selectBusiness( competitor); }}> 
                       <CardHeader
                         avatar={ <Avatar classes={{root: classes.avatar}} alt={competitor.businessName} src={competitor.img ? competitor.img : competitor.businessName}/> }
                         title={competitor.businessName}

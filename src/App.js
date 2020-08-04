@@ -60,7 +60,7 @@ function App(props) {
     <div className={(localStorage.getItem("token") ? ('displayFlex') : ('App'))}>
       <RestrictMobile />
       <NavBar />
-      <PublicRoute exact path='/' component={SearchPage} />
+      <PublicRoute exact path='/' component={Search} />
       <Route path="/Dashboard/" component={DashboardGrid} />
       <Route path="/Register/" component={Registration} />
       <Route path="/Login/" component={Login} />

@@ -16,7 +16,8 @@ import { CardHeader, Avatar } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) =>({
   card: {
-    maxWidth: "420px",
+    width: "100%",
+    minHeight: "110px",
     marginBottom: theme.spacing(4),
   },
   avatar: {
@@ -30,28 +31,24 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
   
   const classes = useStyles();
 
+  const selectedBusiness = e => {
+      e.preventDefault();
+      setIsSelected(!isSelected);
+      console.log("setting selection to ", data);
+      setTentativeSelection({
+        business_id: data.business_id,
+        businessName: data.name,
+        city: data.city,
+        address: data.address,
+        zipcode: data.zipcode
+      });
+        //select(e);
+  }
+
   return (
     <Card
       className={classes.card}
-      // onClick={e => {
-      //   e.preventDefault();
-      //   setIsSelected(!isSelected);
-      //   console.log("setting selection to ", data);
-      //   setTentativeSelection({
-      //     businessId: data.id,
-      //     businessName: data.name,
-      //     businessImg: data.image_url,
-      //     reviewCount: data.review_count,
-      //     averageRating: data.rating,
-      //     changeInRating: "", //Yelp API doesn't offer this, unless DS can get this somehow, lets just exclude it
-      //     url: data.url,
-      //     image_url: data.image_url,
-      //     city: data.location.city,
-      //     state: data.location.state,
-      //     address: data.location.display_address // Added this for the sidebar; don't have a column in DB yet
-      //   });
-      //     //select(e);
-      // }}
+      onClick={selectedBusiness}
     >
       <CardActionArea>
         <CardHeader

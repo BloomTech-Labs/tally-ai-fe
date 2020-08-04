@@ -5,42 +5,49 @@ import { useHistory } from "react-router-dom";
 import Result from "./result";
 import { selectBusiness, resetSearchResults } from "../../actions/businessActions";
 import './results.scss'
-import dbContains from "../../dbIds";
 
-/*Required business data for Result
-data {
-  image_url
-  name
-  rating (1-5)
-  phone
-    location {
-      address1
-      state
-      zip_code
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+
+
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "5rem",
+    overflow: "auto",
+    "-ms-overflow-style": "none",
+    height: "92%",
+    animation: `$slideIn 1s forwards`,
+    width: "100%",
+    
+    [theme.breakpoints.up('lg')]: {
+      width: "50%",
+      maxWidth: "600px",
+    },
+  },
+  text: {
+    background: "rgba(255, 255, 255, 0.6)",
+    padding: "1rem .4rem",
+    borderRadius: ".4rem",
+  },
+  "@keyframes slideIn": {
+    from: {
+      width: "0px",
+      opacity: "0",
+    },
+    to: {
+      width: "100%",
+      opacity: "1",
     }
-}
-*/
+  }
+}))
 
 const Results = props => {
-  /* 
-    tentativeSelection is made by clicking on the result component.
-    Once tentativeSelection is made, the select button appears.
-    The tentativeSelection contains business information from Yelp,
-    including the businessId used for requests to DS API.
-  */
- 
-/*  
-    ten·ta·tive
-    /ˈten(t)ədiv/
+  const classes = useStyles()
 
-    adjective
-
-    not certain or fixed; provisional.
-    "a tentative conclusion"
-
-    done without confidence; hesitant.
-    "he eventually tried a few tentative steps round his hospital room" 
-*/
   const [tentativeSelection, setTentativeSelection] = useState("");
 
   useEffect(() => {
@@ -59,9 +66,9 @@ const Results = props => {
     - routes the user to the dashboard
   */
   const select = () => {
+    console.log("Select working, tentative", tentativeSelection);
     props.resetSearchResults();
     props.select(tentativeSelection);
-    console.log("Select working, tentative", tentativeSelection);
   };
 
   console.log("props", props);
@@ -73,82 +80,18 @@ const Results = props => {
     active is true if the request to Yelp was successful and the
     search results are in
   */
-  const [active, setActive] = useState();
-
-  useEffect(() => {
-    if (props.businesses.data) {
-      //There are now search results to display from state, lets do our CSS animation and render results
-      setActive(true);
-    }
-  }, [props.businesses.data]);
-
-  //TODO: style loading and error messages
-  if (props.businesses.error) {
-    return <p>Error loading search results...</p>;
-  }
-
-  if (props.businesses.isFetching) {
-    return <p>Loading search results...</p>;
-  }
-
-  if (!active) {
-    //we don't want to try to render until state has been touched
-    return <></>;
-  }
-
   if(!props.businesses.data){
-    return <div></div>
+    return null
   }
-
-  // if (props.businesses.data.length === 0) {
-  //   return <h2>No results found</h2>;
-  // } else {
-    let animationClass = "";
-    let fadeForm = document.querySelector(".search-form");
-
-    if (active) {
-      animationClass = " expand-search-results";
-      fadeForm.classList.add("formFaded");
-    }
-    console.log("Animation class", animationClass);
-
-    // const results = props.businesses.data.reduce((acc, result) => //acc?
-    //     // For now, only render results that already exist in the database
-    //     dbContains(result.id)
-    //       ? [...acc, ( 
-    //         <Result
-    //           data={result}
-    //           select={select}
-    //           key={result.id}
-    //           setTentativeSelection={setTentativeSelection}
-    //           className={`result ${
-    //             result.id === tentativeSelection.businessId
-    //               ? "selected"
-    //               : "not-selected"
-    //           }`}
-    //         />
-    //       )]
-    //       : acc
-    //       , []
-    // );
-
-    const Sorry = () => (
-      <div>
-        <h2>Sorry, your business is not currently supported, please try a cafe in Phoenix, AZ!</h2>
-      </div>
-    );
-
-    const NoResults = () => (
-      <div>
-        <h2>Sorry, no results for this business.</h2>
-      </div>
-    );
-    
 
     return (
-      <div className={"search-results" + animationClass}>
+      <div 
+        className={classes.container}
+      >      
+        {props.businesses.error ? <Typography align="center" variant="h4">Error Searching.</Typography>: null}
+        {props.businesses.isFetching  ? <Typography align="center" variant="h4" className={classes.text}>Loading Search Results...</Typography>: null}
         {
-          props.businesses.data.length 
+          props.businesses.data.length > 0
             ? (props.businesses.data.map((result)=>{
               return (
                 <Result
@@ -164,11 +107,13 @@ const Results = props => {
                 />
               )
             }))
-            : <NoResults />
+            : 
+              <Typography align="center" variant="h3" className={classes.text}>No results Found</Typography>
+            
         }
       </div>
     );
-  // }
+
 };
 
 const mapStateToProps = state => ({

@@ -8,10 +8,6 @@ import Button from "@material-ui/core/Button";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "./results";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import HomeIcons from "../home/homeIcons"
 import HomeInfo from "../home/HomeInfoText";
 import HomeFeatures from "../home/HomeFeatures";
@@ -20,6 +16,8 @@ import HomePitches from '../home/HomePitches';
 
 import { fetchBusinesses, selectBusiness } from "../../actions/businessActions.js";
 // import { searchResultsPlaceholder } from "../../actions/index";
+
+import "./search.scss"
 
 import axios from "axios";
 
@@ -42,10 +40,6 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		marginTop: '1%'
 	},
-	dense: {
-		marginTop: theme.spacing(2)
-	},
-
 	button: {
 	margin: "2rem auto 0 auto",
 	width: '6rem',
@@ -53,9 +47,6 @@ const useStyles = makeStyles(theme => ({
 	color: 'white',
 	borderRadius:'20px',
 	},
-	input: {
-		display: 'none'
-	}
 }))
 
 const Search = props => {
@@ -68,14 +59,13 @@ const Search = props => {
 	function resultsSelection(selection) {
 		console.log('Selection: ', selection)
 
-		props.selectBusiness(props.selectedBusiness, selection)
+		props.selectBusiness(selection)
 
 		props.history.push('/dashboard')
 	}
 
 	useEffect(() => {
 		if (searchLocation.latitude && searchLocation.longitude) {
-			//The searchLocation has changed to use latitude and a logitude, lets get the user friendly location from these coords and fill in the location field with it
 			axios
 				.get(
 					`https://us1.locationiq.com/v1/reverse.php?key=${mapsKey}&lat=${searchLocation.latitude}&lon=${searchLocation.longitude}&format=json`
@@ -91,30 +81,15 @@ const Search = props => {
 	}, [searchLocation])
 
 	return (
-		<div className='backgroundcolor'>
+		<div className='search-background'>
 			<div>
 				<div
 					className='search-widget'
-					style={{
-						backgroundSize: 'cover'
-					}}
 				>
-					{/* <h1>See what customers are saying about your business!</h1> */}
-
 					<div
 						className='search-form'
-						style={{
-							height: '100vh',
-							width: '100%',
-							display: 'flex',
-							justifyContent: 'flex-start',
-							marginTop: '16vh',
-							color: 'black',
-							marginLeft: '10%'
-						}}
 					>
-		
-						{/* <h1>Search for a business to get started</h1> */}
+
 						<form
 							className={
 								props.searchResults ? ' growSearch' : classes.container
@@ -122,19 +97,13 @@ const Search = props => {
 						>
 							<div
 								className='YelpBusinessH1'
-								style={{
-									textAlign: 'left',
-									fontSize: '135%',
-									fontWeight: '900'
-								}}
 							>
-								<h1 style={{ paddingLeft: '2%' }}>
+								<h1>
 									See what customers are saying about your business!
 								</h1>
 							</div>
 							<h2
 								className='YelpBusinessH2'
-								style={{ paddingLeft: '2%', textAlign: 'left' }}
 							>
 								Search for a Yelp Business to get started
 							</h2>
@@ -154,7 +123,7 @@ const Search = props => {
 								}}
 							/>
 							<TextField
-								label='City or State'
+								label='City'
 								value={
 									searchLocation.longitude && searchLocation.latitude
 										? readableLocation
@@ -167,7 +136,7 @@ const Search = props => {
 								placeholder={
 									searchLocation.logitude && searchLocation.latitude
 										? readableLocation
-										: 'City or State'
+										: 'City'
 								}
 								onChange={e => {
 									setSearchLocation(e.target.value)
@@ -201,10 +170,10 @@ const Search = props => {
 								type='submit'
 								onClick={e => {
 									e.preventDefault()
-									// props.searchResultsPlaceholder(placeholderBusinesses);
 									props.fetchBusinesses({
 										name: searchTerm,
-										city: searchLocation
+										city: searchLocation,
+										
 									})
 								}}
 							>
@@ -215,31 +184,19 @@ const Search = props => {
 					<Results select={resultsSelection} />
 				</div>
 
-				{/*  closes div containing backgroundcolor */}
-				{/* Made it conditionally render the content at the bottom of the landing page. Once the results come in, the marketing content disappears */}
+			
+				
 				{!props.searchResults ? (
+					
 					<div>
-						<img
-							src={tallySearchLogo}
-							alt='tally search logo'
-							style={{
-								position: 'absolute',
-								top: '0px',
-								right: '0px',
-								width: '50%'
-							}}
-						/>
-						<div>
-							<HomeIcons />
-							<HomeInfo />
-							<HomeFeatures />
-							<HomePitches />
-							<HomeBottomSection />
-						</div>
+						<HomeIcons />
+						<HomeInfo />
+						<HomeFeatures />
+						<HomePitches />
+						<HomeBottomSection />
 					</div>
-				) : (
-					<div></div>
-				)}
+					
+				) : null}
 			</div>
 		</div>
 	)

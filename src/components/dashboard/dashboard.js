@@ -19,12 +19,11 @@ import DashboardPlus from './dashboardPlus'
 const useStyles = makeStyles(theme => ({
 	root: {
 		padding: "2rem 32px 0 32px",
-		margin: "4.6rem 0 4.6rem 0",
+		margin: "4.6rem 0 0 13rem",
 		textAlign: "center",
 		[theme.breakpoints.up("lg")] :{
-			maxWidth : "1024px",
-			marginLeft : "auto",
-			marginRight : "auto"
+			width : "996px",
+			margin: "4.6rem auto 4.6rem auto",
 		},
 		minWidth: "324px",
 	},
@@ -89,7 +88,7 @@ function DashboardGrid(props) {
 			businessesContains(props.businessInfo.business_id) ||
 			!localStorage.getItem('token')
 		) {
-			props.fetchAllData(props.id)
+			props.fetchAllData(props.businessInfo.business_id)
 		}
 
 

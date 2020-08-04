@@ -17,7 +17,6 @@ import RatingOverTimePreview from "./PreviewWidgets/RatingOverTimePreview";
 
 import NegativeWords from "./Widgets/NegativeWords";
 import NegativeWordsPreview from "./PreviewWidgets/NegativeWordsPreview";
-import { Subtitles } from "@material-ui/icons";
 
 
 //Update this array whenever a new widget is added

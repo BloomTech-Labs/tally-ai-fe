@@ -205,9 +205,9 @@ function NavBar(props) {
         //     </div>
         //   </Toolbar>
         // </AppBar>
-      //) : //not logged in
-      // isOnDashboard() ? (
-      //   <MenuBar />
+      ) : //not logged in
+      isOnDashboard() ? (
+        <MenuBar />
       //   // <AppBar className="dashboard-bar">
       //   //   <Toolbar className="dash-toolbar">
       //   //     <div className="toolbar-div1">
