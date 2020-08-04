@@ -54,17 +54,19 @@ img{
 .wavy-line{
     h1{
         position: absolute;
-        margin-left: 280px;
-        margin-top: 280px;
+        margin-left: 5rem;
+        margin-top: 5rem;
         width: 380px;
         height: 167px;
         text-align: right;
         font-weight: 900;
     }
+
+
     .bottom-h1-info{
         position: absolute;
         margin-top: -350px;
-        left: 60%;
+        right: 0;
         width: 380px;
         line-height: 50px;
         font-weight: 900;

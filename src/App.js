@@ -10,11 +10,11 @@ import {
 } from "./actions/settingsActions";
 import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
-import SearchPage from "./components/SearchPage";
 // Components
 import RestrictMobile from "./components/RestrictMobile";
 import NavBar from "./components/navbar";
-import Search from "./components/search.js";
+import Search from "./components/search/search.js";
+import SearchPage from "./components/search/SearchPage"
 import DashboardGrid from "./components/dashboard/dashboard";
 import Registration from "./components/authentication/Registration";
 import Login from "./components/authentication/Login";
@@ -27,29 +27,29 @@ import Menubar from './components/menubar/Menubar'
 import { widgets } from "./components/WidgetSystem/WidgetRegistry";
 
 function App(props) {
-  useEffect(() => {
-    console.log("getting user data");
-    if (localStorage.getItem("token") && localStorage.getItem("userID")) {
-      //we're logged in but there's no user info in the store, lets fix that
+	useEffect(() => {
+		console.log('getting user data');
+		if (localStorage.getItem('token') && localStorage.getItem('userID') && props.loggedInUser.shouldUpdate) {
+			//we're logged in but there's no user info in the store, lets fix that
 
-      props.getUserInfo(localStorage.getItem("userID"));
-    } else {
-      //do we need to delete anything from state when they log out?
-      let userInfo = {
-        competitors: [],
-        loggedInUser: { firstName: null, lastName: null },
-        businesses: [],
-        activeWidgets: [widgets[0].name, widgets[1].name],
-        activeTabs: ["defaultTab"],
-        currentlySelectedBusiness: {
-          businessId: null,
-          businessName: null,
-          businessImg: null,
-          reviewCount: 0,
-          averageRating: 0,
-          changeInRating: "",
-        },
-      };
+			props.getUserInfo(localStorage.getItem('userID'));
+		} else {
+			//do we need to delete anything from state when they log out?
+			let userInfo = {
+				competitors: [],
+				loggedInUser: { firstName: null, lastName: null },
+				businesses: [],
+				activeWidgets: [widgets[0].name, widgets[1].name, widgets[2].name, widgets[3].name, widgets[4].name],
+				activeTabs: ['defaultTab'],
+				currentlySelectedBusiness: {
+					business_id: null,
+					businessName: null,
+					businessImg: null,
+					review_count: 0,
+					business_stars: 0,
+					changeInRating: ''
+				}
+			};
 
       props.setUserInfo(userInfo);
     }
@@ -60,7 +60,7 @@ function App(props) {
     <div className={(localStorage.getItem("token") ? ('displayFlex') : ('App'))}>
       <RestrictMobile />
       <NavBar />
-      <PublicRoute exact path="/" component={Search} />
+      <PublicRoute exact path='/' component={Search} />
       <Route path="/Dashboard/" component={DashboardGrid} />
       <Route path="/Register/" component={Registration} />
       <Route path="/Login/" component={Login} />

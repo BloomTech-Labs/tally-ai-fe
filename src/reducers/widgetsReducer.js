@@ -59,7 +59,7 @@ const initialState = {
           data: null
         },
        
-      }, activeWidgets: [widgets[0].name, widgets[1].name]
+      }, activeWidgets: [widgets[0].name, widgets[1].name, widgets[2].name, widgets[3].name, widgets[4].name]
 }
 
 const widgetsReducer = (state=initialState, action) => {
