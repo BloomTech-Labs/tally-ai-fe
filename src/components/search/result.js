@@ -54,7 +54,7 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
       className={className}
     >
 
-      <img src={data.image_url} />
+      <img src={data.image_url} alt="data url"/>
       <div className="result-text">
         <h2>{data.name}</h2>
         <StarRatings
