@@ -26,6 +26,8 @@ import Policy from "./components/TOS/legal";
 import Menubar from './components/menubar/Menubar'
 import { widgets } from "./components/WidgetSystem/WidgetRegistry";
 
+import SearchBar from './components/dashboard/SearchBar'
+
 function App(props) {
   useEffect(() => {
     console.log("getting user data");
@@ -60,7 +62,7 @@ function App(props) {
     <div className={(localStorage.getItem("token") ? ('displayFlex') : ('App'))}>
       <RestrictMobile />
       <NavBar />
-      <PublicRoute exact path="/" component={Search} />
+      <PublicRoute exact path="/" component={SearchBar} />
       <Route path="/Dashboard/" component={DashboardGrid} />
       <Route path="/Register/" component={Registration} />
       <Route path="/Login/" component={Login} />
