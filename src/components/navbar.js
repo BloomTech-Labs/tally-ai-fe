@@ -260,9 +260,7 @@ function NavBar(props) {
         <AppBar className="last-bar">
           <Toolbar className="last-toolbar">
             <div className="toolbar-div1">
-              <Link className="dash-link" to="/">
-                <h1>tally</h1>
-              </Link>
+              
             </div>
             <div className="last-div">
               <div className="last-listDiv">
