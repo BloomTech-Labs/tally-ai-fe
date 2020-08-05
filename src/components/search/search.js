@@ -28,7 +28,7 @@ const mapsKey = process.env.REACT_APP_MAPS_KEY;
 const useStyles = makeStyles(theme => ({
 	container: {
 		display: 'flex',
-		flexWrap: 'wrap',
+		flexWrap: 'no-wrap',
 		flexDirection: 'column',
 		textAlign: 'left',
 		alignContent: 'center',
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 		marginTop: '1%'
 	},
 	button: {
-	margin: "2rem auto 0 auto",
+	margin: "1.5rem auto 0 auto",
 	width: '6rem',
 	backgroundColor: '#1E4DC7',
 	color: 'white',
