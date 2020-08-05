@@ -259,7 +259,7 @@ function NavBar(props) {
         : (
         <AppBar className="last-bar">
           <Toolbar className="last-toolbar">
-            <div classname="toolbar-div1">
+            <div className="toolbar-div1">
               <Link className="dash-link" to="/">
                 <h1>tally</h1>
               </Link>
