@@ -9,16 +9,14 @@ import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "./results";
 
-import {
-  addCompetitor,
-  removeCompetitor,
-} from "../../actions/competitorsActions";
 
 import {
   fetchBusinesses,
   selectBusiness,
   addBusiness,
-  removeBusiness
+  removeBusiness,
+  addCompetitor,
+  removeCompetitor,
 } from '../../actions/businessActions';
 
 import axios from "axios";
@@ -115,8 +113,6 @@ const SearchPage = props => {
 		}
 	}, [searchLocation])
 
-  console.log("SearchMode ", props.match.params);
-
   function Title(params) {
     if(params.searchMode === "business"){
       return <h1>Search for your Business</h1>
@@ -212,8 +208,8 @@ const SearchPage = props => {
 };
 
 const mapStateToProps = state => ({
-  competitors: state.competitor.competitors.businesses,
-  businesses: state.business.userBusinesses.businesses,
+  competitors: state.business.competitors,
+  businesses: state.business.businesses, 
   selectedBusiness: state.business.currentlySelectedBusiness,
   searchResults : state.business.searchResults
 });

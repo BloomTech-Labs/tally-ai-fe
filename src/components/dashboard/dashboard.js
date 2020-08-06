@@ -92,53 +92,12 @@ function DashboardGrid(props) {
 		}
 
 
-	}, [props.businessInfo, props.competitors, props.userBusinesses])
+	}, [props.businessInfo.business_id, props.competitors, props.userBusinesses])
 
 	return (
 		<Grid className={classes.root}>
 			<>
-				{localStorage.getItem('token') && localStorage.getItem('userID') ? (
-					<>
-						{businessesContains(props.businessInfo.business_id) ? (
-							<Grid justify="center">
-								<Grid container className={classes.businessContainer}>
-									{/* <Card className={classes.card}>
-										<CardActionArea disableSpacing className={classes.actions}>
-											<CardHeader
-												avatar={
-													<Avatar className={classes.avatar} src={props.businessInfo.businessImg ? props.businessInfo.businessImg : null}>
-
-														<RestaurantIcon/>
-													</Avatar>
-												}
-												title={props.businessInfo.businessName}
-												subheader={props.businessInfo.address}
-
-											/>
-										</CardActionArea>
-									</Card> */}
-									<Paper  variant="outlined" className={classes.paper} >
-										<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
-										
-										<p>Total Reviews</p>
-									</Paper>
-									<Paper  variant="outlined" className={classes.paper} >
-										<p className={classes.count} >{props.businessInfo.business_stars} stars</p>
-										<p>Overall Rating</p>
-									</Paper>
-									<Paper  variant="outlined" className={classes.paper}>
-										<p className={classes.count} >{props.businessInfo.change_in_rating}</p>
-										<p>Change in Rating</p>
-									</Paper>
-								</Grid>
-								
-								<WidgetDisplayList />
-							</Grid>
-						) : (
-							<DashboardPlus /> 
-						)}
-					</>
-				) : props.businessInfo.business_id ? ( //if a business is selected
+				{props.businessInfo.business_id ? (
 					<Grid justify="center">
 						<Grid container className={classes.businessContainer}>
 							{/* <Card className={classes.card}>
@@ -157,7 +116,7 @@ function DashboardGrid(props) {
 								</CardActionArea>
 							</Card> */}
 							<Paper  variant="outlined" className={classes.paper} >
-								<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
+								{/* <p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p> */}
 								
 								<p>Total Reviews</p>
 							</Paper>
@@ -174,10 +133,13 @@ function DashboardGrid(props) {
 						<WidgetDisplayList />
 					</Grid>
 				) : (
-					console.log(
-						'Redirecting cause no business selected while on dashboard. Business selected:',
-						props.businessInfo.business_id
-					) & props.history.push('/') 
+						localStorage.getItem('token') && localStorage.getItem('userID') ? <DashboardPlus/> : (
+						console.log(
+							'Redirecting cause no business selected while on dashboard. Business selected:',
+							props.businessInfo.business_id
+						) & props.history.push('/') 
+					) 
+					
 				)}
 			</>
 		</Grid>
@@ -203,11 +165,11 @@ function DashboardGrid(props) {
 const mapStateToProps = state => ({
 	id: state.business.currentlySelectedBusiness.business_id,
 	businessInfo: state.business.currentlySelectedBusiness,
-	businesses: state.business.userBusinesses.businesses.concat(
-		state.competitor.competitors.businesses
+	businesses: state.business.businesses.concat(
+		state.business.competitors
 	),
-	userBusinesses: state.business.userBusinesses.businesses,
-	competitors: state.competitor.competitors.businesses
+	userBusinesses: state.business.businesses,
+	competitors: state.business.competitors,
 })
 
 export default connect(mapStateToProps, {

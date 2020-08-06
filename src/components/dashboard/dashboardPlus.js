@@ -12,12 +12,12 @@ import {
   fetchBusinesses,
   selectBusiness,
   addBusiness,
-  removeBusiness
+  removeBusiness,
+  addCompetitor,
+  removeCompetitor, 
    
 } from "../../actions/businessActions";
 
-import {addCompetitor,  
-  removeCompetitor, } from '../../actions/competitorsActions'
 
 import { CardActionArea, Grid, Typography, Box, Card,Tooltip,Fab, CardHeader,Avatar } from "@material-ui/core";
 
@@ -177,8 +177,8 @@ function DashboardPlus(props) {
 }
 
 const mapStateToProps = state => ({
-  competitors: state.competitor.competitors.businesses,
-  businesses: state.business.userBusinesses.businesses,  
+  competitors: state.business.competitors,
+  businesses: state.business.businesses,  
   selectedBusiness: state.business.currentlySelectedBusiness
 });
 
