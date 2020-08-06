@@ -3,12 +3,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import Tooltip from "@material-ui/core/Tooltip";
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+
 
 import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 
 
 import {
@@ -22,33 +19,49 @@ import {
 import {addCompetitor,  
   removeCompetitor, } from '../../actions/competitorsActions'
 
-const mapsKey = process.env.REACT_APP_MAPS_KEY;
+import { CardActionArea, Grid, Typography, Box, Card,Tooltip,Fab, CardHeader,Avatar } from "@material-ui/core";
+
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    transitionDuration: "0.3s",
-    width: "25%",
-    height: "40%",
-    margin: 20,
-    padding: 20,
-    borderRadius: 20,
-    position: "relative"
+  root: {
+    minHeight: "calc(100vh - 6.6rem)",
+  },
+  container: {
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center"
+    },
+  },  
+  box: {
+    margin: "1rem 0 1rem 0",
+    textAlign: "left",
+    width: "100%",
 
   },
- 
+  boxFont: {
+    fontWeight: "bold",
+    marginBottom: "3rem",
+  },
+  addGrid: {
+    margin: "0 5.2rem",
+  },
+
+  avatar: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
 }));
 
 function DashboardPlus(props) {
   const classes = useStyles();
 
   //get the currently selected tab, and set it to the newly selected business
+  //this might be deleted since we are not using tabs no more
   function modifyActiveTab(business) {
 
     let contains = null;
     props.activeTabs.forEach((tab) => {
-      if (tab.businessId === business.businessId) {
+      if (tab.business_id === business.business_id) {
         contains = tab;
       }
     })
@@ -56,12 +69,12 @@ function DashboardPlus(props) {
       props.selectBusiness(props.selectedBusiness, contains);//the user is trying to add a business that they already have a tab open for, just set that tab as selected
     } else {
       props.activeTabs.forEach((tab) => {
-        if (tab.businessId === props.selectedBusiness.businessId) {//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
-          console.log("Got active tab");
+        if (tab.business_id === props.selectedBusiness.business_id) {//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
+          
           let tabIndex;
-          let newTabsArray = props.activeTabs.filter((item, index) => { console.log("FILTER INDEX", index); if(item.businessId === tab.businessId) { tabIndex = index;} return item.businessId != tab.businessId });//remove the tab we want to modify
+          let newTabsArray = props.activeTabs.filter((item, index) => {  if(item.business_id === tab.business_id) { tabIndex = index;} return item.business_id != tab.business_id });//remove the tab we want to modify
           newTabsArray.splice(tabIndex, 0, {...business});//add back the tab but with the new name
-          console.log("Adding tab at index", tabIndex);
+          
           props.setActiveTabs(props.activeTabs, newTabsArray, localStorage.getItem("userID"))
         }
       })
@@ -70,65 +83,96 @@ function DashboardPlus(props) {
   }
 
   return (
-    <div>
-      <div className="business-results">
-        {/* <div style={{ width: "100%", height: "60vh", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around" }}> */}
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="flex-start"
+      className={classes.root}
+    >
 
-        <h2  className="h2dashboard" >My Businesses</h2>
-        <Tooltip title="Add a Business" arrow>
-          <Card className="card" onClick={() => { props.history.push("/search/business") }}>
-            <Fab disabled aria-label="add" >
-              <AddIcon />
-            </Fab>
-          </Card>
-        </Tooltip>
-        {console.log("Displaying business images of businesses: ", props.businesses)}
-        {
-          props.businesses.slice(0, 10).map(business => {
-            return (
-              <Card className="card"onClick={() => { modifyActiveTab(business); props.selectBusiness(props.selectedBusiness, business); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
-                <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeBusiness(business.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}} />
-                </Tooltip>
-                <h3>{business.businessName}</h3>
-                <img src={business.businessImg} />
-              </Card>
-            )
-          })
-        }
-        {/* </div> */}
-      </div>
-      <div className="competitors-results">
+      <Box className={classes.box}>
+        
+        <Typography variant="h4" component="h2" gutterBottom className={classes.boxFont}>My Businesses</Typography>
+        
+        <Grid 
+          container 
+          justify="flex-start" 
+          alignItems="center" 
+          spacing={1}
+          className={classes.container}
+        >
+        
+          {
+            props.businesses.slice(0, 10).map(business => {
+              return (
+                <Grid item>
+                <Card >
+                  <CardActionArea onClick={() => {  props.selectBusiness(business); }}> 
+                    <CardHeader
+                      avatar={ <Avatar classes={{root: classes.avatar}} alt={business.businessName} src={business.img ? business.img : business.businessName}/> }
+                      title={business.businessName}
+                      subheader={business.address}
+                      
+                    />
+                  </CardActionArea>
+                </Card>
+                </Grid>
+              )
+            })
+          }
+            <Grid className={classes.addGrid} item>
+              <Tooltip title="Add a Business" arrow>
+                <Fab aria-label="add" onClick={() => { props.history.push("/search/business") }} >
+                  <AddIcon fontSize="large"/>  
+                </Fab>
+              </Tooltip>
+            </Grid >
+        </Grid>
+      </Box>
+      <Box className={classes.box}>
 
-        <h2 className="h2dashboard">My Competitors</h2>
+        <Typography variant="h4" component="h2" gutterBottom className={classes.boxFont}>My Competitors</Typography>
+
+        <Grid 
+          container 
+          justify="flex-start" 
+          alignItems="center" 
+          spacing={2}
+          className={classes.container}
+        >
+          
+          {
+            props.competitors.slice(0, 10).map(competitor => {
+              return (
+                <Grid item>
+                  <Card >
+                    <CardActionArea onClick={() => { props.selectBusiness( competitor); }}> 
+                      <CardHeader
+                        avatar={ <Avatar classes={{root: classes.avatar}} alt={competitor.businessName} src={competitor.img ? competitor.img : competitor.businessName}/> }
+                        title={competitor.businessName}
+                        subheader={competitor.address}
+                        
+                      />
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              )
+            })
+          }
+          
+          <Grid className={classes.addGrid} item>
+              <Tooltip title="Add a Competitor" arrow>
+                <Fab aria-label="add-competitor" onClick={() => { props.history.push("/search/competitor") }} >
+                  <AddIcon fontSize="large"/>  
+                </Fab>
+              </Tooltip>
+            </Grid >
 
 
-        <Tooltip title="Add a Competitor" arrow>
-
-          <Card className={classes.card} onClick={() => { props.history.push("/search/competitor") }} style={{ justifyContent: 'center', alignItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
-            <Fab disabled aria-label="add" >
-              <AddIcon />
-            </Fab>
-          </Card>
-        </Tooltip>
-
-
-        {
-          props.competitors.slice(0, 10).map(competitor => {
-            return (
-              <Card className="card" onClick={() => { modifyActiveTab(competitor); props.selectBusiness(props.selectedBusiness, competitor); }} style={{ justifyContent: 'center', alightItems: 'center', height: "20vh", cursor: "pointer", width: "15vw", backgroundColor: "#D7E2EB" }}>
-                <Tooltip title="Delete" arrow>
-                <DeleteForeverOutlinedIcon onClick={(event) => event.stopPropagation() & props.removeCompetitor(competitor.id, localStorage.getItem("userID"))} style={{position:"absolute", top:"0", right:"0", left:"auto", margin:"1vh"}}>
-                </DeleteForeverOutlinedIcon>
-                </Tooltip>
-                <h3>{competitor.businessName}</h3>
-                <img src={competitor.businessImg} />
-              </Card>
-            )
-          })
-        }
-      </div>
-    </div>
+        </Grid>
+      </Box>
+    </Grid>
   )
 }
 

@@ -208,60 +208,59 @@ function NavBar(props) {
       ) : //not logged in
       isOnDashboard() ? (
         <MenuBar />
-        // <AppBar className="dashboard-bar">
-        //   <Toolbar className="dash-toolbar">
-        //     <div className="toolbar-div1">
-        //       <Link className="dash-link" to="/">
-        //         <h1>tally</h1>
-        //       </Link>
-        //     </div>
-        //     <div className="dash-div">
-        //       <div className="list-container">
-        //         <List>
-        //           <div className="list-div2">
-        //             <ListItem
-        //               className="list-item"
-        //               button
-        //               onClick={handleClose}
-        //               component={Link}
-        //               to="/About"
-        //             >
-        //               <ListItemText className="homeNavLink" primary="About" />
-        //             </ListItem>
+      //   // <AppBar className="dashboard-bar">
+      //   //   <Toolbar className="dash-toolbar">
+      //   //     <div className="toolbar-div1">
+      //   //       <Link className="dash-link" to="/">
+      //   //         <h1>tally</h1>
+      //   //       </Link>
+      //   //     </div>
+      //   //     <div className="dash-div">
+      //   //       <div className="list-container">
+      //   //         <List>
+      //   //           <div className="list-div2">
+      //   //             <ListItem
+      //   //               className="list-item"
+      //   //               button
+      //   //               onClick={handleClose}
+      //   //               component={Link}
+      //   //               to="/About"
+      //   //             >
+      //   //               <ListItemText className="homeNavLink" primary="About" />
+      //   //             </ListItem>
 
-        //             <ListItem
-        //               className="list-item"
-        //               button
-        //               onClick={handleClose}
-        //               component={Link}
-        //               to="/Login"
-        //             >
-        //               <ListItemText className="homeNavLink" primary="Sign In" />
-        //             </ListItem>
+      //   //             <ListItem
+      //   //               className="list-item"
+      //   //               button
+      //   //               onClick={handleClose}
+      //   //               component={Link}
+      //   //               to="/Login"
+      //   //             >
+      //   //               <ListItemText className="homeNavLink" primary="Sign In" />
+      //   //             </ListItem>
 
-        //             <ListItem
-        //               className="list-item2"
-        //               component={Link}
-        //               to="/Register"
-        //             >
-        //               <ListItemText
-        //                 style={{ background: "#67FFD2;" }}
-        //                 primary="Sign Up"
-        //               />
-        //             </ListItem>
-        //           </div>
-        //         </List>
-        //       </div>
-        //     </div>
-        //   </Toolbar>
-        // </AppBar>
-      ) : (
+      //   //             <ListItem
+      //   //               className="list-item2"
+      //   //               component={Link}
+      //   //               to="/Register"
+      //   //             >
+      //   //               <ListItemText
+      //   //                 style={{ background: "#67FFD2;" }}
+      //   //                 primary="Sign Up"
+      //   //               />
+      //   //             </ListItem>
+      //   //           </div>
+      //   //         </List>
+      //   //       </div>
+      //   //     </div>
+      //   //   </Toolbar>
+      //   // </AppBar>
+          ) 
+        : (
         <AppBar className="last-bar">
           <Toolbar className="last-toolbar">
-            <div classname="toolbar-div1">
-              <Link className="dash-link" to="/">
-                <h1>tally</h1>
-              </Link>
+            <div className="toolbar-div1">
+              
             </div>
             <div className="last-div">
               <div className="last-listDiv">
