@@ -5,8 +5,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -56,7 +54,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div style={{ backgroundColor: 'gray', height: "100vh", display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
       <Paper component="form" className={classes.root}>
         <FormControl className={classes.iconButton}>
           <Select
@@ -91,6 +89,7 @@ export default function SearchBar() {
           className={classes.input}
           placeholder="Search for a business"
           inputProps={{ 'aria-label': 'search for a business' }}
+          onChange={e => console.log(e.target.value)}
         />
         <IconButton type="submit" className={{ ...classes.iconButton, paddingRight: 0 }} aria-label="search">
           <SearchIcon />

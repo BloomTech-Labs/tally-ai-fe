@@ -6,6 +6,7 @@ import RestaurantIcon from '@material-ui/icons/Restaurant';
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 
+import SearchBar from './SearchBar'
 
 
 import {
@@ -21,13 +22,13 @@ const useStyles = makeStyles(theme => ({
 		padding: "2rem 32px 0 32px",
 		margin: "4.6rem 0 0 13rem",
 		textAlign: "center",
-		[theme.breakpoints.up("lg")] :{
-			width : "996px",
+		[theme.breakpoints.up("lg")]: {
+			width: "996px",
 			margin: "4.6rem auto 4.6rem auto",
 		},
 		minWidth: "324px",
 	},
-	businessContainer : {
+	businessContainer: {
 		justifyContent: "space-around",
 		alignItems: "center"
 	},
@@ -40,18 +41,18 @@ const useStyles = makeStyles(theme => ({
 			height: theme.spacing(14),
 			flex: "0 0 100%",
 			marginBottom: "2rem"
-			},
+		},
 	},
 	avatar: {
 		width: theme.spacing(7),
-    	height: theme.spacing(7),
+		height: theme.spacing(7),
 	},
 	actions: {
 		height: "100%",
 	},
 	paper: {
 		padding: theme.spacing(1),
-		display:"flex",
+		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
 		justifyContent: "center",
@@ -60,18 +61,18 @@ const useStyles = makeStyles(theme => ({
 		width: theme.spacing(30),
 		height: theme.spacing(8),
 		[theme.breakpoints.down("sm")]: {
-		width: theme.spacing(18),
-		height: theme.spacing(6)
+			width: theme.spacing(18),
+			height: theme.spacing(6)
 		},
-		"& > *" : {
+		"& > *": {
 			margin: "0px",
 			color: "black",
 		},
-		[theme.breakpoints.down("xs")]: { 
+		[theme.breakpoints.down("xs")]: {
 			width: theme.spacing(10),
 			fontSize: ".6rem",
 		}
-		
+
 	},
 	count: {
 		fontWeight: "bold",
@@ -97,6 +98,7 @@ function DashboardGrid(props) {
 	return (
 		<Grid className={classes.root}>
 			<>
+				<SearchBar />
 				{localStorage.getItem('token') && localStorage.getItem('userID') ? (
 					<>
 						{businessesContains(props.businessInfo.business_id) ? (
@@ -117,26 +119,26 @@ function DashboardGrid(props) {
 											/>
 										</CardActionArea>
 									</Card> */}
-									<Paper  variant="outlined" className={classes.paper} >
+									<Paper variant="outlined" className={classes.paper} >
 										<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
-										
+
 										<p>Total Reviews</p>
 									</Paper>
-									<Paper  variant="outlined" className={classes.paper} >
+									<Paper variant="outlined" className={classes.paper} >
 										<p className={classes.count} >{props.businessInfo.business_stars} stars</p>
 										<p>Overall Rating</p>
 									</Paper>
-									<Paper  variant="outlined" className={classes.paper}>
+									<Paper variant="outlined" className={classes.paper}>
 										<p className={classes.count} >{props.businessInfo.change_in_rating}</p>
 										<p>Change in Rating</p>
 									</Paper>
 								</Grid>
-								
+
 								<WidgetDisplayList />
 							</Grid>
 						) : (
-							<DashboardPlus /> 
-						)}
+								<DashboardPlus />
+							)}
 					</>
 				) : props.businessInfo.business_id ? ( //if a business is selected
 					<Grid justify="center">
@@ -156,29 +158,29 @@ function DashboardGrid(props) {
 									/>
 								</CardActionArea>
 							</Card> */}
-							<Paper  variant="outlined" className={classes.paper} >
+							<Paper variant="outlined" className={classes.paper} >
 								<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
-								
+
 								<p>Total Reviews</p>
 							</Paper>
-							<Paper  variant="outlined" className={classes.paper} >
+							<Paper variant="outlined" className={classes.paper} >
 								<p className={classes.count} >{props.businessInfo.business_stars} stars</p>
 								<p>Overall Rating</p>
 							</Paper>
-							<Paper  variant="outlined" className={classes.paper}>
+							<Paper variant="outlined" className={classes.paper}>
 								<p className={classes.count} >{props.businessInfo.change_in_rating}</p>
 								<p>Change in Rating</p>
 							</Paper>
 						</Grid>
-						
+
 						<WidgetDisplayList />
 					</Grid>
 				) : (
-					console.log(
-						'Redirecting cause no business selected while on dashboard. Business selected:',
-						props.businessInfo.business_id
-					) & props.history.push('/') 
-				)}
+							console.log(
+								'Redirecting cause no business selected while on dashboard. Business selected:',
+								props.businessInfo.business_id
+							) & props.history.push('/')
+						)}
 			</>
 		</Grid>
 	)
