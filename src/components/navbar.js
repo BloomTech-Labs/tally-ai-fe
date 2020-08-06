@@ -302,10 +302,9 @@ function NavBar(props) {
 
 const mapStateToProps = (state) => {
   return {
-    loggedUser: state.settings.loggedInUser.userID,
-    loggedInUser: state.settings.loggedInUser.data,
-    isFetching: state.settings.loggedInUser.isFetching,
-    error: state.settings.loggedInUser.error,
+    loggedInUser: state.settings.data,
+    isFetching: state.settings.isFetching,
+    error: state.settings.error,
   };
 };
 export default withRouter(

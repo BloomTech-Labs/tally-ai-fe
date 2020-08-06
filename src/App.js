@@ -35,21 +35,13 @@ function App(props) {
 			props.getUserInfo(localStorage.getItem('userID'));
 		} else {
 			//do we need to delete anything from state when they log out?
-			let userInfo = {
-				competitors: [],
-				loggedInUser: { firstName: null, lastName: null },
-				businesses: [],
-				activeWidgets: [widgets[0].name, widgets[1].name, widgets[2].name, widgets[3].name, widgets[4].name],
-				activeTabs: ['defaultTab'],
-				currentlySelectedBusiness: {
-					business_id: null,
-					businessName: null,
-					businessImg: null,
-					review_count: 0,
-					business_stars: 0,
-					changeInRating: ''
-				}
-			};
+			let userInfo = {       
+          first_name: null,
+          last_name: null,
+          user_id: null,
+          type: null,
+
+        };
 
       props.setUserInfo(userInfo);
     }
@@ -76,9 +68,8 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => ({
-  loggedInUser: state.settings.loggedInUser,
-  success: state.settings.loggedInUser.success,
-  activeTabs: state.settings.activeTabs,
+  loggedInUser: state.settings,
+  success: state.settings.success,
 });
 
 export default withRouter(
