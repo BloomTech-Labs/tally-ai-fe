@@ -184,6 +184,7 @@ const SearchPage = props => {
           }}
         ></TextField>
         <Button
+          disabled={props.searchResults.isFetching}
           className={classes.button}
           variant="outlined"
           color="blue"

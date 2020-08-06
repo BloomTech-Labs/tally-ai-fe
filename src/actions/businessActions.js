@@ -77,7 +77,7 @@ export const addBusiness = (businessInfo, userID) => dispatch => {
 		.then(res => {
 			dispatch({
 				type: ADD_BUSINESS_SUCCESS,
-				payload: res.data //new array after modification
+				payload: res.data.businesses //new array after modification
 			})
 		})
 		.catch(err => {
@@ -89,38 +89,28 @@ export const addBusiness = (businessInfo, userID) => dispatch => {
 }
 
 export const addCompetitor = (businessInfo, userID) => dispatch => {
-    console.log("\nAdding competitor to the store...\n");
+    console.log("\nAdding competitor to the store...\n", businessInfo);
     //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
-    let backendFormat =
-    {
-      name: businessInfo.businessName,
-      city: businessInfo.city,
-      state: businessInfo.state,
-      yelp: {
-        yelp_id: businessInfo.businessId,
-        url: businessInfo.url,
-        image_url: businessInfo.image_url
-      }
-    }
-    console.log("Add competitor start, data:", backendFormat);
+   
+
     dispatch({ type: ADD_COMPETITOR_START });
     //endpoint
     axiosWithAuth()
-      .post(`/users/${userID}/favorite`, backendFormat)
+      .post(`/users/${userID}/favorite`, businessInfo)
       .then(res => {
         console.log("Add competitor success, result:", res);
         dispatch({
           type: ADD_COMPETITOR_SUCCESS,
-          payload: res.data//new array after modification
+          payload: res.data.competitors
         });
       })
       .catch(err => {
         dispatch({
           type: ADD_COMPETITOR_FAILURE,
-          payload: err
+          payload: err.response
         });
       });
-    //POST /users/:id/favorite
+
 };
 
 export const removeBusiness = (business_id, userID) => dispatch => {
@@ -140,7 +130,7 @@ export const removeBusiness = (business_id, userID) => dispatch => {
 		.catch(err => {
 			dispatch({
 				type: REMOVE_BUSINESS_FAILURE,
-				payload: err
+				payload: err.response
 			})
 		})
 }
@@ -156,7 +146,7 @@ export const removeCompetitor = (businessID, userID) => dispatch => {
       .then(res => {
         dispatch({
           type: REMOVE_COMPETITOR_SUCCESS,
-          payload: res.data//new array after modification
+          payload: res.data.competitor_id//new array after modification
         });
       })
       .catch(err => {

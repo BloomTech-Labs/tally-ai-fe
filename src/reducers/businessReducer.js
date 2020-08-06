@@ -47,11 +47,8 @@ const initialState = {
 	competitors: [],
 
 	currentlySelectedBusiness: {
-		business_id: null, //default tab selected by default
-		// for side bar
+		business_id: null, 
 		businessName: null,
-		businessImg: null,
-		// for top-of-page info cards
 		review_count: 0,
 		business_stars: 0,
 		changeInRating: '',
@@ -110,7 +107,6 @@ function businessReducer(state = initialState, action) {
 				}
 			}
 		case SELECT_BUSINESS_SUCCESS:
-			console.log(action.payload)
 			return {
 				...state,
 				currentlySelectedBusiness: { 
@@ -137,8 +133,7 @@ function businessReducer(state = initialState, action) {
 				} 
 			}
 
-		case ADD_BUSINESS_START:
-			console.log('ADDDDDDD BUSINESSS STARTTT')
+		case ADD_BUSINESS_START:			
 			return {
 				...state,
 				businesses: state.businesses,
@@ -156,6 +151,9 @@ function businessReducer(state = initialState, action) {
 						address: business.address,
 						city: business.city,
 						zipcode: business.zipcode,
+						cuisine: business.cuisine,
+						review_count : business.review_count,
+						business_stars: business.business_stars
 					}
 				}),
 				isSetting: false,
@@ -211,6 +209,8 @@ function businessReducer(state = initialState, action) {
 						city: business.city,
 						zipcode: business.zipcode,
 						cuisine: business.cuisine,
+						review_count : business.review_count,
+						business_stars: business.business_stars
 					}
 				}),
 				isSetting: false,
