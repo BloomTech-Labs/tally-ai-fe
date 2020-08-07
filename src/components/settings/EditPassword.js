@@ -198,7 +198,7 @@ function EditPassword(props){
 
 const mapStateToProps = state => {
     return {
-        userInfo: state.settings.loggedInUser
+        userInfo: state.settings
     };
 };
 

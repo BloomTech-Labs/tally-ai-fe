@@ -35,14 +35,8 @@ const Result = ({ data, setTentativeSelection, select, className }) => {
       e.preventDefault();
       setIsSelected(!isSelected);
       console.log("setting selection to ", data);
-      setTentativeSelection({
-        business_id: data.business_id,
-        businessName: data.name,
-        city: data.city,
-        address: data.address,
-        zipcode: data.zipcode
-      });
-        //select(e);
+      
+        select(data);
   }
 
   return (

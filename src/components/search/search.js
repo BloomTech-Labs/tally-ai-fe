@@ -15,7 +15,6 @@ import HomeBottomSection from "../home/HomeBottomSection";
 import HomePitches from '../home/HomePitches';
 
 import { fetchBusinesses, selectBusiness } from "../../actions/businessActions.js";
-// import { searchResultsPlaceholder } from "../../actions/index";
 
 import "./search.scss"
 
@@ -92,7 +91,7 @@ const Search = props => {
 
 						<form
 							className={
-								props.searchResults ? ' growSearch' : classes.container
+								props.searchResults.data ? ' growSearch' : classes.container
 							}
 						>
 							<div
@@ -168,6 +167,7 @@ const Search = props => {
 								variant='outlined'
 								color='blue'
 								type='submit'
+								disabled={props.searchResults.isFetching}
 								onClick={e => {
 									e.preventDefault()
 									props.fetchBusinesses({
@@ -186,7 +186,7 @@ const Search = props => {
 
 			
 				
-				{!props.searchResults ? (
+				{!props.searchResults.data ? (
 					
 					<div>
 						<HomeIcons />
@@ -203,7 +203,7 @@ const Search = props => {
 }
 
 const mapStateToProps = state => ({
-	searchResults: state.business.searchResults.data,
+	searchResults: state.business.searchResults,
 	selectedBusiness: state.business.currentlySelectedBusiness
 })
 

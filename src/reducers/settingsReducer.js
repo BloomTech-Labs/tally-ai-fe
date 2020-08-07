@@ -10,16 +10,16 @@ import {
 import {widgets} from '../components/WidgetSystem/WidgetRegistry';
 
 const initialState = {
-	loggedInUser: {
-		data: {
-			firstName: null,
-			lastName: null,
-			userId: null
-		},
-		shouldUpdate: true,
-		isFetching: false,
-		error: null
-	}
+	data: {
+		firstName: null,
+		lastName: null,
+		userId: null,
+		type: null,
+	},
+	shouldUpdate: true,
+	isFetching: false,
+	error: null,
+	success: null
 }
 
 const settingsReducer = (state = initialState, action) => {
@@ -28,112 +28,62 @@ const settingsReducer = (state = initialState, action) => {
 		case FETCH_EDITACCOUNT_START:
 			return {
 				...state,
-				loggedInUser: {
-					...state.loggedInUser,
-					isFetching: true,
-					success: null,
-					error: null
-				}
+				isFetching: true,
+				success: null,
+				error: null
+				
 			}
 		case FETCH_EDITACCOUNT_SUCCESS: //TODO: update activeWidgets with action.payload.preferences.widgets
 			return {
 				...state,
-				loggedInUser: {
-					data: {
-						firstName: action.payload.first_name
-							? action.payload.first_name
-							: state.loggedInUser.data.firstName,
-						lastName: action.payload.last_name_name
-							? action.payload.last_name
-							: state.loggedInUser.data.lastName,
-						id: action.payload.userId 
-							? action.payload.userId
-							: state.loggedInUser.data.userId
-					},
-					isFetching: false,
-					success: true,
-					error: null
-				}
+				data: {
+					firstName: action.payload.first_name,
+					lastName: action.payload.last_name,
+					userId: action.payload.id,
+					type: action.payload.type,
+				},
+				isFetching: false,
+				success: true,
+				error: null
+				
 			}
 		case FETCH_EDITACCOUNT_FAILURE:
 			return {
 				...state,
-				loggedInUser:{
-					...state.loggedInUser,
-					isFetching: false,
-					success: false,
-					error: action.payload
-				  }
+				isFetching: false,
+				success: false,
+				error: action.payload
 			}
 		case GET_USER_DATA_START:
 			return {
 				...state,
-				loggedInUser: {
-					...state.loggedInUser,
-					isFetching: true,
-					
-					error: false
-				}
+				isFetching: true,
+				error: false
+				
 			}
 		case GET_USER_DATA_SUCCESS:
-			console.log('Mapping over competitors', action.payload.competitors)
+			console.log('State', state)
+			console.log('Payload', action.payload)
+
 			return {
 				...state,
-				competitors: {
-					...state.competitors,
-					businesses: action.payload.competitors.map(business => {
-						return {
-							id: business.id,
-							businessId: business.yelp.yelp_id, //default tab selected by default
-							// for side bar
-							businessName: business.name,
-							businessImg: business.yelp.image_url,
-							// for top-of-page info cards
-							reviewCount: 0,
-							averageRating: 0,
-							changeInRating: ''
-						}
-					}),
-					isSetting: false,
-					error: null
+				data: {
+					userId: action.payload.user_id,
+					firstName: action.payload.first_name,
+					lastName: action.payload.last_name,
+					type: action.payload.type,
+
 				},
-				loggedInUser: {
-					...state.loggedInUser,
-					data: action.payload.loggedInUser,
-					isFetching: false,
-				},
-				userBusinesses: {
-					...state.userBusinesses,
-					businesses: action.payload.businesses.map(business => {
-						return {
-							id: business.id,
-							businessId: business.yelp.yelp_id, //default tab selected by default
-							// for side bar
-							businessName: business.name,
-							businessImg: business.yelp.image_url,
-							// for top-of-page info cards
-							reviewCount: 0,
-							averageRating: 0,
-							changeInRating: ''
-						}
-					}),
-					isSetting: false,
-					error: null
-				},
-				activeWidgets: [widgets[0].name, widgets[1].name],
-				tabs: {
-					...state.tabs,
-					activeTabs: action.payload.activeTabs
-				}
+				isFetching: false,
+				error: null,
+				shouldUpdate: false,
 			}
 
 		case UPDATE_LOGGED_IN_USER:
 			return {
 				...state,
-				loggedInUser: {
-					...state.loggedInUser,
-					shouldUpdate: action.payload
-				}
+				shouldUpdate: action.payload
+
 			}
 		default:
 			return state

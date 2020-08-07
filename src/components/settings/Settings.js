@@ -147,9 +147,9 @@ function Settings(props) {
 
 const mapStateToProps = state => {
 	return {
-		isFetching: state.settings.loggedInUser.isFetching,
-		error: state.settings.loggedInUser.error,
-		competitors: state.competitor.competitors.businesses
+    type: state.settings.data.type,
+		isFetching: state.settings.isFetching,
+		error: state.settings.error,
 	}
 }
 
