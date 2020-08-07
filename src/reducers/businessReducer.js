@@ -16,7 +16,16 @@ import {
 	//removing businesses from user's owned businesses list
 	REMOVE_BUSINESS_START,
 	REMOVE_BUSINESS_SUCCESS,
-	REMOVE_BUSINESS_FAILURE
+	REMOVE_BUSINESS_FAILURE,
+
+	ADD_COMPETITOR_START,
+    ADD_COMPETITOR_SUCCESS,
+	ADD_COMPETITOR_FAILURE,
+	
+
+    REMOVE_COMPETITOR_START,
+    REMOVE_COMPETITOR_SUCCESS,
+    REMOVE_COMPETITOR_FAILURE
 } from '../actions/businessActions'
 
 // 							id: business.id,
@@ -30,18 +39,16 @@ import {
 // 							changeInRating: ''
 
 const initialState = {
-	userBusinesses: {
-		isSetting: false,
-		error: null,
-		businesses: []
-	},
+	isSetting: false,
+	error: null,
+	
+	businesses: [],
+
+	competitors: [],
 
 	currentlySelectedBusiness: {
-		business_id: null, //default tab selected by default
-		// for side bar
+		business_id: null, 
 		businessName: null,
-		businessImg: null,
-		// for top-of-page info cards
 		review_count: 0,
 		business_stars: 0,
 		changeInRating: '',
@@ -84,7 +91,8 @@ function businessReducer(state = initialState, action) {
 				searchResults: {
 					...state.searchResults,
 					isFetching: false,
-					error: action.payload
+					data: [],
+					error: action.payload.message
 				}
 			}
 
@@ -99,12 +107,19 @@ function businessReducer(state = initialState, action) {
 				}
 			}
 		case SELECT_BUSINESS_SUCCESS:
-			console.log(action.payload)
 			return {
 				...state,
 				currentlySelectedBusiness: { 
-					...action.payload, 
-					isFetching: false
+					business_id: action.payload.business_id,
+					businessName: action.payload.name,
+					review_count: action.payload.review_count,
+					business_stars: action.payload.business_stars,
+					cuisine: action.payload.cuisine,
+					address: action.payload.address,
+					zipcode: action.payload.zipcode,
+					city: action.payload.city,
+					isFetching: false,
+					error: null,
 				} 
 			}
 		case SELECT_BUSINESS_FAILURE:
@@ -118,86 +133,118 @@ function businessReducer(state = initialState, action) {
 				} 
 			}
 
-		case ADD_BUSINESS_START:
-			console.log('ADDDDDDD BUSINESSS STARTTT')
+		case ADD_BUSINESS_START:			
 			return {
 				...state,
-				userBusinesses: {
-					...state.userBusinesses,
-					isSetting: true,
-					error: null
-				}
+				businesses: state.businesses,
+				isSetting: false,
+				error: null
 			}
 		case ADD_BUSINESS_SUCCESS:
+			console.log(action.payload)
 			return {
 				...state,
-				userBusinesses: {
-					businesses: action.payload.businesses.map(business => {
-						return {
-							id: business.id,
-							businessId: business.yelp_id, //default tab selected by default
-							// for side bar
-							businessName: business.name,
-							businessImg: business.image_url,
-							// for top-of-page info cards
-							reviewCount: 0,
-							averageRating: 0,
-							changeInRating: ''
-						}
-					}),
-					isSetting: false,
-					error: null
-				}
+				businesses: action.payload.map(business => {
+					return {
+						business_id: business.business_id,
+						businessName: business.name,
+						address: business.address,
+						city: business.city,
+						zipcode: business.zipcode,
+						cuisine: business.cuisine,
+						review_count : business.review_count,
+						business_stars: business.business_stars
+					}
+				}),
+				isSetting: false,
+				error: null
 			}
 		case ADD_BUSINESS_FAILURE:
 			return {
 				...state,
-				userBusinesses: {
-					...state.userBusinesses,
-					isSetting: false,
-					error: action.payload
-				}
+
+				isSetting: false,
+				error: action.payload
 			}
 
 		case REMOVE_BUSINESS_START:
 			return {
 				...state,
-				userBusinesses: {
-					...state.userBusinesses,
-					isSetting: true,
-					error: null
-				}
+				isSetting: true,
+				error: null
 			}
 
 		case REMOVE_BUSINESS_SUCCESS:
 			return {
 				...state,
-				userBusinesses: {
-					businesses: action.payload.businesses.map(business => {
-						return {
-							id: business.id,
-							businessId: business.yelp_id, //default tab selected by default
-							// for side bar
-							businessName: business.name,
-							businessImg: business.image_url,
-							// for top-of-page info cards
-							reviewCount: 0,
-							averageRating: 0,
-							changeInRating: ''
-						}
-					}),
-					isSetting: false,
-					error: null
-				}
+
+				businesses: state.businesses.filter(business => {
+					///will filter out business removed
+					return action.payload !== business.business_id
+				}),
+				isSetting: false,
+				error: null
+				
 			}
 		case REMOVE_BUSINESS_FAILURE:
 			return {
 				...state,
-				userBusinesses: {
-					...state.userBusinesses,
-					isSetting: false,
-					error: action.payload
-				}
+				isSetting: false,
+				error: action.payload
+			}
+		case ADD_COMPETITOR_START:
+			return {
+				...state,
+				isSetting: true,
+				error: null
+			}
+		case ADD_COMPETITOR_SUCCESS:
+			return {
+				...state,
+				competitors: action.payload.map(business => {
+					return {
+						business_id: business.business_id,
+						businessName: business.name,
+						address: business.address,
+						city: business.city,
+						zipcode: business.zipcode,
+						cuisine: business.cuisine,
+						review_count : business.review_count,
+						business_stars: business.business_stars
+					}
+				}),
+				isSetting: false,
+				error: null
+			}
+		case ADD_COMPETITOR_FAILURE: 
+			return {
+				...state,
+				isSetting: false,
+				error: action.payload
+			}
+		case REMOVE_COMPETITOR_START:
+			return {
+				...state,
+				isSetting: true,
+				error: null
+			}
+		case REMOVE_COMPETITOR_SUCCESS:
+			return {
+				...state,
+
+				competitors: state.competitors.filter(business => {
+					///will filter out business removed
+					return action.payload !== business.business_id
+				}),
+				isSetting: false,
+				error: null
+				
+			}
+		case REMOVE_COMPETITOR_FAILURE:
+			return {
+				...state,
+				isSetting: false,
+				error: action.payload
 			}
 		default:
 			return state

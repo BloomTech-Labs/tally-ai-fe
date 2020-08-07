@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+
 
 import Result from "./result";
 import { selectBusiness, resetSearchResults } from "../../actions/businessActions";
@@ -56,8 +56,6 @@ const Results = props => {
     }
   }, [tentativeSelection])
 
-  let history = useHistory();
-
   /*
     select is used as the onClick for the select button.
     Calling the select function does the following:
@@ -65,10 +63,9 @@ const Results = props => {
       to the store under state.businessInfo
     - routes the user to the dashboard
   */
-  const select = () => {
-    console.log("Select working, tentative", tentativeSelection);
+  const select = (data) => {
+    props.select(data);
     props.resetSearchResults();
-    props.select(tentativeSelection);
   };
 
   console.log("props", props);
@@ -80,7 +77,7 @@ const Results = props => {
     active is true if the request to Yelp was successful and the
     search results are in
   */
-  if(!props.businesses.data){
+  if(!props.businesses.data || !!props.businesses.isFetching){
     return null
   }
 
@@ -88,7 +85,6 @@ const Results = props => {
       <div 
         className={classes.container}
       >      
-        {props.businesses.error ? <Typography align="center" variant="h4">Error Searching.</Typography>: null}
         {props.businesses.isFetching  ? <Typography align="center" variant="h4" className={classes.text}>Loading Search Results...</Typography>: null}
         {
           props.businesses.data.length > 0
@@ -99,11 +95,6 @@ const Results = props => {
                   select={select}
                   key={result.id}
                   setTentativeSelection={setTentativeSelection}
-                  className={`result ${
-                    result.id === tentativeSelection.businessId
-                      ? "selected"
-                      : "not-selected"
-                  }`}
                 />
               )
             }))
