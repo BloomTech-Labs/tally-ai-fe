@@ -14,12 +14,13 @@ import {User} from 'react-feather';
 import {Settings} from 'react-feather';
 import {Map} from 'react-feather';
 import {LogOut} from 'react-feather';
+import {Folder} from 'react-feather';
 
 //stylesheet
 import './AppMenu.scss';
 
 
-const AppMenu: React.FC = (props) => {
+const AppMenu = (props) => {
   const classes = useStyles()
 
 
@@ -30,6 +31,8 @@ const handleLogout = () => {
     window.location.href='/'
 }
 
+
+
   return (
     <List component="nav" className={classes.appMenu} disablePadding>
       <NavLink to='/Dashboard'>
@@ -38,6 +41,15 @@ const handleLogout = () => {
             <User />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
+        </ListItem>
+      </NavLink>
+
+      <NavLink to='/dashboard'>
+        <ListItem button className={classes.menuItem}>
+          <ListItemIcon className={classes.menuItemIcon}>
+            <Folder />
+          </ListItemIcon>
+          <ListItemText primary="View Business" />
         </ListItem>
       </NavLink>
 

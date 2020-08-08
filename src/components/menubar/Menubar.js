@@ -6,7 +6,7 @@ import Drawer from '@material-ui/core/Drawer'
 import Container from '@material-ui/core/Container'
 import AppMenu from './AppMenu.js'
 
-const MenuBar: React.FC = () => { 
+const MenuBar = (props) => { 
   const classes = useStyles()
 
   return (
