@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
+import {connect } from "react-redux"
 
 //Material ui components 
 import List from '@material-ui/core/List'
@@ -10,16 +11,17 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 
 //Icons
-import {User} from 'react-feather';
-import {Settings} from 'react-feather';
-import {Map} from 'react-feather';
-import {LogOut} from 'react-feather';
+import {Home,Settings,LogOut,ShoppingBag} from 'react-feather';
+
+
+
+
 
 //stylesheet
 import './AppMenu.scss';
 
 
-const AppMenu: React.FC = (props) => {
+const AppMenu = (props) => {
   const classes = useStyles()
 
 
@@ -29,41 +31,58 @@ const handleLogout = () => {
 
     window.location.href='/'
 }
+const refreshBusiness = () => {
+window.location.href='/Dashboard'
+}
+
+  
+
 
   return (
     <List component="nav" className={classes.appMenu} disablePadding>
-      <NavLink to='/Dashboard'>
+      <NavLink to='/'>
         <ListItem button id='dashboardListItem' className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <User />
+            <Home />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary="Home" />
         </ListItem>
       </NavLink>
 
-      <NavLink to='/Settings'>
-        <ListItem button className={classes.menuItem}>
+      { props.userInfo.data.firstName && <NavLink to='/Dashboard'>
+        <ListItem button onClick={refreshBusiness} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
-            <Settings />
+            <ShoppingBag />
           </ListItemIcon>
-          <ListItemText primary="Settings" />
+          <ListItemText primary="View Bussiness" />
         </ListItem>
-      </NavLink>
+      </NavLink>}
+      
+      
 
-          <ListItem button className={classes.menuItem}>
+  { props.userInfo.data.firstName && <NavLink to='/Settings'>
+      <ListItem button className={classes.menuItem}>
+        <ListItemIcon className={classes.menuItemIcon}>
+          <Settings />
+        </ListItemIcon>
+        <ListItemText primary="Settings" />
+      </ListItem>
+    </NavLink>}
+
+          {/* <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
             <Map />
           </ListItemIcon>
           <ListItemText primary="Map" />
-      </ListItem>
+      </ListItem> */}
 
 
-      <ListItem button onClick={handleLogout} className={classes.menuItem}>
+      { props.userInfo.data.firstName && <ListItem button onClick={handleLogout} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
             <LogOut />
           </ListItemIcon>
           <ListItemText primary="Logout" />
-      </ListItem>
+      </ListItem>}
     </List>
   )
 }
@@ -87,4 +106,9 @@ const useStyles = makeStyles(theme =>
   }),
 )
 
-export default AppMenu
+const mapStateToProps = state => {
+  return {
+      userInfo: state.settings
+  };
+};
+export default connect(mapStateToProps)(AppMenu)
