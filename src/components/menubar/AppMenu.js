@@ -30,7 +30,11 @@ const handleLogout = () => {
 
     window.location.href='/'
 }
+const refreshBusiness = () => {
+window.location.href='/Dashboard'
+}
 
+  
 
 
   return (
@@ -44,8 +48,8 @@ const handleLogout = () => {
         </ListItem>
       </NavLink>
 
-      <NavLink to='/dashboard'>
-        <ListItem button className={classes.menuItem}>
+      <NavLink to='/Dashboard'>
+        <ListItem button onClick={refreshBusiness} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
             <Folder />
           </ListItemIcon>
@@ -98,5 +102,6 @@ const useStyles = makeStyles(theme =>
     },
   }),
 )
+
 
 export default AppMenu
