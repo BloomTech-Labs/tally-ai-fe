@@ -116,7 +116,7 @@ function DashboardGrid(props) {
 								</CardActionArea>
 							</Card> */}
 							<Paper  variant="outlined" className={classes.paper} >
-								{/* <p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p> */}
+								<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
 								
 								<p>Total Reviews</p>
 							</Paper>
