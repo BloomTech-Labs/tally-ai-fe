@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import InputBase from '@material-ui/core/InputBase'
@@ -9,12 +9,14 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 
-import axios from 'axios'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
 
 import { axiosWithAuth } from '../../auth/axiosWithAuth'
 
 const useStyles = makeStyles(theme => ({
-	root: {
+	form: {
 		padding: '2px 4px',
 		display: 'flex',
 		alignItems: 'center',
@@ -22,9 +24,12 @@ const useStyles = makeStyles(theme => ({
 		marginTop: 120,
 		borderRadius: 15
 	},
-	formControl: {
-		// margin: theme.spacing(1),
-		// minWidth: 120,
+	list: {
+		width: '100%',
+		marginTop: 10,
+		maxWidth: 800,
+		borderRadius: 10,
+		backgroundColor: theme.palette.background.paper
 	},
 	input: {
 		marginLeft: theme.spacing(1),
@@ -40,10 +45,43 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
+export const SimpleList = () => {
+	const classes = useStyles()
+
+	return (
+		<div className={classes.list}>
+			<List component='nav' aria-label='secondary mailbox folders'>
+				<ListItem button>
+					<ListItemText
+						primary='Trash'
+						onClick={() => console.log('AAAAAAAA')}
+					/>
+				</ListItem>
+			</List>
+		</div>
+	)
+}
+
 export default function SearchBar() {
 	const classes = useStyles()
+	const [businessNames, setBusinessNames] = useState([])
+	const [search, setSearch] = useState('')
 	const [cuisine, setCuisine] = useState('All')
-	const [open, setOpen] = React.useState(false)
+	const [open, setOpen] = useState(false)
+
+	useEffect(() => {
+		const fetchBusinessNames = async () => {
+			try {
+				const { data } = await axiosWithAuth().get('/search/names')
+				console.log({ data })
+				setBusinessNames(data)
+			} catch (error) {
+				console.error(error)
+			}
+		}
+
+		fetchBusinessNames()
+	}, [])
 
 	const handleChange = event => {
 		setCuisine(event.target.value)
@@ -57,31 +95,20 @@ export default function SearchBar() {
 		setOpen(true)
 	}
 
-	const handleSubmit = async () => {
-		try {
-			const { data } = await axiosWithAuth().get('/search/names')
-			console.log({ data })
-		} catch (error) {
-			console.error(error)
-		}
+	const handleSubmit = async e => {
+		e.preventDefault()
 	}
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'flex-start'
-			}}
-		>
-			<Paper component='form' className={classes.root}>
-				<FormControl className={classes.iconButton} onSubmit={handleSubmit}>
+		<>
+			<Paper component='form' className={classes.form}>
+				<FormControl className={classes.iconButton}>
 					<Select
 						open={open}
 						onClose={handleClose}
 						onOpen={handleOpen}
 						value={cuisine}
-						onChange={handleSubmit}
+						onChange={handleChange}
 					>
 						<MenuItem value='All'>All</MenuItem>
 						<MenuItem value={1}>American</MenuItem>
@@ -108,7 +135,11 @@ export default function SearchBar() {
 					className={classes.input}
 					placeholder='Search for a business'
 					inputProps={{ 'aria-label': 'search for a business' }}
-					onChange={e => console.log(e.target.value)}
+					onChange={e => {
+						setSearch(e.target.value)
+						console.log({ search })
+					}}
+					onSubmit={handleSubmit}
 				/>
 				<IconButton
 					type='submit'
@@ -118,6 +149,7 @@ export default function SearchBar() {
 					<SearchIcon />
 				</IconButton>
 			</Paper>
-		</div>
+			<SimpleList />
+		</>
 	)
 }
