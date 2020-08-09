@@ -27,8 +27,12 @@ const useStyles = makeStyles(theme => ({
 	list: {
 		width: '100%',
 		marginTop: 10,
-		maxWidth: 800,
+		width: 800,
+		maxHeight: 400,
+		overflow: 'auto',
 		borderRadius: 10,
+		borderColor: 'red',
+		borderWidth: 2,
 		backgroundColor: theme.palette.background.paper
 	},
 	input: {
@@ -45,27 +49,11 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-export const SimpleList = () => {
-	const classes = useStyles()
-
-	return (
-		<div className={classes.list}>
-			<List component='nav' aria-label='secondary mailbox folders'>
-				<ListItem button>
-					<ListItemText
-						primary='Trash'
-						onClick={() => console.log('AAAAAAAA')}
-					/>
-				</ListItem>
-			</List>
-		</div>
-	)
-}
-
 export default function SearchBar() {
 	const classes = useStyles()
-	const [businessNames, setBusinessNames] = useState([])
 	const [search, setSearch] = useState('')
+	const [businessNames, setBusinessNames] = useState([])
+	const [filteredBusinessNames, setFilteredBusinessNames] = useState([])
 	const [cuisine, setCuisine] = useState('All')
 	const [open, setOpen] = useState(false)
 
@@ -73,15 +61,21 @@ export default function SearchBar() {
 		const fetchBusinessNames = async () => {
 			try {
 				const { data } = await axiosWithAuth().get('/search/names')
-				console.log({ data })
-				setBusinessNames(data)
+				const businessNamesInsensitive = data.map((businessName, index) => {
+					return {
+						businessName,
+						businessNameLowerCase: businessName.toLowerCase(),
+						index
+					}
+				})
+				setBusinessNames(businessNamesInsensitive)
 			} catch (error) {
 				console.error(error)
 			}
 		}
 
-		fetchBusinessNames()
-	}, [])
+		!businessNames.length > 0 && fetchBusinessNames()
+	}, [businessNames])
 
 	const handleChange = event => {
 		setCuisine(event.target.value)
@@ -97,6 +91,19 @@ export default function SearchBar() {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
+	}
+
+	const handleSearch = text => {
+		const searchString = text.toLowerCase()
+		const filtered =
+			text === ''
+				? businessNames.businessName
+				: businessNames.filter(
+						({ businessNameLowerCase }) =>
+							businessNameLowerCase.indexOf(searchString) > -1
+				  )
+		setSearch(text)
+		setFilteredBusinessNames(filtered)
 	}
 
 	return (
@@ -132,13 +139,11 @@ export default function SearchBar() {
 				<Divider className={classes.divider} orientation='vertical' />
 
 				<InputBase
+					value={search}
 					className={classes.input}
 					placeholder='Search for a business'
 					inputProps={{ 'aria-label': 'search for a business' }}
-					onChange={e => {
-						setSearch(e.target.value)
-						console.log({ search })
-					}}
+					onChange={e => handleSearch(e.target.value)}
 					onSubmit={handleSubmit}
 				/>
 				<IconButton
@@ -149,7 +154,25 @@ export default function SearchBar() {
 					<SearchIcon />
 				</IconButton>
 			</Paper>
-			<SimpleList />
+			{search && (
+				<div className={classes.list}>
+					<List component='nav'>
+						{businessNames.length > 0 &&
+							filteredBusinessNames
+								.slice(0, 5)
+								.map(({ businessName, index }) => {
+									return (
+										<ListItem button key={index}>
+											<ListItemText
+												primary={businessName}
+												onClick={() => console.log({ businessName })}
+											/>
+										</ListItem>
+									)
+								})}
+					</List>
+				</div>
+			)}
 		</>
 	)
 }
