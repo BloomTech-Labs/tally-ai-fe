@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 
 //Icons
-import {Home,Settings,LogOut,ShoppingBag} from 'react-feather';
+import {Home,Settings,LogOut,ShoppingBag,GitHub} from 'react-feather';
 
 
 
@@ -19,6 +19,7 @@ import {Home,Settings,LogOut,ShoppingBag} from 'react-feather';
 
 //stylesheet
 import './AppMenu.scss';
+
 
 
 const AppMenu = (props) => {
@@ -83,7 +84,14 @@ window.location.href='/Dashboard'
           </ListItemIcon>
           <ListItemText primary="Map" />
       </ListItem> */}
-
+ <NavLink to='/About'>
+      <ListItem button className={classes.menuItem}>
+        <ListItemIcon className={classes.menuItemIcon}>
+          <GitHub />
+        </ListItemIcon>
+        <ListItemText primary="About Us" />
+      </ListItem>
+    </NavLink>
 
       { props.userInfo.data.firstName && <ListItem button onClick={handleLogout} className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
