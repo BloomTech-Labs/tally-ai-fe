@@ -16,7 +16,12 @@ import {
 	//removing businesses from user's owned businesses list
 	REMOVE_BUSINESS_START,
 	REMOVE_BUSINESS_SUCCESS,
-	REMOVE_BUSINESS_FAILURE
+	REMOVE_BUSINESS_FAILURE,
+
+	//fetch business by name
+	FETCH_BUSINESS_BY_NAME_START,
+	FETCH_BUSINESS_BY_NAME_SUCCESS,
+	FETCH_BUSINESS_BY_NAME_FAILURE
 } from '../actions/businessActions'
 
 // 							id: business.id,
@@ -53,7 +58,7 @@ const initialState = {
 	searchResults: {
 		isFetching: false,
 		error: null,
-		data:  null
+		data: null
 	}
 }
 
@@ -91,7 +96,7 @@ function businessReducer(state = initialState, action) {
 		case SELECT_BUSINESS_START:
 			return {
 				...state,
-				currentlySelectedBusiness: { 
+				currentlySelectedBusiness: {
 					...state.currentlySelectedBusiness,
 					business_id: action.payload,
 					isFetching: true,
@@ -102,20 +107,20 @@ function businessReducer(state = initialState, action) {
 			console.log(action.payload)
 			return {
 				...state,
-				currentlySelectedBusiness: { 
-					...action.payload, 
+				currentlySelectedBusiness: {
+					...action.payload,
 					isFetching: false
-				} 
+				}
 			}
 		case SELECT_BUSINESS_FAILURE:
 			return {
 				...state,
-				currentlySelectedBusiness: { 
+				currentlySelectedBusiness: {
 					...state.currentlySelectedBusiness,
 					business_id: null,
 					isFetching: false,
 					error: action.payload
-				} 
+				}
 			}
 
 		case ADD_BUSINESS_START:
@@ -197,6 +202,33 @@ function businessReducer(state = initialState, action) {
 					...state.userBusinesses,
 					isSetting: false,
 					error: action.payload
+				}
+			}
+		case FETCH_BUSINESS_BY_NAME_START:
+			return {
+				...state,
+				searchResults: {
+					isFetching: true,
+					error: null,
+					data: null
+				}
+			}
+		case FETCH_BUSINESS_BY_NAME_SUCCESS:
+			return {
+				...state,
+				searchResults: {
+					isFetching: false,
+					error: null,
+					data: action.payload
+				}
+			}
+		case FETCH_BUSINESS_BY_NAME_FAILURE:
+			return {
+				...state,
+				searchResults: {
+					isFetching: false,
+					error: action.payload,
+					data: null
 				}
 			}
 		default:
