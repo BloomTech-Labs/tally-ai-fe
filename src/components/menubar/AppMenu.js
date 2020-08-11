@@ -13,7 +13,7 @@ import {selectBusiness} from "../../actions/businessActions.js";
 
 
 //Icons
-import {Home,Settings,LogOut,ShoppingBag} from 'react-feather';
+import {Home,Settings,LogOut,ShoppingBag,GitHub} from 'react-feather';
 
 
 
@@ -21,6 +21,7 @@ import {Home,Settings,LogOut,ShoppingBag} from 'react-feather';
 
 //stylesheet
 import './AppMenu.scss';
+
 
 
 const AppMenu = (props) => {
@@ -56,6 +57,13 @@ const viewAllBusinesses = () => {
 
   return (
     <List component="nav" className={classes.appMenu} disablePadding>
+
+
+      { props.userInfo.data.firstName && 
+        <ListItem button id='dashboardListItem' className={classes.menuItem}>
+          <h3>Hello {props.userInfo.data.firstName}</h3>
+         </ListItem>
+      }
 
 
         <ListItem button id='dashboardListItem' onClick={viewAllBusinesses} classes={{button: classes.button}}>
@@ -95,6 +103,12 @@ const viewAllBusinesses = () => {
           <ListItemText primary="Map" />
       </ListItem> */}
 
+      <ListItem button classes={{button: classes.button}} onClick={()=> history.push("/about")}>
+        <ListItemIcon className={classes.menuItemIcon}>
+          <GitHub />
+        </ListItemIcon>
+        <ListItemText primary="About Us" />
+      </ListItem>
 
       { props.userInfo.data.firstName && <ListItem button onClick={handleLogout} classes={{button: classes.button}}>
           <ListItemIcon className={classes.menuItemIcon}>
