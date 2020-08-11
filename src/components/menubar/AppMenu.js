@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import {connect } from "react-redux"
 
@@ -8,6 +8,8 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+
+import {selectBusiness} from "../../actions/businessActions.js";
 
 
 //Icons
@@ -22,6 +24,7 @@ import './AppMenu.scss';
 
 
 const AppMenu = (props) => {
+  let history = useHistory();
   const classes = useStyles()
 
 
@@ -29,45 +32,61 @@ const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("userID")
 
-    window.location.href='/'
+    history.push("/")
 }
-const refreshBusiness = () => {
-window.location.href='/Dashboard'
+const viewAllBusinesses = () => {
+// window.location.href='/Dashboard'
+
+  props.userInfo.data.firstName ? history.push("/dashboard") : history.push("/")
+
+  props.selectBusiness({
+    business_id: null, 
+		businessName: null,
+		review_count: 0,
+		business_stars: 0,
+		changeInRating: '',
+		address: '',
+		isFetching: false,
+    error: null
+  })
+
 }
 
   
 
-
   return (
     <List component="nav" className={classes.appMenu} disablePadding>
-      <NavLink to='/'>
-        <ListItem button id='dashboardListItem' className={classes.menuItem}>
+
+
+        <ListItem button id='dashboardListItem' onClick={viewAllBusinesses} classes={{button: classes.button}}>
           <ListItemIcon className={classes.menuItemIcon}>
             <Home />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-      </NavLink>
 
-      { props.userInfo.data.firstName && <NavLink to='/Dashboard'>
-        <ListItem button onClick={refreshBusiness} className={classes.menuItem}>
+      { props.selected.business_id && 
+        <ListItem button onClick={viewAllBusinesses} classes={{button: classes.button}}>
           <ListItemIcon className={classes.menuItemIcon}>
             <ShoppingBag />
           </ListItemIcon>
-          <ListItemText primary="View Bussiness" />
-        </ListItem>
-      </NavLink>}
-      
+          <ListItemText 
+          classes={{secondary:classes.listText}}
+          primary={`${props.selected.name.slice(0, 14)}...`}
+          secondary={`${props.selected.address.slice(0, 16)}...`}
+        />
+        </ListItem>}
+
       
 
-  { props.userInfo.data.firstName && <NavLink to='/Settings'>
-      <ListItem button className={classes.menuItem}>
+    {props.userInfo.data.firstName && 
+      <ListItem button classes={{button: classes.button}} onClick={() => history.push("/settings")}>
         <ListItemIcon className={classes.menuItemIcon}>
           <Settings />
         </ListItemIcon>
         <ListItemText primary="Settings" />
       </ListItem>
-    </NavLink>}
+    }
 
           {/* <ListItem button className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
@@ -77,7 +96,7 @@ window.location.href='/Dashboard'
       </ListItem> */}
 
 
-      { props.userInfo.data.firstName && <ListItem button onClick={handleLogout} className={classes.menuItem}>
+      { props.userInfo.data.firstName && <ListItem button onClick={handleLogout} classes={{button: classes.button}}>
           <ListItemIcon className={classes.menuItemIcon}>
             <LogOut />
           </ListItemIcon>
@@ -97,18 +116,32 @@ const useStyles = makeStyles(theme =>
     navList: {
       width: drawerWidth,
     },
-    menuItem: {
-      width: drawerWidth,
-    },
     menuItemIcon: {
       color: '#ffff',
+    },
+    listText: {
+      color: '#ffff',
+    },
+    popper: {
+      zIndex:"2000",
+    },
+    innerList: {
+      background: "black",
+    },
+    button: {
+      "&:hover": {
+        backgroundColor:" rgb(86 86 86)",
+      }
+
     },
   }),
 )
 
 const mapStateToProps = state => {
   return {
-      userInfo: state.settings
+      userInfo: state.settings,
+      businesses: state.business.businesses,
+      selected: state.business.currentlySelectedBusiness,
   };
 };
-export default connect(mapStateToProps)(AppMenu)
+export default connect(mapStateToProps,{selectBusiness})(AppMenu)
