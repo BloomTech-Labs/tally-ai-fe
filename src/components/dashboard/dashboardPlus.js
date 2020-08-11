@@ -110,8 +110,8 @@ function DashboardPlus(props) {
                 <Card >
                   <CardActionArea onClick={() => {  props.selectBusiness(business); }}> 
                     <CardHeader
-                      avatar={ <Avatar classes={{root: classes.avatar}} alt={business.businessName} src={business.img ? business.img : business.businessName}/> }
-                      title={business.businessName}
+                      avatar={ <Avatar classes={{root: classes.avatar}} alt={business.name} src={business.img ? business.img : business.name}/> }
+                      title={business.name}
                       subheader={business.address}
                       
                     />
@@ -149,8 +149,8 @@ function DashboardPlus(props) {
                   <Card >
                     <CardActionArea onClick={() => { props.selectBusiness( competitor); }}> 
                       <CardHeader
-                        avatar={ <Avatar classes={{root: classes.avatar}} alt={competitor.businessName} src={competitor.img ? competitor.img : competitor.businessName}/> }
-                        title={competitor.businessName}
+                        avatar={ <Avatar classes={{root: classes.avatar}} alt={competitor.name} src={competitor.img ? competitor.img : competitor.name}/> }
+                        title={competitor.name}
                         subheader={competitor.address}
                         
                       />

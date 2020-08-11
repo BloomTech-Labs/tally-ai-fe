@@ -110,14 +110,8 @@ function businessReducer(state = initialState, action) {
 			return {
 				...state,
 				currentlySelectedBusiness: { 
-					business_id: action.payload.business_id,
-					businessName: action.payload.name,
-					review_count: action.payload.review_count,
-					business_stars: action.payload.business_stars,
-					cuisine: action.payload.cuisine,
-					address: action.payload.address,
-					zipcode: action.payload.zipcode,
-					city: action.payload.city,
+					...action.payload,
+
 					isFetching: false,
 					error: null,
 				} 
@@ -144,18 +138,7 @@ function businessReducer(state = initialState, action) {
 			console.log(action.payload)
 			return {
 				...state,
-				businesses: action.payload.map(business => {
-					return {
-						business_id: business.business_id,
-						businessName: business.name,
-						address: business.address,
-						city: business.city,
-						zipcode: business.zipcode,
-						cuisine: business.cuisine,
-						review_count : business.review_count,
-						business_stars: business.business_stars
-					}
-				}),
+				businesses: action.payload,
 				isSetting: false,
 				error: null
 			}
@@ -201,18 +184,7 @@ function businessReducer(state = initialState, action) {
 		case ADD_COMPETITOR_SUCCESS:
 			return {
 				...state,
-				competitors: action.payload.map(business => {
-					return {
-						business_id: business.business_id,
-						businessName: business.name,
-						address: business.address,
-						city: business.city,
-						zipcode: business.zipcode,
-						cuisine: business.cuisine,
-						review_count : business.review_count,
-						business_stars: business.business_stars
-					}
-				}),
+				competitors: action.payload,
 				isSetting: false,
 				error: null
 			}
