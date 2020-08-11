@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import InputBase from '@material-ui/core/InputBase'
@@ -8,12 +10,12 @@ import SearchIcon from '@material-ui/icons/Search'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 import { axiosWithAuth } from '../../auth/axiosWithAuth'
+import { fetchBusinessByName } from '../../actions/businessActions'
 
 const useStyles = makeStyles(theme => ({
 	form: {
@@ -51,6 +53,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchBar() {
 	const classes = useStyles()
+
+	const dispatch = useDispatch()
 	const [search, setSearch] = useState('')
 	const [businessNames, setBusinessNames] = useState([])
 	const [filteredBusinessNames, setFilteredBusinessNames] = useState([])
@@ -165,7 +169,9 @@ export default function SearchBar() {
 										<ListItem button key={index}>
 											<ListItemText
 												primary={businessName}
-												onClick={() => console.log({ businessName })}
+												onClick={() =>
+													dispatch(fetchBusinessByName(businessName))
+												}
 											/>
 										</ListItem>
 									)

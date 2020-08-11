@@ -28,9 +28,7 @@ export const FETCH_BUSINESS_BY_NAME_FAILURE = 'FETCH_BUSINESS_BY_NAME_FAILURE'
 export const fetchBusinessByName = name => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BUSINESS_BY_NAME_START })
-		const { data: business } = await axiosWithAuth().post(
-			`/search?name=${name}`
-		)
+		const { data: business } = await axiosWithAuth().get(`/search?name=${name}`)
 		console.log({ business })
 		business &&
 			dispatch({ type: FETCH_BUSINESS_BY_NAME_SUCCESS, payload: business })
