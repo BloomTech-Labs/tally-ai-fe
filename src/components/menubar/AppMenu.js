@@ -40,6 +40,14 @@ window.location.href='/Dashboard'
 
   return (
     <List component="nav" className={classes.appMenu} disablePadding>
+
+{ props.userInfo.data.firstName && 
+        <ListItem button id='dashboardListItem' className={classes.menuItem}>
+          <h3>Hello {props.userInfo.data.firstName}</h3>
+         </ListItem>
+      }
+
+
       <NavLink to='/'>
         <ListItem button id='dashboardListItem' className={classes.menuItem}>
           <ListItemIcon className={classes.menuItemIcon}>
