@@ -26,14 +26,14 @@ export const FETCH_BUSINESS_BY_NAME_SUCCESS = 'FETCH_BUSINESS_BY_NAME_SUCCESS'
 export const FETCH_BUSINESS_BY_NAME_FAILURE = 'FETCH_BUSINESS_BY_NAME_FAILURE'
 
 //adding competitors to user's competitor list
-export const ADD_COMPETITOR_START = "ADD_COMPETITOR_START";
-export const ADD_COMPETITOR_SUCCESS = "ADD_COMPETITOR_SUCCESS";
-export const ADD_COMPETITOR_FAILURE = "ADD_COMPETITOR_FAILURE";
+export const ADD_COMPETITOR_START = 'ADD_COMPETITOR_START'
+export const ADD_COMPETITOR_SUCCESS = 'ADD_COMPETITOR_SUCCESS'
+export const ADD_COMPETITOR_FAILURE = 'ADD_COMPETITOR_FAILURE'
 
 //removing competitors from user's competitor list
-export const REMOVE_COMPETITOR_START = "REMOVE_COMPETITOR_START";
-export const REMOVE_COMPETITOR_SUCCESS = "REMOVE_COMPETITOR_SUCCESS";
-export const REMOVE_COMPETITOR_FAILURE = "REMOVE_COMPETITOR_FAILURE";
+export const REMOVE_COMPETITOR_START = 'REMOVE_COMPETITOR_START'
+export const REMOVE_COMPETITOR_SUCCESS = 'REMOVE_COMPETITOR_SUCCESS'
+export const REMOVE_COMPETITOR_FAILURE = 'REMOVE_COMPETITOR_FAILURE'
 
 export const fetchBusinessByName = name => async dispatch => {
 	try {
@@ -53,33 +53,30 @@ export const fetchBusinesses = business => dispatch => {
 
 	const name = business.name
 	const city = business.city
-		dispatch({
-			type: FETCH_BUSINESS_START,
-		})	
+	dispatch({
+		type: FETCH_BUSINESS_START
+	})
 	axiosWithAuth()
 		.get(`/search?name=${name}&city=${city}`)
-			.then(res => {
-				console.log(res)
-				dispatch({
-					type: FETCH_BUSINESS_SUCCESS,
-					payload: res.data
-				})
+		.then(res => {
+			console.log(res)
+			dispatch({
+				type: FETCH_BUSINESS_SUCCESS,
+				payload: res.data
 			})
-			.catch(err => {
-				console.log(err.response)
-				dispatch({
-					type: FETCH_BUSINESS_FAILURE,
-					payload: err.response.data
-				})
+		})
+		.catch(err => {
+			console.log(err.response)
+			dispatch({
+				type: FETCH_BUSINESS_FAILURE,
+				payload: err.response.data
 			})
 		})
 }
 
-export const selectBusiness = (
-	businessInfo
-) => dispatch => {
+export const selectBusiness = businessInfo => dispatch => {
 	console.log(businessInfo)
-	dispatch({type: SELECT_BUSINESS_SUCCESS, payload: businessInfo})
+	dispatch({ type: SELECT_BUSINESS_SUCCESS, payload: businessInfo })
 }
 
 export const addBusiness = (businessInfo, userID) => dispatch => {
@@ -105,29 +102,27 @@ export const addBusiness = (businessInfo, userID) => dispatch => {
 }
 
 export const addCompetitor = (businessInfo, userID) => dispatch => {
-    console.log("\nAdding competitor to the store...\n", businessInfo);
-    //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
-   
+	console.log('\nAdding competitor to the store...\n', businessInfo)
+	//dispatch({ type: ADD_BUSINESS, payload: businessInfo });
 
-    dispatch({ type: ADD_COMPETITOR_START });
-    //endpoint
-    axiosWithAuth()
-      .post(`/users/${userID}/favorite`, businessInfo)
-      .then(res => {
-        console.log("Add competitor success, result:", res);
-        dispatch({
-          type: ADD_COMPETITOR_SUCCESS,
-          payload: res.data.competitors
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: ADD_COMPETITOR_FAILURE,
-          payload: err.response
-        });
-      });
-
-};
+	dispatch({ type: ADD_COMPETITOR_START })
+	//endpoint
+	axiosWithAuth()
+		.post(`/users/${userID}/favorite`, businessInfo)
+		.then(res => {
+			console.log('Add competitor success, result:', res)
+			dispatch({
+				type: ADD_COMPETITOR_SUCCESS,
+				payload: res.data.competitors
+			})
+		})
+		.catch(err => {
+			dispatch({
+				type: ADD_COMPETITOR_FAILURE,
+				payload: err.response
+			})
+		})
+}
 
 export const removeBusiness = (business_id, userID) => dispatch => {
 	console.log('\removing business from the store...\n')
@@ -140,7 +135,7 @@ export const removeBusiness = (business_id, userID) => dispatch => {
 		.then(res => {
 			dispatch({
 				type: REMOVE_BUSINESS_SUCCESS,
-				payload: res.data.business_id 
+				payload: res.data.business_id
 			})
 		})
 		.catch(err => {
@@ -152,29 +147,28 @@ export const removeBusiness = (business_id, userID) => dispatch => {
 }
 
 export const removeCompetitor = (businessID, userID) => dispatch => {
+	console.log('Removing competitor from the store...\n')
 
-    console.log("\Removing competitor from the store...\n");
-  
-    dispatch({ type: REMOVE_COMPETITOR_START });
-    //endpoint
-    axiosWithAuth()
-      .delete(`/users/${userID}/favorite/${businessID}`)
-      .then(res => {
-        dispatch({
-          type: REMOVE_COMPETITOR_SUCCESS,
-          payload: res.data.competitor_id//new array after modification
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: REMOVE_COMPETITOR_FAILURE,
-          payload: err
-        });
-      });
-  
-    //dispatch({ type: ADD_BUSINESS, payload: businessInfo });
-    //DELETE /users/:id/favorite/:business_id
-  };
+	dispatch({ type: REMOVE_COMPETITOR_START })
+	//endpoint
+	axiosWithAuth()
+		.delete(`/users/${userID}/favorite/${businessID}`)
+		.then(res => {
+			dispatch({
+				type: REMOVE_COMPETITOR_SUCCESS,
+				payload: res.data.competitor_id //new array after modification
+			})
+		})
+		.catch(err => {
+			dispatch({
+				type: REMOVE_COMPETITOR_FAILURE,
+				payload: err
+			})
+		})
+
+	//dispatch({ type: ADD_BUSINESS, payload: businessInfo });
+	//DELETE /users/:id/favorite/:business_id
+}
 
 export const resetSearchResults = () => dispatch => {
 	dispatch({ type: FETCH_BUSINESS_SUCCESS, payload: null })
