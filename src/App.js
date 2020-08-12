@@ -12,7 +12,6 @@ import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
 // Components
 import RestrictMobile from "./components/RestrictMobile";
-import NavBar from "./components/navbar";
 import Search from "./components/search/search.js";
 import SearchPage from "./components/search/SearchPage"
 import DashboardGrid from "./components/dashboard/dashboard";
@@ -21,12 +20,27 @@ import Login from "./components/authentication/Login";
 import Settings from "./components/settings/Settings.js";
 import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
-import DashboardPlus from "./components/dashboard/dashboardPlus";
 import Policy from "./components/TOS/legal";
-import Menubar from './components/menubar/Menubar'
-import { widgets } from "./components/WidgetSystem/WidgetRegistry";
+import AppMenu from './components/menubar/AppMenu';
+import NavBar from "./components/menubar/navbar";
+
+
+import { CssBaseline, makeStyles } from "@material-ui/core";
+import clsx from 'clsx';
+
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    flexGrow: 1,
+  }
+}))
 
 function App(props) {
+  const classes = useStyles();
+
+  console.log(props)
+
+
 	useEffect(() => {
 		console.log('getting user data');
 		if (localStorage.getItem('token') && localStorage.getItem('userID') && props.loggedInUser.shouldUpdate) {
@@ -36,10 +50,10 @@ function App(props) {
 		} else {
 			//do we need to delete anything from state when they log out?
 			let userInfo = {       
-          first_name: null,
-          last_name: null,
-          user_id: null,
-          type: null,
+        firstName: null,
+        lastName: null,
+        userId: null,
+        type: null,
 
         };
 
@@ -49,20 +63,25 @@ function App(props) {
   }, [props.loggedInUser.shouldUpdate]);
 
   return (
-    <div className={(localStorage.getItem("token") ? ('displayFlex') : ('App'))}>
+    <div className="App">
+      <CssBaseline/>
+
       <RestrictMobile />
-      <NavBar />
-      <PublicRoute exact path='/' component={Search} />
-      <Route path="/Dashboard/" component={DashboardGrid} />
-      <Route path="/Register/" component={Registration} />
-      <Route path="/Login/" component={Login} />
-      <Route path="/Compset" component={CompSet} />
-      <Route path="/About" component={AboutUs} />
-      <Route path="/Menu" component={Menubar} />
-      <Route path="/Legal/:doc" component={Policy} />
-      <Route path="/DashboardPlus/" component={DashboardPlus} />
-      <PrivateRoute path="/Settings/" component={Settings} />
-      <PrivateRoute path="/Search/:searchMode" exact component={SearchPage} />
+      {props.location.pathname !== "/" ? <AppMenu/> : <NavBar/> }
+ 
+
+      <main className={classes.content}>
+        <PublicRoute exact path='/' component={Search} />
+        <Route path="/dashboard/" component={DashboardGrid} />
+        <Route path="/register/" component={Registration} />
+        <Route path="/login/" component={Login} />
+        <Route path="/compset" component={CompSet} />
+        <Route path="/about" component={AboutUs} />
+        <Route path="/legal/:doc" component={Policy} />
+        <PrivateRoute path="/settings/" component={Settings} />
+        <PrivateRoute path="/search/:searchMode" exact component={SearchPage} />
+
+      </main>
     </div>
   );
 }

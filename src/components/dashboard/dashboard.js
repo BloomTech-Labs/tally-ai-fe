@@ -18,7 +18,7 @@ import DashboardPlus from './dashboardPlus'
 const useStyles = makeStyles(theme => ({
 	root: {
 		padding: "2rem 32px 0 32px",
-		margin: "4.6rem 0 0 13rem",
+		margin: "4.6rem 0 0 4.6rem",
 		textAlign: "center",
 		[theme.breakpoints.up("lg")] :{
 			width : "996px",
