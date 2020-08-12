@@ -18,7 +18,6 @@ import DashboardGrid from "./components/dashboard/dashboard";
 import Registration from "./components/authentication/Registration";
 import Login from "./components/authentication/Login";
 import Settings from "./components/settings/Settings.js";
-import CompSet from "./components/compSet";
 import AboutUs from "./components/aboutus";
 import Policy from "./components/TOS/legal";
 import AppMenu from './components/menubar/AppMenu';
@@ -75,7 +74,6 @@ function App(props) {
         <Route path="/dashboard/" component={DashboardGrid} />
         <Route path="/register/" component={Registration} />
         <Route path="/login/" component={Login} />
-        <Route path="/compset" component={CompSet} />
         <Route path="/about" component={AboutUs} />
         <Route path="/legal/:doc" component={Policy} />
         <PrivateRoute path="/settings/" component={Settings} />
