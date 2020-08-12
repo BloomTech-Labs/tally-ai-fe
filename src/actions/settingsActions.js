@@ -6,7 +6,8 @@ import {
 	ADD_BUSINESS_FAILURE,
 	ADD_COMPETITOR_START,
 	ADD_COMPETITOR_SUCCESS,
-	ADD_COMPETITOR_FAILURE
+	ADD_COMPETITOR_FAILURE,
+	SELECT_BUSINESS_SUCCESS
 } from "./businessActions";
 
 
@@ -86,7 +87,15 @@ export const getUserInfo = userID => dispatch => {
 			dispatch({ type: GET_USER_DATA_SUCCESS, payload: res.data })
 			dispatch({ type: ADD_BUSINESS_SUCCESS, payload: res.data.businesses })
 			dispatch({ type: ADD_COMPETITOR_SUCCESS, payload: res.data.competitors })
-
+			dispatch({ type: SELECT_BUSINESS_SUCCESS, payload: {
+				business_id: null, 
+				businessName: null,
+				review_count: 0,
+				business_stars: 0,
+				changeInRating: '',
+				address: '',
+				}
+			})
 
 		})
 		.catch(err => {

@@ -17,6 +17,7 @@ import {
   removeBusiness,
   addCompetitor,
   removeCompetitor,
+  resetSearchResults,
 } from '../../actions/businessActions';
 
 import axios from "axios";
@@ -25,7 +26,7 @@ const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
 const useStyles = makeStyles(theme => ({
   container: {
-    marginLeft: "12.5rem",
+    
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -64,6 +65,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#1E4DC7',
     color: 'white',
     borderRadius:'20px',
+    "&:disabled": {
+      backgroundColor: "#3968e361"
+    }
   },
 
 }));
@@ -91,6 +95,10 @@ const SearchPage = props => {
     props.selectBusiness(selection); //lets go ahead and assume they want to view this new bussiness/competitor on the dashboard as well
     props.history.push("/dashboard");
   }
+
+  useEffect(() => {
+    props.resetSearchResults();
+  },[])
 
   useEffect(() => {
     console.log("Added business resulting in new state: competitors ", props.competitors, "businesses", props.businesses);
@@ -221,5 +229,6 @@ export default connect(mapStateToProps, {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness
+  selectBusiness,
+  resetSearchResults,
 })(SearchPage);

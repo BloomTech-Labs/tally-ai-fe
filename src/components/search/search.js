@@ -14,7 +14,7 @@ import HomeFeatures from "../home/HomeFeatures";
 import HomeBottomSection from "../home/HomeBottomSection";
 import HomePitches from '../home/HomePitches';
 
-import { fetchBusinesses, selectBusiness } from "../../actions/businessActions.js";
+import { fetchBusinesses, selectBusiness,resetSearchResults } from "../../actions/businessActions.js";
 
 import "./search.scss"
 
@@ -62,6 +62,10 @@ const Search = props => {
 
 		props.history.push('/dashboard')
 	}
+
+	useEffect(() => {
+		props.resetSearchResults();
+	},[])
 
 	useEffect(() => {
 		if (searchLocation.latitude && searchLocation.longitude) {
@@ -209,5 +213,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
 	fetchBusinesses,
-	selectBusiness
+	selectBusiness,
+	resetSearchResults,
 })(Search)
