@@ -17,7 +17,7 @@ import {
 } from "../../actions/settingsActions";
 
 //Icons
-import {Home,Settings,LogOut,ShoppingBag,GitHub, ChevronRight, ChevronLeft, LogIn, Edit, HelpCircle} from 'react-feather';
+import {Home,Settings,LogOut,ShoppingBag,GitHub, ChevronRight, ChevronLeft, LogIn, Edit, HelpCircle, AlertCircle} from 'react-feather';
 
 
 
@@ -91,7 +91,7 @@ const AppMenu = (props) => {
             <ListItemIcon className={classes.menuItemIcon}>
               {open ? <ChevronLeft/> : <ChevronRight/>}
             </ListItemIcon>
-            <ListItemText classes={{primary: classes.title}} primary={props.userInfo.data.firstName ? `Hello ${props.userInfo.data.firstName}`: 'Tally-Ai'}/>
+            <ListItemText classes={{primary: classes.title}} primary={props.userInfo.data.firstName ? `Hello ${props.userInfo.data.firstName}`: 'TallyAI'}/>
           </ListItem>
 
 
@@ -157,12 +157,6 @@ const AppMenu = (props) => {
             <ListItemText primary="Map" />
         </ListItem> */}
 
-        <ListItem button classes={{button: classes.button}} onClick={()=> history.push("/about")}>
-          <ListItemIcon className={classes.menuItemIcon}>
-            <GitHub />
-          </ListItemIcon>
-          <ListItemText primary="About Us" />
-        </ListItem>
 
         { props.userInfo.data.firstName && <ListItem button onClick={handleLogout} classes={{button: classes.button}}>
             <ListItemIcon className={classes.menuItemIcon}>
@@ -171,13 +165,26 @@ const AppMenu = (props) => {
             <ListItemText primary="Logout" />
         </ListItem>}
 
-        <ListItem button classes={{root: classes.listTOS, button: classes.button}} onClick={()=> history.push("/legal")}>
+        <ListItem button classes={{button: classes.button}} onClick={()=> history.push("/about")}>
           <ListItemIcon className={classes.menuItemIcon}>
             <HelpCircle />
+          </ListItemIcon>
+          <ListItemText primary="About Us" />
+        </ListItem>
+
+        <ListItem button classes={{root: classes.listTOS, button: classes.button}} onClick={()=> history.push("/legal")}>
+          <ListItemIcon className={classes.menuItemIcon}>
+            <AlertCircle />
           </ListItemIcon>
           <ListItemText primary="Terms & Policy" />
         </ListItem>
 
+        <ListItem component="a" button href="https://github.com/Lambda-School-Labs/tally-ai-fe" classes={{root: classes.cRight, button: classes.button}}>
+          <ListItemIcon className={classes.menuItemIcon}>
+            <GitHub />
+          </ListItemIcon>
+          <ListItemText primary="TallyAI © 2020" />
+        </ListItem>
       </List>
     </Drawer>
   )
@@ -205,7 +212,11 @@ const useStyles = makeStyles((theme) => ({
   },
   listTOS: {
     position: "absolute",
-    bottom: "0",
+    bottom: "5rem",
+  },
+  cRight: {
+    position: "absolute",
+    bottom: "0"
   },
   title: {
     fontWeight: "800",
