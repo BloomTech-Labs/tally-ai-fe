@@ -17,7 +17,7 @@ import {
 } from "../../actions/settingsActions";
 
 //Icons
-import {Home,Settings,LogOut,ShoppingBag,GitHub, ChevronRight, ChevronLeft, LogIn, Edit} from 'react-feather';
+import {Home,Settings,LogOut,ShoppingBag,GitHub, ChevronRight, ChevronLeft, LogIn, Edit, HelpCircle} from 'react-feather';
 
 
 
@@ -170,6 +170,14 @@ const AppMenu = (props) => {
             </ListItemIcon>
             <ListItemText primary="Logout" />
         </ListItem>}
+
+        <ListItem button classes={{root: classes.listTOS, button: classes.button}} onClick={()=> history.push("/legal")}>
+          <ListItemIcon className={classes.menuItemIcon}>
+            <HelpCircle />
+          </ListItemIcon>
+          <ListItemText primary="Terms & Policy" />
+        </ListItem>
+
       </List>
     </Drawer>
   )
@@ -185,12 +193,19 @@ const useStyles = makeStyles((theme) => ({
     background: "##232323",
     color: "#ffff",
   },
+  list: {
+    height: "100%",
+  },
   paperDrawer: {
     background: "#232323",
     color: "#ffff",
   },
   menuItemIcon: {
     color: "#ffff",
+  },
+  listTOS: {
+    position: "absolute",
+    bottom: "0",
   },
   title: {
     fontWeight: "800",

@@ -72,11 +72,11 @@ function App(props) {
       <main className={classes.content}>
         <PublicRoute exact path='/' component={Search} />
         <Route path="/dashboard/" component={DashboardGrid} />
-        <Route path="/register/" component={Registration} />
-        <Route path="/login/" component={Login} />
+        <Route path="/register" component={Registration} />
+        <Route path="/login" component={Login} />
         <Route path="/about" component={AboutUs} />
-        <Route path="/legal/:doc" component={Policy} />
-        <PrivateRoute path="/settings/" component={Settings} />
+        <Route path="/legal" component={Policy} />
+        <PrivateRoute path="/settings" component={Settings} />
         <PrivateRoute path="/search/:searchMode" exact component={SearchPage} />
 
       </main>
