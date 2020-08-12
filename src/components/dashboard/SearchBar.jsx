@@ -170,9 +170,10 @@ export default function SearchBar({ searchByNameOnly }) {
 										<ListItem button key={index}>
 											<ListItemText
 												primary={businessName}
-												onClick={() =>
+												onClick={() => {
 													dispatch(fetchBusinessByName(businessName))
-												}
+													setSearch('')
+												}}
 											/>
 										</ListItem>
 									)

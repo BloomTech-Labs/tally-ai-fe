@@ -26,33 +26,14 @@ const mapsKey = process.env.REACT_APP_MAPS_KEY
 
 const useStyles = makeStyles(theme => ({
 	container: {
-		// border: '2px solid red',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 		flexWrap: 'wrap'
-		// height: '100vh',
-
-		// [theme.breakpoints.up('lg')]: {
-		// 	flexDirection: 'row',
-		// 	flexWrap: 'wrap',
-		// 	alignItems: '',
-		// 	justifyContent: 'flex-start'
-		// }
 	},
 	title: {
 		marginTop: 20,
 		marginBottom: 50
-	},
-
-	form: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		flexDirection: 'column',
-		alignItems: 'center',
-		[theme.breakpoints.up('lg')]: {
-			marginLeft: '10%'
-		}
 	},
 	textField: {
 		marginLeft: theme.spacing(1),
