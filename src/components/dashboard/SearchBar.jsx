@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		alignItems: 'center',
 		width: 800,
-		marginTop: 120,
 		borderRadius: 15
 	},
 	list: {
@@ -51,9 +50,8 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-export default function SearchBar() {
+export default function SearchBar({ searchByNameOnly }) {
 	const classes = useStyles()
-
 	const dispatch = useDispatch()
 	const [search, setSearch] = useState('')
 	const [businessNames, setBusinessNames] = useState([])
@@ -113,39 +111,42 @@ export default function SearchBar() {
 	return (
 		<>
 			<Paper component='form' className={classes.form}>
-				<FormControl className={classes.iconButton}>
-					<Select
-						open={open}
-						onClose={handleClose}
-						onOpen={handleOpen}
-						value={cuisine}
-						onChange={handleChange}
-					>
-						<MenuItem value='All'>All</MenuItem>
-						<MenuItem value={1}>American</MenuItem>
-						<MenuItem value={2}>Chinese</MenuItem>
-						<MenuItem value={3}>Cuban</MenuItem>
-						<MenuItem value={4}>Greek</MenuItem>
-						<MenuItem value={5}>Hawaiian</MenuItem>
-						<MenuItem value={6}>Indian</MenuItem>
-						<MenuItem value={7}>Italian</MenuItem>
-						<MenuItem value={8}>Korean</MenuItem>
-						<MenuItem value={9}>Mediterranean</MenuItem>
-						<MenuItem value={10}>Mexican</MenuItem>
-						<MenuItem value={11}>Other</MenuItem>
-						<MenuItem value={12}>Pizza</MenuItem>
-						<MenuItem value={13}>Southern</MenuItem>
-						<MenuItem value={14}>Sushi</MenuItem>
-						<MenuItem value={15}>Thai</MenuItem>
-					</Select>
-				</FormControl>
+				{!searchByNameOnly && (
+					<>
+						<FormControl className={classes.iconButton}>
+							<Select
+								open={open}
+								onClose={handleClose}
+								onOpen={handleOpen}
+								value={cuisine}
+								onChange={handleChange}
+							>
+								<MenuItem value='All'>All</MenuItem>
+								<MenuItem value={1}>American</MenuItem>
+								<MenuItem value={2}>Chinese</MenuItem>
+								<MenuItem value={3}>Cuban</MenuItem>
+								<MenuItem value={4}>Greek</MenuItem>
+								<MenuItem value={5}>Hawaiian</MenuItem>
+								<MenuItem value={6}>Indian</MenuItem>
+								<MenuItem value={7}>Italian</MenuItem>
+								<MenuItem value={8}>Korean</MenuItem>
+								<MenuItem value={9}>Mediterranean</MenuItem>
+								<MenuItem value={10}>Mexican</MenuItem>
+								<MenuItem value={11}>Other</MenuItem>
+								<MenuItem value={12}>Pizza</MenuItem>
+								<MenuItem value={13}>Southern</MenuItem>
+								<MenuItem value={14}>Sushi</MenuItem>
+								<MenuItem value={15}>Thai</MenuItem>
+							</Select>
+						</FormControl>
 
-				<Divider className={classes.divider} orientation='vertical' />
-
+						<Divider className={classes.divider} orientation='vertical' />
+					</>
+				)}
 				<InputBase
 					value={search}
 					className={classes.input}
-					placeholder='Search for a business'
+					placeholder='Search by name'
 					inputProps={{ 'aria-label': 'search for a business' }}
 					onChange={e => handleSearch(e.target.value)}
 					onSubmit={handleSubmit}

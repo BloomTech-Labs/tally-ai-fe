@@ -5,8 +5,6 @@ import { Grid, Paper } from '@material-ui/core'
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 
-import SearchBar from './SearchBar'
-
 import {
 	fetchWordsOverTime,
 	fetchTopAndBottom,
