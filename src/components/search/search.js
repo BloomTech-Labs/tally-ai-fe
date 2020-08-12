@@ -14,8 +14,7 @@ import HomeFeatures from "../home/HomeFeatures";
 import HomeBottomSection from "../home/HomeBottomSection";
 import HomePitches from '../home/HomePitches';
 
-import { fetchBusinesses, selectBusiness } from "../../actions/businessActions.js";
-// import { searchResultsPlaceholder } from "../../actions/index";
+import { fetchBusinesses, selectBusiness,resetSearchResults } from "../../actions/businessActions.js";
 
 import "./search.scss"
 
@@ -65,6 +64,10 @@ const Search = props => {
 	}
 
 	useEffect(() => {
+		props.resetSearchResults();
+	},[])
+
+	useEffect(() => {
 		if (searchLocation.latitude && searchLocation.longitude) {
 			axios
 				.get(
@@ -92,7 +95,7 @@ const Search = props => {
 
 						<form
 							className={
-								props.searchResults ? ' growSearch' : classes.container
+								props.searchResults.data ? ' growSearch' : classes.container
 							}
 						>
 							<div
@@ -168,6 +171,7 @@ const Search = props => {
 								variant='outlined'
 								color='blue'
 								type='submit'
+								disabled={props.searchResults.isFetching}
 								onClick={e => {
 									e.preventDefault()
 									props.fetchBusinesses({
@@ -186,7 +190,7 @@ const Search = props => {
 
 			
 				
-				{!props.searchResults ? (
+				{!props.searchResults.data ? (
 					
 					<div>
 						<HomeIcons />
@@ -203,11 +207,12 @@ const Search = props => {
 }
 
 const mapStateToProps = state => ({
-	searchResults: state.business.searchResults.data,
+	searchResults: state.business.searchResults,
 	selectedBusiness: state.business.currentlySelectedBusiness
 })
 
 export default connect(mapStateToProps, {
 	fetchBusinesses,
-	selectBusiness
+	selectBusiness,
+	resetSearchResults,
 })(Search)

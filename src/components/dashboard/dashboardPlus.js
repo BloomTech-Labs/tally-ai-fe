@@ -12,12 +12,12 @@ import {
   fetchBusinesses,
   selectBusiness,
   addBusiness,
-  removeBusiness
+  removeBusiness,
+  addCompetitor,
+  removeCompetitor, 
    
 } from "../../actions/businessActions";
 
-import {addCompetitor,  
-  removeCompetitor, } from '../../actions/competitorsActions'
 
 import { CardActionArea, Grid, Typography, Box, Card,Tooltip,Fab, CardHeader,Avatar } from "@material-ui/core";
 
@@ -110,8 +110,8 @@ function DashboardPlus(props) {
                 <Card >
                   <CardActionArea onClick={() => {  props.selectBusiness(business); }}> 
                     <CardHeader
-                      avatar={ <Avatar classes={{root: classes.avatar}} alt={business.businessName} src={business.img ? business.img : business.businessName}/> }
-                      title={business.businessName}
+                      avatar={ <Avatar classes={{root: classes.avatar}} alt={business.name} src={business.img ? business.img : business.name}/> }
+                      title={business.name}
                       subheader={business.address}
                       
                     />
@@ -149,8 +149,8 @@ function DashboardPlus(props) {
                   <Card >
                     <CardActionArea onClick={() => { props.selectBusiness( competitor); }}> 
                       <CardHeader
-                        avatar={ <Avatar classes={{root: classes.avatar}} alt={competitor.businessName} src={competitor.img ? competitor.img : competitor.businessName}/> }
-                        title={competitor.businessName}
+                        avatar={ <Avatar classes={{root: classes.avatar}} alt={competitor.name} src={competitor.img ? competitor.img : competitor.name}/> }
+                        title={competitor.name}
                         subheader={competitor.address}
                         
                       />
@@ -177,8 +177,8 @@ function DashboardPlus(props) {
 }
 
 const mapStateToProps = state => ({
-  competitors: state.competitor.competitors.businesses,
-  businesses: state.business.userBusinesses.businesses,  
+  competitors: state.business.competitors,
+  businesses: state.business.businesses,  
   selectedBusiness: state.business.currentlySelectedBusiness
 });
 

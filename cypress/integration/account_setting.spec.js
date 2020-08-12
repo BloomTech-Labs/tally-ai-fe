@@ -13,8 +13,8 @@ describe("Account Settings", ()=>{
     });
 
     it("should type full name, ",()=>{
-        cy.get("#firstName").type("Account").should("have.value", "Account")
-        cy.get("#lastName").type("Test").should("have.value", "Test")
+        cy.get("#firstName").clear().type("Account").should("have.value", "Account")
+        cy.get("#lastName").clear().type("Test").should("have.value", "Test")
     })
 
     it("should have submit button", ()=>{

@@ -9,16 +9,15 @@ import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import { InputAdornment } from "@material-ui/core";
 import Results from "./results";
 
-import {
-  addCompetitor,
-  removeCompetitor,
-} from "../../actions/competitorsActions";
 
 import {
   fetchBusinesses,
   selectBusiness,
   addBusiness,
-  removeBusiness
+  removeBusiness,
+  addCompetitor,
+  removeCompetitor,
+  resetSearchResults,
 } from '../../actions/businessActions';
 
 import axios from "axios";
@@ -27,7 +26,7 @@ const mapsKey = process.env.REACT_APP_MAPS_KEY;
 
 const useStyles = makeStyles(theme => ({
   container: {
-    marginLeft: "12.5rem",
+    
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -66,6 +65,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#1E4DC7',
     color: 'white',
     borderRadius:'20px',
+    "&:disabled": {
+      backgroundColor: "#3968e361"
+    }
   },
 
 }));
@@ -95,6 +97,10 @@ const SearchPage = props => {
   }
 
   useEffect(() => {
+    props.resetSearchResults();
+  },[])
+
+  useEffect(() => {
     console.log("Added business resulting in new state: competitors ", props.competitors, "businesses", props.businesses);
   }, [props.competitors, props.businesses])
 
@@ -114,8 +120,6 @@ const SearchPage = props => {
 				})
 		}
 	}, [searchLocation])
-
-  console.log("SearchMode ", props.match.params);
 
   function Title(params) {
     if(params.searchMode === "business"){
@@ -188,6 +192,7 @@ const SearchPage = props => {
           }}
         ></TextField>
         <Button
+          disabled={props.searchResults.isFetching}
           className={classes.button}
           variant="outlined"
           color="blue"
@@ -212,8 +217,8 @@ const SearchPage = props => {
 };
 
 const mapStateToProps = state => ({
-  competitors: state.competitor.competitors.businesses,
-  businesses: state.business.userBusinesses.businesses,
+  competitors: state.business.competitors,
+  businesses: state.business.businesses, 
   selectedBusiness: state.business.currentlySelectedBusiness,
   searchResults : state.business.searchResults
 });
@@ -224,5 +229,6 @@ export default connect(mapStateToProps, {
   addCompetitor,
   removeBusiness,
   removeCompetitor,
-  selectBusiness
+  selectBusiness,
+  resetSearchResults,
 })(SearchPage);

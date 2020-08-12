@@ -186,7 +186,7 @@ function EditAccount(props){
                             margin="normal"
                             type="city"
                             name="city"
-                            
+                            disabled
                             className={classes.textField}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -201,6 +201,7 @@ function EditAccount(props){
                             margin="normal"
                             type="state"
                             name="state"
+                            disabled
                             className={classes.textField}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -225,9 +226,8 @@ function EditAccount(props){
 }
 
 const mapStateToProps = state => {
-    console.log("redux state",state)
     return {
-        userInfo: state.settings.loggedInUser
+        userInfo: state.settings
     };
 };
 

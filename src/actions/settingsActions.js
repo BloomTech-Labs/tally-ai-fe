@@ -1,5 +1,16 @@
 import { axiosWithAuth } from '../auth/axiosWithAuth';
 
+import {
+	ADD_BUSINESS_START,
+	ADD_BUSINESS_SUCCESS,
+	ADD_BUSINESS_FAILURE,
+	ADD_COMPETITOR_START,
+	ADD_COMPETITOR_SUCCESS,
+	ADD_COMPETITOR_FAILURE,
+	SELECT_BUSINESS_SUCCESS
+} from "./businessActions";
+
+
 // Edit Account
 export const FETCH_EDITACCOUNT_START = 'FETCH_EDITACCOUNT_START'
 export const FETCH_EDITACCOUNT_SUCCESS = 'FETCH_EDITACCOUNT_SUCCESS'
@@ -58,6 +69,7 @@ export const shouldUpdateLoggedInUser = shouldUpdate => dispatch => {
 
 export const setUserInfo = userData => dispatch => {
 	dispatch({ type: GET_USER_DATA_SUCCESS, payload: userData })
+	///need update for businesses dispatch
 }
 
 export const getUserInfo = userID => dispatch => {
@@ -65,26 +77,26 @@ export const getUserInfo = userID => dispatch => {
 	axiosWithAuth()
 		.get('users/' + userID)
 		.then(res => {
-			//so map data from res.data into that format
-			let userInfo = {
-				competitors: res.data.favorites,
-				loggedInUser: {
-					firstName: res.data.first_name,
-					lastName: res.data.last_name,
-					userId : res.data.user_id
-				},
-				businesses: res.data.businesses,
-				activeWidgets:
-					res.data.preferences && res.data.preferences.activeWidgets
-						? res.data.preferences.activeWidgets
-						: [],
-				activeTabs:
-					res.data.preferences && res.data.preferences.activeTabs
-						? res.data.preferences.activeTabs
-						: []
-			}
-			console.log('Got user data, ', res) //{user_id: 13, first_name: "Test", last_name: "Test", businesses: Array(0), favorites: Array(0)}
-			dispatch({ type: GET_USER_DATA_SUCCESS, payload: userInfo })
+			// businesses: (2) [{…}, {…}]
+			// competitors: []
+			// first_name: "Adrian"
+			// last_name: "Parra"
+			// preferences: null
+			// type: "tally"
+			// user_id: 6
+			dispatch({ type: GET_USER_DATA_SUCCESS, payload: res.data })
+			dispatch({ type: ADD_BUSINESS_SUCCESS, payload: res.data.businesses })
+			dispatch({ type: ADD_COMPETITOR_SUCCESS, payload: res.data.competitors })
+			dispatch({ type: SELECT_BUSINESS_SUCCESS, payload: {
+				business_id: null, 
+				businessName: null,
+				review_count: 0,
+				business_stars: 0,
+				changeInRating: '',
+				address: '',
+				}
+			})
+
 		})
 		.catch(err => {
 			console.error('Error getting user data', err)
