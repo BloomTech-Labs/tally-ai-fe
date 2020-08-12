@@ -35,6 +35,21 @@ const useStyles = makeStyles({
     root: {
       flexGrow: 1,
     },
+    title: {
+        height: '20vh', 
+        background: 'linear-gradient(145.23deg, #BBDEFB 4.5%, #E4F3FF 117.03%, #F5FBFF 117.04%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        fontSize: '30px'
+    },
+    content: {
+        textAlign: "left", 
+        padding: "3% 10%",
+        fontWeight: 'bold', 
+        minHeight: "70vh",
+
+    },
 });
 
 function a11yProps(index) {
@@ -64,7 +79,7 @@ const Policy = (props) => {
 
     return (
         <div>
-        <div style={{marginTop: '75px', height: '20vh', background: 'linear-gradient(145.23deg, #BBDEFB 4.5%, #E4F3FF 117.03%, #F5FBFF 117.04%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px'}}>
+        <div className={classes.title}>
             <h1>Legal</h1>
         </div>
         <Paper className={classes.root}>
@@ -87,7 +102,7 @@ const Policy = (props) => {
         >
   
             <TabPanel value={value} index={0} dir={theme.direction}>
-                <div style={{textAlign: "left", paddingLeft: '10%', paddingRight: '10%', paddingBottom: '3', paddingtop: '3%', fontWeight: 'bold', minHeight: "70vh"}}>
+                <div className={classes.content}>
                     <h4>Privacy Policy</h4> 
                     <p>Your privacy is important to us. It is Tally AI's policy to respect your privacy regarding any information we may collect from you across our website, http://tally-ai.com, and other sites we own and operate. We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.</p>
                     <p>We only retain collected information for as long as necessary to provide you with your requested service. What data we store, we’ll protect within commercially acceptable means to prevent loss and theft, as well as unauthorized access, disclosure, copying, use or modification.</p> 
@@ -99,7 +114,7 @@ const Policy = (props) => {
                 </div> 
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-                <div style={{textAlign: "left", paddingLeft: '10%', paddingRight: '10%', paddingBottom: '3%', paddingtop: '3%', fontWeight: 'bold'}}>
+                <div className={classes.content}>
                     <h4>Tally AI Terms of Service </h4> 
                     <h4>1. Terms</h4> 
                     <p>By accessing the website at http://tally-ai.com, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.</p> 

@@ -1,13 +1,7 @@
 .App {
-  text-align: center;
-}
-.homeNavLink{
-  text-shadow: black;
+  display: flex
 }
 
-.displayFlex {
-  display: grid;
-}
 
 form {
   padding-right: 20px;
@@ -631,15 +625,6 @@ star-rating {
   margin-top: 25%;
 }
 
-.FooterButton {
-  font-family: Avenir;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 33px;
-  color: white;
-}
-
 
 
 
@@ -749,26 +734,7 @@ className += selected ? " selectedTab" : " unselectedTab"; */
   cursor: pointer;
 }
 
-.landing-top-section {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 8vh;
-  list-style: none;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 
-.homeNavLink {
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.38);
-}
-
-a {
-  padding-right: 40px;
-  text-decoration: none;
-  color: white;
-}
 
 /* .Signup {
   background-color: #67FFD2;
@@ -778,40 +744,8 @@ a {
   margin-right: 30px;
   font-style: Avenir; */
 /* } */
-a {
-  padding-right: 40px;
-  text-decoration: none;
-  color: white;
-  font-size: 18px;
-}
-
-.Signup {
-  background-color: #67ffd2;
-  border-radius: 40px;
-  width: 100px;
-  height: 33px;
-  font-size: 18px;
-  font-family: Avenir, sans-serif;
-  color: black;
-  text-align: center;
-  letter-spacing: 0.15px;
-  align-items: center;
-  justify-items: center;
-  line-height: 27px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
-}
 
 
-.footerTitle {
-  font-family: Avenir;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 30px;
-  color: white;
-}
 
 .restrictMobile {
   display: none;

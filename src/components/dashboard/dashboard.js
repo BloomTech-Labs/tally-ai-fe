@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { Container, Grid, Paper, Card, CardActionArea, CardHeader, Avatar } from '@material-ui/core'
-import RestaurantIcon from '@material-ui/icons/Restaurant';
+import { Grid, Paper,} from '@material-ui/core'
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 
@@ -19,7 +18,7 @@ import DashboardPlus from './dashboardPlus'
 const useStyles = makeStyles(theme => ({
 	root: {
 		padding: "2rem 32px 0 32px",
-		margin: "4.6rem 0 0 13rem",
+		margin: "4.6rem 0 0 4.6rem",
 		textAlign: "center",
 		[theme.breakpoints.up("lg")] :{
 			width : "996px",
@@ -30,24 +29,6 @@ const useStyles = makeStyles(theme => ({
 	businessContainer : {
 		justifyContent: "space-around",
 		alignItems: "center"
-	},
-	card: {
-		padding: theme.spacing(1),
-		width: theme.spacing(32),
-		height: theme.spacing(16),
-		[theme.breakpoints.down("sm")]: {
-			width: theme.spacing(18),
-			height: theme.spacing(14),
-			flex: "0 0 100%",
-			marginBottom: "2rem"
-			},
-	},
-	avatar: {
-		width: theme.spacing(7),
-    	height: theme.spacing(7),
-	},
-	actions: {
-		height: "100%",
 	},
 	paper: {
 		padding: theme.spacing(1),
@@ -100,21 +81,6 @@ function DashboardGrid(props) {
 				{props.businessInfo.business_id ? (
 					<Grid justify="center">
 						<Grid container className={classes.businessContainer}>
-							{/* <Card className={classes.card}>
-								<CardActionArea disableSpacing className={classes.actions}>
-									<CardHeader
-										avatar={
-											<Avatar className={classes.avatar} src={props.businessInfo.businessImg ? props.businessInfo.businessImg : null}>
-
-												<RestaurantIcon/>
-											</Avatar>
-										}
-										title={props.businessInfo.businessName}
-										subheader={props.businessInfo.address}
-
-									/>
-								</CardActionArea>
-							</Card> */}
 							<Paper  variant="outlined" className={classes.paper} >
 								<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
 								
