@@ -42,12 +42,17 @@ const useStyles = makeStyles(theme => ({
 		textAlign: 'left',
 		width: '100%'
 	},
+	header: {
+		display: 'flex',
+		marginBottom: '2rem',
+		marginTop: '2rem'
+	},
 	boxFont: {
 		fontWeight: 'bold',
-		marginBottom: '3rem'
+		marginTop: '.2rem'
 	},
 	addGrid: {
-		margin: '0 5.2rem'
+		margin: '0 2.2rem'
 	},
 
 	avatar: {
@@ -103,15 +108,28 @@ function DashboardPlus(props) {
 			className={classes.root}
 		>
 			<Box className={classes.box}>
-				<Typography
-					variant='h4'
-					component='h2'
-					gutterBottom
-					className={classes.boxFont}
-				>
-					My Businesses
-				</Typography>
-
+				<Grid className={classes.header}>
+					<Typography
+						variant='h4'
+						component='h2'
+						gutterBottom
+						className={classes.boxFont}
+					>
+						My Businesses
+					</Typography>
+					<Grid className={classes.addGrid} item>
+						<Tooltip title='Add a Business' arrow>
+							<Fab
+								aria-label='add'
+								onClick={() => {
+									props.history.push('/search/business')
+								}}
+							>
+								<AddIcon fontSize='large' />
+							</Fab>
+						</Tooltip>
+					</Grid>
+				</Grid>
 				<Grid
 					container
 					justify='flex-start'
@@ -144,12 +162,24 @@ function DashboardPlus(props) {
 							</Grid>
 						)
 					})}
+				</Grid>
+			</Box>
+			<Box className={classes.box}>
+				<Grid className={classes.header}>
+					<Typography
+						variant='h4'
+						component='h2'
+						gutterBottom
+						className={classes.boxFont}
+					>
+						My Competitors
+					</Typography>
 					<Grid className={classes.addGrid} item>
-						<Tooltip title='Add a Business' arrow>
+						<Tooltip title='Add a Competitor' arrow>
 							<Fab
-								aria-label='add'
+								aria-label='add-competitor'
 								onClick={() => {
-									props.history.push('/search/business')
+									props.history.push('/search/competitor')
 								}}
 							>
 								<AddIcon fontSize='large' />
@@ -157,17 +187,6 @@ function DashboardPlus(props) {
 						</Tooltip>
 					</Grid>
 				</Grid>
-			</Box>
-			<Box className={classes.box}>
-				<Typography
-					variant='h4'
-					component='h2'
-					gutterBottom
-					className={classes.boxFont}
-				>
-					My Competitors
-				</Typography>
-
 				<Grid
 					container
 					justify='flex-start'
@@ -202,19 +221,6 @@ function DashboardPlus(props) {
 							</Grid>
 						)
 					})}
-
-					<Grid className={classes.addGrid} item>
-						<Tooltip title='Add a Competitor' arrow>
-							<Fab
-								aria-label='add-competitor'
-								onClick={() => {
-									props.history.push('/search/competitor')
-								}}
-							>
-								<AddIcon fontSize='large' />
-							</Fab>
-						</Tooltip>
-					</Grid>
 				</Grid>
 			</Box>
 		</Grid>
