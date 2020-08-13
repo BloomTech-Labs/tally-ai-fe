@@ -96,6 +96,7 @@ const Results = props => {
 							select={select}
 							key={result.business_id}
 							setTentativeSelection={setTentativeSelection}
+							searchMode={props.searchMode}
 						/>
 					)
 				})

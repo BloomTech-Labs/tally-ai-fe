@@ -60,6 +60,7 @@ const useStyles = makeStyles(theme => ({
 //searchMode true = competitor search
 //searchMode false = my biz search
 const SearchPage = props => {
+	const { searchMode } = props.match.params
 	const classes = useStyles()
 
 	const [searchTerm, setSearchTerm] = useState()
@@ -67,13 +68,9 @@ const SearchPage = props => {
 	const [readableLocation, setReadableLocation] = useState()
 
 	function resultsSelection(selection) {
-		console.log('Selection: ', selection)
-
 		if (props.match.params.searchMode === 'competitor') {
-			console.log('Adding competitor')
 			props.addCompetitor(selection, localStorage.getItem('userID'))
 		} else {
-			console.log('Adding business', selection)
 			props.addBusiness(selection, localStorage.getItem('userID'))
 		}
 
@@ -112,8 +109,6 @@ const SearchPage = props => {
 	}, [searchLocation])
 
 	function Title() {
-		const { searchMode } = props.match.params
-
 		return (
 			<div className={classes.title}>
 				{searchMode === 'business' ? (
@@ -130,7 +125,7 @@ const SearchPage = props => {
 		<div className={classes.container}>
 			<Title />
 			<SearchBar searchByNameOnly />
-			<Results select={resultsSelection} />
+			<Results select={resultsSelection} searchMode={searchMode} />
 		</div>
 	)
 }
