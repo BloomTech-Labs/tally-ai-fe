@@ -15,7 +15,10 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 import { axiosWithAuth } from '../../auth/axiosWithAuth'
-import { fetchBusinessByName } from '../../actions/businessActions'
+import {
+	fetchBusinessByName,
+	resetSearchResults
+} from '../../actions/businessActions'
 
 const useStyles = makeStyles(theme => ({
 	form: {
@@ -53,6 +56,7 @@ const useStyles = makeStyles(theme => ({
 export default function SearchBar({ searchByNameOnly }) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
+
 	const [search, setSearch] = useState('')
 	const [businessNames, setBusinessNames] = useState([])
 	const [filteredBusinessNames, setFilteredBusinessNames] = useState([])
@@ -106,6 +110,7 @@ export default function SearchBar({ searchByNameOnly }) {
 				  )
 		setSearch(text)
 		setFilteredBusinessNames(filtered)
+		dispatch(resetSearchResults())
 	}
 
 	return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import StarRatings from 'react-star-ratings'
 
@@ -49,9 +49,9 @@ const Result = ({ data, setTentativeSelection, select, searchMode }) => {
 
 		if (alreadyAdded) {
 			setMessage(
-				`${
-					searchMode === 'business' ? 'Businesses' : 'Competitor'
-				} already added!`
+				`This ${
+					searchMode === 'business' ? 'business' : 'competitor'
+				} has already been added!`
 			)
 			handleClick()
 		} else {
@@ -101,16 +101,16 @@ const Result = ({ data, setTentativeSelection, select, searchMode }) => {
 			<Snackbar
 				anchorOrigin={{
 					vertical: 'bottom',
-					horizontal: 'left'
+					horizontal: 'center'
 				}}
 				open={open}
 				autoHideDuration={6000}
 				onClose={handleClose}
-				message='Note archived'
+				message={message}
 				action={
-					<React.Fragment>
+					<Fragment>
 						<Button color='secondary' size='small' onClick={handleClose}>
-							UNDO
+							Okay
 						</Button>
 						<IconButton
 							size='small'
@@ -120,7 +120,7 @@ const Result = ({ data, setTentativeSelection, select, searchMode }) => {
 						>
 							<CloseIcon fontSize='small' />
 						</IconButton>
-					</React.Fragment>
+					</Fragment>
 				}
 			/>
 			{/* {message && message} */}
