@@ -1,13 +1,9 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
-import StarRatings from 'react-star-ratings'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { CardHeader, Avatar } from '@material-ui/core'
 
@@ -17,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 
 import './results.scss'
-import ToggleFavoriteButton from '../ToggleFavoriteButton'
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -31,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const Result = ({ data, setTentativeSelection, select, searchMode }) => {
+const Result = ({ data, select, searchMode }) => {
 	const classes = useStyles()
 
 	const { businesses, competitors } = useSelector(state => state.business)
@@ -132,7 +127,6 @@ const Result = ({ data, setTentativeSelection, select, searchMode }) => {
 					</Fragment>
 				}
 			/>
-			{/* {message && message} */}
 		</>
 	)
 }
