@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 const Result = ({ data, setTentativeSelection, select, searchMode }) => {
 	const classes = useStyles()
 
-	const { businesses } = useSelector(state => state.business)
+	const { businesses, competitors } = useSelector(state => state.business)
 	const [open, setOpen] = useState(false)
 	const [isSelected, setIsSelected] = useState(false)
 	const [message, setMessage] = useState('')
@@ -43,16 +43,25 @@ const Result = ({ data, setTentativeSelection, select, searchMode }) => {
 		e.preventDefault()
 		setIsSelected(!isSelected)
 
-		const alreadyAdded = businesses.some(
+		const businessAlreadyAdded = businesses.some(
 			({ business_id }) => business_id === data.business_id
 		)
 
-		if (alreadyAdded) {
-			setMessage(
-				`This ${
-					searchMode === 'business' ? 'business' : 'competitor'
-				} has already been added!`
-			)
+		const competitorAlreadyAdded = competitors.some(
+			({ business_id }) => business_id === data.business_id
+		)
+
+		if (businessAlreadyAdded && searchMode === 'business') {
+			setMessage(`This business has already been added!`)
+			handleClick()
+		} else if (competitorAlreadyAdded && searchMode === 'competitor') {
+			setMessage(`This competitor has already been added!`)
+			handleClick()
+		} else if (businessAlreadyAdded && searchMode === 'competitor') {
+			setMessage(`You can't add your own business as a competitor`)
+			handleClick()
+		} else if (competitorAlreadyAdded && searchMode === 'business') {
+			setMessage(`You can't add your competitors as your own business`)
 			handleClick()
 		} else {
 			select(data)
