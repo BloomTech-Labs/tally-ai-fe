@@ -30,24 +30,11 @@ import {
 	REMOVE_COMPETITOR_FAILURE
 } from '../actions/businessActions'
 
-// 							id: business.id,
-// 							businessId: business.yelp_id, //default tab selected by default
-// 							// for side bar
-// 							businessName: business.name,
-// 							businessImg: business.image_url,
-// 							// for top-of-page info cards
-// 							reviewCount: 0,
-// 							averageRating: 0,
-// 							changeInRating: ''
-
 const initialState = {
 	isSetting: false,
 	error: null,
-
 	businesses: [],
-
 	competitors: [],
-
 	currentlySelectedBusiness: {
 		business_id: null,
 		businessName: null,
@@ -58,7 +45,6 @@ const initialState = {
 		isFetching: false,
 		error: null
 	},
-
 	searchResults: {
 		isFetching: false,
 		error: null,
