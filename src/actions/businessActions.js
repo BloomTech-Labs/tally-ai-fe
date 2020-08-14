@@ -163,9 +163,6 @@ export const removeCompetitor = (businessID, userID) => dispatch => {
 				payload: err
 			})
 		})
-
-	//dispatch({ type: ADD_BUSINESS, payload: businessInfo });
-	//DELETE /users/:id/favorite/:business_id
 }
 
 export const resetSearchResults = () => dispatch => {
