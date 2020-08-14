@@ -35,16 +35,6 @@ export const REMOVE_COMPETITOR_START = 'REMOVE_COMPETITOR_START'
 export const REMOVE_COMPETITOR_SUCCESS = 'REMOVE_COMPETITOR_SUCCESS'
 export const REMOVE_COMPETITOR_FAILURE = 'REMOVE_COMPETITOR_FAILURE'
 
-//adding competitors to user's competitor list
-export const ADD_COMPETITOR_START = 'ADD_COMPETITOR_START'
-export const ADD_COMPETITOR_SUCCESS = 'ADD_COMPETITOR_SUCCESS'
-export const ADD_COMPETITOR_FAILURE = 'ADD_COMPETITOR_FAILURE'
-
-//removing competitors from user's competitor list
-export const REMOVE_COMPETITOR_START = 'REMOVE_COMPETITOR_START'
-export const REMOVE_COMPETITOR_SUCCESS = 'REMOVE_COMPETITOR_SUCCESS'
-export const REMOVE_COMPETITOR_FAILURE = 'REMOVE_COMPETITOR_FAILURE'
-
 export const fetchBusinessByName = name => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BUSINESS_BY_NAME_START })
