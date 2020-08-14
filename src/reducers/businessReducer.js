@@ -18,36 +18,25 @@ import {
 	REMOVE_BUSINESS_SUCCESS,
 	REMOVE_BUSINESS_FAILURE,
 
+	//fetch business by name
+	FETCH_BUSINESS_BY_NAME_START,
+	FETCH_BUSINESS_BY_NAME_SUCCESS,
+	FETCH_BUSINESS_BY_NAME_FAILURE,
 	ADD_COMPETITOR_START,
-    ADD_COMPETITOR_SUCCESS,
+	ADD_COMPETITOR_SUCCESS,
 	ADD_COMPETITOR_FAILURE,
-	
-
-    REMOVE_COMPETITOR_START,
-    REMOVE_COMPETITOR_SUCCESS,
-    REMOVE_COMPETITOR_FAILURE
+	REMOVE_COMPETITOR_START,
+	REMOVE_COMPETITOR_SUCCESS,
+	REMOVE_COMPETITOR_FAILURE
 } from '../actions/businessActions'
-
-// 							id: business.id,
-// 							businessId: business.yelp_id, //default tab selected by default
-// 							// for side bar
-// 							businessName: business.name,
-// 							businessImg: business.image_url,
-// 							// for top-of-page info cards
-// 							reviewCount: 0,
-// 							averageRating: 0,
-// 							changeInRating: ''
 
 const initialState = {
 	isSetting: false,
 	error: null,
-	
 	businesses: [],
-
 	competitors: [],
-
 	currentlySelectedBusiness: {
-		business_id: null, 
+		business_id: null,
 		businessName: null,
 		review_count: 0,
 		business_stars: 0,
@@ -56,11 +45,10 @@ const initialState = {
 		isFetching: false,
 		error: null
 	},
-
 	searchResults: {
 		isFetching: false,
 		error: null,
-		data:  null
+		data: null
 	}
 }
 
@@ -99,7 +87,7 @@ function businessReducer(state = initialState, action) {
 		case SELECT_BUSINESS_START:
 			return {
 				...state,
-				currentlySelectedBusiness: { 
+				currentlySelectedBusiness: {
 					...state.currentlySelectedBusiness,
 					business_id: action.payload,
 					isFetching: true,
@@ -109,25 +97,25 @@ function businessReducer(state = initialState, action) {
 		case SELECT_BUSINESS_SUCCESS:
 			return {
 				...state,
-				currentlySelectedBusiness: { 
+				currentlySelectedBusiness: {
 					...action.payload,
 
 					isFetching: false,
-					error: null,
-				} 
+					error: null
+				}
 			}
 		case SELECT_BUSINESS_FAILURE:
 			return {
 				...state,
-				currentlySelectedBusiness: { 
+				currentlySelectedBusiness: {
 					...state.currentlySelectedBusiness,
 					business_id: null,
 					isFetching: false,
 					error: action.payload
-				} 
+				}
 			}
 
-		case ADD_BUSINESS_START:			
+		case ADD_BUSINESS_START:
 			return {
 				...state,
 				businesses: state.businesses,
@@ -167,7 +155,6 @@ function businessReducer(state = initialState, action) {
 				}),
 				isSetting: false,
 				error: null
-				
 			}
 		case REMOVE_BUSINESS_FAILURE:
 			return {
@@ -188,7 +175,7 @@ function businessReducer(state = initialState, action) {
 				isSetting: false,
 				error: null
 			}
-		case ADD_COMPETITOR_FAILURE: 
+		case ADD_COMPETITOR_FAILURE:
 			return {
 				...state,
 				isSetting: false,
@@ -210,13 +197,39 @@ function businessReducer(state = initialState, action) {
 				}),
 				isSetting: false,
 				error: null
-				
 			}
 		case REMOVE_COMPETITOR_FAILURE:
 			return {
 				...state,
 				isSetting: false,
 				error: action.payload
+			}
+		case FETCH_BUSINESS_BY_NAME_START:
+			return {
+				...state,
+				searchResults: {
+					isFetching: true,
+					error: null,
+					data: null
+				}
+			}
+		case FETCH_BUSINESS_BY_NAME_SUCCESS:
+			return {
+				...state,
+				searchResults: {
+					isFetching: false,
+					error: null,
+					data: action.payload
+				}
+			}
+		case FETCH_BUSINESS_BY_NAME_FAILURE:
+			return {
+				...state,
+				searchResults: {
+					isFetching: false,
+					error: action.payload,
+					data: null
+				}
 			}
 		default:
 			return state

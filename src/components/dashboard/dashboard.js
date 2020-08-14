@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Paper,} from '@material-ui/core'
+import { Grid, Paper } from '@material-ui/core'
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
-
-
 
 import {
 	fetchWordsOverTime,
@@ -14,49 +12,47 @@ import {
 } from '../../actions/widgetsActions'
 import DashboardPlus from './dashboardPlus'
 
-
 const useStyles = makeStyles(theme => ({
 	root: {
-		padding: "2rem 32px 0 32px",
-		margin: "4.6rem 0 0 4.6rem",
-		textAlign: "center",
-		[theme.breakpoints.up("lg")] :{
-			width : "996px",
-			margin: "4.6rem auto 4.6rem auto",
+		padding: '2rem 32px 0 32px',
+		margin: '4.6rem 0 0 4.6rem',
+		textAlign: 'center',
+		[theme.breakpoints.up('lg')]: {
+			width: '996px',
+			margin: '4.6rem auto 4.6rem auto'
 		},
-		minWidth: "324px",
+		minWidth: '324px'
 	},
-	businessContainer : {
-		justifyContent: "space-around",
-		alignItems: "center"
+	businessContainer: {
+		justifyContent: 'space-around',
+		alignItems: 'center'
 	},
 	paper: {
 		padding: theme.spacing(1),
-		display:"flex",
-		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: "#F9F9F9",
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#F9F9F9',
 		color: theme.palette.text.secondary,
 		width: theme.spacing(30),
 		height: theme.spacing(8),
-		[theme.breakpoints.down("sm")]: {
-		width: theme.spacing(18),
-		height: theme.spacing(6)
+		[theme.breakpoints.down('sm')]: {
+			width: theme.spacing(18),
+			height: theme.spacing(6)
 		},
-		"& > *" : {
-			margin: "0px",
-			color: "black",
+		'& > *': {
+			margin: '0px',
+			color: 'black'
 		},
-		[theme.breakpoints.down("xs")]: { 
+		[theme.breakpoints.down('xs')]: {
 			width: theme.spacing(10),
-			fontSize: ".6rem",
+			fontSize: '.6rem'
 		}
-		
 	},
 	count: {
-		fontWeight: "bold",
-		fontSize: "1.4rem",
+		fontWeight: 'bold',
+		fontSize: '1.4rem'
 	}
 }))
 
@@ -71,41 +67,44 @@ function DashboardGrid(props) {
 		) {
 			props.fetchAllData(props.businessInfo.business_id)
 		}
-
-
 	}, [props.businessInfo.business_id, props.competitors, props.userBusinesses])
 
 	return (
 		<Grid className={classes.root}>
 			<>
 				{props.businessInfo.business_id ? (
-					<Grid justify="center">
+					<Grid justify='center'>
 						<Grid container className={classes.businessContainer}>
-							<Paper  variant="outlined" className={classes.paper} >
-								<p className={classes.count}>{props.businessInfo.review_count.toLocaleString()}</p>
-								
+							<Paper variant='outlined' className={classes.paper}>
+								<p className={classes.count}>
+									{props.businessInfo.review_count.toLocaleString()}
+								</p>
+
 								<p>Total Reviews</p>
 							</Paper>
-							<Paper  variant="outlined" className={classes.paper} >
-								<p className={classes.count} >{props.businessInfo.business_stars} stars</p>
+							<Paper variant='outlined' className={classes.paper}>
+								<p className={classes.count}>
+									{props.businessInfo.business_stars} stars
+								</p>
 								<p>Overall Rating</p>
 							</Paper>
-							<Paper  variant="outlined" className={classes.paper}>
-								<p className={classes.count} >{props.businessInfo.change_in_rating}</p>
+							<Paper variant='outlined' className={classes.paper}>
+								<p className={classes.count}>
+									{props.businessInfo.change_in_rating}
+								</p>
 								<p>Change in Rating</p>
 							</Paper>
 						</Grid>
-						
+
 						<WidgetDisplayList />
 					</Grid>
+				) : localStorage.getItem('token') && localStorage.getItem('userID') ? (
+					<DashboardPlus />
 				) : (
-						localStorage.getItem('token') && localStorage.getItem('userID') ? <DashboardPlus/> : (
-						console.log(
-							'Redirecting cause no business selected while on dashboard. Business selected:',
-							props.businessInfo.business_id
-						) & props.history.push('/') 
-					) 
-					
+					console.log(
+						'Redirecting cause no business selected while on dashboard. Business selected:',
+						props.businessInfo.business_id
+					) & props.history.push('/')
 				)}
 			</>
 		</Grid>
@@ -113,7 +112,6 @@ function DashboardGrid(props) {
 
 	//used to check if this is an actual business or just a new tab
 	function businessesContains(business_id) {
-
 		if (!business_id) {
 			return false
 		}
@@ -131,11 +129,9 @@ function DashboardGrid(props) {
 const mapStateToProps = state => ({
 	id: state.business.currentlySelectedBusiness.business_id,
 	businessInfo: state.business.currentlySelectedBusiness,
-	businesses: state.business.businesses.concat(
-		state.business.competitors
-	),
+	businesses: state.business.businesses.concat(state.business.competitors),
 	userBusinesses: state.business.businesses,
-	competitors: state.business.competitors,
+	competitors: state.business.competitors
 })
 
 export default connect(mapStateToProps, {
