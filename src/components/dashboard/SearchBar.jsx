@@ -154,10 +154,10 @@ export default function SearchBar({ searchByNameOnly }) {
 					placeholder='Search by name'
 					inputProps={{ 'aria-label': 'search for a business' }}
 					onChange={e => handleSearch(e.target.value)}
-					onSubmit={handleSubmit}
+					onSubmit={() => {}}
 				/>
 				<IconButton
-					type='submit'
+					// type='submit'
 					className={{ ...classes.iconButton, paddingRight: 0 }}
 					aria-label='search'
 				>
@@ -165,7 +165,13 @@ export default function SearchBar({ searchByNameOnly }) {
 				</IconButton>
 			</Paper>
 			{search && (
-				<div className={classes.list}>
+				<div
+					className={
+						searchByNameOnly
+							? classes.list
+							: { ...classes.list, marginLeft: 'auto' }
+					}
+				>
 					<List component='nav'>
 						{businessNames.length > 0 &&
 							filteredBusinessNames

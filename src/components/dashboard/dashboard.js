@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Paper } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
+import SearchBar from './SearchBar'
 
 import {
 	fetchWordsOverTime,
@@ -23,9 +24,21 @@ const useStyles = makeStyles(theme => ({
 		},
 		minWidth: '324px'
 	},
+	header: {
+		border: '2px solid red',
+		display: 'flex',
+		flexWrap: 'wrap',
+		justifyContent: 'space-between',
+		alignItems: 'center'
+	},
+	logo: {
+		fontWeight: 'bold',
+		fontSize: '2.4rem'
+	},
 	businessContainer: {
 		justifyContent: 'space-around',
-		alignItems: 'center'
+		alignItems: 'center',
+		marginTop: 50
 	},
 	paper: {
 		padding: theme.spacing(1),
@@ -74,6 +87,13 @@ function DashboardGrid(props) {
 			<>
 				{props.businessInfo.business_id ? (
 					<Grid justify='center'>
+						<Grid className={classes.header}>
+							<Typography variant='h3' className={classes.logo}>
+								tally
+							</Typography>
+							<SearchBar />
+						</Grid>
+
 						<Grid container className={classes.businessContainer}>
 							<Paper variant='outlined' className={classes.paper}>
 								<p className={classes.count}>
