@@ -11,7 +11,7 @@
 ## Previous Product Manager | UX Designer
 
 |                                       [Elizabeth Ter Sahakyan](https://github.com/elizabethts)                                        |                                       [Colton Mortensen](https://medium.com/@colton.j.mortensen) 
-[Bobby Hall](https://github.com/bobbyhalljr)                                        |
+|[Bobby Hall](https://github.com/bobbyhalljr)   |                                     |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
 |                      [<img src="https://i.ibb.co/4Tx1qKw/T4-JUEB3-ME-UJ9-CTFQ12-52e3af3f04a4-512.png" width = "200" />](https://github.com/elizabethts)                       |                      [<img src="https://i.ibb.co/vcxqt2x/1.jpg" width = "200" />](https://medium.com/@colton.j.mortensen)                       |
 |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/elizabethts)                 |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://medium.com/@colton.j.mortensen)                 |
