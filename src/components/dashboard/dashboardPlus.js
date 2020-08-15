@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
 import AddIcon from '@material-ui/icons/Add'
+import {XCircle} from "react-feather";
 
 import {
 	fetchBusinesses,
@@ -54,7 +55,14 @@ const useStyles = makeStyles(theme => ({
 	addGrid: {
 		margin: '0 2.2rem'
 	},
-
+	cardButton: {
+		display: "flex"
+	},
+	deleteButton: {
+		margin: "16px 16px auto 0",
+		width: "24px",
+		height: "24px"
+	},
 	avatar: {
 		width: theme.spacing(7),
 		height: theme.spacing(7)
@@ -63,41 +71,6 @@ const useStyles = makeStyles(theme => ({
 
 function DashboardPlus(props) {
 	const classes = useStyles()
-
-	//get the currently selected tab, and set it to the newly selected business
-	//this might be deleted since we are not using tabs no more
-	function modifyActiveTab(business) {
-		let contains = null
-		props.activeTabs.forEach(tab => {
-			if (tab.business_id === business.business_id) {
-				contains = tab
-			}
-		})
-		if (contains) {
-			props.selectBusiness(props.selectedBusiness, contains) //the user is trying to add a business that they already have a tab open for, just set that tab as selected
-		} else {
-			props.activeTabs.forEach(tab => {
-				if (tab.business_id === props.selectedBusiness.business_id) {
-					//the currently selected tab is always the currently selected business, so we can find it by seeing which tab = currentlySelectedBusiness
-
-					let tabIndex
-					let newTabsArray = props.activeTabs.filter((item, index) => {
-						if (item.business_id === tab.business_id) {
-							tabIndex = index
-						}
-						return item.business_id != tab.business_id
-					}) //remove the tab we want to modify
-					newTabsArray.splice(tabIndex, 0, { ...business }) //add back the tab but with the new name
-
-					props.setActiveTabs(
-						props.activeTabs,
-						newTabsArray,
-						localStorage.getItem('userID')
-					)
-				}
-			})
-		}
-	}
 
 	return (
 		<Grid
@@ -142,6 +115,7 @@ function DashboardPlus(props) {
 							<Grid item key={business.business_id}>
 								<Card>
 									<CardActionArea
+										className={classes.cardButton}
 										onClick={() => {
 											props.selectBusiness(business)
 										}}
@@ -157,6 +131,15 @@ function DashboardPlus(props) {
 											title={business.name}
 											subheader={business.address}
 										/>
+										<Tooltip title="Delete" aria-label="delete">
+											<XCircle 
+												className={classes.deleteButton} 
+												onClick={(e)=> {
+													e.stopPropagation() 
+													props.removeBusiness(business.business_id,props.userId)
+												}}
+											/>
+										</Tooltip>
 									</CardActionArea>
 								</Card>
 							</Grid>
@@ -199,6 +182,7 @@ function DashboardPlus(props) {
 							<Grid item key={competitor.business_id}>
 								<Card>
 									<CardActionArea
+										className={classes.cardButton}
 										onClick={() => {
 											props.selectBusiness(competitor)
 										}}
@@ -216,6 +200,15 @@ function DashboardPlus(props) {
 											title={competitor.name}
 											subheader={competitor.address}
 										/>
+										<Tooltip title="Delete" aria-label="delete">
+											<XCircle 
+												className={classes.deleteButton} 
+												onClick={(e)=> {
+													e.stopPropagation() 
+													props.removeCompetitor(competitor.business_id,props.userId)
+												}}
+											/>
+										</Tooltip>
 									</CardActionArea>
 								</Card>
 							</Grid>
@@ -230,7 +223,8 @@ function DashboardPlus(props) {
 const mapStateToProps = state => ({
 	competitors: state.business.competitors,
 	businesses: state.business.businesses,
-	selectedBusiness: state.business.currentlySelectedBusiness
+	selectedBusiness: state.business.currentlySelectedBusiness,
+	userId: state.settings.data.userId
 })
 
 export default withRouter(
