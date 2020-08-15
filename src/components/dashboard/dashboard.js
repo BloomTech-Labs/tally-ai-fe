@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 		minWidth: '324px'
 	},
 	header: {
-		border: '2px solid red',
 		display: 'flex',
 		flexWrap: 'wrap',
 		justifyContent: 'space-between',
@@ -91,7 +90,7 @@ function DashboardGrid(props) {
 							<Typography variant='h3' className={classes.logo}>
 								tally
 							</Typography>
-							<SearchBar />
+							<SearchBar searchByNameOnly={false} />
 						</Grid>
 
 						<Grid container className={classes.businessContainer}>
