@@ -90,7 +90,7 @@ function DashboardGrid(props) {
 							<Typography variant='h3' className={classes.logo}>
 								tally
 							</Typography>
-							<SearchBar searchByNameOnly={false} />
+							<SearchBar />
 						</Grid>
 
 						<Grid container className={classes.businessContainer}>

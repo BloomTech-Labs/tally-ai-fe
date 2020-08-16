@@ -35,8 +35,6 @@ const useStyles = makeStyles(theme => ({
 		maxHeight: 400,
 		overflow: 'auto',
 		borderRadius: 10,
-		borderColor: 'red',
-		borderWidth: 2,
 		backgroundColor: theme.palette.background.paper
 	},
 	input: {
@@ -54,6 +52,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SearchBar({ searchByNameOnly }) {
+	console.log(searchByNameOnly)
 	const classes = useStyles()
 	const dispatch = useDispatch()
 
@@ -166,11 +165,8 @@ export default function SearchBar({ searchByNameOnly }) {
 			</Paper>
 			{search && (
 				<div
-					className={
-						searchByNameOnly
-							? classes.list
-							: { ...classes.list, marginLeft: 'auto' }
-					}
+					className={classes.list}
+					style={searchByNameOnly ? {} : { marginLeft: 'auto' }}
 				>
 					<List component='nav'>
 						{businessNames.length > 0 &&
