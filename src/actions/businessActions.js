@@ -35,10 +35,12 @@ export const REMOVE_COMPETITOR_START = 'REMOVE_COMPETITOR_START'
 export const REMOVE_COMPETITOR_SUCCESS = 'REMOVE_COMPETITOR_SUCCESS'
 export const REMOVE_COMPETITOR_FAILURE = 'REMOVE_COMPETITOR_FAILURE'
 
-export const fetchBusinessByName = name => async dispatch => {
+export const fetchBusinessBy = (query, value) => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BUSINESS_BY_NAME_START })
-		const { data: business } = await axiosWithAuth().get(`/search?name=${name}`)
+		const { data: business } = await axiosWithAuth().get(
+			`/search?${query}=${value}`
+		)
 		console.log({ business })
 		business &&
 			dispatch({ type: FETCH_BUSINESS_BY_NAME_SUCCESS, payload: business })

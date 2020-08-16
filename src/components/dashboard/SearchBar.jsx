@@ -16,7 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 import { axiosWithAuth } from '../../auth/axiosWithAuth'
 import {
-	fetchBusinessByName,
+	fetchBusinessBy,
 	resetSearchResults
 } from '../../actions/businessActions'
 
@@ -182,7 +182,7 @@ export default function SearchBar({ searchByNameOnly }) {
 											<ListItemText
 												primary={businessName}
 												onClick={() => {
-													dispatch(fetchBusinessByName(businessName))
+													dispatch(fetchBusinessBy('name', businessName))
 													setSearch('')
 												}}
 											/>
