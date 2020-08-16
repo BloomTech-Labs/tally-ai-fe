@@ -83,6 +83,7 @@ export default function SearchBar({ searchByNameOnly }) {
 	}, [businessNames])
 
 	const handleChange = event => {
+		console.log(event.target.value)
 		setCuisine(event.target.value)
 	}
 
@@ -126,21 +127,21 @@ export default function SearchBar({ searchByNameOnly }) {
 								onChange={handleChange}
 							>
 								<MenuItem value='All'>All</MenuItem>
-								<MenuItem value={1}>American</MenuItem>
-								<MenuItem value={2}>Chinese</MenuItem>
-								<MenuItem value={3}>Cuban</MenuItem>
-								<MenuItem value={4}>Greek</MenuItem>
-								<MenuItem value={5}>Hawaiian</MenuItem>
-								<MenuItem value={6}>Indian</MenuItem>
-								<MenuItem value={7}>Italian</MenuItem>
-								<MenuItem value={8}>Korean</MenuItem>
-								<MenuItem value={9}>Mediterranean</MenuItem>
-								<MenuItem value={10}>Mexican</MenuItem>
-								<MenuItem value={11}>Other</MenuItem>
-								<MenuItem value={12}>Pizza</MenuItem>
-								<MenuItem value={13}>Southern</MenuItem>
-								<MenuItem value={14}>Sushi</MenuItem>
-								<MenuItem value={15}>Thai</MenuItem>
+								<MenuItem value={'American'}>American</MenuItem>
+								<MenuItem value={'Chinese'}>Chinese</MenuItem>
+								<MenuItem value={'Cuban'}>Cuban</MenuItem>
+								<MenuItem value={'Greek'}>Greek</MenuItem>
+								<MenuItem value={'Hawaiian'}>Hawaiian</MenuItem>
+								<MenuItem value={'Indian'}>Indian</MenuItem>
+								<MenuItem value={'Italian'}>Italian</MenuItem>
+								<MenuItem value={'Korean'}>Korean</MenuItem>
+								<MenuItem value={'Mediterranean'}>Mediterranean</MenuItem>
+								<MenuItem value={'Mexican'}>Mexican</MenuItem>
+								<MenuItem value={'Other'}>Other</MenuItem>
+								<MenuItem value={'Pizza'}>Pizza</MenuItem>
+								<MenuItem value={'Southern'}>Southern</MenuItem>
+								<MenuItem value={'Sushi'}>Sushi</MenuItem>
+								<MenuItem value={'Thai'}>Thai</MenuItem>
 							</Select>
 						</FormControl>
 
