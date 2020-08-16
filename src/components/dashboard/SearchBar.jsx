@@ -127,21 +127,22 @@ export default function SearchBar({ searchByNameOnly }) {
 								onChange={handleChange}
 							>
 								<MenuItem value='All'>All</MenuItem>
-								<MenuItem value={'American'}>American</MenuItem>
-								<MenuItem value={'Chinese'}>Chinese</MenuItem>
-								<MenuItem value={'Cuban'}>Cuban</MenuItem>
-								<MenuItem value={'Greek'}>Greek</MenuItem>
-								<MenuItem value={'Hawaiian'}>Hawaiian</MenuItem>
-								<MenuItem value={'Indian'}>Indian</MenuItem>
-								<MenuItem value={'Italian'}>Italian</MenuItem>
-								<MenuItem value={'Korean'}>Korean</MenuItem>
-								<MenuItem value={'Mediterranean'}>Mediterranean</MenuItem>
-								<MenuItem value={'Mexican'}>Mexican</MenuItem>
-								<MenuItem value={'Other'}>Other</MenuItem>
-								<MenuItem value={'Pizza'}>Pizza</MenuItem>
-								<MenuItem value={'Southern'}>Southern</MenuItem>
-								<MenuItem value={'Sushi'}>Sushi</MenuItem>
-								<MenuItem value={'Thai'}>Thai</MenuItem>
+								<MenuItem value={'american'}>American</MenuItem>
+								<MenuItem value={'chinese'}>Chinese</MenuItem>
+								<MenuItem value={'cuban'}>Cuban</MenuItem>
+								<MenuItem value={'greek'}>Greek</MenuItem>
+								<MenuItem value={'hawaiian'}>Hawaiian</MenuItem>
+								<MenuItem value={'indian'}>Indian</MenuItem>
+								<MenuItem value={'italian'}>Italian</MenuItem>
+								<MenuItem value={'korean'}>Korean</MenuItem>
+								<MenuItem value={'mediterranean'}>Mediterranean</MenuItem>
+								<MenuItem value={'mexican'}>Mexican</MenuItem>
+								<MenuItem value={'other'}>Other</MenuItem>
+								<MenuItem value={'pizza'}>Pizza</MenuItem>
+								<MenuItem value={'pub'}>Pub</MenuItem>
+								<MenuItem value={'southern'}>Southern</MenuItem>
+								<MenuItem value={'sushi'}>Sushi</MenuItem>
+								<MenuItem value={'thai'}>Thai</MenuItem>
 							</Select>
 						</FormControl>
 
