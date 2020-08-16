@@ -52,7 +52,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SearchBar({ searchByNameOnly }) {
-	console.log(searchByNameOnly)
 	const classes = useStyles()
 	const dispatch = useDispatch()
 
@@ -65,11 +64,12 @@ export default function SearchBar({ searchByNameOnly }) {
 	useEffect(() => {
 		const fetchBusinessNames = async () => {
 			try {
-				const { data } = await axiosWithAuth().get('/search/names')
-				const businessNamesInsensitive = data.map((businessName, index) => {
+				const { data: businesses } = await axiosWithAuth().get('/search/names')
+				console.log({ businesses })
+				const businessNamesInsensitive = businesses.map(({ name }, index) => {
 					return {
-						businessName,
-						businessNameLowerCase: businessName.toLowerCase(),
+						businessName: name,
+						businessNameLowerCase: name.toLowerCase(),
 						index
 					}
 				})
