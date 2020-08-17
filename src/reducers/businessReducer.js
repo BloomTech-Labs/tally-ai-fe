@@ -77,6 +77,7 @@ function businessReducer(state = initialState, action) {
 		case FETCH_BUSINESS_NAMES_FAILURE:
 			return {
 				...state,
+				loading: false,
 				error: action.payload
 			}
 

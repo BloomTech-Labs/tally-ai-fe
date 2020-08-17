@@ -57,8 +57,6 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-//searchMode true = competitor search
-//searchMode false = my biz search
 const SearchPage = props => {
 	const { searchMode } = props.match.params
 	const classes = useStyles()
@@ -83,15 +81,6 @@ const SearchPage = props => {
 	}, [])
 
 	useEffect(() => {
-		console.log(
-			'Added business resulting in new state: competitors ',
-			props.competitors,
-			'businesses',
-			props.businesses
-		)
-	}, [props.competitors, props.businesses])
-
-	useEffect(() => {
 		if (searchLocation.latitude && searchLocation.longitude) {
 			//The searchLocation has changed to use latitude and a logitude, lets get the user friendly location from these coords and fill in the location field with it
 			axios
@@ -99,7 +88,7 @@ const SearchPage = props => {
 					`https://us1.locationiq.com/v1/reverse.php?key=${mapsKey}&lat=${searchLocation.latitude}&lon=${searchLocation.longitude}&format=json`
 				)
 				.then(res => {
-					console.log('Got location', res)
+					// console.log('Got location', res)
 					setReadableLocation(res.data.address.city)
 				})
 				.catch(err => {

@@ -14,7 +14,6 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import { axiosWithAuth } from '../../auth/axiosWithAuth'
 import {
 	fetchBusinessNames,
 	fetchBusinessBy,
@@ -70,20 +69,17 @@ export default function SearchBar({ searchByNameOnly }) {
 	}, [businessesNames])
 
 	const handleCuisineChange = () => {
-		console.log('cuisine from handleCuisineChange', cuisine)
 		const filteredByCuisine =
 			cuisine === 'All'
-				? businessNames
-				: businessNames.filter(business => business.cuisine === cuisine)
-		console.log({ filteredByCuisine })
-		console.log({ businessNames })
+				? businessesNames
+				: businessesNames.filter(business => business.cuisine === cuisine)
+
 		setBusinessNames(filteredByCuisine)
 		setSearch('')
 	}
 
 	useEffect(() => {
 		handleCuisineChange()
-		console.log({ cuisine })
 	}, [cuisine])
 
 	const handleClose = () => {
@@ -92,10 +88,6 @@ export default function SearchBar({ searchByNameOnly }) {
 
 	const handleOpen = () => {
 		setOpen(true)
-	}
-
-	const handleSubmit = async e => {
-		e.preventDefault()
 	}
 
 	const handleSearch = text => {
@@ -171,7 +163,7 @@ export default function SearchBar({ searchByNameOnly }) {
 					style={searchByNameOnly ? {} : { marginLeft: 'auto' }}
 				>
 					<List component='nav'>
-						{businessNames.length > 0 &&
+						{filteredBusinessNames.length > 0 &&
 							filteredBusinessNames
 								.slice(0, 5)
 								.map(({ businessName, index }) => {
