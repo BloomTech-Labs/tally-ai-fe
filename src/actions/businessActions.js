@@ -35,15 +35,49 @@ export const REMOVE_COMPETITOR_START = 'REMOVE_COMPETITOR_START'
 export const REMOVE_COMPETITOR_SUCCESS = 'REMOVE_COMPETITOR_SUCCESS'
 export const REMOVE_COMPETITOR_FAILURE = 'REMOVE_COMPETITOR_FAILURE'
 
-export const fetchBusinessByName = name => async dispatch => {
+//fetch all business names
+export const FETCH_BUSINESS_NAMES_START = 'FETCH_BUSINESS_NAMES_START'
+export const FETCH_BUSINESS_NAMES_SUCCESS = 'FETCH_BUSINESS_NAMES_SUCCESS'
+export const FETCH_BUSINESS_NAMES_FAILURE = 'FETCH_BUSINESS_NAMES_FAILURE'
+
+export const fetchBusinessNames = () => async dispatch => {
+	try {
+		dispatch({ type: FETCH_BUSINESS_NAMES_START })
+		const { data: businesses } = await axiosWithAuth().get('/search/names')
+
+		if (businesses) {
+			const businessNamesInsensitive = businesses.map(
+				({ name, cuisine }, index) => {
+					return {
+						cuisine,
+						businessName: name,
+						businessNameLowerCase: name.toLowerCase(),
+						index
+					}
+				}
+			)
+			dispatch({
+				type: FETCH_BUSINESS_NAMES_SUCCESS,
+				payload: businessNamesInsensitive
+			})
+		}
+	} catch (error) {
+		console.error(`Error fetching business names: ${error}`)
+		dispatch({ type: FETCH_BUSINESS_NAMES_FAILURE, payload: error })
+	}
+}
+
+export const fetchBusinessBy = (query, value) => async dispatch => {
 	try {
 		dispatch({ type: FETCH_BUSINESS_BY_NAME_START })
-		const { data: business } = await axiosWithAuth().get(`/search?name=${name}`)
+		const { data: business } = await axiosWithAuth().get(
+			`/search?${query}=${value}`
+		)
 		console.log({ business })
 		business &&
 			dispatch({ type: FETCH_BUSINESS_BY_NAME_SUCCESS, payload: business })
 	} catch (err) {
-		console.log({ err })
+		console.error({ err })
 		dispatch({ type: FETCH_BUSINESS_BY_NAME_FAILURE, payload: err })
 	}
 }

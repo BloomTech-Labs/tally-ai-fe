@@ -68,8 +68,6 @@ const Results = props => {
 		props.resetSearchResults()
 	}
 
-	console.log('props', props)
-
 	/*
     active, props.businesses.error, and props.businesses.isFetching
     are used to conditionally render the results section.

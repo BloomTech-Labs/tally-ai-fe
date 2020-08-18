@@ -1,4 +1,9 @@
 import {
+	// Fetch business names
+	FETCH_BUSINESS_NAMES_START,
+	FETCH_BUSINESS_NAMES_SUCCESS,
+	FETCH_BUSINESS_NAMES_FAILURE,
+
 	// Yelp Business Search
 	FETCH_BUSINESS_START,
 	FETCH_BUSINESS_SUCCESS,
@@ -33,6 +38,8 @@ import {
 const initialState = {
 	isSetting: false,
 	error: null,
+	loading: false,
+	businessNames: [],
 	businesses: [],
 	competitors: [],
 	currentlySelectedBusiness: {
@@ -53,6 +60,26 @@ const initialState = {
 
 function businessReducer(state = initialState, action) {
 	switch (action.type) {
+		case FETCH_BUSINESS_NAMES_START:
+			return {
+				...state,
+				loading: true
+			}
+
+		case FETCH_BUSINESS_NAMES_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				businessNames: action.payload
+			}
+
+		case FETCH_BUSINESS_NAMES_FAILURE:
+			return {
+				...state,
+				loading: false,
+				error: action.payload
+			}
+
 		case FETCH_BUSINESS_START:
 			return {
 				...state,

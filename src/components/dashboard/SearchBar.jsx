@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -14,9 +14,9 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import { axiosWithAuth } from '../../auth/axiosWithAuth'
 import {
-	fetchBusinessByName,
+	fetchBusinessNames,
+	fetchBusinessBy,
 	resetSearchResults
 } from '../../actions/businessActions'
 
@@ -35,8 +35,6 @@ const useStyles = makeStyles(theme => ({
 		maxHeight: 400,
 		overflow: 'auto',
 		borderRadius: 10,
-		borderColor: 'red',
-		borderWidth: 2,
 		backgroundColor: theme.palette.background.paper
 	},
 	input: {
@@ -56,36 +54,33 @@ const useStyles = makeStyles(theme => ({
 export default function SearchBar({ searchByNameOnly }) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-
+	const { businessNames: businessesNames } = useSelector(
+		state => state.business
+	)
 	const [search, setSearch] = useState('')
-	const [businessNames, setBusinessNames] = useState([])
+	const [businessNames, setBusinessNames] = useState(businessesNames)
 	const [filteredBusinessNames, setFilteredBusinessNames] = useState([])
 	const [cuisine, setCuisine] = useState('All')
 	const [open, setOpen] = useState(false)
 
 	useEffect(() => {
-		const fetchBusinessNames = async () => {
-			try {
-				const { data } = await axiosWithAuth().get('/search/names')
-				const businessNamesInsensitive = data.map((businessName, index) => {
-					return {
-						businessName,
-						businessNameLowerCase: businessName.toLowerCase(),
-						index
-					}
-				})
-				setBusinessNames(businessNamesInsensitive)
-			} catch (error) {
-				console.error(error)
-			}
-		}
+		!businessesNames.length > 0 && dispatch(fetchBusinessNames())
+		setBusinessNames(businessesNames)
+	}, [businessesNames])
 
-		!businessNames.length > 0 && fetchBusinessNames()
-	}, [businessNames])
+	const handleCuisineChange = () => {
+		const filteredByCuisine =
+			cuisine === 'All'
+				? businessesNames
+				: businessesNames.filter(business => business.cuisine === cuisine)
 
-	const handleChange = event => {
-		setCuisine(event.target.value)
+		setBusinessNames(filteredByCuisine)
+		setSearch('')
 	}
+
+	useEffect(() => {
+		handleCuisineChange()
+	}, [cuisine])
 
 	const handleClose = () => {
 		setOpen(false)
@@ -95,11 +90,8 @@ export default function SearchBar({ searchByNameOnly }) {
 		setOpen(true)
 	}
 
-	const handleSubmit = async e => {
-		e.preventDefault()
-	}
-
 	const handleSearch = text => {
+		console.log({ businessNames })
 		const searchString = text.toLowerCase()
 		const filtered =
 			text === ''
@@ -124,24 +116,25 @@ export default function SearchBar({ searchByNameOnly }) {
 								onClose={handleClose}
 								onOpen={handleOpen}
 								value={cuisine}
-								onChange={handleChange}
+								onChange={e => setCuisine(e.target.value)}
 							>
 								<MenuItem value='All'>All</MenuItem>
-								<MenuItem value={1}>American</MenuItem>
-								<MenuItem value={2}>Chinese</MenuItem>
-								<MenuItem value={3}>Cuban</MenuItem>
-								<MenuItem value={4}>Greek</MenuItem>
-								<MenuItem value={5}>Hawaiian</MenuItem>
-								<MenuItem value={6}>Indian</MenuItem>
-								<MenuItem value={7}>Italian</MenuItem>
-								<MenuItem value={8}>Korean</MenuItem>
-								<MenuItem value={9}>Mediterranean</MenuItem>
-								<MenuItem value={10}>Mexican</MenuItem>
-								<MenuItem value={11}>Other</MenuItem>
-								<MenuItem value={12}>Pizza</MenuItem>
-								<MenuItem value={13}>Southern</MenuItem>
-								<MenuItem value={14}>Sushi</MenuItem>
-								<MenuItem value={15}>Thai</MenuItem>
+								<MenuItem value={'american'}>American</MenuItem>
+								<MenuItem value={'chinese'}>Chinese</MenuItem>
+								<MenuItem value={'cuban'}>Cuban</MenuItem>
+								<MenuItem value={'greek'}>Greek</MenuItem>
+								<MenuItem value={'hawaiian'}>Hawaiian</MenuItem>
+								<MenuItem value={'indian'}>Indian</MenuItem>
+								<MenuItem value={'italian'}>Italian</MenuItem>
+								<MenuItem value={'korean'}>Korean</MenuItem>
+								<MenuItem value={'mediterranean'}>Mediterranean</MenuItem>
+								<MenuItem value={'mexican'}>Mexican</MenuItem>
+								<MenuItem value={'other'}>Other</MenuItem>
+								<MenuItem value={'pizza'}>Pizza</MenuItem>
+								<MenuItem value={'pub'}>Pub</MenuItem>
+								<MenuItem value={'southern'}>Southern</MenuItem>
+								<MenuItem value={'sushi'}>Sushi</MenuItem>
+								<MenuItem value={'thai'}>Thai</MenuItem>
 							</Select>
 						</FormControl>
 
@@ -154,10 +147,10 @@ export default function SearchBar({ searchByNameOnly }) {
 					placeholder='Search by name'
 					inputProps={{ 'aria-label': 'search for a business' }}
 					onChange={e => handleSearch(e.target.value)}
-					onSubmit={handleSubmit}
+					onSubmit={() => {}}
 				/>
 				<IconButton
-					type='submit'
+					// type='submit'
 					className={{ ...classes.iconButton, paddingRight: 0 }}
 					aria-label='search'
 				>
@@ -165,9 +158,12 @@ export default function SearchBar({ searchByNameOnly }) {
 				</IconButton>
 			</Paper>
 			{search && (
-				<div className={classes.list}>
+				<div
+					className={classes.list}
+					style={searchByNameOnly ? {} : { marginLeft: 'auto' }}
+				>
 					<List component='nav'>
-						{businessNames.length > 0 &&
+						{filteredBusinessNames.length > 0 &&
 							filteredBusinessNames
 								.slice(0, 5)
 								.map(({ businessName, index }) => {
@@ -176,7 +172,7 @@ export default function SearchBar({ searchByNameOnly }) {
 											<ListItemText
 												primary={businessName}
 												onClick={() => {
-													dispatch(fetchBusinessByName(businessName))
+													dispatch(fetchBusinessBy('name', businessName))
 													setSearch('')
 												}}
 											/>
