@@ -48,6 +48,7 @@
 - Font Awesome
 - SASS
 - React Feather icons
+- Google Oauth
 
 # APIs
 ## Authentication
