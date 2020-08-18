@@ -44,10 +44,9 @@ const initialState = {
 	competitors: [],
 	currentlySelectedBusiness: {
 		business_id: null,
-		businessName: null,
+		name: null,
 		review_count: 0,
 		business_stars: 0,
-		changeInRating: '',
 		address: '',
 		isFetching: false,
 		error: null

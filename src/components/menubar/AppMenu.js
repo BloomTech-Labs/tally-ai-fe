@@ -57,7 +57,7 @@ const AppMenu = (props) => {
 
     props.selectBusiness({
       business_id: null, 
-      businessName: null,
+      name: null,
       review_count: 0,
       business_stars: 0,
       changeInRating: '',
@@ -103,7 +103,7 @@ const AppMenu = (props) => {
           </ListItem>
 
           {props.selected.business_id && 
-            <ListItem button onClick={viewAllBusinesses} classes={{button: classes.button}}>
+            <ListItem button classes={{button: classes.button}}>
               <ListItemIcon className={classes.menuItemIcon}>
                 <ShoppingBag />
               </ListItemIcon>

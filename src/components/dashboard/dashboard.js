@@ -110,9 +110,9 @@ function DashboardGrid(props) {
 							</Paper>
 							<Paper variant='outlined' className={classes.paper}>
 								<p className={classes.count}>
-									{props.businessInfo.change_in_rating}
+									{props.businessInfo.cuisine[0].toUpperCase() + props.businessInfo.cuisine.slice(1)}
 								</p>
-								<p>Change in Rating</p>
+								<p>Cuisine</p>
 							</Paper>
 						</Grid>
 

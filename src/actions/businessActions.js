@@ -157,9 +157,6 @@ export const addCompetitor = (businessInfo, userID) => dispatch => {
 }
 
 export const removeBusiness = (business_id, userID) => dispatch => {
-	console.log('\removing business from the store...\n')
-	//dispatch({ type: REMOVE_BUSINESS_START, payload: businessInfo });
-	//DELETE /users/:id/business/:business_id
 	dispatch({ type: REMOVE_BUSINESS_START })
 	//endpoint
 	axiosWithAuth()
@@ -179,7 +176,6 @@ export const removeBusiness = (business_id, userID) => dispatch => {
 }
 
 export const removeCompetitor = (businessID, userID) => dispatch => {
-	console.log('Removing competitor from the store...\n')
 
 	dispatch({ type: REMOVE_COMPETITOR_START })
 	//endpoint
