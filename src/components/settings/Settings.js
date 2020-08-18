@@ -132,7 +132,7 @@ function Settings(props) {
             aria-label="Vertical tabs"
             >
             <StyledTab label="Account" icon={<AccountCircle/>} {...a11yProps(0)} />
-            <StyledTab label="Password" icon={<Lock/>} {...a11yProps(1)} />
+            <StyledTab disabled={props.type === "google"} label="Password" icon={<Lock/>} {...a11yProps(1)} />
             <StyledTab label="Help" icon={<Help/>} {...a11yProps(2)} />
 
 
