@@ -91,7 +91,6 @@ export default function SearchBar({ searchByNameOnly }) {
 	}
 
 	const handleSearch = text => {
-		console.log({ businessNames })
 		const searchString = text.toLowerCase()
 		const filtered =
 			text === ''
