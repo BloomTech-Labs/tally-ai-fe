@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Paper, Typography } from '@material-ui/core'
 
 import WidgetDisplayList from '../WidgetSystem/WidgetDisplayList'
 import SearchBar from './SearchBar'
 import Results from '../search/results'
+import DashboardPlus from './dashboardPlus'
 
 import {
 	fetchWordsOverTime,
 	fetchTopAndBottom,
 	fetchAllData
 } from '../../actions/widgetsActions'
-import DashboardPlus from './dashboardPlus'
+import {
+	resetSearchResults,
+	selectBusiness
+} from '../../actions/businessActions'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -71,6 +75,8 @@ const useStyles = makeStyles(theme => ({
 
 function DashboardGrid(props) {
 	const classes = useStyles()
+	const dispatch = useDispatch()
+	const { data } = useSelector(state => state.business.searchResults)
 
 	// Fetch data for widgets
 	useEffect(() => {
@@ -80,7 +86,13 @@ function DashboardGrid(props) {
 		) {
 			props.fetchAllData(props.businessInfo.business_id)
 		}
+
+		return () => dispatch(resetSearchResults())
 	}, [props.businessInfo.business_id, props.competitors, props.userBusinesses])
+
+	function resultsSelection(selection) {
+		dispatch(selectBusiness(selection))
+	}
 
 	return (
 		<Grid className={classes.root}>
@@ -94,29 +106,36 @@ function DashboardGrid(props) {
 							<SearchBar />
 						</Grid>
 
-						<Grid container className={classes.businessContainer}>
-							<Paper variant='outlined' className={classes.paper}>
-								<p className={classes.count}>
-									{props.businessInfo.review_count.toLocaleString()}
-								</p>
+						{data ? (
+							<Results select={resultsSelection} />
+						) : (
+							<>
+								<Grid container className={classes.businessContainer}>
+									<Paper variant='outlined' className={classes.paper}>
+										<p className={classes.count}>
+											{props.businessInfo.review_count.toLocaleString()}
+										</p>
 
-								<p>Total Reviews</p>
-							</Paper>
-							<Paper variant='outlined' className={classes.paper}>
-								<p className={classes.count}>
-									{props.businessInfo.business_stars} stars
-								</p>
-								<p>Overall Rating</p>
-							</Paper>
-							<Paper variant='outlined' className={classes.paper}>
-								<p className={classes.count}>
-									{props.businessInfo.cuisine[0].toUpperCase() + props.businessInfo.cuisine.slice(1)}
-								</p>
-								<p>Cuisine</p>
-							</Paper>
-						</Grid>
+										<p>Total Reviews</p>
+									</Paper>
+									<Paper variant='outlined' className={classes.paper}>
+										<p className={classes.count}>
+											{props.businessInfo.business_stars} stars
+										</p>
+										<p>Overall Rating</p>
+									</Paper>
+									<Paper variant='outlined' className={classes.paper}>
+										<p className={classes.count}>
+											{props.businessInfo.cuisine[0].toUpperCase() +
+												props.businessInfo.cuisine.slice(1)}
+										</p>
+										<p>Cuisine</p>
+									</Paper>
+								</Grid>
 
-						<WidgetDisplayList />
+								<WidgetDisplayList />
+							</>
+						)}
 					</Grid>
 				) : localStorage.getItem('token') && localStorage.getItem('userID') ? (
 					<DashboardPlus />
